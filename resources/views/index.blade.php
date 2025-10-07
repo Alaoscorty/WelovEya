@@ -142,7 +142,7 @@
                     <div style=" width:8vh; height:8vh; ; padding:8px;margin-left: 5vh; margin-bottom: 5px;">
                         <i class="fas fa-shopping-bag" style="color:white;font-size:4vh;"></i>
                     </div>
-                    <div class="text-4xl font-bold mb-5 fonts">Boutique Officielle</div>
+                    <div class="text-4xl font-bold mb-5 fonts"> Boutique Officielle</div>
                     <div class="text-gray-400 text-sm">Découvrez notre collection exclusive de produits dérivés et d'archives numériques des éditions passés</div>
                     <button class="border border-b border-gray-500 rounded-lg py-2 px-4 text-center mt-5">
                         <div class="text-gray-400 text-sm">Découvrir</div>
