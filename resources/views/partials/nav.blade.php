@@ -104,33 +104,33 @@ document.addEventListener("DOMContentLoaded", () => {
                         <img src="${item.image}" alt="${
           item.name
         }" class="w-16 h-16 object-cover rounded">
-                        <div class="ml-4 flex-grow">
-                            <h4 class="font-medium">${item.name}</h4>
-                            <p class="text-gray-600 text-sm">${item.price.toFixed(
-                              2
-                            )}FCFA</p>
-                            <div class="flex items-center mt-2">
-                                <button class="decrease-quantity text-gray-500 hover:text-orange-600" data-id="${
-                                  item.id
-                                }">
-                                    <i class="fas fa-minus text-xs"></i>
-                                </button>
-                                <span class="quantity mx-2 text-gray-500">${
-                                  item.quantity
-                                }</span>
-                                <button class="increase-quantity text-gray-500 hover:text-orange-600" data-id="${
-                                  item.id
-                                }">
-                                    <i class="fas fa-plus text-xs"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <button class="remove-item text-gray-400 hover:text-red-500 ml-2" data-id="${
-                          item.id
-                        }">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    `;
+            <div class="ml-4 flex-grow">
+                <h4 class="font-medium text-orange-800">${item.name}</h4>
+                <p class="text-gray-600 text-sm">${item.price.toFixed(
+                    2
+                )}FCFA</p>
+                <div class="flex items-center mt-2">
+                    <button class="decrease-quantity text-gray-500 hover:text-orange-600" data-id="${
+                        item.id
+                    }">
+                        <i class="fas fa-minus text-xs"></i>
+                    </button>
+                    <span class="quantity mx-2 text-gray-500">${
+                        item.quantity
+                    }</span>
+                    <button class="increase-quantity text-gray-500 hover:text-orange-600" data-id="${
+                        item.id
+                    }">
+                        <i class="fas fa-plus text-xs"></i>
+                    </button>
+                </div>
+            </div>
+            <button class="remove-item text-gray-400 hover:text-red-500 ml-2" data-id="${
+                item.id
+            }">
+                <i class="fas fa-times"></i>
+            </button>
+        `;
 
         cartItemsContainer.appendChild(cartItem);
       });
