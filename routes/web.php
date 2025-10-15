@@ -43,3 +43,4 @@ Route::get('/propos', function () {
 Route::get('/jeux', function () {
     return view('jeux');
 })->name('jeux');
+

@@ -69,7 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const cartSummary = document.getElementById("cart-summary");
   const cartSubtotal = document.getElementById("cart-subtotal");
   const cartTotal = document.getElementById("cart-total");
-
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
   // Update cart count
@@ -259,5 +258,21 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
 });
     </script>
+    <script>
+                                // Met à jour le total dans le localStorage et l'affiche
+                                function updateCartTotalLocal() {
+                                    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+                                    localStorage.setItem('cartTotal', total);
+                                    document.getElementById('cart-total-local').textContent = `FCFA ${total.toFixed(2)}`;
+                                }
+                                // Appelle la fonction à chaque mise à jour du panier
+                                const _oldUpdateCartDisplay = updateCartDisplay;
+                                updateCartDisplay = function() {
+                                    _oldUpdateCartDisplay();
+                                    updateCartTotalLocal();
+                                };
+                                // Initialise à l'ouverture du panier
+                                updateCartTotalLocal();
+                            </script>
 </body>
 </html>
