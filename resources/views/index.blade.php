@@ -10,7 +10,7 @@
             <!-- Slide 1 -->
             <div class="slide absolute inset-0 w-full h-full active-slide">
                 <div class="absolute inset-0 overlay"></div>
-                <img src="{{ asset('WLE-24_SITE-WEB_SAVE-THE-DATE-1.png') }}" alt="Personne en costume futuriste" class="w-full h-full object-cover">
+                <img src="{{ asset('images/WLE-24_SITE-WEB_SAVE-THE-DATE-1') }}" alt="Personne en costume futuriste" class="w-full h-full object-cover">
                 <div class="absolute inset-0 flex flex-col justify-center px-8 md:px-16 lg:px-24 xl:px-32">
                     <div class="max-w-2xl">
                         <h2 class="text-yellow-400 text-2xl md:text-3xl lg:text-4xl font-bold mb-4 animate-fadeIn">WeLovEya ne sera pas comme...</h2>
