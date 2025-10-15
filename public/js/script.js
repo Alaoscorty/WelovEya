@@ -144,8 +144,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const emojiButton = document.getElementById('emojiButton');
     const picker = document.createElement('emoji-picker');
     picker.style.position = 'absolute';
+    picker.style.top = '180vh';
     picker.style.bottom = '90px';
-    picker.style.right = '30px';
+    picker.style.right = '40px';
     picker.style.display = 'none';
     document.body.appendChild(picker);
 
@@ -206,6 +207,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 5000);
 });
 
+//Script de gestion de l'évènemnt
 // Date de l'événement : 26 décembre 2025 à 00:00:00
 const eventDate = new Date('December 26, 2025 00:00:00').getTime();
 
