@@ -1,6 +1,6 @@
 <nav class="bg-black py-4 px-6 border-b border-gray-800">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="{{ url('/index') }}">
+            <a href="{{ url('/') }}">
                 <img src="{{ asset('images/Logo-WLE_Plan-de-travail-1.png') }}" alt="Logo" width="50">
 
             </a>
