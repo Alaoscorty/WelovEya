@@ -14,7 +14,7 @@
             
             <!-- Countdown -->
             <div class="mt-16 flex justify-center">
-                <input type="text" placeholder="Rechercher un artiste" class="w-full max-w-md p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <input type="text" placeholder="Rechercher un artiste" class="w-full max-w-md p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500 " >
                 <i class="fa fa-search" data-feather="search" style="margin-left: -4vh; margin-top: 2vh; font-size: 3vh;"></i>
             </div>
         </div>

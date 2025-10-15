@@ -25,33 +25,40 @@
         <div class="container mx-auto">
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="card rounded-xl p-6 hover-scale" style="background: url(images/T-shirt.jpeg);height:50vh;" data-genre="Afrobeat">
-                    <button class="mt-4  bg-orange-800 text-white font-bold py-2  w-80 px-4  rounded-lg hover:bg-orange-600 transition" style="margin-top: 37vh; ">
+                <div class="card rounded-xl p-6 hover-scale" style="background: url(images/T-shirt.jpeg);height:50vh;" data-genre="">
+                    <button class=" add-to-cart mt-4  bg-orange-800 text-white font-bold py-2  w-80 px-4  rounded-lg hover:bg-orange-600 transition" style="margin-top: 37vh; "data-id="1" data-name="produit" data-price="15000" data-image="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
+                    <i class="fas fa-plus mr-1"></i>
+                        Ajouter au panier
+                    </button>
+                    
+                </div>
+                <div class="card bg-gray-800 rounded-xl p-6 hover-scale" style="background: url(images/OIP.jpeg);height:50vh;" data-genre="">
+                    <button class=" add-to-cart mt-4  bg-orange-800 text-white font-bold py-2 w-80  px-4 rounded-lg  hover:bg-orange-600 transition" style="margin-top: 37vh;"data-id="2" data-name="produit" data-price="15000" data-image="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
+                    <i class="fas fa-plus mr-1"></i>
                         Ajouter au panier
                     </button>
                 </div>
-                <div class="card bg-gray-800 rounded-xl p-6 hover-scale" style="background: url(images/OIP.jpeg);height:50vh;" data-genre="Rap Français">
-                    <button class="mt-4  bg-orange-800 text-white font-bold py-2 w-80  px-4 rounded-lg  hover:bg-orange-600 transition" style="margin-top: 37vh;">
+                <div class="card bg-gray-800 rounded-xl p-6 hover-scale" style="background: url(images/0d64049a-575f-4470-9c95-46f54e3e61bb.jpeg);height:50vh;" data-genre="">
+                    <button class=" add-to-cart mt-4 bg-orange-800  text-white font-bold py-2  w-80 px-4  rounded-lg hover:bg-orange-600 transition"  style="margin-top: 37vh;"data-id="3" data-name="produit" data-price="15000" data-image="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
+                    <i class="fas fa-plus mr-1"></i>
                         Ajouter au panier
                     </button>
                 </div>
-                <div class="card bg-gray-800 rounded-xl p-6 hover-scale" style="background: url(images/0d64049a-575f-4470-9c95-46f54e3e61bb.jpeg);height:50vh;" data-genre="Coupé Décalé">
-                    <button class="mt-4 bg-orange-800  text-white font-bold py-2  w-80 px-4  rounded-lg hover:bg-orange-600 transition"  style="margin-top: 37vh;">
+                <div class="card bg-gray-800 rounded-xl p-6 hover-scale" style="background: url(images/Juneteenth.jpeg);height:50vh;" data-genre="">
+                    <button class=" add-to-cart mt-4 bg-orange-800 text-white font-bold py-2 w-80  px-4 rounded-lg  hover:bg-orange-600 transition"  style="margin-top: 37vh;"data-id="4" data-name="produit" data-price="15000" data-image="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
+                    <i class="fas fa-plus mr-1"></i>
                         Ajouter au panier
                     </button>
                 </div>
-                <div class="card bg-gray-800 rounded-xl p-6 hover-scale" style="background: url(images/Juneteenth.jpeg);height:50vh;" data-genre="Scène Béninise">
-                    <button class="mt-4 bg-orange-800 text-white font-bold py-2 w-80  px-4 rounded-lg  hover:bg-orange-600 transition"  style="margin-top: 37vh;">
+                <div class="card bg-gray-800 rounded-xl p-6 hover-scale" style="background: url(images/welove.webp);height:50vh;" data-genre="">
+                    <button class=" add-to-cart mt-4 bg-orange-800  text-white font-bold py-2 w-80  px-4 rounded-lg  hover:bg-orange-600 transition"  style="margin-top: 37vh;"data-id="5" data-name="produit" data-price="15000" data-image="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
+                    <i class="fas fa-plus mr-1"></i>
                         Ajouter au panier
                     </button>
                 </div>
-                <div class="card bg-gray-800 rounded-xl p-6 hover-scale" style="background: url(images/welove.webp);height:50vh;" data-genre="Afrobeat">
-                    <button class="mt-4 bg-orange-800  text-white font-bold py-2 w-80  px-4 rounded-lg  hover:bg-orange-600 transition"  style="margin-top: 37vh;">
-                        Ajouter au panier
-                    </button>
-                </div>
-                <div class="card bg-gray-800 rounded-xl p-6 hover-scale" style="background: url(images/Juneteenth.jpeg); height:50vh;" data-genre="Rap Français">
-                    <button class="mt-4 bg-orange-800 text-white font-bold py-2 w-80  px-4 rounded-lg  hover:bg-orange-600 transition"  style="margin-top: 37vh;">
+                <div class="card bg-gray-800 rounded-xl p-6 hover-scale" style="background: url(images/Juneteenth.jpeg); height:50vh;" data-genre="">
+                    <button class=" add-to-cart mt-4 bg-orange-800 text-white font-bold py-2 w-80  px-4 rounded-lg  hover:bg-orange-600 transition"  style="margin-top: 37vh;"data-id="6" data-name="produit" data-price="15000" data-image="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
+                    <i class="fas fa-plus mr-1"></i>
                         Ajouter au panier
                     </button>
                 </div>

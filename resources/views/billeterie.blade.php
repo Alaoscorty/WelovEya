@@ -32,9 +32,9 @@
         </div>
 
         <!-- section d'achat de tickets -->
-        <section>
-            <div class="card p-6" style="background: url(images/welove.webp);height:50vh;"></div>
-            <div>
+        <section class="p-6 flex">
+            <div class="card p-6" style="background: url(images/welove.webp);height:50vh;width: 80vh;"></div>
+            <div class="mt-8 p-6">
                 <p>
                     Tickets 2025
                 </p>
@@ -45,7 +45,11 @@
                     Ticket standard: le tickets standars coûte 15000frcs
                     et est valable pour deux jours au festival pour une personne.Il vous donne l'accès au site
                 </p>
+                <button class="add-to-cart bg-orange-800 text-white px-3 py-1 rounded-full text-sm hover:bg-orange-400 transition" data-id="1" data-name="tickets standar" data-price="15000" data-image="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
+                    <i class="fas fa-plus mr-1"></i> Acheter
+                </button>
             </div>
+            
         </section>
         <!-- Fin de la section  -->
 
@@ -69,6 +73,7 @@
             </div>
         </div>
     </footer>
+    
 @endsection
 
     @push('scripts')
