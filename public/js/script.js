@@ -132,78 +132,114 @@ document.addEventListener('DOMContentLoaded', function() {
 
 //script pour la gestion du chat
 //script pour la gestion du chat
-document.addEventListener('DOMContentLoaded', function() {
-    // ------------------------
-        // CHAT EN TEMPS RÉEL AVEC ECHO
-        // ------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    const messageInput = document.getElementById('messageInput');
+    const chatMessages = document.getElementById('chatMessages');
+    const sendButton = document.getElementById('sendButton');
+    const sendSound = document.getElementById('sendSound');
+    const receiveSound = document.getElementById('receiveSound');
+    const onlineCount = document.getElementById('onlineCount');
 
-        axios.defaults.headers.common['X-CSRF-TOKEN'] = document.querySelector('meta[name="csrf-token"]').content;
+    // Emoji Picker
+    const emojiButton = document.getElementById('emojiButton');
+    const picker = document.createElement('emoji-picker');
+    picker.style.position = 'absolute';
+    picker.style.bottom = '90px';
+    picker.style.right = '30px';
+    picker.style.display = 'none';
+    document.body.appendChild(picker);
 
-        window.Pusher = Pusher;
-        window.Echo = new Echo({
-            broadcaster: 'pusher',
-            key: '{{ config("broadcasting.connections.pusher.key") }}',
-            cluster: '{{ config("broadcasting.connections.pusher.options.cluster") }}',
-            forceTLS: true
+    emojiButton.addEventListener('click', () => {
+        picker.style.display = picker.style.display === 'none' ? 'block' : 'none';
+    });
+
+    picker.addEventListener('emoji-click', e => {
+        messageInput.value += e.detail.unicode;
+        picker.style.display = 'none';
+    });
+
+    // Charger les messages initiaux
+    fetch('/messages')
+        .then(res => res.json())
+        .then(data => {
+            chatMessages.innerHTML = '';
+            data.forEach(msg => appendMessage(msg));
         });
 
-        const chatBox = document.getElementById('chatMessages');
-        const messageInput = document.getElementById('messageInput');
-        const sendButton = document.getElementById('sendButton');
-        const onlineNumber = document.getElementById('onlineNumber');
-        const messageSound = new Audio('{{ asset("sounds/new-message.mp3") }}');
+    function appendMessage(msg) {
+        const div = document.createElement('div');
+        div.className = 'bg-gray-800 rounded-lg p-2';
+        div.innerHTML = `<span class="text-blue-400 font-bold">${msg.pseudo} :</span> ${msg.message}`;
+        chatMessages.appendChild(div);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
 
-        sendButton?.addEventListener('click', sendMessage);
-        messageInput?.addEventListener('keypress', e => {
-            if (e.key === 'Enter') sendMessage();
+    // Envoyer message
+    sendButton.addEventListener('click', async () => {
+        const message = messageInput.value.trim();
+        if (!message) return;
+
+        sendSound.play();
+
+        const res = await fetch('/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+            body: JSON.stringify({ message })
+        });
+        const data = await res.json();
+        appendMessage(data);
+        messageInput.value = '';
+    });
+
+    // Laravel Echo (écoute en temps réel)
+    window.Echo.channel('chat')
+        .listen('.message.sent', (e) => {
+            appendMessage(e.message);
+            receiveSound.play();
         });
 
-        function sendMessage() {
-            const content = messageInput.value.trim();
-            if (!content) return;
-            axios.post('/chat/send', { content })
-                .then(() => {
-                    messageInput.value = '';
-                })
-                .catch(err => {
-                    console.error('Erreur envoi message :', err);
-                    alert('Erreur lors de l’envoi du message.');
-                });
-        }
-
-        function displayMessage(msg, highlight = true) {
-            const div = document.createElement('div');
-            div.className = 'bg-gray-800 p-2 rounded-lg mb-1 transition-opacity duration-500';
-            if (highlight) div.style.opacity = 0;
-            div.innerHTML = `
-                <span class="text-blue-400 font-semibold">${msg.pseudo}</span>
-                <span class="text-gray-300 text-sm">: ${msg.content}</span>
-                <span class="text-gray-500 text-xs ml-2">${msg.created_at?.substring(11, 16) || ''}</span>
-            `;
-            chatBox.appendChild(div);
-            chatBox.scrollTop = chatBox.scrollHeight;
-            if (highlight) {
-                setTimeout(() => div.style.opacity = 1, 50);
-                messageSound.play().catch(() => {});
-            }
-        }
-
-        window.Echo.channel('chat')
-            .listen('MessageSent', e => {
-                displayMessage(e.message);
-                if (e.onlineCount !== undefined && onlineNumber) {
-                    onlineNumber.textContent = e.onlineCount;
-                }
-            });
-
-        window.Echo.join('chat.presence')
-            .here(users => {
-                if (onlineNumber) onlineNumber.textContent = users.length;
-            })
-            .joining(() => {
-                if (onlineNumber) onlineNumber.textContent = parseInt(onlineNumber.textContent) + 1;
-            })
-            .leaving(() => {
-                if (onlineNumber) onlineNumber.textContent = parseInt(onlineNumber.textContent) - 1;
-            });
+    // Mise à jour du nombre d’utilisateurs
+    setInterval(async () => {
+        const res = await fetch('/online-users');
+        const data = await res.json();
+        onlineCount.textContent = data.count;
+    }, 5000);
 });
+
+// Date de l'événement : 26 décembre 2025 à 00:00:00
+const eventDate = new Date('December 26, 2025 00:00:00').getTime();
+
+function updateCountdown() {
+    // Date actuelle
+    const now = new Date().getTime();
+    
+    // Différence entre la date de l'événement et maintenant
+    const distance = eventDate - now;
+    
+    // Calculs pour les jours, heures, minutes et secondes
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    
+    // Mise à jour de l'affichage avec un zéro devant si nécessaire
+    document.getElementById('days').textContent = days;
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+    
+    // Si le compte à rebours est terminé
+    if (distance < 0) {
+        clearInterval(countdownInterval);
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+    }
+}
+
+// Mettre à jour le compte à rebours immédiatement
+updateCountdown();
+
+// Mettre à jour le compte à rebours toutes les secondes
+const countdownInterval = setInterval(updateCountdown, 1000);

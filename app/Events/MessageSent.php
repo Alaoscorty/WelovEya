@@ -1,41 +1,32 @@
-// app/Events/MessageSent.php
-
+<?php
 namespace App\Events;
 
 use App\Models\Message;
-use Illuminate\Broadcasting\Channel;
-use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\InteractsWithSockets;
+use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
+use Illuminate\Broadcasting\PrivateChannel;
+use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
+use Illuminate\Broadcasting\Channel;
 
 class MessageSent implements ShouldBroadcast
 {
-    use InteractsWithSockets, SerializesModels;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $message;
-    public $onlineCount; // pour envoyer le nombre en ligne (optionnel)
 
-    public function __construct(Message $message, $onlineCount = null)
+    public function __construct(Message $message)
     {
         $this->message = $message;
-        $this->onlineCount = $onlineCount;
     }
 
-    public function broadcastOn(): Channel
+    public function broadcastOn()
     {
-        // canal public ou privé selon ton besoin
         return new Channel('chat');
     }
 
-    public function broadcastWith(): array
+    public function broadcastAs()
     {
-        return [
-            'message' => [
-                'pseudo' => $this->message->pseudo,
-                'content' => $this->message->content,
-                'created_at' => $this->message->created_at->toDateTimeString(), // timestamp
-            ],
-            'onlineCount' => $this->onlineCount,
-        ];
+        return 'message.sent';
     }
 }

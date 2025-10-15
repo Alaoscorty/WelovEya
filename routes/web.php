@@ -26,8 +26,10 @@ Route::get('/billeterie', function () {
     return view('billeterie');
 })->name('billeterie');
 
-Route::get('/direct',[ChatController::class,'index'])->name ('direct');
-Route::post('/send',[ChatController::class, 'send'])->name ('chat.send');
+Route::get('/direct', [ChatController::class, 'index'])->name('chat.direct');
+Route::get('/messages', [ChatController::class, 'getMessages']);
+Route::post('/messages', [ChatController::class, 'sendMessage']);
+Route::get('/online-users', [ChatController::class, 'getOnlineCount']);
 
 
 Route::get('/produit', function () {

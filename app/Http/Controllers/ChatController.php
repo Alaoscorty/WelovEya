@@ -4,41 +4,49 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Message;
-use App\Helpers\PseudoHelper;
-use Carbon\Carbon;
+use App\Events\MessageSent;
+use Illuminate\Support\Facades\Cache;
 
 class ChatController extends Controller
 {
     public function index(Request $request)
     {
-        // Génération automatique d’un pseudo si pas déjà défini
         if (!$request->session()->has('pseudo')) {
-            $request->session()->put('pseudo', PseudoHelper::generate());
+            $pseudo = 'Invité_' . rand(1000, 9999);
+            $request->session()->put('pseudo', $pseudo);
         }
 
-        // Messages des 60 derniers jours
-        $messages = Message::where('created_at', '>=', Carbon::now()->subDays(60))
-            ->orderBy('created_at', 'asc')
-            ->get();
-
         return view('direct', [
-            'messages' => $messages,
             'pseudo' => $request->session()->get('pseudo')
         ]);
     }
 
-    public function send(Request $request)
+    public function getMessages()
     {
-        $request->validate(['content' => 'required|string|max:500']);
+        Message::where('created_at', '<', now()->subDays(60))->delete();
+        return response()->json(Message::latest()->take(100)->get()->reverse()->values());
+    }
 
-        $message = Message::create([
-            'pseudo' => $request->session()->get('pseudo'),
-            'content' => $request->content,
-        ]);
+    public function sendMessage(Request $request)
+    {
+        $request->validate(['message' => 'required|string|max:500']);
 
-        // Diffusion du message en temps réel
-        broadcast(new \App\Events\MessageSent($message))->toOthers();
+        $pseudo = $request->session()->get('pseudo');
+        $message = Message::create(['pseudo' => $pseudo, 'message' => $request->message]);
+
+        broadcast(new MessageSent($message))->toOthers();
+
+        Cache::put('user_' . $pseudo, now(), 120);
 
         return response()->json($message);
+    }
+
+    public function getOnlineCount()
+    {
+        $users = collect(Cache::get('users', []))->filter(function ($time) {
+            return now()->diffInMinutes($time) < 2;
+        });
+
+        return response()->json(['count' => $users->count()]);
     }
 }

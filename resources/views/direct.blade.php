@@ -84,51 +84,37 @@
         </div>
         <!-- fin de la section de fin de la direct live -->
         <!-- Section Chat (Droite) -->
-        <div class="w-full lg:w-96 bg-gray-900 flex flex-col border-l border-gray-800 rounded-lg shadow-lg p-2 mt-5">
+        <div class="flex flex-col lg:flex-row h-screen bg-gray-900 text-white">
+    <!-- Section Chat -->
+    <div class="w-full lg:w-96 bg-gray-900 flex flex-col border-l border-gray-800">
 
-            <!-- Header du chat -->
-            <div class="p-4 border-b border-gray-800">
-                <h3 class="text-lg font-bold text-white">Chat en direct</h3>
-                <div>
-                    <div id="onlineCount" class="text-gray-400 text-sm mb-2">
-                        Utilisateurs en ligne : <span id="onlineNumber">0</span>
+        <!-- Header -->
+        <div class="p-4 border-b border-gray-800 flex justify-between items-center">
+            <h3 class="text-lg font-bold text-white">Chat en direct</h3>
+            <div class="text-sm text-gray-400"><span id="onlineCount">0</span> en ligne</div>
+        </div>
 
-                    </div>
-                    <p class="text-gray-400 text-sm">Vous êtes : <span class="text-blue-400">{{ $pseudo }}</span></p>
-                </div>
-                
+        <!-- Messages -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-4" id="chatMessages" style="max-height: 60vh;">
+            <div class="text-gray-400 text-sm text-center">Chargement...</div>
+        </div>
+
+        <!-- Zone d’envoi -->
+        <div class="p-4 border-t border-gray-800">
+            <div class="flex space-x-2 items-center">
+                <input id="messageInput" type="text" placeholder="Écrivez un message..." class="flex-1 bg-gray-800 text-white px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm" />
+                <button id="emojiButton" class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-lg text-sm">😊</button>
+                <button id="sendButton" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm"><i class="fas fa-paper-plane"></i></button>
             </div>
+        </div>
+    </div>
+</div>
 
-            <!-- Messages du chat -->
-            <div class="flex-1 overflow-y-auto p-4 space-y-4" id="chatMessages" style="max-height: 60vh;">
-                @foreach($messages as $msg)
-                    <div class="bg-gray-800 p-2 rounded-lg">
-                        <span class="text-blue-400 font-semibold">{{ $msg->pseudo }}</span>
-                        <span class="text-gray-300 text-sm">: {{ $msg->content }}</span>
-                    </div>
-                @endforeach
-            </div>
+<!-- Sons -->
+<audio id="sendSound" src="{{ asset('sounds/send.mp3') }}"></audio>
+<audio id="receiveSound" src="{{ asset('sounds/receive.mp3') }}"></audio>
 
-            <!-- Zone d'envoi de message -->
-            <div class="p-4 border-t border-gray-800">
-                
-                <div class="flex space-x-2 items-center">
-                    <input 
-                        type="text" 
-                        id="messageInput"
-                        placeholder="Écrivez un message..."
-                        class="flex-1 bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm min-w-0"
-                    />
-                    <button 
-                        id="sendButton"
-                        class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg font-semibold transition flex items-center space-x-1 flex-shrink-0 text-sm"
-                    >
-                        <i class="fas fa-paper-plane text-xs"></i>
-                        <span class="hidden sm:inline">Envoyer</span>
-                    </button>
-                </div>
-            </div>
-        </div>   
+
     </div>
     </div>
     <!-- Footer -->
@@ -145,4 +131,7 @@
 
     @push('scripts')
     <script src="{{ asset('js/script.js') }}"></script>
-@endpush
+    <script src="https://cdn.jsdelivr.net/npm/emoji-picker-element@1.21.0/index.js" type="module"></script>
+    <script src="https://js.pusher.com/8.2/pusher.min.js"></script>
+    <script src="@vite('resources/js/app.js')"></script> 
+    @endpush
