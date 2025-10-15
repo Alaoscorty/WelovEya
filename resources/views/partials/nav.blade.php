@@ -1,9 +1,9 @@
 <nav class="bg-black py-4 px-6 border-b border-gray-800">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center">
+            <a href="{{ url('/produit') }}">
                 <img src="{{ asset('images/Logo-WLE_Plan-de-travail-1.png') }}" alt="Logo" width="50">
 
-            </div>
+            </a>
             
             <div id="menu" class="hidden md:flex items-center space-x-6">
                 <a href="{{ url('/artistes') }}" class="text-white hover:text-orange-500">Artistes</a>
