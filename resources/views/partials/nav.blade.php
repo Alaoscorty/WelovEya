@@ -116,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                 }">
                                     <i class="fas fa-minus text-xs"></i>
                                 </button>
-                                <span class="quantity mx-2">${
+                                <span class="quantity mx-2 text-gray-500">${
                                   item.quantity
                                 }</span>
                                 <button class="increase-quantity text-gray-500 hover:text-orange-600" data-id="${
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cartItemsContainer.appendChild(cartItem);
       });
 
-      cartSubtotal.textContent = subtotal.toFixed(2) + "FcCFA";
+      cartSubtotal.textContent = subtotal.toFixed(2) + "FCFA";
       cartTotal.textContent = subtotal.toFixed(2) + "FCFA";
       cartSummary.classList.remove("hidden");
     }

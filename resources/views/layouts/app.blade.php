@@ -42,7 +42,7 @@
                 </div>
             </div>
             
-            <div id="cart-summary" class="border-t border-gray-200 pt-4 hidden">
+            <div id="cart-summary" class="border-t border-gray-200 text-gray-600 pt-4 hidden">
                 <div class="flex justify-between mb-2">
                     <span>Sous-total</span>
                     <span id="cart-subtotal">0FCFA</span>
