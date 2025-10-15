@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,8 @@ Route::get('/billeterie', function () {
     return view('billeterie');
 })->name('billeterie');
 
-Route::get('/direct', function () {
-    return view('direct');
-})->name('direct');
+Route::get('/direct',[ChatController::class,'index'])->name ('direct');
+Route::post('/send',[ChatController::class, 'send'])->name ('chat.send');
 
 
 Route::get('/produit', function () {

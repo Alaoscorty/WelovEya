@@ -51,35 +51,85 @@
         </a>
     </div>
     <!-- section de fin de la direct live -->
-    <div class="mt-5 justify-center border border-gray-800  rounded-lg" style="margin-left: 5vh; margin-right: 5vh;">
-        <div class="flex justify-between items-center p-6">
-            <div class="flex items-center space-x-4">
-                <div class=" font-bold mb-4 text-center text-white bg-red-800 rounded-lg py-2 px-5">
-                    <i class="fas fa-circle text-green-500"></i>
-                En direct
+    <div class="flex justify-center ">
+        <div class="mt-5 justify-center border border-gray-800  rounded-lg" style="margin-left: 5vh; margin-right: 5vh;">
+            <div class="flex justify-between items-center p-6">
+                <div class="flex items-center space-x-4">
+                    <div class=" font-bold mb-4 text-center text-white bg-red-800 rounded-lg py-2 px-5">
+                        <i class="fas fa-circle text-green-500"></i>
+                    En direct
+                    </div>
+                    <div class="mb-4 py-2">
+                        <i class="fas fa-user-friends"></i>
+                        1,234 spectacteurs
+                    </div>
                 </div>
-                <div class="mb-4 py-2">
-                    <i class="fas fa-user-friends"></i>
-                    1,234 spectacteurs
+                <div>
+                    <i class="fas fa-share-alt"></i>
                 </div>
             </div>
-            <div>
-                <i class="fas fa-share-alt"></i>
+            <div class="bg-gray-800 p-6">
+                <!-- Lecteur vidéo en direct -->
+                <video id="liveVideo" controls style="width: 100%; height: 50vh; background-color: black;">
+                    <source src="//https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                </video>
+                <p class="text-white mt-2">
+                    Festival WelovEya - Scène Principale
+                </p>
+                <!-- Bouton pour enregistrer la vidéo -->
+                <button id="recordBtn" class="bg-red-500 text-white font-bold py-2 px-4 mt-4 rounded-lg hover:bg-red-600 transition">
+                    Commencer l'enregistrement
+                </button>
             </div>
         </div>
-        <div class="bg-gray-800 p-6">
-            <!-- Lecteur vidéo en direct -->
-            <video id="liveVideo" controls style="width: 100%; height: 50vh; background-color: black;">
-                <source src="//https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-            </video>
-            <p class="text-white mt-2">
-                Festival WelovEya - Scène Principale
-            </p>
-            <!-- Bouton pour enregistrer la vidéo -->
-            <button id="recordBtn" class="bg-red-500 text-white font-bold py-2 px-4 mt-4 rounded-lg hover:bg-red-600 transition">
-                Commencer l'enregistrement
-            </button>
-        </div>
+        <!-- fin de la section de fin de la direct live -->
+        <!-- Section Chat (Droite) -->
+        <div class="w-full lg:w-96 bg-gray-900 flex flex-col border-l border-gray-800 rounded-lg shadow-lg p-2 mt-5">
+
+            <!-- Header du chat -->
+            <div class="p-4 border-b border-gray-800">
+                <h3 class="text-lg font-bold text-white">Chat en direct</h3>
+                <div>
+                    <div id="onlineCount" class="text-gray-400 text-sm mb-2">
+                        Utilisateurs en ligne : <span id="onlineNumber">0</span>
+
+                    </div>
+                    <p class="text-gray-400 text-sm">Vous êtes : <span class="text-blue-400">{{ $pseudo }}</span></p>
+                </div>
+                
+            </div>
+
+            <!-- Messages du chat -->
+            <div class="flex-1 overflow-y-auto p-4 space-y-4" id="chatMessages" style="max-height: 60vh;">
+                @foreach($messages as $msg)
+                    <div class="bg-gray-800 p-2 rounded-lg">
+                        <span class="text-blue-400 font-semibold">{{ $msg->pseudo }}</span>
+                        <span class="text-gray-300 text-sm">: {{ $msg->content }}</span>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- Zone d'envoi de message -->
+            <div class="p-4 border-t border-gray-800">
+                
+                <div class="flex space-x-2 items-center">
+                    <input 
+                        type="text" 
+                        id="messageInput"
+                        placeholder="Écrivez un message..."
+                        class="flex-1 bg-gray-800 text-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm min-w-0"
+                    />
+                    <button 
+                        id="sendButton"
+                        class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg font-semibold transition flex items-center space-x-1 flex-shrink-0 text-sm"
+                    >
+                        <i class="fas fa-paper-plane text-xs"></i>
+                        <span class="hidden sm:inline">Envoyer</span>
+                    </button>
+                </div>
+            </div>
+        </div>   
+    </div>
     </div>
     <!-- Footer -->
     <footer class="bg-black py-12 px-6 border-t border-gray-800 mt-8">
@@ -91,8 +141,8 @@
             </div>
         </div>
     </footer>
-   @endsection
+ @endsection
 
     @push('scripts')
     <script src="{{ asset('js/script.js') }}"></script>
-    @endpush
+@endpush

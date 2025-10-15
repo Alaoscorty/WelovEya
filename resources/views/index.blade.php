@@ -3,23 +3,92 @@
 @section('title', 'Artistes')
 
 @section('content')
-    <!--Première section -->
-    <div class=" justify-center " style="background:url(images/WLE-25_SAVE-THE-DATE_INSTA.png); height:80vh; background-size: cover; background-position: center;padding-top: 45vh;">
-        <P class="text-white text-xl font-bold mt-6 mb-6" style="background-color: rgba(0, 0, 0, 0.7); padding: 10px; padding-left: 20px; padding-right: 20px">
-            L'évènement musical le plus attendu de l'année arrive !
-            <br>
-            Découvrez vos artistes préférés, participez aux jeux et vivez l'expérienec en direct
-        </P>
-        <div class="flex justify-center space-x-20">
-            <button class=" bg-red-900 text-white font-bold py-2 px-4 mt-5 mb-5 rounded-lg hover:bg-orange-600 transition">
-                    Acheter votre ticket      
-            </button>
-            <button class=" bg-yellow-600 text-white font-bold py-2 px-4 mt-5 mb-5 rounded-lg hover:bg-orange-600 transition">
-                <i class="fas fa-play"></i>    Voir la bande d'annonce
-            </button>
+    <!-- section carousel -->
+        <div class="relative h-screen w-full overflow-hidden">
+        <!-- Slides -->
+        <div class="relative h-full w-full">
+            <!-- Slide 1 -->
+            <div class="slide absolute inset-0 w-full h-full active-slide">
+                <div class="absolute inset-0 overlay"></div>
+                <img src="{{ asset('WLE-24_SITE-WEB_SAVE-THE-DATE-1.png') }}" alt="Personne en costume futuriste" class="w-full h-full object-cover">
+                <div class="absolute inset-0 flex flex-col justify-center px-8 md:px-16 lg:px-24 xl:px-32">
+                    <div class="max-w-2xl">
+                        <h2 class="text-yellow-400 text-2xl md:text-3xl lg:text-4xl font-bold mb-4 animate-fadeIn">WeLovEya ne sera pas comme...</h2>
+                        <p class="text-white text-xl md:text-2xl mb-8">Découvrez l'avenir de la festivité</p>
+                        <div class="flex justify-center space-x-20">
+                            <button class=" bg-red-900 text-white font-bold py-2 px-4 mt-5 mb-5 rounded-lg hover:bg-orange-600 transition">
+                                    Acheter votre ticket      
+                            </button>
+                            <button class=" bg-yellow-600 text-white font-bold py-2 px-4 mt-5 mb-5 rounded-lg hover:bg-orange-600 transition">
+                                <i class="fas fa-play"></i>    Voir la bande d'annonce
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide absolute inset-0 w-full h-full inactive-slide">
+                <div class="absolute inset-0 overlay"></div>
+                <img src="{{ asset('images/WLE_REV-Nikanor.png') }}" alt="Univers digital" class="w-full h-full object-cover">
+                <div class="absolute inset-0 flex flex-col justify-center px-8 md:px-16 lg:px-24 xl:px-32">
+                    <div class="max-w-2xl">
+                        <h2 class="text-yellow-400 text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Spéciale ? Mieux, vous êtes unique.</h2>
+                        <p class="text-white text-xl md:text-2xl mb-8">Personnalisez votre expérience en festivité</p>
+                        <div class="flex justify-center space-x-20">
+                            <button class=" bg-red-900 text-white font-bold py-2 px-4 mt-5 mb-5 rounded-lg hover:bg-orange-600 transition">
+                                    Acheter votre ticket      
+                            </button>
+                            <button class=" bg-yellow-600 text-white font-bold py-2 px-4 mt-5 mb-5 rounded-lg hover:bg-orange-600 transition">
+                                <i class="fas fa-play"></i>    Voir la bande d'annonce
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide absolute inset-0 w-full h-full inactive-slide">
+                <div class="absolute inset-0 overlay"></div>
+                <img src="{{ asset('images/Black-women.jpeg') }}" alt="Réseau futuriste" class="w-full h-full object-cover">
+                <div class="absolute inset-0 flex flex-col justify-center px-8 md:px-16 lg:px-24 xl:px-32">
+                    <div class="max-w-2xl">
+                        <h2 class="text-yellow-400 text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Connectivité nouvelle génération</h2>
+                        <p class="text-white text-xl md:text-2xl mb-8">Latence ultra-faible, vitesse révolutionnaire avec l'intégration de notre chat en ligne , vibrons ensemble</p>
+                        <div class="flex justify-center space-x-20">
+                            <button class=" bg-red-900 text-white font-bold py-2 px-4 mt-5 mb-5 rounded-lg hover:bg-orange-600 transition">
+                                    Acheter votre ticket      
+                            </button>
+                            <button class=" bg-yellow-600 text-white font-bold py-2 px-4 mt-5 mb-5 rounded-lg hover:bg-orange-600 transition">
+                                <i class="fas fa-play"></i>    Voir la bande d'annonce
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        
+
+        <!-- Navigation dots -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
+            <button class="dot w-3 h-3 rounded-full bg-gray-600 active" data-slide="0"></button>
+            <button class="dot w-3 h-3 rounded-full bg-gray-600" data-slide="1"></button>
+            <button class="dot w-3 h-3 rounded-full bg-gray-600" data-slide="2"></button>
+        </div>
+
+        <!-- Chat button -->
+        <button class="absolute bottom-8 right-8 bg-blue-600 text-white p-4 rounded-full shadow-lg chat-bubble z-20">
+            <i data-feather="message-circle"></i>
+        </button>
+        <!-- Navigation arrows -->
+        <button class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full z-20 hover:bg-opacity-70 transition" id="prev-slide">
+            <i data-feather="chevron-left"></i>
+        </button>
+        <button class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full z-20 hover:bg-opacity-70 transition" id="next-slide">
+            <i data-feather="chevron-right"></i>
+        </button>
     </div>
+    <!-- Fin de la section carousel  -->
+
     <p class="mt-5 mb-5 text-center text-gray-300 text-lg">
         Plus que quelques moments avant le festival
     </p>
@@ -92,7 +161,7 @@
             Une expérience musicale complète avec des fonctionalités innovantes pour vivre l'évènement comme jamais auparavant.
         </p>
     </div>
-    <div class="mt-6 mb-16 m-8" >
+    <div class="mt-6 mb-16 m-8 flex-col lg:flex-row" >
             <div class="grid grid-cols-3 gap-3">
                 <div class="border border-b border-gray-500 rounded-lg py-4 px-6 items-center">
                     <div style=" background:rgba(243, 9, 9, 0.34); width:8vh; height:8vh;; padding:8px; margin-left: 5vh; margin-bottom: 5px;">
@@ -142,7 +211,7 @@
                     <div style=" width:8vh; height:8vh; ; padding:8px;margin-left: 5vh; margin-bottom: 5px;">
                         <i class="fas fa-shopping-bag" style="color:white;font-size:4vh;"></i>
                     </div>
-                    <div class="text-4xl font-bold mb-5 fonts"> Boutique Officielle</div>
+                    <div class="text-4xl font-bold mb-5 fonts">Boutique Officielle</div>
                     <div class="text-gray-400 text-sm">Découvrez notre collection exclusive de produits dérivés et d'archives numériques des éditions passés</div>
                     <button class="border border-b border-gray-500 rounded-lg py-2 px-4 text-center mt-5">
                         <div class="text-gray-400 text-sm">Découvrir</div>

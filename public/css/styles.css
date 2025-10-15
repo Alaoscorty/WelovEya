@@ -6,6 +6,35 @@ body {
   background-color: #000000;
   color: white;
 }
+.slide {
+            transition: opacity 1s ease-in-out;
+        }
+        .active-slide {
+            opacity: 1;
+            z-index: 10;
+        }
+        .inactive-slide {
+            opacity: 0;
+            z-index: 0;
+        }
+        .overlay {
+            background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+        }
+        .dot {
+            transition: all 0.3s ease;
+        }
+        .dot.active {
+            background-color: #FBBF24;
+            transform: scale(1.2);
+        }
+        .chat-bubble {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
 
 h1, h2, h3{
  font-family: "Orbitron", sans-serif;

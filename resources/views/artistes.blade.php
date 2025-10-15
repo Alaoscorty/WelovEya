@@ -96,6 +96,42 @@
             </div>
         </div>
     </section>
+    <!-- section des animateurs -->
+     <section class="pt-16 pb-24 px-6">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mt-6 mb-6 text-orange-500">NOS ANIMATEURS</h1>
+            
+            <!-- Countdown -->
+            <div class="mt-16 flex justify-center">
+                <input type="text" placeholder="Rechercher un animateur" class="w-full max-w-md p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <i class="fa fa-search" data-feather="search" style="margin-left: -4vh; margin-top: 2vh; font-size: 3vh;"></i>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card rounded-xl p-6 hover-scale" style="background: url(images/welove.webp);height:50vh;" ></div>
+                <div class="card bg-gray-800 rounded-xl p-6 hover-scale" style="background: url(images/OIP.jpeg);height:50vh;" ></div>
+                <div class="card bg-gray-800 rounded-xl p-6 hover-scale" style="background: url(images/welove.webp);height:50vh;" ></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- section des deejay -->
+     <section class="pt-16 pb-24 px-6">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mt-6 mb-6 text-orange-500">NOS DEEJAY</h1>
+            
+            <!-- Countdown -->
+            <div class="mt-16 flex justify-center">
+                <input type="text" placeholder="Rechercher un DJ" class="w-full max-w-md p-3 rounded-lg bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                <i class="fa fa-search" data-feather="search" style="margin-left: -4vh; margin-top: 2vh; font-size: 3vh;"></i>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="card rounded-xl p-6 hover-scale" style="background: url(images/welove.webp);height:50vh;" ></div>
+                <div class="card bg-gray-800 rounded-xl p-6 hover-scale" style="background: url(images/OIP.jpeg);height:50vh;" ></div>
+                <div class="card bg-gray-800 rounded-xl p-6 hover-scale" style="background: url(images/welove.webp);height:50vh;" ></div>
+            </div>
+        </div>
+    </section>
+
     @endsection
 
     @push('scripts')

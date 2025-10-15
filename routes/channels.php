@@ -16,3 +16,10 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
     return (int) $user->id === (int) $id;
 });
+Broadcast::channel('chat.presence', function ($user) {
+    // Si tu utilises l’authentification utilisateur
+    // return ['id' => $user->id, 'name' => $user->name];
+    // Si tu n’as pas d’auth utilisateur, tu peux juste retourner true
+    return true;
+});
+// Pour un canal public simple, pas besoin d’autorisation

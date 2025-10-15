@@ -31,6 +31,24 @@
             </button>
         </div>
 
+        <!-- section d'achat de tickets -->
+        <section>
+            <div class="card p-6" style="background: url(images/welove.webp);height:50vh;"></div>
+            <div>
+                <p>
+                    Tickets 2025
+                </p>
+                <p>
+                    15 000 FCFA
+                </p>
+                <p>
+                    Ticket standard: le tickets standars coûte 15000frcs
+                    et est valable pour deux jours au festival pour une personne.Il vous donne l'accès au site
+                </p>
+            </div>
+        </section>
+        <!-- Fin de la section  -->
+
         <div class="bg-gray-800 p-6 " style="background: url(images/ac0dee6a445122d535397c22d278e7e3.jpg);height:50vh;background-repeat: no-repeat;background-size: 100% auto; background-position: center"></div>
 
         <div class=" flex justify-center">
