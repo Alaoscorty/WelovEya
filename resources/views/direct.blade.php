@@ -35,86 +35,89 @@
     </div>
 
     <!-- section de direct live -->
-    <div class="mt-2 justify-center text-center bg-orange-800 p-6 rounded-lg" style="margin-left: 5vh; margin-right: 5vh;">
-        <h1 class="text-xl  font-bold mt-1 mb-3 text-white">
+    <div class="mt-2 text-center bg-orange-800 p-6 rounded-lg mx-5 sm:mx-10 lg:mx-20">
+        <h1 class="text-xl font-bold mt-1 mb-3 text-white">
             LE FESTIVAL EST A VOTRE PORTEE. VIBREZ, PEU IMPORTE OU VOUS ETES
         </h1>
-        <P>
-            Vivez les sets explosifs de Davido, Tayc et Asake depuis chez vous, en qualité HD exclusive.Ne manquez aucune minute de la fête, des coulisses à la scène principale.Votre pass streaming est à 50£ pour deux jours d'énergie pure. 
-        </P>
-        <button class=" bg-orange-500 text-white font-bold py-2 px-4 mt-5 mb-5 rounded-lg hover:bg-orange-600 transition">
+        <p class="text-white mb-4">
+            Vivez les sets explosifs de Davido, Tayc et Asake depuis chez vous, en qualité HD exclusive.
+            Ne manquez aucune minute de la fête, des coulisses à la scène principale.
+            Votre pass streaming est à 50£ pour deux jours d'énergie pure. 
+        </p>
+        <button class="bg-orange-500 text-white font-bold py-2 px-4 mt-5 mb-5 rounded-lg hover:bg-orange-600 transition">
             Acheter votre Pass Streaming
         </button>
         <br>
-        <a href="" class=" text-blue-500 px-4 py-2 mt-10">
-            Vous avez déjà votre pass, cliquez ici pour entrez votre code d'accès.
+        <a href="#" class="text-blue-500 px-4 py-2 mt-10 inline-block">
+            Vous avez déjà votre pass, cliquez ici pour entrer votre code d'accès.
         </a>
     </div>
-    <!-- section de fin de la direct live -->
-    <div class="flex justify-center w-full">
-        <div class="mt-5 justify-center border border-gray-800 mb-28 rounded-lg" style="margin-left: 5vh; margin-right: 5vh;">
+    <!-- fin section direct live -->
+
+    <div class="flex flex-col lg:flex-row justify-center w-full mx-5 sm:mx-10 lg:mx-20 mb-28">
+        <!-- Vidéo + infos -->
+        <div class="mt-5 border border-gray-800 rounded-lg lg:mr-10 flex-shrink-0 w-full lg:w-2/3">
             <div class="flex justify-between items-center p-6">
                 <div class="flex items-center space-x-4">
-                    <div class=" font-bold mb-4 text-center text-white bg-red-800 rounded-lg py-2 px-5">
+                    <div class="font-bold mb-4 text-center text-white bg-red-800 rounded-lg py-2 px-5">
                         <i class="fas fa-circle text-green-500"></i>
-                    En direct
+                        En direct
                     </div>
-                    <div class="mb-4 py-2">
+                    <div class="mb-4 py-2 text-white">
                         <i class="fas fa-user-friends"></i>
-                        1,234 spectacteurs
+                        1,234 spectateurs
                     </div>
                 </div>
                 <div>
-                    <i class="fas fa-share-alt"></i>
+                    <i class="fas fa-share-alt text-white"></i>
                 </div>
             </div>
-            <div class="bg-gray-800 p-6 ">
+            <div class="bg-gray-800 p-6">
                 <!-- Lecteur vidéo en direct -->
-                <video id="liveVideo" controls style="width: 100%; height: 64vh; background-color: black;">
+                <video id="liveVideo" controls class="w-full h-64 sm:h-96 md:h-[64vh] bg-black rounded-md">
                     <source src="//https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
                 </video>
                 <p class="text-white mt-2">
                     Festival WelovEya - Scène Principale
                 </p>
-                <!-- Bouton pour enregistrer la vidéo -->
-                <button id="recordBtn" class="bg-red-500 text-white font-bold py-2 px-4 mt-4 rounded-lg hover:bg-red-600 transition">
+                <!-- Bouton suivre live -->
+                <button id="recordBtn" class="bg-red-500 text-white font-bold py-2 px-4 mt-4 rounded-lg hover:bg-red-600 transition w-full sm:w-auto">
                     Suivre en live
                 </button>
             </div>
         </div>
-        <!-- fin de la section de fin de la direct live -->
-        <!-- Section Chat (Droite) -->
-        <div class="flex flex-col lg:flex-row h-screen bg-gray-900 text-white mt-5 mb-28">
-            <!-- Section Chat -->
-            <div class="w-full lg:w-98 bg-gray-900 flex flex-col border-l border-gray-800">
 
-                <!-- Header -->
-                <div class="p-4 border-b border-gray-800 flex justify-between items-center">
-                    <h3 class="text-lg font-bold text-white">Chat en direct</h3>
-                    <div class="text-sm text-gray-400"><span id="onlineCount">0</span> en ligne</div>
-                </div>
-
-                <!-- Messages -->
-                <div class="flex-1 overflow-y-auto p-4 space-y-4" id="chatMessages" style="max-height: 60vh;">
-                    <div class="text-gray-400 text-sm text-center">Chargement...</div>
-                </div>
-
-                <!-- Zone d’envoi -->
-                <div class="p-4 border-t border-gray-800 mt-28">
-                    <div class="flex space-x-2 items-center">
-                        <input id="messageInput" type="text" placeholder="Écrivez un message..." class="flex-1 bg-gray-800 text-white px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm" />
-                        <button id="emojiButton" class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-lg text-sm">😊</button>
-                        <button id="sendButton" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm"><i class="fas fa-paper-plane"></i></button>
-                    </div>
-                </div>
+        <!-- Section Chat -->
+        <div class="flex flex-col bg-gray-900 text-white border-l border-gray-800 mt-10 lg:mt-0 w-full lg:w-1/3 h-[70vh] lg:h-auto rounded-lg overflow-hidden">
+            <!-- Header -->
+            <div class="p-4 border-b border-gray-800 flex justify-between items-center">
+                <h3 class="text-lg font-bold text-white">Chat en direct</h3>
+                <div class="text-sm text-gray-400"><span id="onlineCount">0</span> en ligne</div>
             </div>
 
-            <!-- Sons -->
-            <audio id="sendSound" src="{{ asset('sounds/send.mp3') }}"></audio>
-            <audio id="receiveSound" src="{{ asset('sounds/receive.mp3') }}"></audio>
+            <!-- Messages -->
+            <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 text-gray-400 text-sm" style="max-height: 55vh;">
+                <div class="text-center">Chargement...</div>
+            </div>
 
+            <!-- Zone d’envoi -->
+            <div class="p-4 border-t border-gray-800">
+                <div class="flex space-x-2 items-center">
+                    <input id="messageInput" type="text" placeholder="Écrivez un message..."
+                        class="flex-1 bg-gray-800 text-white px-3 py-2 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm" />
+                    <button id="emojiButton" class="bg-gray-700 hover:bg-gray-600 text-white px-3 py-2 rounded-lg text-sm">😊</button>
+                    <button id="sendButton" class="bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- Sons -->
+    <audio id="sendSound" src="{{ asset('sounds/send.mp3') }}"></audio>
+    <audio id="receiveSound" src="{{ asset('sounds/receive.mp3') }}"></audio>
+
     <!-- Footer -->
     <footer class="bg-black py-12 px-6 border-t border-gray-800 mt-8">
         <div class="container mx-auto">

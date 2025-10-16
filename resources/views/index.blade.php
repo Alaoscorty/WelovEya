@@ -161,98 +161,107 @@
             Une expérience musicale complète avec des fonctionalités innovantes pour vivre l'évènement comme jamais auparavant.
         </p>
     </div>
-    <div class="mt-6 mb-16 m-8 flex-col lg:flex-row" >
-            <div class="grid grid-cols-3 gap-3">
-                <div class="border border-b border-gray-500 rounded-lg py-4 px-6 items-center">
-                    <div style=" background:rgba(243, 9, 9, 0.34); width:8vh; height:8vh;; padding:8px; margin-left: 5vh; margin-bottom: 5px;">
-                        <i class="fas fa-cube" style="color:red;font-size:4vh;"></i>
-                    </div>
-                    <div class="text-4xl font-bold mb-5 fonts">Nos artistes</div>
-                    <div class="text-gray-400 text-sm">Découvrez vos artistes favoris grâce à des outils 3D interactifs. Explorez leurs biographies et discographies</div>
-                    <button class="border border-b border-gray-500 rounded-lg py-2 px-4 text-center mt-5">
-                        <div class="text-gray-400 text-sm">Découvrir</div>
-                    </button>
-                </div>
-                <div class="border border-b border-gray-500 rounded-lg py-4 px-6 items-center">
-                    <div style=" width:8vh; height:8vh; ; padding:8px;margin-left: 5vh; margin-bottom: 5px;">
-                        <i class="fas fa-video" style="font-size:4vh;"></i>
-                    </div>
-                    <div class="text-4xl font-bold mb-5 fonts">Live Streaming</div>
-                    <div class="text-gray-400 text-sm">Accéder au streaming en direct de l'évènement avec nos pass exclusifs.
-                        Ne ratez aucun moment !
-                    </div>
-                    <button class="border border-b border-gray-500 rounded-lg py-2 px-4 text-center mt-5">
-                        <div class="text-gray-400 text-sm">Découvrir</div>
-                    </button>
-                </div>
-                <div class="border border-b border-gray-500 rounded-lg py-4 px-6 items-center">
-                    <div style=" background:rgba(247, 209, 44, 0.34); width:8vh; height:8vh; ; padding:8px;margin-left: 5vh; margin-bottom: 5px;">
-                        <i class="fas fa-gamepad" style="color:yellow;font-size:4vh;"></i>
-                    </div>
-                    <div class="text-4xl font-bold mb-5 fonts ">Jeux & Concours</div>
-                    <div class="text-gray-400 text-sm">Participez à nos mini-jeux interactifs et tentez de gagnez des billets gratuits et des rencontres avec les artistes.</div>
-                    <button class="border border-b border-gray-500 rounded-lg py-2 px-4 text-center mt-5">
-                        <div class="text-gray-400 text-sm">Découvrir</div>
-                    </button>
-                </div>
+    <div class="mt-6 mb-16 mx-4 flex flex-col lg:flex-row">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+        <!-- Carte 1 -->
+        <div class="border border-gray-500 rounded-lg py-4 px-6 flex flex-col items-center text-center">
+            <div class="bg-red-500/30 w-20 h-20 flex items-center justify-center rounded-full mb-4">
+                <i class="fas fa-cube text-red-600 text-3xl"></i>
             </div>
-            <div class="grid grid-cols-3 gap-3 mt-5">
-                <div class="border border-b border-gray-500 rounded-lg py-4 px-6 items-center">
-                    <div style=" background:rgba(243, 9, 9, 0.34); width:8vh; height:8vh; ; padding:8px; margin-left: 5vh; margin-bottom: 5px;">
-                        <i class="fas fa-laptop" style="color:red;font-size:4vh;"></i>
-                    </div>
-                    <div class="text-4xl font-bold mb-5 fonts">Votez pour vos artistes</div>
-                    <div class="text-gray-400 text-sm">Influencez l'ordre des performances en votant pour vos artistes préféres. votre voix compte!</div>
-                    <button class="border border-b border-gray-500 rounded-lg py-2 px-4 text-center mt-5">
-                        <div class="text-gray-400 text-sm">Découvrir</div>
-                    </button>
-                </div>
-                <div class="border border-b border-gray-500 rounded-lg py-4 px-6 items-center">
-                    <div style=" width:8vh; height:8vh; ; padding:8px;margin-left: 5vh; margin-bottom: 5px;">
-                        <i class="fas fa-shopping-bag" style="color:white;font-size:4vh;"></i>
-                    </div>
-                    <div class="text-4xl font-bold mb-5 fonts">Boutique Officielle</div>
-                    <div class="text-gray-400 text-sm">Découvrez notre collection exclusive de produits dérivés et d'archives numériques des éditions passés</div>
-                    <button class="border border-b border-gray-500 rounded-lg py-2 px-4 text-center mt-5">
-                        <div class="text-gray-400 text-sm">Découvrir</div>
-                    </button>
-                </div>
-                <div class="border border-b border-gray-500 rounded-lg py-4 px-6 items-center">
-                    <div style=" background:rgba(247, 209, 44, 0.34); width:8vh; height:8vh;; padding:8px;margin-left: 5vh; margin-bottom: 5px;">
-                        <i class="fas fa-car" style="color:yellow;font-size:4vh;"></i>
-                    </div>
-                    <div class="text-4xl font-bold mb-5 fonts "> location de véhicules</div>
-                    <div class="text-gray-400 text-sm">Réservez votre véhicule pour vous rendre à l'évènement en toute simplicité Service de location partenaire</div>
-                    <button class="border border-b border-gray-500 rounded-lg py-2 px-4 text-center mt-5">
-                        <div class="text-gray-400 text-sm">Découvrir</div>
-                    </button>
-                </div>
-            </div>
+            <div class="text-2xl md:text-3xl font-bold mb-3">Nos artistes</div>
+            <p class="text-gray-400 text-sm mb-4">
+                Découvrez vos artistes favoris grâce à des outils 3D interactifs. Explorez leurs biographies et discographies
+            </p>
+            <button class="border border-gray-500 rounded-lg py-2 px-4 text-gray-400 text-sm hover:bg-gray-700 transition">Découvrir</button>
         </div>
 
-        <div class="container mx-auto text-center">
-            <h1 class="text-4xl md:text-6xl font-bold mt-6 mb-6 text-orange-500">Nos Partenaires</h1>
-                <p class="mt-5 mb-5 text-center text-gray-300 text-lg">
-                    Ils font confiance à WeLovEya et contribuent au succès de l'évènement.
-                </p>
-                <div class="grid grid-cols-4 gap-4 mt-5">
-                    <div class="border border-b border-gray-500 rounded-lg py-4 px-6 text-center items-center">
-                        <div class="text-gray-400 text-sm">Partenaires 1</div>
-                    </div>
-                    <div class="border border-b border-gray-500 rounded-lg py-4 px-6 text-center items-center">
-                        <div class="text-gray-400 text-sm">Partenaires 2</div>
-                    </div>
-                    <div class="border border-b border-gray-500 rounded-lg py-4 px-6 text-center items-center">
-                        <div class="text-gray-400 text-sm">Partenaires 3</div>
-                    </div>
-                    <div class="border border-b border-gray-500 rounded-lg py-4 px-6 text-center items-center">
-
-                        <div class="text-gray-400 text-sm">Partenaires 4</div>
-                    </div>
-                </div>
-        <p class="mt-2 mb-2 text-center text-gray-300 text-lg">
-            Vous souhaitez devenir partenaires ? <a href="" class="text-orange-800">Contactez nous</a>
+        <!-- Carte 2 -->
+        <div class="border border-gray-500 rounded-lg py-4 px-6 flex flex-col items-center text-center">
+            <div class="w-20 h-20 flex items-center justify-center rounded-full bg-gray-300/20 mb-4">
+                <i class="fas fa-video text-3xl"></i>
+            </div>
+            <div class="text-2xl md:text-3xl font-bold mb-3">Live Streaming</div>
+            <p class="text-gray-400 text-sm mb-4">
+                Accéder au streaming en direct de l'évènement avec nos pass exclusifs. Ne ratez aucun moment !
+            </p>
+            <button class="border border-gray-500 rounded-lg py-2 px-4 text-gray-400 text-sm hover:bg-gray-700 transition">Découvrir</button>
         </div>
+
+        <!-- Carte 3 -->
+        <div class="border border-gray-500 rounded-lg py-4 px-6 flex flex-col items-center text-center">
+            <div class="bg-yellow-400/30 w-20 h-20 flex items-center justify-center rounded-full mb-4">
+                <i class="fas fa-gamepad text-yellow-400 text-3xl"></i>
+            </div>
+            <div class="text-2xl md:text-3xl font-bold mb-3">Jeux & Concours</div>
+            <p class="text-gray-400 text-sm mb-4">
+                Participez à nos mini-jeux interactifs et tentez de gagnez des billets gratuits et des rencontres avec les artistes.
+            </p>
+            <button class="border border-gray-500 rounded-lg py-2 px-4 text-gray-400 text-sm hover:bg-gray-700 transition">Découvrir</button>
+        </div>
+
+        <!-- Carte 4 -->
+        <div class="border border-gray-500 rounded-lg py-4 px-6 flex flex-col items-center text-center">
+            <div class="bg-red-500/30 w-20 h-20 flex items-center justify-center rounded-full mb-4">
+                <i class="fas fa-laptop text-red-600 text-3xl"></i>
+            </div>
+            <div class="text-2xl md:text-3xl font-bold mb-3">Votez pour vos artistes</div>
+            <p class="text-gray-400 text-sm mb-4">
+                Influencez l'ordre des performances en votant pour vos artistes préférés. Votre voix compte !
+            </p>
+            <button class="border border-gray-500 rounded-lg py-2 px-4 text-gray-400 text-sm hover:bg-gray-700 transition">Découvrir</button>
+        </div>
+
+        <!-- Carte 5 -->
+        <div class="border border-gray-500 rounded-lg py-4 px-6 flex flex-col items-center text-center">
+            <div class="w-20 h-20 flex items-center justify-center rounded-full bg-gray-300/20 mb-4">
+                <i class="fas fa-shopping-bag text-white text-3xl"></i>
+            </div>
+            <div class="text-2xl md:text-3xl font-bold mb-3">Boutique Officielle</div>
+            <p class="text-gray-400 text-sm mb-4">
+                Découvrez notre collection exclusive de produits dérivés et d'archives numériques des éditions passées.
+            </p>
+            <button class="border border-gray-500 rounded-lg py-2 px-4 text-gray-400 text-sm hover:bg-gray-700 transition">Découvrir</button>
+        </div>
+
+        <!-- Carte 6 -->
+        <div class="border border-gray-500 rounded-lg py-4 px-6 flex flex-col items-center text-center">
+            <div class="bg-yellow-400/30 w-20 h-20 flex items-center justify-center rounded-full mb-4">
+                <i class="fas fa-car text-yellow-400 text-3xl"></i>
+            </div>
+            <div class="text-2xl md:text-3xl font-bold mb-3 capitalize">Location de véhicules</div>
+            <p class="text-gray-400 text-sm mb-4">
+                Réservez votre véhicule pour vous rendre à l'évènement en toute simplicité. Service de location partenaire.
+            </p>
+            <button class="border border-gray-500 rounded-lg py-2 px-4 text-gray-400 text-sm hover:bg-gray-700 transition">Découvrir</button>
+        </div>
+    </div>
+</div>
+
+<!-- Partenaires -->
+<div class="container mx-auto px-4 text-center">
+    <h1 class="text-3xl md:text-5xl font-bold mt-10 mb-6 text-orange-500">Nos Partenaires</h1>
+    <p class="mb-6 text-gray-300 text-lg">Ils font confiance à WeLovEya et contribuent au succès de l'évènement.</p>
+    
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="border border-gray-500 rounded-lg py-4 px-6">
+            <div class="text-gray-400 text-sm">Partenaire 1</div>
+        </div>
+        <div class="border border-gray-500 rounded-lg py-4 px-6">
+            <div class="text-gray-400 text-sm">Partenaire 2</div>
+        </div>
+        <div class="border border-gray-500 rounded-lg py-4 px-6">
+            <div class="text-gray-400 text-sm">Partenaire 3</div>
+        </div>
+        <div class="border border-gray-500 rounded-lg py-4 px-6">
+            <div class="text-gray-400 text-sm">Partenaire 4</div>
+        </div>
+    </div>
+
+    <p class="mt-4 text-gray-300 text-lg">
+        Vous souhaitez devenir partenaire ? <a href="#" class="text-orange-600 underline">Contactez-nous</a>
+    </p>
+</div>
+
         
 
     <footer class="bg-black py-12 px-6 border-t border-gray-800 mt-20">

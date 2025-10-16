@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WeLovEya - @yield('title', 'Festival Musical')</title>
+    <title>WeLovEya - Festival Musical</title>
     <!-- Tailwind, Font Awesome, etc. -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
@@ -14,7 +14,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://js.pusher.com/beams/2.1.0/push-notifications-cdn.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="min-h-screen bg-black text-white">

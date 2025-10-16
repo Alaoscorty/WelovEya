@@ -66,16 +66,24 @@ document.addEventListener('DOMContentLoaded', function() {
     let slideInterval = setInterval(nextSlide, 5000);
 
     function showSlide(n) {
-        slides.forEach(slide => slide.classList.remove('active-slide'));
-        slides.forEach(slide => slide.classList.add('inactive-slide'));
-        slides[n].classList.remove('inactive-slide');
-        slides[n].classList.add('active-slide');
-        
+    if (!slides[n]) return; // sécurité : si le slide n’existe pas
+
+    slides.forEach(slide => {
+        slide.classList.remove('active-slide');
+        slide.classList.add('inactive-slide');
+    });
+
+    slides[n].classList.remove('inactive-slide');
+    slides[n].classList.add('active-slide');
+
+    if (dots[n]) { // sécurité : si le dot existe
         dots.forEach(dot => dot.classList.remove('active'));
         dots[n].classList.add('active');
-        
-        currentSlide = n;
     }
+
+    currentSlide = n;
+}
+
 
     function nextSlide() {
         let newSlide = currentSlide + 1;
@@ -154,6 +162,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const sendSound = document.getElementById('sendSound');
     const receiveSound = document.getElementById('receiveSound');
     const onlineCount = document.getElementById('onlineCount');
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
 
     // Emoji Picker
     const emojiButton = document.getElementById('emojiButton');
@@ -164,10 +174,14 @@ document.addEventListener("DOMContentLoaded", () => {
     picker.style.right = '40px';
     picker.style.display = 'none';
     document.body.appendChild(picker);
+    
 
-    emojiButton.addEventListener('click', () => {
-        picker.style.display = picker.style.display === 'none' ? 'block' : 'none';
-    });
+    if (emojiButton) {
+  emojiButton.addEventListener('click', () => {
+    picker.style.display = picker.style.display === 'none' ? 'block' : 'none';
+  });
+}
+
 
     picker.addEventListener('emoji-click', e => {
         messageInput.value += e.detail.unicode;
@@ -192,27 +206,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Envoyer message
     sendButton.addEventListener('click', async () => {
-        const message = messageInput.value.trim();
-        if (!message) return;
+    const message = messageInput.value.trim();
+    if (!message) return;
 
+    try {
         sendSound.play();
-
         const res = await fetch('/messages', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
-            body: JSON.stringify({ message })
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
+          body: JSON.stringify({ message }),
+          credentials: 'same-origin'
         });
-        const data = await res.json();
-        appendMessage(data);
-        messageInput.value = '';
-    });
+        if (!res.ok) {
+        const text = await res.text(); // récupère la réponse brute (HTML ou autre)
+        throw new Error(`Erreur serveur: ${res.status} - ${text}`);
+      }
+      const data = await res.json();
+      appendMessage(data);
 
+              messageInput.value = '';
+          } catch (error) {
+              console.error('Erreur lors de l’envoi du message :', error);
+              alert("Erreur lors de l'envoi du message.");
+          }
+      });
+    //envoyer de message avec la touche entrée
+    messageInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendButton.click();
+        }
+    });
     // Laravel Echo (écoute en temps réel)
     window.Echo.channel('chat')
         .listen('.message.sent', (e) => {
             appendMessage(e.message);
             receiveSound.play();
         });
+        
 
     // Mise à jour du nombre d’utilisateurs
     setInterval(async () => {

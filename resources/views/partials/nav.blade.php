@@ -258,21 +258,6 @@ document.addEventListener("DOMContentLoaded", () => {
   updateCartCount();
 });
     </script>
-    <script>
-                                // Met à jour le total dans le localStorage et l'affiche
-                                function updateCartTotalLocal() {
-                                    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-                                    localStorage.setItem('cartTotal', total);
-                                    document.getElementById('cart-total-local').textContent = `FCFA ${total.toFixed(2)}`;
-                                }
-                                // Appelle la fonction à chaque mise à jour du panier
-                                const _oldUpdateCartDisplay = updateCartDisplay;
-                                updateCartDisplay = function() {
-                                    _oldUpdateCartDisplay();
-                                    updateCartTotalLocal();
-                                };
-                                // Initialise à l'ouverture du panier
-                                updateCartTotalLocal();
-                            </script>
+    
 </body>
 </html>
