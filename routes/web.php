@@ -32,9 +32,9 @@ Route::post('/messages', [ChatController::class, 'sendMessage']);
 Route::get('/online-users', [ChatController::class, 'getOnlineCount']);
 
 
-Route::get('/produit', function () {
-    return view('produit');
-})->name('produit');
+Route::get('/boutique', function () {
+    return view('boutique');
+})->name('boutique');
 
 Route::get('/propos', function () {
     return view('propos');

@@ -26,30 +26,31 @@
         </div>
 
         <div class="mb-20 flex justify-center">
-            <button class="mt-4 bg-orange-800 text-white font-bold py-4 px-4  hover:bg-orange-600 transition" style="margin-top: 2vh; margin-left: 10vh; ">
+            <button class="mt-4 bg-orange-800 text-white font-bold py-4 px-4  hover:bg-orange-600 transition" style="margin-top: 2vh; margin-left: 10vh; " id="ticket-button">
                 Achetez votre tickets ici   <i class="fas fa-long-arrow-alt-right"></i>
             </button>
         </div>
 
         <!-- section d'achat de tickets -->
-        <section class="p-6 flex">
-            <div class="card p-6" style="background: url(images/welove.webp);height:50vh;width: 80vh;"></div>
-            <div class="mt-8 p-6">
-                <p>
-                    Tickets 2025
-                </p>
-                <p>
-                    15 000 FCFA
-                </p>
-                <p>
-                    Ticket standard: le tickets standars coûte 15000frcs
-                    et est valable pour deux jours au festival pour une personne.Il vous donne l'accès au site
-                </p>
-                <button class="add-to-cart bg-orange-800 text-white px-3 py-1 rounded-full text-sm hover:bg-orange-400 transition" data-id="1" data-name="tickets standar" data-price="15000" data-image="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80">
-                    <i class="fas fa-plus mr-1"></i> Acheter
-                </button>
+        <section class="ticket-section" id="ticket-section">
+            <div class="ticket-image">
+                <img src="{{ asset('images/tickets') }}" alt="Ticket 2025">
             </div>
-            
+            <div class="ticket-info">
+                <p class="text-2xl font-bold">Ticket 2025</p>
+                <p class="price">15 000 FCFA</p>
+                <p class="description">Ticket standard: Le ticket standard coûte 15000frcs et est valable pour deux jours du festival pour une personne. Il vous donne l'accès au site</p>
+                
+                <div class=" flex items-center">
+                    <div class="quantity-control text">
+                        <button class="quantity-btn minus">-</button>
+                        <input type="number" value="1" min="1" class="quantity-input">
+                        <button class="quantity-btn plus">+</button>
+                    
+                    </div>
+                    <button class="add-to-cart bg-orange-800 text-white font-bold hover:bg-orange-600 transition"> Ajouter au panier </button>
+                </div>
+            </div>
         </section>
         <!-- Fin de la section  -->
 

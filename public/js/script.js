@@ -1,256 +1,284 @@
 document.addEventListener('DOMContentLoaded', () => {
-    document.addEventListener("DOMContentLoaded", function () {
-        const menuToggle = document.getElementById("menu-toggle");
-        const menu = document.getElementById("menu");
-        const menuIcon = document.getElementById("menu-icon");
-        const cartIcon = document.getElementById("cart-icon");
+  document.addEventListener("DOMContentLoaded", function () {
+      const menuToggle = document.getElementById("menu-toggle");
+      const menu = document.getElementById("menu");
+      const menuIcon = document.getElementById("menu-icon");
+      const cartIcon = document.getElementById("cart-icon");
 
-        let isOpen = false;
+      let isOpen = false;
 
-        menuToggle.addEventListener("click", function () {
-            isOpen = !isOpen;
+      menuToggle.addEventListener("click", function () {
+          isOpen = !isOpen;
 
-            if (isOpen) {
-                // Affiche le menu, change l'icône en croix, cache le panier
-                menu.style.display = "block";
-                menuIcon.classList.remove("fa-bars");
-                menuIcon.classList.add("fa-times");
-                cartIcon.style.display = "none";
-            } else {
-                // Cache le menu, remet l'icône burger, affiche le panier
-                menu.style.display = "none";
-                menuIcon.classList.remove("fa-times");
-                menuIcon.classList.add("fa-bars");
-                cartIcon.style.display = "block";
-            }
-        });
-    });
+          if (isOpen) {
+              // Affiche le menu, change l'icône en croix, cache le panier
+              menu.style.display = "block";
+              menuIcon.classList.remove("fa-bars");
+              menuIcon.classList.add("fa-times");
+              cartIcon.style.display = "none";
+          } else {
+              // Cache le menu, remet l'icône burger, affiche le panier
+              menu.style.display = "none";
+              menuIcon.classList.remove("fa-times");
+              menuIcon.classList.add("fa-bars");
+              cartIcon.style.display = "block";
+          }
+      });
+  });
 });
 
 //script pour gérer le filtre d'évènement 
 document.addEventListener('DOMContentLoaded', function() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const cards = document.querySelectorAll('.card');
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const cards = document.querySelectorAll('.card');
 
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', () => {
-            const filter = btn.getAttribute('data-filter');
-            filterButtons.forEach(b => {
-                b.classList.remove('bg-orange-500');
-                b.classList.add('bg-gray-700');
-            });
-            btn.classList.remove('bg-gray-700');
-            btn.classList.add('bg-orange-500');
+  filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter');
+          filterButtons.forEach(b => {
+              b.classList.remove('bg-orange-500');
+              b.classList.add('bg-gray-700');
+          });
+          btn.classList.remove('bg-gray-700');
+          btn.classList.add('bg-orange-500');
 
-            cards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-genre') === filter) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    });
+          cards.forEach(card => {
+              if (filter === 'all' || card.getAttribute('data-genre') === filter) {
+                  card.style.display = 'block';
+              } else {
+                  card.style.display = 'none';
+              }
+          });
+      });
+  });
 });   
+
 //script pour la gestion du carousel
 document.addEventListener('DOMContentLoaded', function() {
 
+  feather.replace();
 
-    feather.replace();
+  const slides = document.querySelectorAll('.slide');
+  const dots = document.querySelectorAll('.dot');
+  const prevButton = document.getElementById('prev-slide');
+  const nextButton = document.getElementById('next-slide');
+  let currentSlide = 0;
+  let slideInterval = setInterval(nextSlide, 5000);
 
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    const prevButton = document.getElementById('prev-slide');
-    const nextButton = document.getElementById('next-slide');
-    let currentSlide = 0;
-    let slideInterval = setInterval(nextSlide, 5000);
+  function showSlide(n) {
+  if (!slides[n]) return; // sécurité : si le slide n’existe pas
 
-    function showSlide(n) {
-    if (!slides[n]) return; // sécurité : si le slide n’existe pas
+  slides.forEach(slide => {
+      slide.classList.remove('active-slide');
+      slide.classList.add('inactive-slide');
+  });
 
-    slides.forEach(slide => {
-        slide.classList.remove('active-slide');
-        slide.classList.add('inactive-slide');
-    });
+  slides[n].classList.remove('inactive-slide');
+  slides[n].classList.add('active-slide');
 
-    slides[n].classList.remove('inactive-slide');
-    slides[n].classList.add('active-slide');
+  if (dots[n]) { // sécurité : si le dot existe
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[n].classList.add('active');
+  }
 
-    if (dots[n]) { // sécurité : si le dot existe
-        dots.forEach(dot => dot.classList.remove('active'));
-        dots[n].classList.add('active');
-    }
-
-    currentSlide = n;
+  currentSlide = n;
 }
 
 
-    function nextSlide() {
-        let newSlide = currentSlide + 1;
-        if (newSlide >= slides.length) {
-            newSlide = 0;
-        }
-        showSlide(newSlide);
-        resetInterval();
-    }
+  function nextSlide() {
+      let newSlide = currentSlide + 1;
+      if (newSlide >= slides.length) {
+          newSlide = 0;
+      }
+      showSlide(newSlide);
+      resetInterval();
+  }
 
-    function prevSlide() {
-        let newSlide = currentSlide - 1;
-        if (newSlide < 0) {
-            newSlide = slides.length - 1;
-        }
-        showSlide(newSlide);
-        resetInterval();
-    }
+  function prevSlide() {
+      let newSlide = currentSlide - 1;
+      if (newSlide < 0) {
+          newSlide = slides.length - 1;
+      }
+      showSlide(newSlide);
+      resetInterval();
+  }
 
-    function resetInterval() {
-        clearInterval(slideInterval);
-        slideInterval = setInterval(nextSlide, 5000);
-    }
+  function resetInterval() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(nextSlide, 5000);
+  }
 
-    nextButton.addEventListener('click', nextSlide);
-    prevButton.addEventListener('click', prevSlide);
+  nextButton.addEventListener('click', nextSlide);
+  prevButton.addEventListener('click', prevSlide);
 
-    dots.forEach(dot => {
-        dot.addEventListener('click', function() {
-            const slideIndex = parseInt(this.getAttribute('data-slide'));
-            showSlide(slideIndex);
-            resetInterval();
-        });
-    });
+  dots.forEach(dot => {
+      dot.addEventListener('click', function() {
+          const slideIndex = parseInt(this.getAttribute('data-slide'));
+          showSlide(slideIndex);
+          resetInterval();
+      });
+  });
 
-    // Keyboard navigation
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'ArrowRight') {
-            nextSlide();
-        } else if (e.key === 'ArrowLeft') {
-            prevSlide();
-        }
-    });
+  // Clavier de navigation
+  document.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowRight') {
+          nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+          prevSlide();
+      }
+  });
 
-    // Touch events for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
+  // Touch events for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
 
-    document.addEventListener('touchstart', function(e) {
-        touchStartX = e.changedTouches[0].screenX;
-    }, false);
+  document.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+  }, false);
 
-    document.addEventListener('touchend', function(e) {
-        touchEndX = e.changedTouches[0].screenX;
-        handleSwipe();
-    }, false);
+  document.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+  }, false);
 
-    function handleSwipe() {
-        if (touchEndX < touchStartX - 50) {
-            nextSlide();
-        }
-        if (touchEndX > touchStartX + 50) {
-            prevSlide();
-        }
-    }
+  function handleSwipe() {
+      if (touchEndX < touchStartX - 50) {
+          nextSlide();
+      }
+      if (touchEndX > touchStartX + 50) {
+          prevSlide();
+      }
+  }
 });
 
 
 //script pour la gestion du chat
-//script pour la gestion du chat
 document.addEventListener("DOMContentLoaded", () => {
 
-    const messageInput = document.getElementById('messageInput');
-    const chatMessages = document.getElementById('chatMessages');
-    const sendButton = document.getElementById('sendButton');
-    const sendSound = document.getElementById('sendSound');
-    const receiveSound = document.getElementById('receiveSound');
-    const onlineCount = document.getElementById('onlineCount');
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+const messageInput = document.getElementById('messageInput');
+const chatMessages = document.getElementById('chatMessages');
+const sendButton = document.getElementById('sendButton');
+const sendSound = document.getElementById('sendSound');
+const receiveSound = document.getElementById('receiveSound');
+const onlineCount = document.getElementById('onlineCount');
+const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-
-    // Emoji Picker
-    const emojiButton = document.getElementById('emojiButton');
-    const picker = document.createElement('emoji-picker');
-    picker.style.position = 'absolute';
-    picker.style.top = '180vh';
-    picker.style.bottom = '90px';
-    picker.style.right = '40px';
-    picker.style.display = 'none';
-    document.body.appendChild(picker);
-    
-
-    if (emojiButton) {
-  emojiButton.addEventListener('click', () => {
-    picker.style.display = picker.style.display === 'none' ? 'block' : 'none';
-  });
+// Vérifier si les éléments existent avant de les utiliser
+if (!messageInput || !chatMessages || !sendButton || !onlineCount) {
+    console.warn('Certains éléments du chat ne sont pas présents sur cette page.');
+    return;
 }
 
+// Emoji Picker
+const emojiButton = document.getElementById('emojiButton');
+const picker = document.createElement('emoji-picker');
+picker.style.position = 'absolute';
+picker.style.top = '180vh';
+picker.style.bottom = '90px';
+picker.style.right = '40px';
+picker.style.display = 'none';
+document.body.appendChild(picker);
 
-    picker.addEventListener('emoji-click', e => {
-        messageInput.value += e.detail.unicode;
-        picker.style.display = 'none';
-    });
+if (emojiButton) {
+emojiButton.addEventListener('click', () => {
+picker.style.display = picker.style.display === 'none' ? 'block' : 'none';
+});
+}
 
-    // Charger les messages initiaux
-    fetch('/messages')
-        .then(res => res.json())
-        .then(data => {
-            chatMessages.innerHTML = '';
-            data.forEach(msg => appendMessage(msg));
-        });
+picker.addEventListener('emoji-click', e => {
+    messageInput.value += e.detail.unicode;
+    picker.style.display = 'none';
+});
 
-    function appendMessage(msg) {
-        const div = document.createElement('div');
-        div.className = 'bg-gray-800 rounded-lg p-2';
-        div.innerHTML = `<span class="text-blue-400 font-bold">${msg.pseudo} :</span> ${msg.message}`;
-        chatMessages.appendChild(div);
-        chatMessages.scrollTop = chatMessages.scrollHeight;
+//Menu toggle
+function toggleTheme() {
+    const body = document.body;
+    const icon = document.querySelector('.theme-toggle i');
+
+    body.classList.toggle('light-mode');
+
+    if (body.classList.contains('light-mode')) {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+    } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
     }
+}
 
-    // Envoyer message
-    sendButton.addEventListener('click', async () => {
-    const message = messageInput.value.trim();
-    if (!message) return;
+// Charger les messages initiaux
+fetch('/messages')
+.then(res => res.json())
+.then(data => {
+    chatMessages.innerHTML = '';
+    data.forEach(msg => appendMessage(msg));
+})
+.catch(error => {
+    console.error('Erreur lors du chargement des messages initiaux :', error);
+});
 
-    try {
-        sendSound.play();
-        const res = await fetch('/messages', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
-          body: JSON.stringify({ message }),
-          credentials: 'same-origin'
-        });
-        if (!res.ok) {
-        const text = await res.text(); // récupère la réponse brute (HTML ou autre)
-        throw new Error(`Erreur serveur: ${res.status} - ${text}`);
-      }
-      const data = await res.json();
-      appendMessage(data);
+function appendMessage(msg) {
+  const div = document.createElement('div');
+  div.className = 'bg-gray-800 rounded-lg p-2';
+  div.innerHTML = `<span class="text-blue-400 font-bold">${msg.pseudo} :</span> ${msg.message}`;
+  chatMessages.appendChild(div);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
 
-              messageInput.value = '';
-          } catch (error) {
-              console.error('Erreur lors de l’envoi du message :', error);
-              alert("Erreur lors de l'envoi du message.");
-          }
-      });
-    //envoyer de message avec la touche entrée
-    messageInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            sendButton.click();
-        }
+// Envoyer message
+sendButton.addEventListener('click', async () => {
+const message = messageInput.value.trim();
+if (!message) return;
+
+try {
+  if (sendSound) sendSound.play();
+    const res = await fetch('/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrfToken },
+      body: JSON.stringify({ message }),
+      credentials: 'same-origin'
     });
-    // Laravel Echo (écoute en temps réel)
-    window.Echo.channel('chat')
-        .listen('.message.sent', (e) => {
-            appendMessage(e.message);
-            receiveSound.play();
-        });
-        
+    if (!res.ok) {
+    const text = await res.text(); // récupère la réponse brute
+    throw new Error(`Erreur serveur: ${res.status} - ${text}`);
+  }
+  const data = await res.json();
+  appendMessage(data);
 
-    // Mise à jour du nombre d’utilisateurs
-    setInterval(async () => {
+          messageInput.value = '';
+      } catch (error) {
+        console.error('Erreur lors de l’envoi du message :', error);
+        alert("Erreur lors de l'envoi du message.");
+      }
+  });
+  //envoyer de message avec la touche entrée
+  messageInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendButton.click();
+      }
+  });
+  // Laravel Echo (écoute en temps réel)
+  if (window.Echo) {
+      window.Echo.channel('chat')
+          .listen('.message.sent', (e) => {
+            appendMessage(e.message);
+            if (receiveSound) receiveSound.play();
+          });
+  } else {
+      console.warn('Laravel Echo n\'est pas disponible.');
+  }
+
+  // Mise à jour du nombre d’utilisateurs
+  setInterval(async () => {
+    try {
         const res = await fetch('/online-users');
         const data = await res.json();
         onlineCount.textContent = data.count;
-    }, 5000);
+    } catch (error) {
+        console.error('Erreur lors de la mise à jour du nombre d\'utilisateurs :', error);
+    }
+  }, 5000);
 });
 
 
@@ -279,11 +307,11 @@ function updateCountdown() {
     
     // Si le compte à rebours est terminé
     if (distance < 0) {
-        clearInterval(countdownInterval);
-        document.getElementById('days').textContent = '00';
-        document.getElementById('hours').textContent = '00';
-        document.getElementById('minutes').textContent = '00';
-        document.getElementById('seconds').textContent = '00';
+      clearInterval(countdownInterval);
+      document.getElementById('days').textContent = '00';
+      document.getElementById('hours').textContent = '00';
+      document.getElementById('minutes').textContent = '00';
+      document.getElementById('seconds').textContent = '00';
     }
 }
 
@@ -295,7 +323,7 @@ const countdownInterval = setInterval(updateCountdown, 1000);
 
 //script de gestion des produits
 document.addEventListener("DOMContentLoaded", () => {
-    // Cart functionality
+  // Fonctionnalité des cartes
   const cartBtn = document.getElementById("cart-btn");
   const cartSidebar = document.getElementById("cart-sidebar");
   const closeCartBtn = document.getElementById("close-cart");
@@ -342,33 +370,33 @@ document.addEventListener("DOMContentLoaded", () => {
                         <img src="${item.image}" alt="${
           item.name
         }" class="w-16 h-16 object-cover rounded">
-                        <div class="ml-4 flex-grow">
-                            <h4 class="font-medium">${item.name}</h4>
-                            <p class="text-gray-600 text-sm">${item.price.toFixed(
-                              2
-                            )}€</p>
-                            <div class="flex items-center mt-2">
-                                <button class="decrease-quantity text-gray-500 hover:text-pink-600" data-id="${
-                                  item.id
-                                }">
-                                    <i class="fas fa-minus text-xs"></i>
-                                </button>
-                                <span class="quantity mx-2">${
-                                  item.quantity
-                                }</span>
-                                <button class="increase-quantity text-gray-500 hover:text-pink-600" data-id="${
-                                  item.id
-                                }">
-                                    <i class="fas fa-plus text-xs"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <button class="remove-item text-gray-400 hover:text-red-500 ml-2" data-id="${
-                          item.id
-                        }">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    `;
+        <div class="ml-4 flex-grow">
+            <h4 class="font-medium">${item.name}</h4>
+            <p class="text-gray-600 text-sm">${item.price.toFixed(
+              2
+            )}€</p>
+            <div class="flex items-center mt-2">
+                <button class="decrease-quantity text-gray-500 hover:text-pink-600" data-id="${
+                  item.id
+                }">
+                    <i class="fas fa-minus text-xs"></i>
+                </button>
+                <span class="quantity mx-2">${
+                  item.quantity
+                }</span>
+                <button class="increase-quantity text-gray-500 hover:text-pink-600" data-id="${
+                  item.id
+                }">
+                    <i class="fas fa-plus text-xs"></i>
+                </button>
+            </div>
+        </div>
+        <button class="remove-item text-gray-400 hover:text-red-500 ml-2" data-id="${
+          item.id
+        }">
+            <i class="fas fa-times"></i>
+        </button>
+    `;
 
         cartItemsContainer.appendChild(cartItem);
       });
@@ -379,7 +407,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Add to cart
+  // Ajouter à la carte
   document.querySelectorAll(".add-to-cart").forEach((button) => {
     button.addEventListener("click", function () {
       const id = this.getAttribute("data-id");
@@ -393,11 +421,11 @@ document.addEventListener("DOMContentLoaded", () => {
         existingItem.quantity += 1;
       } else {
         cart.push({
-          id,
-          name,
-          price,
-          image,
-          quantity: 1,
+        id,
+        name,
+        price,
+        image,
+        quantity: 1,
         });
       }
 
@@ -474,7 +502,7 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCartSidebar();
     }
 
-    // Remove item
+    // Suppresion des items
     if (
       e.target.classList.contains("remove-item") ||
       e.target.closest(".remove-item")
@@ -492,6 +520,64 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Initialize cart on page load
+  // Initialisation de la carte de gestion
   updateCartCount();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Smooth scroll to ticket section
+    const ticketButton = document.getElementById('ticket-button');
+    const ticketSection = document.getElementById('ticket-section');
+    
+    if (ticketButton && ticketSection) {
+        ticketButton.addEventListener('click', function() {
+            ticketSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+    
+    // Quantity controls
+    const quantityInputs = document.querySelectorAll('.quantity-input');
+    const minusButtons = document.querySelectorAll('.minus');
+    const plusButtons = document.querySelectorAll('.plus');
+    const addToCartButtons = document.querySelectorAll('.add-to-cart, .add-to-cart-sidebar');
+    const toast = document.getElementById('toast');
+    const toastMessage = document.getElementById('toast-message');
+    
+    // Handle minus button
+    minusButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const input = this.nextElementSibling;
+            if (parseInt(input.value) > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        });
+    });
+    
+    // Handle plus button
+    plusButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            input.value = parseInt(input.value) + 1;
+        });
+    });
+    
+    // Handle add to cart
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            let quantity = 1;
+            const quantityInput = document.querySelector('.quantity-input');
+            if (quantityInput) {
+                quantity = quantityInput.value;
+            }
+            
+            // Show toast notification
+            toastMessage.textContent = `${quantity} ticket(s) ajouté(s) au panier`;
+            toast.style.display = 'block';
+            
+            // Hide toast after 3 seconds
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
+        });
+    });
 });

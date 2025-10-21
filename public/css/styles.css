@@ -1,46 +1,97 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@400;600;700&display=swap");
+* {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-
+/* Mode Sombre par défaut */
 body {
   font-family: "Inter", sans-serif;
   background-color: #000000;
   color: white;
 }
+
+header,
+footer {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+/* Mode Clair */
+body.light-mode p{
+  color: #000000;
+}
+body.light-mode {
+  background-color: hsl(0, 0%, 100%);
+  color: #000000;
+  
+  
+
+}
+body.light-mode header,
+body.light-mode footer {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Bouton Toggle */
+.theme-toggle {
+  background: none;
+  border: 2px solid currentColor;
+  cursor: pointer;
+  padding: 5px 5px;
+  border-radius: 50%;
+  font-size: 24px;
+  transition: transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+  transform: rotate(180deg) scale(1.1);
+}
+
+.theme-toggle i {
+  color: #f0e68c;
+}
+
+body.light-mode .theme-toggle i {
+  color: #ffa500;
+}
+
+
 .slide {
-            transition: opacity 1s ease-in-out;
-        }
-        .active-slide {
-            opacity: 1;
-            z-index: 10;
-        }
-        .inactive-slide {
-            opacity: 0;
-            z-index: 0;
-        }
-        .overlay {
-            background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
-        }
-        .dot {
-            transition: all 0.3s ease;
-        }
-        .dot.active {
-            background-color: #FBBF24;
-            transform: scale(1.2);
-        }
-        .chat-bubble {
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
+  transition: opacity 1s ease-in-out;
+}
+.active-slide {
+  opacity: 1;
+  z-index: 10;
+}
+.inactive-slide {
+  opacity: 0;
+  z-index: 0;
+}
+.overlay {
+  background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+}
+.dot {
+  transition: all 0.3s ease;
+}
+.dot.active {
+  background-color: #FBBF24;
+  transform: scale(1.2);
+}
+.chat-bubble {
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
 
 h1, h2, h3{
- font-family: "Orbitron", sans-serif;
+font-family: "Orbitron", sans-serif;
 }
 .fonts{
- font-family: "Orbitron", sans-serif;
+font-family: "Orbitron", sans-serif;
 }
 
 .hover-scale {
@@ -57,4 +108,130 @@ h1, h2, h3{
 .countdown-box {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 8px;
+}
+.card {
+  background-color: #6b686833;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+/* Media queries pour la responsivité */
+@media (max-width: 768px) {
+  .countdown-box {
+    padding: 1rem 0.5rem; /* Réduire le padding sur mobile */
+  }
+
+  .countdown-box .text-4xl {
+    font-size: 2rem; /* Réduire la taille du texte sur mobile */
+  }
+
+  .countdown-box .text-sm {
+    font-size: 0.75rem; /* Ajuster la taille du texte secondaire */
+  }
+
+  /* Ajustements pour les cartes de statistiques */
+  .grid.grid-cols-3 .border {
+    margin-bottom: 1rem; /* Espacement entre les cartes */
+  }
+
+  /* Ajustements pour les cartes de fonctionnalités */
+  .grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-3 .border {
+    padding: 1rem; /* Réduire le padding des cartes */
+  }
+
+  .grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-3 .text-2xl.md\\:text-3xl {
+    font-size: 1.5rem; /* Réduire la taille des titres */
+  }
+
+  /* Ajustements pour les partenaires */
+  .grid.grid-cols-2.sm\\:grid-cols-4 .border {
+    padding: 1rem; /* Réduire le padding des partenaires */
+  }
+}
+
+@media (max-width: 480px) {
+  .countdown-box {
+    padding: 0.75rem 0.25rem; /* Encore plus petit sur très petits écrans */
+  }
+
+  .countdown-box .text-4xl {
+    font-size: 1.5rem; /* Très petit texte */
+  }
+
+  /* Grille de statistiques en une colonne sur très petits écrans */
+  .grid.grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr); /* 2 colonnes au lieu de 4 */
+  }
+
+  /* Cartes de fonctionnalités en une colonne */
+  .grid.grid-cols-1.sm\\:grid-cols-2.lg\\:grid-cols-3 {
+    grid-template-columns: 1fr; /* Une seule colonne */
+  }
+
+  /* Partenaires en 2 colonnes */
+  .grid.grid-cols-2.sm\\:grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* Ticket Section */
+.ticket-section {
+    display: flex;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+
+.ticket-image {
+    flex: 1;
+}
+
+.ticket-image img {
+    width: 100%;
+    border: 1px solid #333;
+    border-radius: 8px;
+}
+
+.ticket-info {
+    flex: 1;
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin: 1rem 0;
+}
+
+.quantity-control {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.quantity-btn {
+    background-color: white;
+    color: black;
+    border: none;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.quantity-input {
+  width: 50px;
+  height: 30px;
+  text-align: center;
+  background-color: white;
+  color: black;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+}
+.add-to-cart{
+  margin-left: 5vh;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 3vh; 
+  margin-left: 10vh;
+  padding: 8px;
 }

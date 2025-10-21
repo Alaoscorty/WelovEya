@@ -17,7 +17,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body class="min-h-screen bg-black text-white">
-
+    
     {{-- Navigation --}}
     @include('partials.nav')
 
@@ -25,7 +25,7 @@
     <main>
         @yield('content')
     </main>
-     <!-- Shopping Cart Sidebar -->
+    <!-- Shopping Cart Sidebar -->
     <div id="cart-sidebar" class="fixed top-0 right-0 h-full w-full md:w-96 bg-white shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out z-50 overflow-y-auto">
         <div class="p-6">
             <div class="flex justify-between items-center mb-6">
