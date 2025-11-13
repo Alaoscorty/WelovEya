@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Détail Ticket Premium</title>
+
+    @vite('resources/css/app.css')
+
+    <!-- Font Awesome -->
+    <link 
+      rel="stylesheet" 
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
+
+    <!-- Sidebar -->
+    <div class="fixed left-0 top-0 h-full w-64 bg-slate-950 border-r border-slate-800 p-4">
+
+        <!-- Logo -->
+        <div class="flex items-center gap-2 mb-6 px-2">
+            <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
+                <i class="fas fa-layer-group text-white text-sm"></i>
+            </div>
+            <span class="text-orange-500 font-bold">WELDVEYB</span>
+        </div>
+
+        <!-- Search -->
+        <div class="relative mb-6">
+            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
+            <input type="text" placeholder="Rechercher....."
+                class="w-full bg-slate-900 text-slate-300 pl-10 pr-4 py-2 rounded-lg text-sm border border-slate-800 focus:outline-none focus:border-blue-500">
+        </div>
+
+        <!-- Menu -->
+        <nav class="space-y-1">
+            <a href="#" class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg transition">
+                <i class="fas fa-th-large"></i> Dashboard
+            </a>
+
+            <a href="#" class="flex items-center gap-3 px-3 py-2 bg-orange-500 text-white rounded-lg">
+                <i class="fas fa-ticket-alt"></i> Tickets
+            </a>
+
+            <a href="#" class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg transition">
+                <i class="fas fa-users"></i> Revendeurs
+            </a>
+
+            <a href="#" class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg transition">
+                <i class="fas fa-gift"></i> Benefices
+            </a>
+
+            <a href="#" class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg transition">
+                <i class="fas fa-cog"></i> Paramètres
+            </a>
+        </nav>
+
+        <!-- User -->
+        <div class="absolute bottom-6 left-4 right-4">
+            <div class="flex items-center gap-3 px-3 py-2 bg-slate-900 rounded-lg">
+                <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
+                    <i class="fas fa-user text-white text-sm"></i>
+                </div>
+                <div class="flex-1">
+                    <div class="text-white text-sm font-medium">John Carter</div>
+                    <div class="text-slate-400 text-xs">Admin</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Main Content -->
+    <div class="ml-64 p-8">
+
+        <!-- Header -->
+        <div class="bg-slate-900/50 border border-blue-900/50 rounded-2xl p-6 mb-8">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-4">
+                    <button onclick="history.back()" class="w-10 h-10 flex items-center justify-center hover:bg-slate-800 rounded-lg transition">
+                        <i class="fas fa-arrow-left text-white"></i>
+                    </button>
+                    <h1 class="text-white text-2xl font-bold">Détail du Ticket: Premium</h1>
+                </div>
+
+                <button class="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-6 py-2.5 rounded-lg font-medium transition">
+                    <i class="fas fa-edit"></i> Modifier
+                </button>
+            </div>
+
+            <div class="mt-4">
+                <span class="inline-flex items-center gap-2 bg-orange-500/20 text-orange-400 px-4 py-2 rounded-full text-sm font-medium">
+                    Actif
+                </span>
+            </div>
+        </div>
+
+        <!-- Configuration -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-8 mb-8">
+            <h2 class="text-white text-xl font-semibold mb-8">Configuration et paramètre du ticket</h2>
+
+            <div class="grid grid-cols-2 gap-12">
+
+                <div class="space-y-8">
+                    <div>
+                        <label class="block text-slate-400 text-sm mb-3">Type de ticket</label>
+                        <p class="text-white text-lg font-medium">Premium</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-400 text-sm mb-4">Description</label>
+                        <ul class="space-y-3 text-white">
+                            <li class="flex gap-3"><i class="fas fa-check text-orange-500"></i> Accès rapide avec un bracelet</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-orange-500"></i> Accès de deux jours au festival</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-orange-500"></i> Proximité à la scène</li>
+                            <li class="flex gap-3"><i class="fas fa-check text-orange-500"></i> Accès au village Eyra (Espace Restauration, Bars, Mode & Jeux)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="space-y-8">
+                    <div>
+                        <label class="block text-slate-400 text-sm mb-3">Stock Actuel</label>
+                        <p class="text-white text-lg font-medium">250 tickets</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-slate-400 text-sm mb-3">Prix de Vente</label>
+                        <p class="text-white text-lg font-medium">50 000 FCFA</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Performance -->
+        <div class="bg-slate-900/80 border border-slate-800 rounded-xl p-8">
+            <h2 class="text-white text-xl font-semibold mb-6">Performance et inventaire</h2>
+
+            <div class="grid grid-cols-3 gap-6">
+
+                <div class="bg-slate-950/50 border border-slate-800 rounded-xl p-6">
+                    <div class="flex justify-between mb-4">
+                        <span class="text-slate-400 text-sm">Tickets Vendus</span>
+                        <div class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-chart-line text-orange-500"></i>
+                        </div>
+                    </div>
+                    <div class="text-white text-3xl font-bold mb-1">90</div>
+                    <div class="text-slate-500 text-xs">Sur 100 disponibles</div>
+                </div>
+
+                <div class="bg-slate-950/50 border border-slate-800 rounded-xl p-6">
+                    <div class="flex justify-between mb-4">
+                        <span class="text-slate-400 text-sm">Stock restant</span>
+                        <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-box text-blue-500"></i>
+                        </div>
+                    </div>
+                    <div class="text-white text-3xl font-bold mb-1">10</div>
+                    <div class="text-slate-500 text-xs">Tickets disponibles</div>
+                </div>
+
+                <div class="bg-slate-950/50 border border-slate-800 rounded-xl p-6">
+                    <div class="flex justify-between mb-4">
+                        <span class="text-slate-400 text-sm">Revenus Générés</span>
+                        <div class="w-10 h-10 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-wallet text-orange-500"></i>
+                        </div>
+                    </div>
+                    <div class="text-white text-3xl font-bold mb-1">4 500 000 F</div>
+                    <div class="text-slate-500 text-xs">90 x 50 000 F</div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

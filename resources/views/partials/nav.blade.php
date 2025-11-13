@@ -15,6 +15,7 @@
       <a href="{{ url('/boutique') }}" class="text-white hover:text-orange-500">Boutique</a>
       <a href="{{ url('/propos') }}"class="text-white hover:text-orange-500">A propos</a>
       <a href="{{ url('/jeux') }}" class="text-white hover:text-orange-500">Jeux</a>
+      <a href="{{ url('/dashboard') }}" class="text-white hover:text-white bg-orange-800 rounded-lg p-2">Connexion</a>
     </div>
 
     <div class="flex items-center justify-end space-x-4">

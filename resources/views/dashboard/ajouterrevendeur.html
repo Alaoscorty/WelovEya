@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>WELOVEYA - Nouveau Revendeur</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white">
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="fixed left-0 top-0 h-full w-64 bg-gray-900 border-r border-gray-800 p-6">
+            <!-- Logo -->
+            <div class="flex items-center gap-3 mb-12">
+                <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
+                    <div class="w-6 h-6 border-2 border-white rounded-full"></div>
+                </div>
+                <span class="text-orange-500 font-bold text-xl tracking-wider">WELOVEYA</span>
+            </div>
+
+            <!-- Search -->
+            <div class="mb-8">
+                <div class="relative">
+                    <input 
+                        type="text" 
+                        placeholder="Rechercher..."
+                        class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-orange-500"
+                    />
+                </div>
+            </div>
+
+            <!-- Menu -->
+            <nav class="space-y-2">
+                <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition">
+                    <i class="fas fa-chart-pie w-5"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="{{ route('tickets.index') }}" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition">
+                    <i class="fas fa-ticket-alt w-5"></i>
+                    <span>Tickets</span>
+                </a>
+                <a href="{{ route('resellers.index') }}" class="flex items-center gap-3 px-4 py-3 bg-orange-500 text-white rounded-lg">
+                    <i class="fas fa-users w-5"></i>
+                    <span>Revendeurs</span>
+                </a>
+                <a href="{{ route('benefits.index') }}" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition">
+                    <i class="fas fa-dollar-sign w-5"></i>
+                    <span>Bénéfices</span>
+                </a>
+                <a href="{{ route('settings.index') }}" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition">
+                    <i class="fas fa-cog w-5"></i>
+                    <span>Paramètres</span>
+                </a>
+            </nav>
+
+            <!-- User Profile -->
+            <div class="absolute bottom-6 left-6 right-6">
+                <div class="flex items-center gap-3 p-3 bg-gray-800 rounded-lg">
+                    <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center font-bold text-sm">
+                        {{ strtoupper(substr(Auth::user()->name ?? 'JC', 0, 2)) }}
+                    </div>
+                    <div class="flex-1">
+                        <div class="text-sm font-medium">{{ Auth::user()->name ?? 'John Carter' }}</div>
+                        <div class="text-xs text-gray-400">Admin</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="ml-64 w-full p-8">
+            <!-- Header Alert -->
+            <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-6 mb-8 shadow-lg">
+                <div class="flex items-start gap-4">
+                    <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <i class="fas fa-user-plus text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold mb-1">Nouveau Revendeur</h2>
+                        <p class="text-white/90 text-sm">
+                            Remplissez les informations pour créer une nouvelle fiche revendeur.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Container -->
+            <form action="{{ route('resellers.store') }}" method="POST" id="revendeurForm" class="bg-gradient-to-br from-gray-800 to-gray-900 rounded-2xl border border-gray-700 p-8">
+                @csrf
+
+                <!-- Section I: Informations de base -->
+                <div class="mb-10">
+                    <h3 class="text-lg font-bold mb-6 text-orange-500">I. Informations de base</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">Nom complet*</label>
+                            <input
+                                type="text"
+                                name="nom_complet"
+                                id="nomComplet"
+                                placeholder="Ex: Roy Dupont"
+                                required
+                                class="w-full bg-blue-900/30 border border-blue-800/50 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">Email</label>
+                            <input
+                                type="email"
+                                name="email"
+                                id="email"
+                                placeholder="Ex: Roy@gmail.com"
+                                class="w-full bg-blue-900/30 border border-blue-800/50 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">Téléphone</label>
+                            <input
+                                type="tel"
+                                name="telephone"
+                                id="telephone"
+                                placeholder="+229 XX XX XX XX"
+                                class="w-full bg-blue-900/30 border border-blue-800/50 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">Date d'Adhésion</label>
+                            <input
+                                type="date"
+                                name="date_adhesion"
+                                id="dateAdhesion"
+                                value="{{ date('Y-m-d') }}"
+                                class="w-full bg-blue-900/30 border border-blue-800/50 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition"
+                            />
+                        </div>
+
+                        <div class="md:col-span-2">
+                            <label class="block text-sm text-gray-400 mb-2">Statut Initial</label>
+                            <select
+                                name="statut"
+                                id="statut"
+                                class="w-full bg-blue-900/30 border border-blue-800/50 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-orange-500 transition appearance-none cursor-pointer"
+                            >
+                                <option value="ACTIF" selected>ACTIF</option>
+                                <option value="INACTIF">INACTIF</option>
+                                <option value="SUSPENDU">SUSPENDU</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section II: Barème de Commission -->
+                <div class="mb-10">
+                    <h3 class="text-lg font-bold mb-6 text-orange-500">II. Barème de Commission</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">Commission Standard</label>
+                            <input
+                                type="number"
+                                name="commission_standard"
+                                id="commissionStandard"
+                                value="150"
+                                placeholder="150 F"
+                                class="w-full bg-blue-900/30 border border-blue-800/50 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">Commission Premium</label>
+                            <input
+                                type="number"
+                                name="commission_premium"
+                                id="commissionPremium"
+                                value="100"
+                                placeholder="100 F"
+                                class="w-full bg-blue-900/30 border border-blue-800/50 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">Commission VIP</label>
+                            <input
+                                type="number"
+                                name="commission_vip"
+                                id="commissionVIP"
+                                value="1000"
+                                placeholder="1000 F"
+                                class="w-full bg-blue-900/30 border border-blue-800/50 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">Commission Elite</label>
+                            <input
+                                type="number"
+                                name="commission_elite"
+                                id="commissionElite"
+                                value="2000"
+                                placeholder="2000 F"
+                                class="w-full bg-blue-900/30 border border-blue-800/50 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section III: Allocation initial de Stock -->
+                <div class="mb-8">
+                    <h3 class="text-lg font-bold mb-6 text-orange-500">III. Allocation initial de Stock</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">Stock Initial Standard</label>
+                            <input
+                                type="number"
+                                name="stock_standard"
+                                id="stockStandard"
+                                value="0"
+                                placeholder="0"
+                                class="w-full bg-blue-900/30 border border-blue-800/50 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">Stock Initial Premium</label>
+                            <input
+                                type="number"
+                                name="stock_premium"
+                                id="stockPremium"
+                                value="0"
+                                placeholder="0"
+                                class="w-full bg-blue-900/30 border border-blue-800/50 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">Stock Initial VIP</label>
+                            <input
+                                type="number"
+                                name="stock_vip"
+                                id="stockVIP"
+                                value="0"
+                                placeholder="0"
+                                class="w-full bg-blue-900/30 border border-blue-800/50 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition"
+                            />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm text-gray-400 mb-2">Stock Initial Elite</label>
+                            <input
+                                type="number"
+                                name="stock_elite"
+                                id="stockElite"
+                                value="0"
+                                placeholder="0"
+                                class="w-full bg-blue-900/30 border border-blue-800/50 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex justify-end gap-4 pt-6 border-t border-gray-700">
+                    <button
+                        type="button"
+                        onclick="annuler()"
+                        class="px-8 py-3 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-lg transition"
+                    >
+                        Annuler
+                    </button>
+                    <button
+                        type="submit"
+                        class="px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-lg transition shadow-lg"
+                    >
+                        Créer le Revendeur
+                    </button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        // Fonction d'annulation
+        function annuler() {
+            if (confirm('Voulez-vous vraiment annuler ? Toutes les données non enregistrées seront perdues.')) {
+                window.location.href = '{{ route("resellers.index") }}';
+            }
+        }
+
+        // Validation du formulaire
+        document.getElementById('revendeurForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupération des données du formulaire
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            console.log('Création du revendeur:', data);
+            
+            // Envoi via fetch (AJAX)
+            fetch('{{ route("resellers.store") }}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Revendeur créé avec succès !');
+                    window.location.href = '{{ route("resellers.index") }}';
+                } else {
+                    alert('Erreur lors de la création du revendeur');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue');
+            });
+        });
+
+        // Validation en temps réel du téléphone
+        document.getElementById('telephone').addEventListener('input', function(e) {
+            let value = e.target.value;
+            // Format automatique pour le Bénin (+229)
+            if (!value.startsWith('+229') && value.length > 0) {
+                e.target.value = '+229 ' + value.replace(/\D/g, '');
+            }
+        });
+
+        // Empêcher les valeurs négatives pour les commissions et stocks
+        const numberInputs = document.querySelectorAll('input[type="number"]');
+        numberInputs.forEach(input => {
+            input.addEventListener('input', function(e) {
+                if (e.target.value < 0) {
+                    e.target.value = 0;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

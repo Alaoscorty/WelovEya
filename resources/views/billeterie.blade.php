@@ -49,10 +49,102 @@
                     
                     </div>
                     <button class="add-to-cart bg-orange-800 text-white font-bold hover:bg-orange-600 transition"> Ajouter au panier </button>
+                    
+                </div>
+                <div>
+                    <p class="font-bold">
+                        Ce ticket inclut:
+                    </p>
+                    <p>
+                        <i class="fa-solid fa-check text-orange-800"></i> Accès de deux jours au festival <br>
+                        <i class="fa-solid fa-check text-orange-800"></i> Accès au village Amazone <br>
+                        <i class="fa-solid fa-check text-orange-800"></i> Accès à un bracelet
+                    </p>
                 </div>
             </div>
         </section>
         <!-- Fin de la section  -->
+
+        <div class="">
+            <p class="text-center font-bold">
+                Autre type de tickets
+            </p>
+            <div class="flex justify-evenly mt-5 mb-5">
+                <div>
+                    <div>
+                        <img src="" alt="">
+                    </div>
+                    <div>
+                        <p class="font-bold text-2xl">
+                            Ticket Prenium
+                        </p>
+                        <p>
+                            50000F
+                        </p>
+                        <p>
+                            <i class="fa-solid fa-check text-orange-800"></i> Accès de deux jours au festival <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Proximité à la scène <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Accès au village Eya (Espace, Restauration, Bars, Mode & Jeux) <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Accès rapide avec un bracelet
+                        </p>
+                    </div>
+                    <button class="add-to-cart bg-orange-800 text-white font-bold hover:bg-orange-600 transition rounded-lg">
+                        Ajouter au panier
+                    </button>
+                </div>
+                <div>
+                    <div>
+                        <img src="" alt="">
+                    </div>
+                    <div>
+                        <p class="font-bold text-2xl">
+                            Ticket VIP
+                        </p>
+                        <p>
+                            150000F
+                        </p>
+                        <p>
+                            <i class="fa-solid fa-check text-orange-800"></i> Accès de deux jours au festival <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Proximité directe à la scène <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Accès au village Eya (Espace, Restauration, Bars, Mode & Jeux) <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Accès à une tente VIP <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Espace Détente <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Restauration et boisson offerte (stand dédiée). <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Accès rapide à un bracelet
+                        </p>
+                    </div>
+                    <button class="add-to-cart bg-orange-800 text-white font-bold hover:bg-orange-600 transition rounded-lg">
+                        Ajouter au panier
+                    </button>
+                </div>
+                <div>
+                    <div>
+                        <img src="" alt="">
+                    </div>
+                    <div>
+                        <p class="font-bold text-2xl">
+                            Ticket Elite
+                        </p>
+                        <p>
+                            Sur réservation
+                        </p>
+                        <p>
+                            <i class="fa-solid fa-check text-orange-800"></i> Accès de deux jours au festival <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Parking privé <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Accès au village Eya (Espace, Restauration, Bars, Mode & Jeux) <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Accès à une tente VIP <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Emplacement privilégié à une vue directe sur la scène <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Restauration et boisson à volonté <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Restauration et boisson à volontéAccès à l'estrade Elite <br>
+                            <i class="fa-solid fa-check text-orange-800"></i> Accès rapide avec un bracelet
+                        </p>
+                    </div>
+                    <button class="add-to-cart bg-orange-800 text-white font-bold hover:bg-orange-600 transition rounded-lg">
+                        Réserver
+                    </button>
+                </div>
+            </div>
+        </div>
 
         <div class="bg-gray-800 p-6 " style="background: url(images/ac0dee6a445122d535397c22d278e7e3.jpg);height:50vh;background-repeat: no-repeat;background-size: 100% auto; background-position: center"></div>
 

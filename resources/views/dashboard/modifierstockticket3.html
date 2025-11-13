@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Modifier Stock Ticket VIP</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+
+<!-- Sidebar -->
+<div class="fixed left-0 top-0 h-full w-64 bg-slate-950 border-r border-slate-800 p-4">
+  <div class="flex items-center gap-2 mb-6 px-2">
+    <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
+      <i class="fas fa-layer-group text-white text-sm"></i>
+    </div>
+    <span class="text-orange-500 font-bold">WELDVEYB</span>
+  </div>
+
+  <nav class="space-y-1">
+    <a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg"><i class="fas fa-th-large"></i> Dashboard</a>
+    <a class="flex items-center gap-3 px-3 py-2 bg-orange-500 text-white rounded-lg"><i class="fas fa-ticket-alt"></i> Tickets</a>
+    <a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg"><i class="fas fa-users"></i> Revendeurs</a>
+    <a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg"><i class="fas fa-gift"></i> Benefices</a>
+    <a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg"><i class="fas fa-cog"></i> Paramètres</a>
+  </nav>
+</div>
+
+<!-- Main -->
+<div class="ml-64 p-8">
+  <div class="max-w-2xl">
+
+    <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-t-2xl p-6">
+      <div class="flex items-center gap-3 mb-2">
+        <i class="fas fa-edit text-white text-xl"></i>
+        <h1 class="text-white text-2xl font-bold">Modifier un stock de ticket</h1>
+      </div>
+      <p class="text-orange-100 text-sm">Définissez les détails du type de ticket.</p>
+    </div>
+
+    <form action="{{ route('tickets.vip.update') }}" method="POST">
+      @csrf
+
+      <div class="bg-gradient-to-b from-blue-900/40 via-blue-950/60 to-slate-950 border-x border-b border-slate-800 rounded-b-2xl p-8">
+        <h2 class="text-white text-lg font-semibold mb-6">Informations de base</h2>
+
+        <div class="space-y-6">
+
+          <div>
+            <label class="block text-slate-300 text-sm mb-2">Type de ticket concerné</label>
+            <input type="text" id="ticketType" value="{{ $formData['ticketType'] }}" class="w-full bg-blue-950/60 text-white px-4 py-3 rounded-lg border border-blue-900/50">
+          </div>
+
+          <div>
+            <label class="block text-slate-300 text-sm mb-2">Stock actuel</label>
+            <input type="number" id="currentStock" value="{{ $formData['currentStock'] }}" class="stock-input w-full bg-blue-950/60 text-white px-4 py-3 rounded-lg border border-blue-900/50">
+          </div>
+
+          <div>
+            <label class="block text-slate-300 text-sm mb-2">Quantité à ajouter</label>
+            <input type="number" id="quantityToAdd" value="500" class="stock-input w-full bg-blue-950/60 text-white px-4 py-3 rounded-lg border border-blue-900/50">
+          </div>
+
+          <div>
+            <label class="block text-slate-300 text-sm mb-2">Nouveau Stock Total</label>
+            <input type="number" id="newTotalStock" readonly class="w-full bg-blue-950/60 text-white px-4 py-3 rounded-lg border border-blue-900/50 opacity-75 cursor-not-allowed">
+          </div>
+        </div>
+
+        <div class="flex justify-end gap-4 mt-8">
+          <button type="button" id="resetBtn" class="px-8 py-3 border border-blue-800/50 text-slate-300 rounded-lg">Annuler</button>
+          <button class="px-8 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg shadow-lg">Modifier</button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+function calcStock() {
+  let current = parseInt(document.getElementById('currentStock').value) || 0;
+  let add = parseInt(document.getElementById('quantityToAdd').value) || 0;
+  document.getElementById('newTotalStock').value = current + add;
+}
+
+document.querySelectorAll('.stock-input').forEach(e => e.addEventListener('input', calcStock));
+
+document.getElementById('resetBtn').onclick = () => {
+  document.getElementById('currentStock').value = "{{ $formData['currentStock'] }}";
+  document.getElementById('quantityToAdd').value = 500;
+  calcStock();
+};
+
+calcStock();
+</script>
+
+</body>
+</html>

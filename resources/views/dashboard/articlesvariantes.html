@@ -1,0 +1,395 @@
+{{-- resources/views/articles/variants.blade.php --}}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Gestion des variantes - WELDVEYA</title>
+    
+    {{-- Tailwind CSS CDN --}}
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    {{-- Lucide Icons CDN --}}
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white p-6">
+        {{-- Sidebar --}}
+        <div class="fixed left-0 top-0 h-full w-64 bg-slate-900/50 backdrop-blur-sm border-r border-slate-700 p-6">
+            <div class="flex items-center gap-2 mb-12">
+                <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-pink-500 rounded-lg"></div>
+                <span class="text-xl font-bold">WELDVEYA</span>
+            </div>
+            
+            <nav class="space-y-2">
+                <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg cursor-pointer transition">
+                    <i data-lucide="package" class="w-5 h-5"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="{{ route('tickets.index') }}" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg cursor-pointer transition">
+                    <i data-lucide="package" class="w-5 h-5"></i>
+                    <span>Tickets</span>
+                </a>
+                <a href="{{ route('resellers.index') }}" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg cursor-pointer transition">
+                    <i data-lucide="trending-up" class="w-5 h-5"></i>
+                    <span>Revendeurs</span>
+                </a>
+                <a href="{{ route('articles.index') }}" class="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg cursor-pointer">
+                    <i data-lucide="package" class="w-5 h-5"></i>
+                    <span>Articles</span>
+                </a>
+                <a href="{{ route('benefits.index') }}" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg cursor-pointer transition">
+                    <i data-lucide="dollar-sign" class="w-5 h-5"></i>
+                    <span>Bénéfices</span>
+                </a>
+                <a href="{{ route('settings.index') }}" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg cursor-pointer transition">
+                    <i data-lucide="package" class="w-5 h-5"></i>
+                    <span>Paramètres</span>
+                </a>
+            </nav>
+
+            <div class="absolute bottom-6 left-6 right-6">
+                <div class="flex items-center gap-3 px-4 py-3 bg-slate-800 rounded-lg">
+                    <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full"></div>
+                    <div>
+                        <div class="font-semibold">{{ Auth::user()->name ?? 'John Carter' }}</div>
+                        <div class="text-xs text-slate-400">{{ Auth::user()->role ?? 'Admin' }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Main Content --}}
+        <div class="ml-64 pl-8">
+            <div class="mb-8">
+                <h1 class="text-3xl font-bold mb-2">Gestion des variantes - {{ $article->name ?? 'T-shirt Logo Évènement' }}</h1>
+                <p class="text-slate-400">ID Produit: {{ $article->code ?? 'PROD-001' }} | Stock global: {{ $totalStock ?? '120' }} unités</p>
+            </div>
+
+            {{-- Search and Add Button --}}
+            <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 mb-6">
+                <div class="flex items-center gap-4">
+                    <div class="flex-1 relative">
+                        <i data-lucide="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-5 h-5"></i>
+                        <input
+                            type="text"
+                            id="searchTerm"
+                            placeholder="Rechercher..."
+                            class="w-full bg-slate-900/50 border border-slate-600 rounded-lg pl-10 pr-4 py-3 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-500"
+                        />
+                    </div>
+                    <button onclick="openAddVariantModal()" class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2">
+                        <i data-lucide="plus" class="w-5 h-5"></i>
+                        Ajouter une nouvelle variante
+                    </button>
+                </div>
+            </div>
+
+            {{-- Variants Table --}}
+            <div class="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-slate-900/50">
+                            <tr>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">
+                                    <input type="checkbox" id="selectAll" class="rounded">
+                                </th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">
+                                    <div class="flex items-center gap-2 cursor-pointer" onclick="sortTable('id')">
+                                        ID Article
+                                        <span class="text-slate-500">⌄</span>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">
+                                    <div class="flex items-center gap-2 cursor-pointer" onclick="sortTable('variant')">
+                                        Variante
+                                        <span class="text-slate-500">⌄</span>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">
+                                    <div class="flex items-center gap-2 cursor-pointer" onclick="sortTable('option1')">
+                                        Option 1
+                                        <span class="text-slate-500">⌄</span>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">
+                                    <div class="flex items-center gap-2 cursor-pointer" onclick="sortTable('option2')">
+                                        Option 2
+                                        <span class="text-slate-500">⌄</span>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">
+                                    <div class="flex items-center gap-2 cursor-pointer" onclick="sortTable('stock')">
+                                        Stock global
+                                        <span class="text-slate-500">⌄</span>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300">
+                                    <div class="flex items-center gap-2">
+                                        Image
+                                        <span class="text-slate-500">⌄</span>
+                                    </div>
+                                </th>
+                                <th class="px-6 py-4 text-left text-sm font-semibold text-slate-300"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="variantsTableBody">
+                            @forelse($variants as $variant)
+                            <tr class="border-t border-slate-700 hover:bg-slate-700/30 transition">
+                                <td class="px-6 py-4">
+                                    <input type="checkbox" class="rounded variant-checkbox" value="{{ $variant->id }}">
+                                </td>
+                                <td class="px-6 py-4 text-sm">{{ $variant->code }}</td>
+                                <td class="px-6 py-4 text-sm font-medium">{{ $variant->name }}</td>
+                                <td class="px-6 py-4 text-sm">{{ $variant->option1 }}</td>
+                                <td class="px-6 py-4 text-sm">{{ $variant->option2 }}</td>
+                                <td class="px-6 py-4 text-sm">{{ $variant->stock }}</td>
+                                <td class="px-6 py-4">
+                                    <div class="w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center text-2xl">
+                                        @if($variant->image_url)
+                                            <img src="{{ $variant->image_url }}" alt="{{ $variant->name }}" class="w-full h-full object-cover rounded-lg">
+                                        @else
+                                            {{ $variant->emoji ?? '📦' }}
+                                        @endif
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <div class="flex items-center gap-2">
+                                        <button onclick="openAddStockModal({{ $variant->id }}, '{{ $variant->name }}')" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg text-sm font-medium transition flex items-center gap-2">
+                                            <i data-lucide="plus" class="w-4 h-4"></i>
+                                            Stock
+                                        </button>
+                                        <a href="{{ route('variants.edit', $variant->id) }}" class="p-2 hover:bg-slate-700 rounded-lg transition">
+                                            <i data-lucide="edit" class="w-5 h-5"></i>
+                                        </a>
+                                        <button onclick="deleteVariant({{ $variant->id }})" class="p-2 hover:bg-slate-700 rounded-lg transition">
+                                            <i data-lucide="trash-2" class="w-5 h-5"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="8" class="px-6 py-8 text-center text-slate-400">
+                                    Aucune variante trouvée
+                                </td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Modal Ajouter Stock --}}
+    <div id="addStockModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+        <div class="bg-slate-800 rounded-2xl p-8 max-w-md w-full mx-4 border border-slate-700">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-2xl font-bold text-white">Ajouter du stock</h2>
+                <button onclick="closeAddStockModal()" class="text-slate-400 hover:text-white">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <form id="addStockForm" onsubmit="submitAddStock(event)">
+                <input type="hidden" id="variantId" name="variant_id">
+                
+                <div class="mb-4">
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Variante</label>
+                    <input type="text" id="variantName" readonly class="w-full bg-slate-900 text-slate-400 px-4 py-3 rounded-lg border border-slate-700">
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Stock actuel</label>
+                    <input type="number" id="currentStock" readonly class="w-full bg-slate-900 text-slate-400 px-4 py-3 rounded-lg border border-slate-700">
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-slate-300 text-sm font-medium mb-2">Quantité à ajouter</label>
+                    <input type="number" id="quantityToAdd" name="quantity" min="1" required class="w-full bg-slate-900 text-white px-4 py-3 rounded-lg border border-slate-700 focus:outline-none focus:ring-2 focus:ring-orange-500">
+                </div>
+                
+                <div class="flex gap-4">
+                    <button type="button" onclick="closeAddStockModal()" class="flex-1 px-6 py-3 border border-slate-600 hover:border-slate-500 rounded-lg font-semibold transition">
+                        Annuler
+                    </button>
+                    <button type="submit" class="flex-1 px-6 py-3 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 rounded-lg font-semibold transition">
+                        Confirmer
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Search functionality
+        const searchInput = document.getElementById('searchTerm');
+        const tableBody = document.getElementById('variantsTableBody');
+        const allRows = Array.from(tableBody.querySelectorAll('tr'));
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            allRows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+
+        // Select all checkboxes
+        const selectAllCheckbox = document.getElementById('selectAll');
+        const variantCheckboxes = document.querySelectorAll('.variant-checkbox');
+
+        selectAllCheckbox.addEventListener('change', function() {
+            variantCheckboxes.forEach(checkbox => {
+                checkbox.checked = this.checked;
+            });
+        });
+
+        // Sort table
+        let sortDirection = {};
+        function sortTable(column) {
+            const tbody = document.getElementById('variantsTableBody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            
+            if (!sortDirection[column]) {
+                sortDirection[column] = 'asc';
+            } else {
+                sortDirection[column] = sortDirection[column] === 'asc' ? 'desc' : 'asc';
+            }
+            
+            const columnIndex = {
+                'id': 1,
+                'variant': 2,
+                'option1': 3,
+                'option2': 4,
+                'stock': 5
+            };
+            
+            const idx = columnIndex[column];
+            
+            rows.sort((a, b) => {
+                const aText = a.cells[idx].textContent.trim();
+                const bText = b.cells[idx].textContent.trim();
+                
+                if (column === 'stock') {
+                    return sortDirection[column] === 'asc' 
+                        ? parseInt(aText) - parseInt(bText)
+                        : parseInt(bText) - parseInt(aText);
+                }
+                
+                return sortDirection[column] === 'asc'
+                    ? aText.localeCompare(bText)
+                    : bText.localeCompare(aText);
+            });
+            
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        // Modal functions
+        function openAddStockModal(variantId, variantName) {
+            document.getElementById('variantId').value = variantId;
+            document.getElementById('variantName').value = variantName;
+            
+            // Fetch current stock via AJAX
+            fetch(`/variants/${variantId}/stock`)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('currentStock').value = data.stock;
+                })
+                .catch(error => console.error('Erreur:', error));
+            
+            document.getElementById('addStockModal').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function closeAddStockModal() {
+            document.getElementById('addStockModal').classList.add('hidden');
+            document.getElementById('addStockForm').reset();
+        }
+
+        function submitAddStock(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(event.target);
+            const variantId = document.getElementById('variantId').value;
+            
+            fetch(`/variants/${variantId}/add-stock`, {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    quantity: formData.get('quantity')
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Stock ajouté avec succès');
+                    closeAddStockModal();
+                    location.reload();
+                } else {
+                    alert('Erreur lors de l\'ajout du stock');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue');
+            });
+        }
+
+        function openAddVariantModal() {
+            window.location.href = '{{ route("variants.create", ["article_id" => $article->id ?? 0]) }}';
+        }
+
+        // Delete variant function
+        function deleteVariant(variantId) {
+            if (!confirm('Êtes-vous sûr de vouloir supprimer cette variante ?')) {
+                return;
+            }
+
+            fetch(`/variants/${variantId}`, {
+                method: 'DELETE',
+                headers: {
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Variante supprimée avec succès');
+                    location.reload();
+                } else {
+                    alert('Erreur lors de la suppression');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                alert('Une erreur est survenue');
+            });
+        }
+
+        // Make functions global
+        window.sortTable = sortTable;
+        window.openAddStockModal = openAddStockModal;
+        window.closeAddStockModal = closeAddStockModal;
+        window.submitAddStock = submitAddStock;
+        window.openAddVariantModal = openAddVariantModal;
+        window.deleteVariant = deleteVariant;
+    </script>
+</body>
+</html>

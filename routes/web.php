@@ -44,3 +44,7 @@ Route::get('/jeux', function () {
     return view('jeux');
 })->name('jeux');
 
+Route::get('/dashboard', function () {
+    return view('dashboard.index');
+})->name('dashboard');
+
