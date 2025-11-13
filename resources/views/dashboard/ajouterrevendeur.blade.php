@@ -1,80 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>WELOVEYA - Nouveau Revendeur</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-    </style>
-</head>
-<body class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white">
-    <div class="flex">
-        <!-- Sidebar -->
-        <aside class="fixed left-0 top-0 h-full w-64 bg-gray-900 border-r border-gray-800 p-6">
-            <!-- Logo -->
-            <div class="flex items-center gap-3 mb-12">
-                <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
-                    <div class="w-6 h-6 border-2 border-white rounded-full"></div>
-                </div>
-                <span class="text-orange-500 font-bold text-xl tracking-wider">WELOVEYA</span>
-            </div>
+@extends('layouts.application')
 
-            <!-- Search -->
-            <div class="mb-8">
-                <div class="relative">
-                    <input 
-                        type="text" 
-                        placeholder="Rechercher..."
-                        class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-orange-500"
-                    />
-                </div>
-            </div>
+@section('title', 'Artistes')
 
-            <!-- Menu -->
-            <nav class="space-y-2">
-                <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition">
-                    <i class="fas fa-chart-pie w-5"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="{{ route('tickets.index') }}" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition">
-                    <i class="fas fa-ticket-alt w-5"></i>
-                    <span>Tickets</span>
-                </a>
-                <a href="{{ route('resellers.index') }}" class="flex items-center gap-3 px-4 py-3 bg-orange-500 text-white rounded-lg">
-                    <i class="fas fa-users w-5"></i>
-                    <span>Revendeurs</span>
-                </a>
-                <a href="{{ route('benefits.index') }}" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition">
-                    <i class="fas fa-dollar-sign w-5"></i>
-                    <span>Bénéfices</span>
-                </a>
-                <a href="{{ route('settings.index') }}" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition">
-                    <i class="fas fa-cog w-5"></i>
-                    <span>Paramètres</span>
-                </a>
-            </nav>
-
-            <!-- User Profile -->
-            <div class="absolute bottom-6 left-6 right-6">
-                <div class="flex items-center gap-3 p-3 bg-gray-800 rounded-lg">
-                    <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center font-bold text-sm">
-                        {{ strtoupper(substr(Auth::user()->name ?? 'JC', 0, 2)) }}
-                    </div>
-                    <div class="flex-1">
-                        <div class="text-sm font-medium">{{ Auth::user()->name ?? 'John Carter' }}</div>
-                        <div class="text-xs text-gray-400">Admin</div>
-                    </div>
-                </div>
-            </div>
-        </aside>
-
+@section('content')
         <!-- Main Content -->
         <main class="ml-64 w-full p-8">
             <!-- Header Alert -->
@@ -353,5 +281,7 @@
             });
         });
     </script>
-</body>
-</html>
+@endsection
+
+    @push('scripts')
+@endpush

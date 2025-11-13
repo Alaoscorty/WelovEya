@@ -1,31 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Modifier Stock Ticket VIP</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
+@extends('layouts.application')
 
-<body class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+@section('title', 'Artistes')
 
-<!-- Sidebar -->
-<div class="fixed left-0 top-0 h-full w-64 bg-slate-950 border-r border-slate-800 p-4">
-  <div class="flex items-center gap-2 mb-6 px-2">
-    <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
-      <i class="fas fa-layer-group text-white text-sm"></i>
-    </div>
-    <span class="text-orange-500 font-bold">WELDVEYB</span>
-  </div>
-
-  <nav class="space-y-1">
-    <a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg"><i class="fas fa-th-large"></i> Dashboard</a>
-    <a class="flex items-center gap-3 px-3 py-2 bg-orange-500 text-white rounded-lg"><i class="fas fa-ticket-alt"></i> Tickets</a>
-    <a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg"><i class="fas fa-users"></i> Revendeurs</a>
-    <a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg"><i class="fas fa-gift"></i> Benefices</a>
-    <a class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg"><i class="fas fa-cog"></i> Paramètres</a>
-  </nav>
-</div>
+@section('content')
 
 <!-- Main -->
 <div class="ml-64 p-8">
@@ -95,6 +72,7 @@ document.getElementById('resetBtn').onclick = () => {
 
 calcStock();
 </script>
+@endsection
 
-</body>
-</html>
+    @push('scripts')
+@endpush

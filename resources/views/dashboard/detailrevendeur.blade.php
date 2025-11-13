@@ -1,70 +1,11 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8" />
-    <title>WELOVEYA - Dashboard Revendeur</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+@extends('layouts.application')
 
-    <!-- FontAwesome -->
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-</head>
+@section('title', 'Artistes')
 
-<body class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900 text-white font-sans">
-
-    <!-- SIDEBAR -->
-    <div class="fixed left-0 top-0 h-full w-64 bg-gray-900 border-r border-gray-800 p-6">
-
-        <!-- Logo -->
-        <div class="flex items-center gap-3 mb-12">
-            <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
-                <div class="w-6 h-6 border-2 border-white rounded-full"></div>
-            </div>
-            <span class="text-orange-500 font-bold text-xl tracking-wider">WELDVEYR</span>
-        </div>
-
-        <!-- Search -->
-        <div class="mb-8">
-            <input type="text" placeholder="Rechercher..." class="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 text-gray-300 text-sm placeholder-gray-500 focus:border-orange-500 outline-none">
-        </div>
-
-        <!-- Menu -->
-        <nav class="space-y-2">
-            <a class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition" href="#">
-                <i class="fa-solid fa-chart-simple"></i> Dashboard
-            </a>
-
-            <a class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition" href="#">
-                <i class="fa-solid fa-ticket"></i> Tickets
-            </a>
-
-            <a class="flex items-center gap-3 px-4 py-3 bg-orange-500 text-white rounded-lg" href="#">
-                <i class="fa-solid fa-users"></i> Revendeurs
-            </a>
-
-            <a class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition" href="#">
-                <i class="fa-solid fa-coins"></i> Bénéfices
-            </a>
-
-            <a class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition" href="#">
-                <i class="fa-solid fa-gear"></i> Paramètres
-            </a>
-        </nav>
-
-        <!-- User -->
-        <div class="absolute bottom-6 left-6 right-6">
-            <div class="flex items-center gap-3 p-3 bg-gray-800 rounded-lg">
-                <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center font-bold">JC</div>
-                <div>
-                    <div class="text-sm font-medium">John Carter</div>
-                    <div class="text-xs text-gray-400">Admin</div>
-                </div>
-            </div>
-        </div>
-    </div>
+@section('content')
 
     <!-- MAIN CONTENT -->
-    <div class="ml-64 p-8">
+    <div class="ml-5 p-8">
 
         <h1 class="text-2xl font-bold mb-1">Fiche Revendeur : LE ROY AGENCY</h1>
         <p class="text-gray-400 text-sm mb-8">leroyagency@gmail.com</p>
@@ -132,5 +73,7 @@
         </div>
     </div>
 
-</body>
-</html>
+@endsection
+
+    @push('scripts')
+@endpush

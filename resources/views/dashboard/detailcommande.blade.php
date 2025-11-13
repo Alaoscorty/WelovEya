@@ -1,83 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Commande - Dashboard</title>
+@extends('layouts.application')
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+@section('title', 'Artistes')
 
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body class="min-h-screen bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 p-6">
-
-<div class="max-w-7xl mx-auto">
-
-    {{-- SIDEBAR --}}
-    <div class="fixed left-0 top-0 h-full w-64 bg-slate-900 border-r border-slate-800 p-4">
-
-        {{-- Logo --}}
-        <div class="flex items-center gap-2 mb-8 px-2">
-            <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                <i class="fas fa-layer-group text-white text-sm"></i>
-            </div>
-            <span class="text-white font-bold">WELDVERS</span>
-        </div>
-
-        {{-- Menu --}}
-        <nav class="space-y-1">
-
-            <div class="text-slate-500 text-xs px-2 mb-2">
-                <i class="fas fa-sync-alt mr-2"></i>
-                Synchronis...
-            </div>
-
-            <a href="#" class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-800 rounded-lg transition">
-                <i class="fas fa-th-large"></i>
-                <span>Dashboard</span>
-            </a>
-
-            <a href="#" class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-800 rounded-lg transition">
-                <i class="fas fa-ticket-alt"></i>
-                <span>Tickets</span>
-            </a>
-
-            <a href="#" class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-800 rounded-lg transition">
-                <i class="fas fa-exchange-alt"></i>
-                <span>Reversions</span>
-            </a>
-
-            <a href="#" class="flex items-center gap-3 px-3 py-2 bg-orange-500 text-white rounded-lg">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Commandes</span>
-            </a>
-
-            <a href="#" class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-800 rounded-lg transition">
-                <i class="fas fa-money-bill-wave"></i>
-                <span>Remises</span>
-            </a>
-
-            <a href="#" class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-800 rounded-lg transition">
-                <i class="fas fa-cog"></i>
-                <span>Paramètres</span>
-            </a>
-        </nav>
-
-        {{-- User --}}
-        <div class="absolute bottom-6 left-4 right-4">
-            <div class="flex items-center gap-3 px-3 py-2 bg-slate-800 rounded-lg">
-                <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                    <i class="fas fa-user text-white text-sm"></i>
-                </div>
-                <div class="flex-1">
-                    <div class="text-white text-sm font-medium">John Carter</div>
-                    <div class="text-slate-400 text-xs">@john_carter</div>
-                </div>
-            </div>
-        </div>
-
-    </div>
+@section('content')
 
     {{-- MAIN CONTENT --}}
     <div class="ml-64 pl-8">
@@ -211,6 +136,7 @@
     </div>
 
 </div>
+@endsection
 
-</body>
-</html>
+    @push('scripts')
+@endpush

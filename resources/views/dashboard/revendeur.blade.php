@@ -1,238 +1,15 @@
-import React, { useState } from 'react';
+@extends('layouts.application')
 
-export default function WeloveeyaDashboard() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage, setItemsPerPage] = useState(10);
+@section('title', 'Artistes')
 
-  const revendeurs = [
-    {
-      id: 1,
-      nom: "JA SHY AMASCO",
-      email: "Geekstyl@gmail.com",
-      phone: "+242663652378",
-      tickets: 120,
-      commission: "2.5%",
-      statut: "Actif",
-      date: "Novembre 2024",
-      ventesDirectes: 10000,
-      ventesMoyennes: "1 000 F",
-      nonRegle: "00374",
-      performance: 97
-    },
-    {
-      id: 2,
-      nom: "DJ EBIKY COMIDAD",
-      email: "Djebiky@gmail.com",
-      phone: "+242660463377",
-      tickets: 75,
-      commission: "2.5%",
-      statut: "Inactif",
-      date: "Novembre 2022",
-      ventesDirectes: 500,
-      ventesMoyennes: "100%",
-      nonRegle: "00394",
-      performance: 0
-    },
-    {
-      id: 3,
-      nom: "LE RAY JAMACY",
-      email: "Lerayjamacy@gmail.com",
-      phone: "+242065947645",
-      tickets: 71,
-      commission: "2.5%",
-      statut: "Inactif",
-      date: "Novembre 2023",
-      ventesDirectes: 50,
-      ventesMoyennes: "100%",
-      nonRegle: "00374",
-      performance: 0
-    },
-    {
-      id: 4,
-      nom: "LE RAY COMIDAD",
-      email: "Xxaamedogmail.com",
-      phone: "+242065652277",
-      tickets: 71,
-      commission: "2.5%",
-      statut: "Actif",
-      date: "Novembre 2024",
-      ventesDirectes: 210,
-      ventesMoyennes: "10%",
-      nonRegle: "00374",
-      performance: 0
-    },
-    {
-      id: 5,
-      nom: "DJ COSY COMIDAD",
-      email: "Djcosycongo@gmail.com",
-      phone: "+242055460028",
-      tickets: 170,
-      commission: "2.5%",
-      statut: "En attente",
-      date: "Décembre 2024",
-      ventesDirectes: 50,
-      ventesMoyennes: "8%",
-      nonRegle: "14677",
-      performance: 0
-    },
-    {
-      id: 6,
-      nom: "LE BOY DIABOLO",
-      email: "Leboydiabol@gmail.com",
-      phone: "+242014934394",
-      tickets: 124,
-      commission: "2.5%",
-      statut: "Actif",
-      date: "Novembre 2024",
-      ventesDirectes: 1000,
-      ventesMoyennes: "90%",
-      nonRegle: "00001",
-      performance: 0
-    },
-    {
-      id: 7,
-      nom: "LE RAY ARMY",
-      email: "Leboydiabol@gmail.com",
-      phone: "+242016460444",
-      tickets: 22,
-      commission: "2.5%",
-      statut: "Inactif",
-      date: "Novembre 2021",
-      ventesDirectes: 500,
-      ventesMoyennes: "100%",
-      nonRegle: "64651",
-      performance: 0
-    },
-    {
-      id: 8,
-      nom: "LE DAVID TOMY",
-      email: "Leboydiabol@gmail.com",
-      phone: "+242014964640",
-      tickets: 203,
-      commission: "2.5%",
-      statut: "Actif",
-      date: "Décembre 2023",
-      ventesDirectes: 495,
-      ventesMoyennes: "78%",
-      nonRegle: "11037",
-      performance: 0
-    },
-    {
-      id: 9,
-      nom: "LE NAGA FAMY",
-      email: "Leboydiabol@gmail.com",
-      phone: "+242014964640",
-      tickets: 203,
-      commission: "2.5%",
-      statut: "En attente",
-      date: "Novembre 2014",
-      ventesDirectes: 75,
-      ventesMoyennes: "99%",
-      nonRegle: "90267",
-      performance: 0
-    },
-    {
-      id: 10,
-      nom: "DJ COSY COMIDAD",
-      email: "Danimycoongo@gmail.com",
-      phone: "+242014948223",
-      tickets: 170,
-      commission: "2.5%",
-      statut: "Actif",
-      date: "Décembre 2024",
-      ventesDirectes: 28,
-      ventesMoyennes: "57%",
-      nonRegle: "90267",
-      performance: 0
-    }
-  ];
+@section('content')
 
-  const getStatutClass = (statut) => {
-    switch(statut) {
-      case 'Actif': return 'bg-green-500/20 text-green-400 border border-green-500/30';
-      case 'Inactif': return 'bg-gray-500/20 text-gray-400 border border-gray-500/30';
-      case 'En attente': return 'bg-orange-500/20 text-orange-400 border border-orange-500/30';
-      default: return 'bg-gray-500/20 text-gray-400';
-    }
-  };
-
-  return (
-    <>
-      {/* Font Awesome CDN */}
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-      
-      <div className="min-h-screen bg-[#0a1628] text-white font-sans">
-        {/* Sidebar */}
-        <div className="fixed left-0 top-0 h-full w-56 bg-[#0d1b2f] border-r border-gray-800 p-4">
-          {/* Logo */}
-          <div className="flex items-center gap-3 mb-8 px-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-500 rounded-lg flex items-center justify-center">
-              <div className="w-5 h-5 bg-white/20 rounded"></div>
-            </div>
-            <span className="text-lg font-bold bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">
-              WELOVEEYA
-            </span>
-          </div>
-
-          {/* Search */}
-          <div className="mb-6 px-2">
-            <div className="relative">
-              <i className="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-xs"></i>
-              <input 
-                type="text" 
-                placeholder="Rechercher..." 
-                className="w-full bg-[#0a1628] border border-gray-700 rounded-lg py-2 pl-10 pr-3 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-blue-500"
-              />
-            </div>
-          </div>
-
-          {/* Menu */}
-          <nav className="space-y-1">
-            <a href="#" className="flex items-center gap-3 px-3 py-2.5 text-gray-400 hover:bg-[#0a1628] rounded-lg transition-colors">
-              <i className="fas fa-chart-line text-sm w-4"></i>
-              <span className="text-sm">Dashboard</span>
-            </a>
-            <a href="#" className="flex items-center gap-3 px-3 py-2.5 text-gray-400 hover:bg-[#0a1628] rounded-lg transition-colors">
-              <i className="fas fa-ticket-alt text-sm w-4"></i>
-              <span className="text-sm">Tickets</span>
-            </a>
-            <a href="#" className="flex items-center gap-3 px-3 py-2.5 bg-orange-500 rounded-lg transition-colors">
-              <i className="fas fa-users text-sm w-4"></i>
-              <span className="text-sm font-medium">Revendeurs</span>
-            </a>
-            <a href="#" className="flex items-center gap-3 px-3 py-2.5 text-gray-400 hover:bg-[#0a1628] rounded-lg transition-colors">
-              <i className="fas fa-money-bill-wave text-sm w-4"></i>
-              <span className="text-sm">Bénéfices</span>
-            </a>
-            <a href="#" className="flex items-center gap-3 px-3 py-2.5 text-gray-400 hover:bg-[#0a1628] rounded-lg transition-colors">
-              <i className="fas fa-cog text-sm w-4"></i>
-              <span className="text-sm">Paramètres</span>
-            </a>
-          </nav>
-
-          {/* User Profile */}
-          <div className="absolute bottom-4 left-4 right-4">
-            <div className="flex items-center gap-3 p-2 bg-[#0a1628] rounded-lg">
-              <div className="w-9 h-9 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center text-sm font-semibold">
-                JC
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="text-sm font-medium text-white truncate">John Carter</div>
-                <div className="text-xs text-gray-400">ADMIN</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Main Content */}
-        <div className="ml-56 p-8">
-          {/* Header */}
+<div className="ml-56 p-8">
           <div className="mb-6">
             <h1 className="text-2xl font-bold text-white mb-1">Gestion des revendeurs</h1>
             <p className="text-sm text-gray-400">Gérez vos partenaires et leurs performances</p>
           </div>
 
-          {/* Stats Cards */}
           <div className="grid grid-cols-3 gap-6 mb-8">
             <div className="bg-[#0d1b2f] border border-gray-800 rounded-xl p-5">
               <div className="flex items-center justify-between mb-2">
@@ -256,8 +33,6 @@ export default function WeloveeyaDashboard() {
               <div className="text-3xl font-bold text-white">14.3 %</div>
             </div>
           </div>
-
-          {/* Table Actions */}
           <div className="bg-[#0d1b2f] border border-gray-800 rounded-xl overflow-hidden">
             <div className="flex items-center justify-between p-4 border-b border-gray-800">
               <div className="relative flex-1 max-w-md">
@@ -268,15 +43,13 @@ export default function WeloveeyaDashboard() {
                   className="w-full bg-[#0a1628] border border-gray-700 rounded-lg py-2 pl-10 pr-3 text-sm text-gray-300 placeholder-gray-500 focus:outline-none focus:border-blue-500"
                 />
               </div>
-              <button className="ml-4 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
+              <button href="{{ url('/ajouterrevendeur') }}" className="ml-4 bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-colors">
                 + Ajouter revendeur
               </button>
               <button className="ml-2 text-gray-400 hover:text-white px-3 py-2 text-sm">
                 <i className="fas fa-file-pdf mr-1"></i> PDF (156)
               </button>
             </div>
-
-            {/* Table */}
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
@@ -379,7 +152,6 @@ export default function WeloveeyaDashboard() {
               </table>
             </div>
 
-            {/* Pagination */}
             <div className="flex items-center justify-between p-4 border-t border-gray-800">
               <div className="text-sm text-gray-400">
                 1 - 10 of 156
@@ -407,7 +179,7 @@ export default function WeloveeyaDashboard() {
             </div>
           </div>
         </div>
-      </div>
-    </>
-  );
-}
+@endsection
+
+    @push('scripts')
+@endpush

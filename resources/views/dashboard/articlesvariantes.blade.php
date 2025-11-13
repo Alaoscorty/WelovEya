@@ -1,64 +1,8 @@
-{{-- resources/views/articles/variants.blade.php --}}
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Gestion des variantes - WELDVEYA</title>
-    
-    {{-- Tailwind CSS CDN --}}
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    {{-- Lucide Icons CDN --}}
-    <script src="https://unpkg.com/lucide@latest"></script>
-</head>
-<body>
-    <div class="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 text-white p-6">
-        {{-- Sidebar --}}
-        <div class="fixed left-0 top-0 h-full w-64 bg-slate-900/50 backdrop-blur-sm border-r border-slate-700 p-6">
-            <div class="flex items-center gap-2 mb-12">
-                <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-pink-500 rounded-lg"></div>
-                <span class="text-xl font-bold">WELDVEYA</span>
-            </div>
-            
-            <nav class="space-y-2">
-                <a href="{{ route('dashboard') }}" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg cursor-pointer transition">
-                    <i data-lucide="package" class="w-5 h-5"></i>
-                    <span>Dashboard</span>
-                </a>
-                <a href="{{ route('tickets.index') }}" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg cursor-pointer transition">
-                    <i data-lucide="package" class="w-5 h-5"></i>
-                    <span>Tickets</span>
-                </a>
-                <a href="{{ route('resellers.index') }}" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg cursor-pointer transition">
-                    <i data-lucide="trending-up" class="w-5 h-5"></i>
-                    <span>Revendeurs</span>
-                </a>
-                <a href="{{ route('articles.index') }}" class="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-orange-500 to-orange-600 text-white rounded-lg cursor-pointer">
-                    <i data-lucide="package" class="w-5 h-5"></i>
-                    <span>Articles</span>
-                </a>
-                <a href="{{ route('benefits.index') }}" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg cursor-pointer transition">
-                    <i data-lucide="dollar-sign" class="w-5 h-5"></i>
-                    <span>Bénéfices</span>
-                </a>
-                <a href="{{ route('settings.index') }}" class="flex items-center gap-3 px-4 py-3 text-slate-400 hover:text-white hover:bg-slate-800 rounded-lg cursor-pointer transition">
-                    <i data-lucide="package" class="w-5 h-5"></i>
-                    <span>Paramètres</span>
-                </a>
-            </nav>
+@extends('layouts.application')
 
-            <div class="absolute bottom-6 left-6 right-6">
-                <div class="flex items-center gap-3 px-4 py-3 bg-slate-800 rounded-lg">
-                    <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full"></div>
-                    <div>
-                        <div class="font-semibold">{{ Auth::user()->name ?? 'John Carter' }}</div>
-                        <div class="text-xs text-slate-400">{{ Auth::user()->role ?? 'Admin' }}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+@section('title', 'Artistes')
+
+@section('content')
 
         {{-- Main Content --}}
         <div class="ml-64 pl-8">
@@ -391,5 +335,7 @@
         window.openAddVariantModal = openAddVariantModal;
         window.deleteVariant = deleteVariant;
     </script>
-</body>
-</html>
+@endsection
+
+    @push('scripts')
+@endpush

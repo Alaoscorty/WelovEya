@@ -48,3 +48,25 @@ Route::get('/dashboard', function () {
     return view('dashboard.index');
 })->name('dashboard');
 
+Route::get('/tickets', function () {
+    return view('dashboard.gestiondestickets');
+})->name('tickets');
+
+Route::get('/revendeurs', function () {
+    return view('dashboard.detailrevendeur');
+})->name('revendeur');
+Route::get('/ajouterrevendeur', function () {
+    return view('dashboard.ajouterrevendeur');
+})->name('ajouter_revendeur');
+
+
+Route::get('/benefices', function () {
+    return view('dashboard.');
+})->name('benefices');
+
+
+Route::get('/parametres', function () {
+    return view('dashboard.modifierstockticket');
+})->name('parametres');
+
+

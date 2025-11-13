@@ -1,28 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr" class="bg-gray-900 text-white">
-<head>
-  <meta charset="UTF-8">
-  <title>Gestion des Tickets</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-gray-900">
+@extends('layouts.application')
 
+@section('title', 'Artistes')
+
+@section('content')
 <div class="flex">
 
-  <!-- Sidebar -->
-  <aside class="w-64 h-screen bg-gray-900 border-r border-gray-800 p-6 fixed left-0 top-0">
-    <div class="flex items-center gap-3 mb-12">
-      <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg"></div>
-      <span class="text-orange-500 font-bold text-xl tracking-wider">WELDVEYR</span>
-    </div>
-
-    <nav class="space-y-2">
-      <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition">Dashboard</a>
-      <a href="#" class="flex items-center gap-3 px-4 py-3 bg-orange-500 text-white rounded-lg">Tickets</a>
-      <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition">Revendeurs</a>
-      <a href="#" class="flex items-center gap-3 px-4 py-3 text-gray-400 hover:bg-gray-800 rounded-lg transition">Bénéfices</a>
-    </nav>
-  </aside>
 
   <!-- Main Content -->
   <main class="ml-64 p-8 w-full">
@@ -34,7 +16,7 @@
 
       <!-- Search -->
       <form method="GET" class="mb-6">
-        <input type="text" name="search" value="{{ $search }}" placeholder="Rechercher..." 
+        <input type="text" name="search" placeholder="Rechercher..." 
                class="w-full bg-blue-900/30 border border-blue-800/50 rounded-lg px-4 py-3 focus:border-orange-500">
       </form>
 
@@ -47,9 +29,9 @@
           </tr>
         </thead>
         <tbody>
-        @foreach($tickets as $ticket)
+        <!-- @foreach($tickets as $ticket)-->
           <tr class="border-b border-gray-700/50 hover:bg-blue-900/20 transition">
-            <td><input type="checkbox"></td>
+            <!-- <td><input type="checkbox"></td>
             <td>{{ $ticket['type'] }}</td>
             <td>{{ $ticket['prix'] }}</td>
             <td>{{ $ticket['nombreTotal'] }}</td>
@@ -69,13 +51,14 @@
               <button class="hover:bg-gray-700 p-2 rounded">Supprimer</button>
             </td>
           </tr>
-        @endforeach
+        @endforeach -->
         </tbody>
       </table>
 
     </div>
   </main>
 </div>
+@endsection
 
-</body>
-</html>
+    @push('scripts')
+    @endpush

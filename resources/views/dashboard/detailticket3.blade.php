@@ -1,78 +1,8 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Détail Ticket VIP</title>
+@extends('layouts.application')
 
-    <!-- Tailwind -->
-    @vite('resources/css/app.css')
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
-</head>
+@section('title', 'Artistes')
 
-<body class="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950 to-slate-950">
-
-    <!-- Sidebar -->
-    <div class="fixed left-0 top-0 h-full w-64 bg-slate-950 border-r border-slate-800 p-4">
-        
-        <!-- Logo -->
-        <div class="flex items-center gap-2 mb-6 px-2">
-            <div class="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
-                <i class="fas fa-layer-group text-white text-sm"></i>
-            </div>
-            <span class="text-orange-500 font-bold">WELDVEYB</span>
-        </div>
-
-        <!-- Search -->
-        <div class="relative mb-6">
-            <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-sm"></i>
-            <input type="text" placeholder="Rechercher....."
-                   class="w-full bg-slate-900 text-slate-300 pl-10 pr-4 py-2 rounded-lg text-sm border border-slate-800 focus:outline-none focus:border-blue-500">
-        </div>
-
-        <!-- Menu -->
-        <nav class="space-y-1">
-            <a href="#" class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg transition">
-                <i class="fas fa-th-large"></i>
-                <span>Dashboard</span>
-            </a>
-
-            <a href="#" class="flex items-center gap-3 px-3 py-2 bg-orange-500 text-white rounded-lg">
-                <i class="fas fa-ticket-alt"></i>
-                <span>Tickets</span>
-            </a>
-
-            <a href="#" class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg transition">
-                <i class="fas fa-users"></i>
-                <span>Revendeurs</span>
-            </a>
-
-            <a href="#" class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg transition">
-                <i class="fas fa-gift"></i>
-                <span>Bénéfices</span>
-            </a>
-
-            <a href="#" class="flex items-center gap-3 px-3 py-2 text-slate-400 hover:bg-slate-900 rounded-lg transition">
-                <i class="fas fa-cog"></i>
-                <span>Paramètres</span>
-            </a>
-        </nav>
-
-        <!-- User -->
-        <div class="absolute bottom-6 left-4 right-4">
-            <div class="flex items-center gap-3 px-3 py-2 bg-slate-900 rounded-lg">
-                <div class="w-8 h-8 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center">
-                    <i class="fas fa-user text-white text-sm"></i>
-                </div>
-                <div class="flex-1">
-                    <div class="text-white text-sm font-medium">John Carter</div>
-                    <div class="text-slate-400 text-xs">Admin</div>
-                </div>
-            </div>
-        </div>
-
-    </div>
+@section('content')
 
     <!-- Main -->
     <div class="ml-64 p-8">
@@ -196,5 +126,7 @@
 
     </div>
 
-</body>
-</html>
+@endsection
+
+    @push('scripts')
+@endpush
