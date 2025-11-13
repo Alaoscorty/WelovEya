@@ -19,7 +19,7 @@ $tickets = [
 
 @section('content')
   <!-- Main -->
-  <div class="ml-64 p-8">
+  <div class="ml-5 p-8">
 
     <h1 class="text-white text-2xl font-bold mb-6">Gestion des Tickets</h1>
 
@@ -31,7 +31,7 @@ $tickets = [
           <input id="searchInput" type="text" placeholder="Rechercher une commande..." class="w-full bg-slate-950 text-slate-300 pl-10 pr-4 py-2 rounded-lg border border-slate-800">
         </div>
 
-        <button class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg">Ajouter une commande</button>
+      <button href="{{ route('ajouter_tickets')}}" class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg">Ajouter une commande</button>
       </div>
 
       <div class="space-y-2" id="ticketList">

@@ -23,22 +23,35 @@
         <i class="fas fa-ticket-alt w-4.5"></i>
         <span>Tickets</span>
     </a>
+
     <a href="{{ url('/revendeurs') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">
         <i class="fas fa-users w-4.5"></i>
         <span>Revendeurs</span>
     </a>
+
+    <a href="{{ url('/articles') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">
+        <i class="fas fa-ticket-alt w-4.5"></i>
+        <span>Articles</span>
+    </a>
+
     <a href="{{ url('/benefices') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">
         <i class="fas fa-trophy w-4.5"></i>
         <span>Benefices</span>
     </a>
+    
+    <a href="{{ url('/commandes') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">
+        <i class="fas fa-ticket-alt w-4.5"></i>
+        <span>Commandes</span>
+    </a>
+    
     <a href="{{ url('/parametres') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">
         <i class="fas fa-cog w-4.5"></i>
         <span>Paramètres</span>
     </a>
 </nav>
- <!-- User Profile -->
+        <!-- User Profile -->
             <div class="flex items-center gap-3 p-3.5 bg-[#1a1f3a] rounded-xl mt-auto">
-                <div class="w-9 h-9 bg-gradient-to-br from-[#667eea] to-[#764ba2] rounded-full flex items-center justify-center">
+                <div class="w-9 h-9 bg-gradient-to-br from-[#667ea] to-[#764ba2] rounded-full flex items-center justify-center">
                     <i class="fas fa-user text-white"></i>
                 </div>
                 <div class="flex-1">
