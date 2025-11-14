@@ -60,7 +60,6 @@
             <div>
               <label for="prenom" class="block text-sm text-slate-200/80 mb-1">Prénom <span class="text-orange-400">*</span></label>
               <input id="prenom" name="prenom" required aria-required="true"
-                     value="Jean"
                      class="w-full rounded-lg py-3 px-4 bg-[var(--input-bg)] text-white placeholder:text-slate-400 border border-transparent focus:outline-none focus:ring-2 focus:ring-sky-400"
                      placeholder="Jean" />
               <p class="mt-1 text-xs text-rose-300 hidden" id="err-prenom">Veuillez entrer un prénom.</p>
@@ -70,7 +69,6 @@
             <div>
               <label for="nom" class="block text-sm text-slate-200/80 mb-1">Nom <span class="text-orange-400">*</span></label>
               <input id="nom" name="nom" required aria-required="true"
-                     value="Dupont"
                      class="w-full rounded-lg py-3 px-4 bg-[var(--input-bg)] text-white placeholder:text-slate-400 border border-transparent focus:outline-none focus:ring-2 focus:ring-sky-400"
                      placeholder="Dupont" />
               <p class="mt-1 text-xs text-rose-300 hidden" id="err-nom">Veuillez entrer un nom.</p>
@@ -80,7 +78,6 @@
             <div>
               <label for="email" class="block text-sm text-slate-200/80 mb-1">Email <span class="text-orange-400">*</span></label>
               <input id="email" name="email" type="email" required aria-required="true"
-                     value="jeandupont@gmail.com"
                      class="w-full rounded-lg py-3 px-4 bg-[var(--input-bg)] text-white placeholder:text-slate-400 border border-transparent focus:outline-none focus:ring-2 focus:ring-sky-400"
                      placeholder="jeandupont@gmail.com" />
               <p class="mt-1 text-xs text-rose-300 hidden" id="err-email">Adresse e-mail non valide.</p>
@@ -90,7 +87,6 @@
             <div>
               <label for="phone" class="block text-sm text-slate-200/80 mb-1">Téléphone <span class="text-orange-400">*</span></label>
               <input id="phone" name="phone" type="tel" required aria-required="true"
-                     value="+229 01 23 45 67 89"
                      pattern="^\+229\s?\d{2}\s?\d{2}\s?\d{2}\s?\d{2}$"
                      class="w-full rounded-lg py-3 px-4 bg-[var(--input-bg)] text-white placeholder:text-slate-400 border border-transparent focus:outline-none focus:ring-2 focus:ring-sky-400"
                      placeholder="+229 01 23 45 67 89" />
@@ -114,7 +110,7 @@
   </main>
 
   <!-- Modal (success popup) -->
-  <div id="modalOverlay" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center z-50" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div id="modalOverlay" class="fixed inset-0 bg-black bg-opacity-60 hidden items-center justify-center p-24" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div id="modalCard" class="w-[92%] max-w-md rounded-xl p-6 bg-white text-slate-900 shadow-xl transform transition" role="document">
       <div class="flex items-start gap-4">
         <div class="flex-shrink-0">
