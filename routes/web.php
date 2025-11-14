@@ -40,6 +40,10 @@ Route::get('/propos', function () {
     return view('propos');
 })->name('propos');
 
+Route::get('/formulaire', function () {
+    return view('formulaire');
+})->name('formulaire');
+
 Route::get('/jeux', function () {
     return view('jeux');
 })->name('jeux');
