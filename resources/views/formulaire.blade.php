@@ -37,7 +37,7 @@
   </style>
 </head>
 <body class="min-h-screen flex flex-col">
-      <a href="{{ url('/artistes') }}" >
+      <a href="{{ url('/direct') }}" class="mb-44 p-8 w-70">
         <i></i> Retour aux activités
       </a>
   <!-- Container -->
@@ -46,7 +46,7 @@
       <!-- Card -->
       <section
         class="relative rounded-2xl overflow-hidden shadow-2xl"
-        style="background: linear-gradient(180deg, var(--card-top), var(--card-bottom)); border: 1px solid rgba(255,255,255,0.03);"
+        style="background: linear-gradient(180deg, var(--card-top), var(--card-bottom)); border: 1px solid rgba(255, 255, 255, 0.47);"
       >
         <div class="p-6 sm:p-8">
           <h1 class="text-center text-lg font-semibold">RESERVER MA PLACE</h1>
