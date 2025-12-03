@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="detailplainte.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <span class="logo-text">WELOVEYA</span>
+            </div>
+
+            <div class="search-box">
+                <input type="text" placeholder="Rechercher.....">
+            </div>
+
+            <ul class="menu">
+                <li class="menu-item">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span>Tickets</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-video"></i>
+                    <span>Billets Streaming</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>Revendeurs</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Articles</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-terminal"></i>
+                    <span>Commandes</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-microphone"></i>
+                    <span>Intervenants</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Jeux-concours</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Activités</span>
+                </li>
+                <li class="menu-item active">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>Plainte des clients</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-gift"></i>
+                    <span>Benefices</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Paramètres</span>
+                </li>
+            </ul>
+
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h4>John Carter</h4>
+                    <p>Admin</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="breadcrumb" onclick="goBack()">
+                <i class="fas fa-arrow-left"></i>
+                <span>Retour à la Gestion des Plaintes</span>
+            </div>
+
+            <div class="page-header">
+                <h1 class="page-title">Détails de la Plainte : <span class="complaint-id">PLT-10524</span></h1>
+            </div>
+
+            <div class="details-grid">
+                <!-- Informations sur le Client et le Billet -->
+                <div class="card">
+                    <h2 class="card-title">Informations sur le Client et le Billet</h2>
+                    
+                    <div class="info-group">
+                        <div class="info-label">Nom du Client</div>
+                        <div class="info-value">Marie Dubois</div>
+                    </div>
+
+                    <div class="info-group">
+                        <div class="info-label">Email du Client</div>
+                        <div class="info-value">marie.ds@email.com</div>
+                    </div>
+
+                    <div class="info-group">
+                        <div class="info-label">Type de Billet Acheté</div>
+                        <div class="info-value">Pass VIP - 3 Jours</div>
+                    </div>
+
+                    <div class="info-group">
+                        <div class="info-label">Code d'Accès</div>
+                        <div class="info-value">VF2024-A8B5C1</div>
+                    </div>
+                </div>
+
+                <!-- Détails et Statut de la Plainte -->
+                <div class="card">
+                    <h2 class="card-title">Détails et Statut de la Plainte</h2>
+                    
+                    <div class="info-group">
+                        <div class="info-label">Type de Plainte</div>
+                        <div class="info-value">Problème de Ticket</div>
+                    </div>
+
+                    <div class="info-group">
+                        <div class="info-label">Date de Soumission</div>
+                        <div class="info-value">21 Juillet 2024, 14:30</div>
+                    </div>
+
+                    <div class="info-group">
+                        <div class="info-label">Description Complète</div>
+                        <div class="description-box">
+                            Bonjour, J'ai acheté mon billet il y a une semaine mais le code QR sur le billet ne semble pas fonctionner lorsque j'essaie de le scanner avec l'application du festival. J'ai peur de ne pas pouvoir entrer. Pouvez-vous vérifier si mon billet est valide ? Merci.
+                        </div>
+                    </div>
+
+                    <div class="info-group">
+                        <div class="info-label">Statut Actuel</div>
+                        <div class="info-value">
+                            <span class="status-badge">Ouvert</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Modifier le Statut</label>
+                        <div class="select-wrapper">
+                            <select id="statusSelect">
+                                <option value="ouvert" selected>Ouvert</option>
+                                <option value="en-cours">En cours</option>
+                                <option value="résolu">Résolu</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Notes Internes</label>
+                        <textarea id="internalNotes" placeholder="Ajouter des commentaires pour l'équipe..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions-bar">
+                <button class="btn btn-secondary" onclick="closeComplaint()">
+                    <i class="fas fa-times"></i> Fermer la Plainte
+                </button>
+                <button class="btn btn-primary" onclick="saveChanges()">
+                    <i class="fas fa-save"></i> Sauvegarder les Modifications
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Menu interaction
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Status select change
+        const statusSelect = document.getElementById('statusSelect');
+        const statusBadge = document.querySelector('.status-badge');
+
+        statusSelect.addEventListener('change', function() {
+            const selectedStatus = this.value;
+            
+            // Remove all status classes
+            statusBadge.className = 'status-badge';
+            
+            // Add appropriate status class
+            switch(selectedStatus) {
+                case 'ouvert':
+                    statusBadge.style.background = 'rgba(59, 130, 246, 0.15)';
+                    statusBadge.style.color = '#3b82f6';
+                    statusBadge.style.borderColor = 'rgba(59, 130, 246, 0.3)';
+                    statusBadge.textContent = 'Ouvert';
+                    break;
+                case 'en-cours':
+                    statusBadge.style.background = 'rgba(251, 191, 36, 0.15)';
+                    statusBadge.style.color = '#fbbf24';
+                    statusBadge.style.borderColor = 'rgba(251, 191, 36, 0.3)';
+                    statusBadge.textContent = 'En cours';
+                    break;
+                case 'résolu':
+                    statusBadge.style.background = 'rgba(34, 197, 94, 0.15)';
+                    statusBadge.style.color = '#22c55e';
+                    statusBadge.style.borderColor = 'rgba(34, 197, 94, 0.3)';
+                    statusBadge.textContent = 'Résolu';
+                    break;
+            }
+        });
+
+        // Go back function
+        function goBack() {
+            if (confirm('Voulez-vous vraiment revenir à la page précédente ? Les modifications non sauvegardées seront perdues.')) {
+                window.history.back();
+            }
+        }
+
+        // Close complaint function
+        function closeComplaint() {
+            if (confirm('Êtes-vous sûr de vouloir fermer cette plainte ?')) {
+                statusSelect.value = 'résolu';
+                statusSelect.dispatchEvent(new Event('change'));
+                alert('La plainte a été fermée avec succès.');
+            }
+        }
+
+        // Save changes function
+        function saveChanges() {
+            const status = statusSelect.value;
+            const notes = document.getElementById('internalNotes').value;
+            
+            // Simulate saving
+            const saveBtn = document.querySelector('.btn-primary');
+            const originalText = saveBtn.innerHTML;
+            
+            saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enregistrement...';
+            saveBtn.disabled = true;
+            
+            setTimeout(() => {
+                saveBtn.innerHTML = '<i class="fas fa-check"></i> Modifications sauvegardées !';
+                
+                setTimeout(() => {
+                    saveBtn.innerHTML = originalText;
+                    saveBtn.disabled = false;
+                }, 2000);
+                
+                console.log('Statut:', status);
+                console.log('Notes:', notes);
+            }, 1500);
+        }
+
+        // Auto-save notes (optional)
+        let saveTimeout;
+        document.getElementById('internalNotes').addEventListener('input', function() {
+            clearTimeout(saveTimeout);
+            saveTimeout = setTimeout(() => {
+                console.log('Notes auto-sauvegardées:', this.value);
+            }, 2000);
+        });
+    </script>
+
+
+</body>
+</html>

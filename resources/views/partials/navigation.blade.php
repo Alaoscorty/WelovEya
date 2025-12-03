@@ -24,6 +24,11 @@
         <span>Tickets</span>
     </a>
 
+    <a href="{{ url('/billets') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">
+        <i class="fas fa-users w-4.5"></i>
+        <span>Billets streaming</span>
+    </a>
+
     <a href="{{ url('/revendeurs') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">
         <i class="fas fa-users w-4.5"></i>
         <span>Revendeurs</span>
@@ -34,14 +39,34 @@
         <span>Articles</span>
     </a>
 
-    <a href="{{ url('/benefices') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">
-        <i class="fas fa-trophy w-4.5"></i>
-        <span>Benefices</span>
-    </a>
-    
     <a href="{{ url('/commandes') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">
         <i class="fas fa-ticket-alt w-4.5"></i>
         <span>Commandes</span>
+    </a>
+
+    <a href="{{ url('/intervenants') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">
+        <i class="fas fa-users w-4.5"></i>
+        <span>Intervenants</span>
+    </a>
+
+    <a href="{{ url('/jeux') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">
+        <i class="fas fa-users w-4.5"></i>
+        <span>Jeux concours</span>
+    </a>
+
+    <a href="{{ url('/activites') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">
+        <i class="fas fa-users w-4.5"></i>
+        <span>activités</span>
+    </a>
+
+    <a href="{{ url('/plaintes') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">
+        <i class="fas fa-users w-4.5"></i>
+        <span>Plaintes des clients</span>
+    </a>
+
+    <a href="{{ url('/benefices') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">
+        <i class="fas fa-trophy w-4.5"></i>
+        <span>Bénéfices</span>
     </a>
     
     <a href="{{ url('/parametres') }}" class="flex items-center gap-3 px-3.5 py-2.5 text-gray-400 rounded-lg text-sm transition-all hover:bg-[#1a1f3a] hover:text-white">

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="plaintesclients.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+<div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-globe"></i>
+                </div>
+                <span class="logo-text">WELOVEYA</span>
+            </div>
+
+            <div class="search-box">
+                <input type="text" placeholder="Rechercher.....">
+            </div>
+
+            <ul class="menu">
+                <li class="menu-item">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span>Tickets</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-video"></i>
+                    <span>Billets Streaming</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>Revendeurs</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Articles</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-terminal"></i>
+                    <span>Commandes</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-microphone"></i>
+                    <span>Intervenants</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Jeux-concours</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Activités</span>
+                </li>
+                <li class="menu-item active">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>Plainte des clients</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-gift"></i>
+                    <span>Benefices</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Paramètres</span>
+                </li>
+            </ul>
+
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h4>John Carter</h4>
+                    <p>Admin</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Gestion des Plaintes Clients</h1>
+                <p class="page-subtitle">Suivez et résolvez les problèmes des participants ici.</p>
+            </div>
+
+            <div class="filters-section">
+                <div class="search-bar-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-bar" id="searchInput" placeholder="Rechercher par nom, email, ID de ticket...">
+                </div>
+                <div class="filter-dropdown" id="statusFilter">
+                    <span>Statut : Tous</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="filter-dropdown" id="typeFilter">
+                    <span>Type de Plainte : Tous</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID DE PLAINTE</th>
+                            <th>NOM/EMAIL DU CLIENT</th>
+                            <th>TYPE DE PLAINTE</th>
+                            <th>DESCRIPTION COURTE</th>
+                            <th>STATUT</th>
+                            <th>DATE DE SOUMISSION</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="complaintsTable">
+                        <tr data-status="ouvert" data-type="ticket">
+                            <td><span class="complaint-id">PLT-10524</span></td>
+                            <td>
+                                <div class="client-info">
+                                    <h4>Marie Dubois</h4>
+                                    <p>marie.ds@email.com</p>
+                                </div>
+                            </td>
+                            <td><span class="complaint-type">Problème de Ticket</span></td>
+                            <td><span class="complaint-description">Le code du billet ne fonctionne pas...</span></td>
+                            <td><span class="status-badge status-ouvert">Ouvert</span></td>
+                            <td><span class="date-time">2024-07-21 14:30</span></td>
+                            <td><a href="#" class="action-link">Voir Détails</a></td>
+                        </tr>
+                        <tr data-status="en-cours" data-type="streaming">
+                            <td><span class="complaint-id">PLT-10523</span></td>
+                            <td>
+                                <div class="client-info">
+                                    <h4>Jean Martin</h4>
+                                    <p>j.martin@email.com</p>
+                                </div>
+                            </td>
+                            <td><span class="complaint-type">Problème de Streaming</span></td>
+                            <td><span class="complaint-description">Qualité vidéo très faible, impossible de...</span></td>
+                            <td><span class="status-badge status-en-cours">En cours</span></td>
+                            <td><span class="date-time">2024-07-21 11:05</span></td>
+                            <td><a href="#" class="action-link">Voir Détails</a></td>
+                        </tr>
+                        <tr data-status="résolu" data-type="ticket">
+                            <td><span class="complaint-id">PLT-10521</span></td>
+                            <td>
+                                <div class="client-info">
+                                    <h4>Claire Petit</h4>
+                                    <p>c.petit@email.com</p>
+                                </div>
+                            </td>
+                            <td><span class="complaint-type">Problème de Ticket</span></td>
+                            <td><span class="complaint-description">Je n'ai pas reçu mon billet par email apr...</span></td>
+                            <td><span class="status-badge status-résolu">Résolu</span></td>
+                            <td><span class="date-time">2024-07-20 09:15</span></td>
+                            <td><a href="#" class="action-link">Voir Détails</a></td>
+                        </tr>
+                        <tr data-status="résolu" data-type="autre">
+                            <td><span class="complaint-id">PLT-10520</span></td>
+                            <td>
+                                <div class="client-info">
+                                    <h4>Lucas Bernard</h4>
+                                    <p>l.bernard@email.com</p>
+                                </div>
+                            </td>
+                            <td><span class="complaint-type">Autre</span></td>
+                            <td><span class="complaint-description">Question sur les horaires de passage...</span></td>
+                            <td><span class="status-badge status-résolu">Résolu</span></td>
+                            <td><span class="date-time">2024-07-19 18:45</span></td>
+                            <td><a href="#" class="action-link">Voir Détails</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination-wrapper">
+                <div class="pagination-info">
+                    Affichage de 1 à 4 sur 25 résultats
+                </div>
+                <div class="pagination">
+                    <button class="page-btn" id="prevBtn" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="page-btn active" data-page="1">1</button>
+                    <button class="page-btn" data-page="2">2</button>
+                    <button class="page-btn" data-page="3">3</button>
+                    <button class="page-btn">...</button>
+                    <button class="page-btn" id="nextBtn">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Menu interaction
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const complaintsTable = document.getElementById('complaintsTable');
+
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = complaintsTable.querySelectorAll('tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+
+            updatePaginationInfo();
+        });
+
+        // Filter functionality
+        const statusFilter = document.getElementById('statusFilter');
+        const typeFilter = document.getElementById('typeFilter');
+        let currentStatusFilter = 'tous';
+        let currentTypeFilter = 'tous';
+
+        statusFilter.addEventListener('click', function() {
+            const statuses = ['tous', 'ouvert', 'en-cours', 'résolu'];
+            const currentIndex = statuses.indexOf(currentStatusFilter);
+            currentStatusFilter = statuses[(currentIndex + 1) % statuses.length];
+            
+            this.querySelector('span').textContent = `Statut : ${currentStatusFilter.charAt(0).toUpperCase() + currentStatusFilter.slice(1)}`;
+            applyFilters();
+        });
+
+        typeFilter.addEventListener('click', function() {
+            const types = ['tous', 'ticket', 'streaming', 'autre'];
+            const currentIndex = types.indexOf(currentTypeFilter);
+            currentTypeFilter = types[(currentIndex + 1) % types.length];
+            
+            this.querySelector('span').textContent = `Type de Plainte : ${currentTypeFilter.charAt(0).toUpperCase() + currentTypeFilter.slice(1)}`;
+            applyFilters();
+        });
+
+        function applyFilters() {
+            const rows = complaintsTable.querySelectorAll('tr');
+            
+            rows.forEach(row => {
+                const status = row.dataset.status;
+                const type = row.dataset.type;
+                
+                const statusMatch = currentStatusFilter === 'tous' || status === currentStatusFilter;
+                const typeMatch = currentTypeFilter === 'tous' || type === currentTypeFilter;
+                
+                row.style.display = (statusMatch && typeMatch) ? '' : 'none';
+            });
+
+            updatePaginationInfo();
+        }
+
+        function updatePaginationInfo() {
+            const visibleRows = Array.from(complaintsTable.querySelectorAll('tr')).filter(row => row.style.display !== 'none');
+            const infoElement = document.querySelector('.pagination-info');
+            infoElement.textContent = `Affichage de 1 à ${visibleRows.length} sur 25 résultats`;
+        }
+
+        // Pagination
+        const pageButtons = document.querySelectorAll('.page-btn[data-page]');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        pageButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                pageButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const page = parseInt(this.dataset.page);
+                prevBtn.disabled = page === 1;
+            });
+        });
+
+        prevBtn.addEventListener('click', function() {
+            const activePage = document.querySelector('.page-btn.active');
+            const currentPage = parseInt(activePage.dataset.page);
+            if (currentPage > 1) {
+                pageButtons[currentPage - 2].click();
+            }
+        });
+
+        nextBtn.addEventListener('click', function() {
+            const activePage = document.querySelector('.page-btn.active');
+            const currentPage = parseInt(activePage.dataset.page);
+            if (currentPage < pageButtons.length) {
+                pageButtons[currentPage].click();
+            }
+        });
+
+        // Action links
+        document.querySelectorAll('.action-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const row = this.closest('tr');
+                const complaintId = row.querySelector('.complaint-id').textContent;
+                const clientName = row.querySelector('.client-info h4').textContent;
+                
+                alert(`Affichage des détails de la plainte ${complaintId} pour ${clientName}`);
+            });
+        });
+    </script>
+    
+</body>
+</html>

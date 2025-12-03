@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="gestiondesinscrits.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+<div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="WELDOVEYA Logo" width="35" height="35">
+                <span class="logo-text">WELDOVEYA</span>
+            </div>
+
+            <div class="search-box">
+                <input type="text" placeholder="Rechercher.....">
+            </div>
+
+            <ul class="menu">
+                <li class="menu-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span>Tickets</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-ticket"></i>
+                    <span>Billets Streaming</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>Revendeurs</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-newspaper"></i>
+                    <span>Articles</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Commandes</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-user-tie"></i>
+                    <span>Intervenants</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-trophy"></i>
+                    <span>Jeux-concours</span>
+                </li>
+                <li class="menu-item active">
+                    <i class="fas fa-bolt"></i>
+                    <span>Activités</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>Plainte des clients</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Benefices</span>
+                </li>
+                <li class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Paramètres</span>
+                </li>
+            </ul>
+
+            <div class="user-info">
+                <div class="user-avatar">
+                    <img src="avatar.jpg" alt="John Carter" width="38" height="38">
+                </div>
+                <div class="user-details">
+                    <div class="user-name">John Carter</div>
+                    <div class="user-role">Admin</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="content-wrapper">
+                <a class="back-button" onclick="history.back()">
+                    <i class="fas fa-chevron-left"></i>
+                    Retour au Tableau de Suivi
+                </a>
+
+                <h1 class="page-title">Gestion des Inscrits : [Nom de l'Action]</h1>
+
+                <div class="stats-box">
+                    <div class="stats-title">15 / 20 Inscrits</div>
+                    <div class="stats-subtitle">Récompense : 3 Billets Jour 1</div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nom du Participant</th>
+                                <th>Statut de Présence</th>
+                                <th>Action Finale (Ticket)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Participant A</td>
+                                <td>
+                                    <div class="status">
+                                        <div class="status-checkbox empty" data-row="0"></div>
+                                        <span>Présent</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-secondary" data-row="0">Émettre le Ticket</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Participant B</td>
+                                <td>
+                                    <div class="status">
+                                        <div class="status-checkbox" data-row="1">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <span>Présent</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <button class="btn btn-primary" data-row="1">Émettre le Ticket</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Participant C</td>
+                                <td>
+                                    <div class="status">
+                                        <div class="status-checkbox" data-row="2">
+                                            <i class="fas fa-check"></i>
+                                        </div>
+                                        <span>Présent</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="code-text">Émis (Code XXXXX)</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="scrollbar"></div>
+        </main>
+    </div>
+
+    <script>
+        // Handle checkbox clicks
+        document.querySelectorAll('.status-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', function() {
+                const row = this.getAttribute('data-row');
+                const btn = document.querySelector(`button[data-row="${row}"]`);
+                
+                if (this.classList.contains('empty')) {
+                    this.classList.remove('empty');
+                    this.innerHTML = '<i class="fas fa-check"></i>';
+                    
+                    if (btn) {
+                        btn.classList.remove('btn-secondary');
+                        btn.classList.add('btn-primary');
+                    }
+                } else {
+                    this.classList.add('empty');
+                    this.innerHTML = '';
+                    
+                    if (btn) {
+                        btn.classList.remove('btn-primary');
+                        btn.classList.add('btn-secondary');
+                    }
+                }
+            });
+        });
+
+        // Handle button clicks
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (this.classList.contains('btn-primary')) {
+                    const row = this.getAttribute('data-row');
+                    const code = 'XXXXX';
+                    const td = this.parentElement;
+                    td.innerHTML = `<span class="code-text">Émis (Code ${code})</span>`;
+                }
+            });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search-box input');
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            document.querySelectorAll('tbody tr').forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+
+        // Menu item clicks
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="addnewgame.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+ <!-- Sidebar -->
+    <div class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">
+                <i class="fas fa-globe"></i>
+            </div>
+            <span class="logo-text">WELOVEYA</span>
+        </div>
+
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Rechercher......">
+        </div>
+
+        <nav class="menu">
+            <a href="#" class="menu-item">
+                <i class="fas fa-chart-line"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-ticket-alt"></i>
+                <span>Tickets</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-film"></i>
+                <span>Billets Streaming</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-users"></i>
+                <span>Revendeurs</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-newspaper"></i>
+                <span>Articles</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Commandes</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-user-tie"></i>
+                <span>Intervenants</span>
+            </a>
+            <a href="#" class="menu-item active">
+                <i class="fas fa-trophy"></i>
+                <span>Jeux-concours</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-bolt"></i>
+                <span>Activités</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>Plainte des clients</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-gift"></i>
+                <span>Benefices</span>
+            </a>
+            <a href="#" class="menu-item">
+                <i class="fas fa-cog"></i>
+                <span>Paramètres</span>
+            </a>
+        </nav>
+
+        <div class="user-profile">
+            <div class="user-avatar">JC</div>
+            <div class="user-info">
+                <h4>John Carter</h4>
+                <p>Admin</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="page-header">
+            <h1>Ajouter un nouveau Jeu-Concours</h1>
+            <p>Remplissez les champs ci-dessous pour lancer votre concours</p>
+        </div>
+
+        <form class="form-container" id="contestForm">
+            <!-- Identification Section -->
+            <div class="form-section">
+                <h2>Identification</h2>
+                <div class="form-group">
+                    <label>Nom du Jeu</label>
+                    <input type="text" placeholder="Ex: Grand Concours de l'Été" required>
+                </div>
+                <div class="form-group">
+                    <label>Description du Jeu</label>
+                    <textarea placeholder="Décrivez brièvement le jeu, ses règles et son objectif." required></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Partenaire Associé</label>
+                        <select required>
+                            <option value="">Rechercher ou sélectionner</option>
+                            <option value="marque-a">Marque A</option>
+                            <option value="marque-b">Marque B</option>
+                            <option value="marque-c">Marque C</option>
+                            <option value="sponsor-x">Sponsor X</option>
+                            <option value="partenaire-y">Partenaire Y</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Type de Jeu</label>
+                        <select required>
+                            <option value="">Sélectionner un type</option>
+                            <option value="tirage">Tirage au sort</option>
+                            <option value="quiz">Quiz</option>
+                            <option value="photo">Concours photo</option>
+                            <option value="video">Concours vidéo</option>
+                            <option value="creative">Challenge créatif</option>
+                            <option value="instant">Jeu instantané</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Liens et Réseaux Section -->
+            <div class="form-section">
+                <h2>Liens et Réseaux</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Réseau Social Principal</label>
+                        <select required>
+                            <option value="">Sélectionner un réseau</option>
+                            <option value="facebook">
+                                <i class="fab fa-facebook"></i> Facebook
+                            </option>
+                            <option value="instagram">
+                                <i class="fab fa-instagram"></i> Instagram
+                            </option>
+                            <option value="tiktok">
+                                <i class="fab fa-tiktok"></i> TikTok
+                            </option>
+                            <option value="twitter">
+                                <i class="fab fa-twitter"></i> Twitter / X
+                            </option>
+                            <option value="youtube">
+                                <i class="fab fa-youtube"></i> YouTube
+                            </option>
+                            <option value="linkedin">
+                                <i class="fab fa-linkedin"></i> LinkedIn
+                            </option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Lien du Jeu (URL)</label>
+                        <input type="url" placeholder="https://example.com/concours" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Date de Début / Fin Section -->
+            <div class="form-section">
+                <h2>Date de Début / Fin</h2>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Date de début</label>
+                        <div class="date-input-wrapper">
+                            <i class="far fa-calendar"></i>
+                            <input type="date" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Date de fin</label>
+                        <div class="date-input-wrapper">
+                            <i class="far fa-calendar"></i>
+                            <input type="date" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Récompense Section -->
+            <div class="form-section">
+                <h2>Récompense</h2>
+                <div class="form-row-3">
+                    <div class="form-group">
+                        <label>Récompense / Lot</label>
+                        <input type="text" placeholder="Ex: 2 Billets VIP" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nombre de Gagnants</label>
+                        <input type="number" min="1" value="1" required>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">Créer le Jeu</button>
+        </form>
+    </div>
+
+    <script>
+        // Form submission
+        document.getElementById('contestForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const formData = new FormData(this);
+            
+            // Show success message
+            alert('Jeu-Concours créé avec succès ! 🎉');
+            
+            // Optional: Reset form
+            // this.reset();
+            
+            // Optional: Redirect to list page
+            // window.location.href = '/jeux-concours';
+        });
+
+        // Date validation (end date must be after start date)
+        const startDateInput = document.querySelector('input[type="date"]:first-of-type');
+        const endDateInput = document.querySelector('input[type="date"]:last-of-type');
+
+        endDateInput.addEventListener('change', function() {
+            const startDate = new Date(startDateInput.value);
+            const endDate = new Date(this.value);
+            
+            if (endDate <= startDate) {
+                alert('La date de fin doit être postérieure à la date de début');
+                this.value = '';
+            }
+        });
+
+        // Set minimum date to today
+        const today = new Date().toISOString().split('T')[0];
+        startDateInput.setAttribute('min', today);
+        endDateInput.setAttribute('min', today);
+    </script>
+
+</body>
+</html>

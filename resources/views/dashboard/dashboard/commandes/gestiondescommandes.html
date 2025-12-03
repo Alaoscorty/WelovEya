@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="gestiondescommandes.css">
+</head>
+<body>
+    
+<div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-fire"></i>
+                </div>
+                <span class="logo-text">WELDVEYA</span>
+            </div>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Rechercher...">
+            </div>
+
+            <nav class="menu">
+                <div class="menu-item">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span>Tickets</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-users"></i>
+                    <span>Revendeurs</span>
+                </div>
+                <div class="menu-item active">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Commandes</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-gift"></i>
+                    <span>Bénéfices</span>
+                </div>
+                <div class="menu-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Paramètres</span>
+                </div>
+            </nav>
+
+            <div class="user-profile">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="user-info">
+                    <h4>John Carter</h4>
+                    <p>Admin</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1>Gestion des commandes</h1>
+                <p>Visualisez et gérez toutes les commandes</p>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon orange">
+                        <i class="fas fa-box"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Articles Vendus</h3>
+                        <p>2847</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon green">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Total Commandes</h3>
+                        <p>2456</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon yellow">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Commandes en attente</h3>
+                        <p>391</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon red">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>Revenus Générés</h3>
+                        <p>450000 F</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Table Section -->
+            <div class="table-section">
+                <div class="table-header">
+                    <div class="table-search">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Rechercher une commande ....">
+                    </div>
+                    <span class="pagination-info">1 - 10 sur</span>
+                    <button class="add-btn">
+                        <i class="fas fa-plus"></i>
+                        Ajouter une commande
+                    </button>
+                </div>
+
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" class="checkbox"></th>
+                            <th>ID Commande <i class="fas fa-sort"></i></th>
+                            <th>Acheteur <i class="fas fa-sort"></i></th>
+                            <th>Articles achetés <i class="fas fa-sort"></i></th>
+                            <th>Statut <i class="fas fa-sort"></i></th>
+                            <th>Revenus générés <i class="fas fa-sort"></i></th>
+                            <th>Date <i class="fas fa-sort"></i></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox"></td>
+                            <td class="order-id">CDE-001</td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">JD</div>
+                                    <div class="customer-details">
+                                        <h4>Jean Dupont</h4>
+                                        <p>jeandupont@gmail.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>3</td>
+                            <td><span class="badge validee"><i class="fas fa-check-circle"></i> Validée</span></td>
+                            <td>13700 F</td>
+                            <td>15 Novembre 2024</td>
+                            <td>
+                                <div class="actions">
+                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox"></td>
+                            <td class="order-id">CDE-002</td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">MM</div>
+                                    <div class="customer-details">
+                                        <h4>Marie Martin</h4>
+                                        <p>mariemartin@gmail.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>1</td>
+                            <td><span class="badge attente"><i class="fas fa-clock"></i> En attente</span></td>
+                            <td>15000 F</td>
+                            <td>15 Novembre 2023</td>
+                            <td>
+                                <div class="actions">
+                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox"></td>
+                            <td class="order-id">CDE-003</td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">SD</div>
+                                    <div class="customer-details">
+                                        <h4>Sophie Dubois</h4>
+                                        <p>sophiedubois@gmail.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>2</td>
+                            <td><span class="badge attente"><i class="fas fa-clock"></i> En attente</span></td>
+                            <td>5675 F</td>
+                            <td>10 Décembre 2023</td>
+                            <td>
+                                <div class="actions">
+                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox"></td>
+                            <td class="order-id">CDE-004</td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">EB</div>
+                                    <div class="customer-details">
+                                        <h4>Emma Bernard</h4>
+                                        <p>emmab@gmail.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>5</td>
+                            <td><span class="badge validee"><i class="fas fa-check-circle"></i> Validée</span></td>
+                            <td>3375 F</td>
+                            <td>29 Novembre 2024</td>
+                            <td>
+                                <div class="actions">
+                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox"></td>
+                            <td class="order-id">CDE-005</td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">JD</div>
+                                    <div class="customer-details">
+                                        <h4>Jean Dupont</h4>
+                                        <p>jeandupont@gmail.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>4</td>
+                            <td><span class="badge attente"><i class="fas fa-clock"></i> En attente</span></td>
+                            <td>13293 F</td>
+                            <td>17 Décembre 2024</td>
+                            <td>
+                                <div class="actions">
+                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox"></td>
+                            <td class="order-id">CDE-006</td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">JD</div>
+                                    <div class="customer-details">
+                                        <h4>Jean Dupont</h4>
+                                        <p>jeandupont@gmail.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>2</td>
+                            <td><span class="badge validee"><i class="fas fa-check-circle"></i> Validée</span></td>
+                            <td>10000 F</td>
+                            <td>07 Novembre 2024</td>
+                            <td>
+                                <div class="actions">
+                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox"></td>
+                            <td class="order-id">CDE-007</td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">JD</div>
+                                    <div class="customer-details">
+                                        <h4>Jean Dupont</h4>
+                                        <p>jeandupont@gmail.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>1</td>
+                            <td><span class="badge attente"><i class="fas fa-clock"></i> En attente</span></td>
+                            <td>8100 F</td>
+                            <td>04 Novembre 2023</td>
+                            <td>
+                                <div class="actions">
+                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox"></td>
+                            <td class="order-id">CDE-008</td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">JD</div>
+                                    <div class="customer-details">
+                                        <h4>Jean Dupont</h4>
+                                        <p>jeandupont@gmail.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>1</td>
+                            <td><span class="badge validee"><i class="fas fa-check-circle"></i> Validée</span></td>
+                            <td>11700 F</td>
+                            <td>06 Décembre 2023</td>
+                            <td>
+                                <div class="actions">
+                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox"></td>
+                            <td class="order-id">CDE-009</td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">JD</div>
+                                    <div class="customer-details">
+                                        <h4>Jean Dupont</h4>
+                                        <p>jeandupont@gmail.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>2</td>
+                            <td><span class="badge attente"><i class="fas fa-clock"></i> En attente</span></td>
+                            <td>19200 F</td>
+                            <td>08 Novembre 2024</td>
+                            <td>
+                                <div class="actions">
+                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="checkbox"></td>
+                            <td class="order-id">CDE-010</td>
+                            <td>
+                                <div class="customer-info">
+                                    <div class="customer-avatar">JD</div>
+                                    <div class="customer-details">
+                                        <h4>Jean Dupont</h4>
+                                        <p>jeandupont@gmail.com</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>5</td>
+                            <td><span class="badge attente"><i class="fas fa-clock"></i> En attente</span></td>
+                            <td>15000 F</td>
+                            <td>10 Décembre 2024</td>
+                            <td>
+                                <div class="actions">
+                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+<script>
+        // Checkbox functionality
+        document.querySelectorAll('.checkbox').forEach(checkbox => {
+            checkbox.addEventListener('click', function() {
+                if (this.style.background) {
+                    this.style.background = '';
+                } else {
+                    this.style.background = '#ff6b35';
+                }
+            });
+        });
+
+        // Menu navigation
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Sort functionality
+        document.querySelectorAll('.orders-table thead th i').forEach(icon => {
+            icon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                document.querySelectorAll('.orders-table thead th i').forEach(i => {
+                    i.classList.remove('fa-sort-up', 'fa-sort-down');
+                    i.classList.add('fa-sort');
+                });
+                
+                this.classList.remove('fa-sort');
+                this.classList.add('fa-sort-up');
+            });
+        });
+
+        // Search functionality
+        const searchInputs = document.querySelectorAll('input[type="text"]');
+        searchInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                console.log('Searching for:', this.value);
+            });
+        });
+    </script>
+
+</body>
+</html>

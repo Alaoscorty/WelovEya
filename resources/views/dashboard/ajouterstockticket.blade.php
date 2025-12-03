@@ -3,189 +3,272 @@
 @section('title', 'Artistes')
 
 @section('content')
+<style>
+    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Orbitron:wght@400;600;700&display=swap");
+    * {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+
+    /* Ticket Section */
+    .ticket-section {
+        display: flex;
+        gap: 2rem;
+        margin: 3rem 0;
+    }
+
+    .ticket-image {
+        flex: 1;
+    }
+
+    .ticket-image img {
+        width: 100%;
+        border: 1px solid #333;
+        border-radius: 8px;
+    }
+
+    .ticket-info {
+        flex: 1;
+    }
+
+    .price {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #FFFFFF;
+        margin: 1rem 0;
+    }
+
+    .quantity-control {
+        display: flex;
+        align-items: center;
+        margin-top: 1.5rem;
+    }
+
+    .quantity-btn {
+        background-color: white;
+        color: black;
+        border: none;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+    }
+
+    .quantity-input {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    background-color: white;
+    color: black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    }
+    .add-to-cart{
+    margin-left: 5vh;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    margin-top: 3vh; 
+    margin-left: 10vh;
+    padding: 8px;
+    }
+    .main-content {
+        flex: 1;
+        padding: 40px;
+        width: 100%;
+    }
+
+    .header-banner {
+        background: linear-gradient(135deg, #ff8c42 0%, #d35400 100%);
+        padding: 25px 30px;
+        border-radius: 12px;
+        margin-bottom: 30px;
+    }
+
+    .header-banner h1 {
+        font-size: 24px;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .header-banner p {
+        font-size: 14px;
+        opacity: 0.95;
+    }
+
+    .form-section {
+        background: #0d1b2a;
+        padding: 30px;
+        border-radius: 12px;
+    }
+
+    .section-title {
+        font-size: 18px;
+        margin-bottom: 25px;
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 14px;
+        color: #b8c5d6;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 14px 18px;
+        background: #1a2842;
+        border: 1px solid #2a3f5f;
+        border-radius: 8px;
+        color: #fff;
+        font-size: 14px;
+        transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: #ff8c42;
+    }
+
+    .form-group input::placeholder {
+        color: #4a5f7f;
+    }
+
+    .form-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+        margin-top: 30px;
+    }
+
+    .btn {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .btn-cancel {
+        background: transparent;
+        color: #b8c5d6;
+        border: 1px solid #2a3f5f;
+    }
+
+    .btn-cancel:hover {
+        background: #1a2842;
+    }
+
+    .btn-submit {
+        background: linear-gradient(135deg, #ff8c42 0%, #d35400 100%);
+        color: #fff;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 140, 66, 0.3);
+    }
+</style>
 
         {{-- Main Content --}}
-        <div class="ml-64 p-8">
-            {{-- Form Card --}}
-            <div class="max-w-2xl">
-                {{-- Header --}}
-                <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-t-2xl p-6 mb-0">
-                    <div class="flex items-center gap-3 mb-2">
-                        <i class="fas fa-plus-circle text-white text-xl"></i>
-                        <h1 class="text-white text-2xl font-bold">Ajouter un stock de ticket</h1>
-                    </div>
-                    <p class="text-orange-100 text-sm">
-                        Définissez les détails du type de ticket pour votre événement.
-                    </p>
-                </div>
-
-                {{-- Form Content --}}
-                <div class="bg-slate-900/95 border-x border-b border-slate-800 rounded-b-2xl p-8">
-                    <h2 class="text-white text-lg font-semibold mb-6">Informations de base</h2>
-                    
-                    <form id="addStockForm" action="{{ route('tickets.add-stock') }}" method="POST">
-                        @csrf
-                        
-                        <div class="space-y-6">
-                            {{-- Type de ticket concerné --}}
-                            <div>
-                                <label class="block text-slate-300 text-sm font-medium mb-2">
-                                    Type de ticket concerné
-                                </label>
-                                <select
-                                    id="ticketType"
-                                    name="ticket_type"
-                                    class="w-full bg-slate-950 text-slate-400 px-4 py-3 rounded-lg border border-slate-800 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                                    required
-                                >
-                                    <option value="">Ex: Standard, Premium, VIP</option>
-                                    <option value="standard">Standard</option>
-                                    <option value="premium">Premium</option>
-                                    <option value="vip">VIP</option>
-                                </select>
-                            </div>
-
-                            {{-- Stock actuel --}}
-                            <div>
-                                <label class="block text-slate-300 text-sm font-medium mb-2">
-                                    Stock actuel
-                                </label>
-                                <input
-                                    type="number"
-                                    id="currentStock"
-                                    name="current_stock"
-                                    placeholder=""
-                                    class="w-full bg-slate-950 text-slate-300 px-4 py-3 rounded-lg border border-slate-800 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                                    readonly
-                                />
-                            </div>
-
-                            {{-- Quantité à ajouter --}}
-                            <div>
-                                <label class="block text-slate-300 text-sm font-medium mb-2">
-                                    Quantité à ajouter
-                                </label>
-                                <input
-                                    type="number"
-                                    id="quantityToAdd"
-                                    name="quantity_to_add"
-                                    placeholder=""
-                                    class="w-full bg-slate-950 text-slate-300 px-4 py-3 rounded-lg border border-slate-800 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                                    min="1"
-                                    required
-                                />
-                            </div>
-
-                            {{-- Nouveau stock total --}}
-                            <div>
-                                <label class="block text-slate-300 text-sm font-medium mb-2">
-                                    Nouveau stock total
-                                </label>
-                                <input
-                                    type="number"
-                                    id="newTotalStock"
-                                    name="new_total_stock"
-                                    placeholder=""
-                                    class="w-full bg-slate-950 text-slate-300 px-4 py-3 rounded-lg border border-slate-800 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                                    readonly
-                                />
-                            </div>
-                        </div>
-
-                        {{-- Action Buttons --}}
-                        <div class="flex items-center justify-end gap-4 mt-8 pt-6 border-t border-slate-800">
-                            <button
-                                type="button"
-                                id="cancelBtn"
-                                class="px-6 py-2.5 text-slate-300 hover:text-white border border-slate-700 hover:border-slate-600 rounded-lg transition font-medium"
-                            >
-                                Annuler
-                            </button>
-                            <button
-                                type="submit"
-                                class="px-6 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white rounded-lg transition font-medium shadow-lg shadow-orange-500/20"
-                            >
-                                Confirmer l'ajout de stock
-                            </button>
-                        </div>
-                    </form>
-                </div>
+<div class=" p-8">
+    <!-- Main Content -->
+        <main class="main-content">
+            <div class="header-banner">
+                <h1>
+                    <i class="fas fa-plus"></i>
+                    Ajouter un stock de ticket
+                </h1>
+                <p>Définissez les détails du type de ticket pour votre événement.</p>
             </div>
-        </div>
-    </div>
 
-    <script>
-        // Données de stock simulées (à remplacer par des données de l'API)
-        const ticketStocks = {
-            'standard': 100,
-            'premium': 50,
-            'vip': 25
-        };
+            <div class="form-section">
+                <h2 class="section-title">Informations de base</h2>
+                
+                <form id="ticketForm">
+                    <div class="form-group">
+                        <label for="ticketType">Type de ticket concerné</label>
+                        <input type="text" id="ticketType" placeholder="Ex: Standard, Premium, VIP">
+                    </div>
 
-        const ticketTypeSelect = document.getElementById('ticketType');
-        const currentStockInput = document.getElementById('currentStock');
-        const quantityToAddInput = document.getElementById('quantityToAdd');
-        const newTotalStockInput = document.getElementById('newTotalStock');
-        const cancelBtn = document.getElementById('cancelBtn');
-        const form = document.getElementById('addStockForm');
+                    <div class="form-group">
+                        <label for="currentStock">Stock actuel</label>
+                        <input type="number" id="currentStock" placeholder="Entrez le stock actuel">
+                    </div>
 
-        // Mettre à jour le stock actuel quand le type de ticket change
-        ticketTypeSelect.addEventListener('change', function() {
-            const selectedType = this.value;
-            if (selectedType && ticketStocks[selectedType] !== undefined) {
-                currentStockInput.value = ticketStocks[selectedType];
-                calculateNewTotal();
-            } else {
-                currentStockInput.value = '';
-                newTotalStockInput.value = '';
-            }
-        });
+                    <div class="form-group">
+                        <label for="quantityToAdd">Quantité à ajouter</label>
+                        <input type="number" id="quantityToAdd" placeholder="Entrez la quantité à ajouter">
+                    </div>
 
-        // Calculer le nouveau stock total quand la quantité change
-        quantityToAddInput.addEventListener('input', calculateNewTotal);
+                    <div class="form-group">
+                        <label for="newTotalStock">Nouveau Stock Total</label>
+                        <input type="number" id="newTotalStock" placeholder="Calculé automatiquement" readonly>
+                    </div>
 
-        function calculateNewTotal() {
-            const current = parseInt(currentStockInput.value) || 0;
-            const toAdd = parseInt(quantityToAddInput.value) || 0;
-            newTotalStockInput.value = current + toAdd;
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-cancel">Annuler</button>
+                        <button type="submit" class="btn btn-submit">Confirmer l'ajout de Stock</button>
+                    </div>
+                </form>
+            </div>
+        </main>
+</div>
+
+<script>
+    // Calcul automatique du nouveau stock total
+    const currentStockInput = document.getElementById('currentStock');
+    const quantityToAddInput = document.getElementById('quantityToAdd');
+    const newTotalStockInput = document.getElementById('newTotalStock');
+
+    function calculateNewStock() {
+        const currentStock = parseFloat(currentStockInput.value) || 0;
+        const quantityToAdd = parseFloat(quantityToAddInput.value) || 0;
+        newTotalStockInput.value = currentStock + quantityToAdd;
+    }
+
+    currentStockInput.addEventListener('input', calculateNewStock);
+    quantityToAddInput.addEventListener('input', calculateNewStock);
+
+    // Gestion du formulaire
+    document.getElementById('ticketForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const ticketType = document.getElementById('ticketType').value;
+        const currentStock = document.getElementById('currentStock').value;
+        const quantityToAdd = document.getElementById('quantityToAdd').value;
+        const newTotalStock = document.getElementById('newTotalStock').value;
+
+        if (!ticketType || !currentStock || !quantityToAdd) {
+            alert('Veuillez remplir tous les champs obligatoires');
+            return;
         }
 
-        // Bouton Annuler
-        cancelBtn.addEventListener('click', function() {
-            form.reset();
-            currentStockInput.value = '';
-            newTotalStockInput.value = '';
-        });
+        alert(`Stock ajouté avec succès!\n\nType: ${ticketType}\nStock actuel: ${currentStock}\nQuantité ajoutée: ${quantityToAdd}\nNouveau total: ${newTotalStock}`);
+        
+        // Réinitialiser le formulaire
+        this.reset();
+        newTotalStockInput.value = '';
+    });
 
-        // Validation du formulaire
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const formData = new FormData(this);
-            
-            // Ici vous pouvez envoyer les données via AJAX
-            fetch(this.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                }
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Stock ajouté avec succès!');
-                    form.reset();
-                    currentStockInput.value = '';
-                    newTotalStockInput.value = '';
-                }
-            })
-            .catch(error => {
-                console.error('Erreur:', error);
-                alert('Une erreur est survenue');
-            });
-        });
-    </script>
+    // Bouton annuler
+    document.querySelector('.btn-cancel').addEventListener('click', function() {
+        if (confirm('Voulez-vous vraiment annuler? Toutes les données saisies seront perdues.')) {
+            document.getElementById('ticketForm').reset();
+            newTotalStockInput.value = '';
+        }
+    });
+</script>
 @endsection
 
     @push('scripts')

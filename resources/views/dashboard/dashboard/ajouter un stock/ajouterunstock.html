@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="ajouterunstock.css">
+</head>
+<body>
+    
+<div class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-plus-circle"></i>
+                    Ajouter un stock
+                </div>
+                <button class="close-btn" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Stock ajouté avec succès !</span>
+                </div>
+
+                <div class="section-title">Informations de base</div>
+
+                <div class="form-group">
+                    <label class="form-label">Article concerné</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-tag input-icon"></i>
+                        <input type="text" class="form-input" id="article" value="T-Shirt Logo Événement" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Stock actuel</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-box input-icon"></i>
+                        <input type="number" class="form-input calculated-field" id="currentStock" value="20" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Quantité à ajouter</label>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="decreaseQuantity()">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <input type="number" class="quantity-input" id="quantity" value="20" min="0" oninput="calculateTotal()">
+                        <button class="quantity-btn" onclick="increaseQuantity()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Nouveau Stock Total</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-calculator input-icon"></i>
+                        <input type="number" class="form-input calculated-field" id="newStock" value="40" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-cancel" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                    Annuler
+                </button>
+                <button class="btn btn-confirm" onclick="confirmStock()">
+                    <i class="fas fa-check"></i>
+                    Confirmer l'ajout de Stock
+                </button>
+            </div>
+        </div>
+    </div>
+
+ <script>
+        function calculateTotal() {
+            const currentStock = parseInt(document.getElementById('currentStock').value) || 0;
+            const quantity = parseInt(document.getElementById('quantity').value) || 0;
+            const newStock = currentStock + quantity;
+            document.getElementById('newStock').value = newStock;
+        }
+
+        function increaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+            calculateTotal();
+        }
+
+        function decreaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue > 0) {
+                quantityInput.value = currentValue - 1;
+                calculateTotal();
+            }
+        }
+
+        function confirmStock() {
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+            
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 3000);
+        }
+
+        function closeModal() {
+            const modal = document.querySelector('.modal');
+            modal.style.animation = 'slideOut 0.3s ease-out';
+            
+            setTimeout(() => {
+                alert('Modal fermée');
+            }, 300);
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideOut {
+                from {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateY(-50px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+
+</body>
+</html>

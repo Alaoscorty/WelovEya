@@ -56,9 +56,9 @@ Route::get('/tickets', function () {
     return view('dashboard.gestiondestickets');
 })->name('tickets');
 
-Route::get('/articles', function () {
-    return view('dashboard.articles');
-})->name('articles');
+Route::get('/billets', function () {
+    return view('dashboard.billets');
+})->name('billets streaming');
 
 Route::get('/articles', function () {
     return view('dashboard.articles');
@@ -68,18 +68,42 @@ Route::get('/commandes', function () {
     return view('dashboard.commandes');
 })->name('commandes');
 
+Route::get('/detailcommande', function () {
+    return view('dashboard.detailcommande');
+})->name('commandes_detail');
+
+Route::get('/intervenants', function () {
+    return view('dashboard.intervenants');
+})->name('intervenants');
+
+Route::get('/jeux', function () {
+    return view('dashboard.Jeux');
+})->name('Jeux_concours');
+
+Route::get('/activites', function () {
+    return view('dashboard.activites');
+})->name('activités');
+
+Route::get('/plaintes', function () {
+    return view('dashboard.plaintes');
+})->name('plaintes');
+
+Route::get('/revendeurs', function () {
+    return view('dashboard.revendeur');
+})->name('revendeurs');
+
 Route::get('/ajouterrevendeur', function () {
     return view('dashboard.ajouterrevendeur');
 })->name('ajouter_revendeur');
 
 
 Route::get('/benefices', function () {
-    return view('dashboard.');
+    return view('dashboard.benefices');
 })->name('benefices');
 
 
 Route::get('/parametres', function () {
-    return view('dashboard.modifierstockticket');
+    return view('dashboard.parametres');
 })->name('parametres');
 
 Route::get('/ajouter_tickets', function () {

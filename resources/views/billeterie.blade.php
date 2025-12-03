@@ -139,9 +139,9 @@
                             <i class="fa-solid fa-check text-orange-800"></i> Accès rapide avec un bracelet
                         </p>
                     </div>
-                    <button class="add-to-cart bg-orange-800 text-white font-bold hover:bg-orange-600 transition rounded-lg">
+                    <a href="{{ url('/formulaire') }}" class="add-to-cart bg-orange-800 text-white font-bold hover:bg-orange-600 transition rounded-lg p-3 mt-5">
                         Réserver
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
