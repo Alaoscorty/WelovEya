@@ -1,92 +1,253 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="plaintesclients.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    
-<div class="container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-globe"></i>
-                </div>
-                <span class="logo-text">WELOVEYA</span>
-            </div>
+@extends('layouts.application')
 
-            <div class="search-box">
-                <input type="text" placeholder="Rechercher.....">
-            </div>
+@section('title', 'Artistes')
+<style>
+    .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+        }
 
-            <ul class="menu">
-                <li class="menu-item">
-                    <i class="fas fa-th-large"></i>
-                    <span>Dashboard</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-ticket-alt"></i>
-                    <span>Tickets</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-video"></i>
-                    <span>Billets Streaming</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-users"></i>
-                    <span>Revendeurs</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-newspaper"></i>
-                    <span>Articles</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-terminal"></i>
-                    <span>Commandes</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-microphone"></i>
-                    <span>Intervenants</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-gamepad"></i>
-                    <span>Jeux-concours</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Activités</span>
-                </li>
-                <li class="menu-item active">
-                    <i class="fas fa-comment-dots"></i>
-                    <span>Plainte des clients</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-gift"></i>
-                    <span>Benefices</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-cog"></i>
-                    <span>Paramètres</span>
-                </li>
-            </ul>
+        .page-header {
+            margin-bottom: 30px;
+        }
 
-            <div class="user-profile">
-                <div class="user-avatar">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="user-info">
-                    <h4>John Carter</h4>
-                    <p>Admin</p>
-                </div>
-            </div>
-        </aside>
+        .page-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
 
-        <!-- Main Content -->
-        <main class="main-content">
+        .page-subtitle {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 25px;
+        }
+
+        .filters-section {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .search-bar-wrapper {
+            position: relative;
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px;
+            padding-left: 45px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .search-bar::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .filter-dropdown {
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .filter-dropdown:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .filter-dropdown i {
+            font-size: 12px;
+        }
+
+        /* Table */
+        .table-container {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            padding: 16px;
+            text-align: left;
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 20px 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 14px;
+        }
+
+        tbody tr {
+            transition: background 0.3s;
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .complaint-id {
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .client-info h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .client-info p {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .complaint-type {
+            font-size: 13px;
+        }
+
+        .complaint-description {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .status-badge {
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .status-ouvert {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .status-en-cours {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
+        .status-résolu {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .date-time {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .action-link {
+            color: #3b82f6;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .action-link:hover {
+            color: #60a5fa;
+            text-decoration: underline;
+        }
+
+        /* Pagination */
+        .pagination-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding: 0 5px;
+        }
+
+        .pagination-info {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .pagination {
+            display: flex;
+            gap: 8px;
+        }
+
+        .page-btn {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .page-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .page-btn.active {
+            background: #3b82f6;
+            border-color: #3b82f6;
+        }
+
+        .page-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+</style>
+@section('content')
+
+    {{-- MAIN CONTENT --}}
+    <main class="main-content">
             <div class="page-header">
                 <h1 class="page-title">Gestion des Plaintes Clients</h1>
                 <p class="page-subtitle">Suivez et résolvez les problèmes des participants ici.</p>
@@ -199,9 +360,9 @@
                 </div>
             </div>
         </main>
-    </div>
-
-    <script>
+@endsection
+    
+<script>
         // Menu interaction
         document.querySelectorAll('.menu-item').forEach(item => {
             item.addEventListener('click', function() {
@@ -315,6 +476,5 @@
             });
         });
     </script>
-    
-</body>
-</html>
+    @push('scripts')
+@endpush

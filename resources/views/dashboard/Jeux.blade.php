@@ -1,89 +1,241 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="jeuxconcours.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    
-<!-- Sidebar -->
-    <div class="sidebar">
-        <div class="logo">
-            <div class="logo-icon">
-                <i class="fas fa-globe"></i>
-            </div>
-            <span class="logo-text">WELOVEYA</span>
-        </div>
+@extends('layouts.application')
 
-        <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Rechercher......">
-        </div>
+@section('title', 'Artistes')
+<style>
+    .main-content {
+            flex: 1;
+            padding: 30px 40px;
+            overflow-y: auto;
+        }
 
-        <nav class="menu">
-            <a href="#" class="menu-item">
-                <i class="fas fa-chart-line"></i>
-                <span>Dashboard</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-ticket-alt"></i>
-                <span>Tickets</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-film"></i>
-                <span>Billets Streaming</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-users"></i>
-                <span>Revendeurs</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-newspaper"></i>
-                <span>Articles</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Commandes</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-user-tie"></i>
-                <span>Intervenants</span>
-            </a>
-            <a href="#" class="menu-item active">
-                <i class="fas fa-trophy"></i>
-                <span>Jeux-concours</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-bolt"></i>
-                <span>Activités</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-exclamation-circle"></i>
-                <span>Plainte des clients</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-gift"></i>
-                <span>Benefices</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-cog"></i>
-                <span>Paramètres</span>
-            </a>
-        </nav>
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
 
-        <div class="user-profile">
-            <div class="user-avatar">JC</div>
-            <div class="user-info">
-                <h4>John Carter</h4>
-                <p>Admin</p>
-            </div>
-        </div>
-    </div>
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+        }
 
-    <!-- Main Content -->
+        .btn-add {
+            background: linear-gradient(90deg, #ff6b35 0%, #ff8c5a 100%);
+            color: #fff;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+
+        .btn-add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        /* Filters */
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            align-items: center;
+        }
+
+        .search-filter {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-filter input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 12px 15px 12px 45px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .search-filter i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Table */
+        .table-container {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        th {
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tbody tr {
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        td {
+            padding: 20px;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        .social-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .social-badge.facebook {
+            background: rgba(24, 119, 242, 0.15);
+            color: #1877f2;
+        }
+
+        .social-badge.instagram {
+            background: rgba(225, 48, 108, 0.15);
+            color: #e1306c;
+        }
+
+        .social-badge.tiktok {
+            background: rgba(0, 242, 234, 0.15);
+            color: #00f2ea;
+        }
+
+        .social-badge i {
+            font-size: 16px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-badge.en-cours {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+        }
+
+        .status-badge.termine {
+            background: rgba(156, 163, 175, 0.15);
+            color: #9ca3af;
+        }
+
+        .link-btn {
+            color: #60a5fa;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .link-btn:hover {
+            color: #93c5fd;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: rgba(255, 255, 255, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        .action-btn.edit:hover {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+        }
+
+        .action-btn.delete:hover {
+            background: rgba(239, 68, 68, 0.15);
+            color: #ef4444;
+        }
+</style>
+@section('content')
+
+    {{-- MAIN CONTENT --}}
     <div class="main-content">
         <div class="header">
             <h1>Suivi des Jeux-Concours</h1>
@@ -210,7 +362,8 @@
             </table>
         </div>
     </div>
-
+@endsection
+    
     <script>
         // Filter buttons
         const filterBtns = document.querySelectorAll('.filter-btn');
@@ -262,5 +415,5 @@
             alert('Redirection vers le formulaire de création d\'un jeu-concours');
         });
     </script>
-</body>
-</html>
+    @push('scripts')
+@endpush
