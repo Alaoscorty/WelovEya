@@ -146,11 +146,10 @@
     <script src="{{ asset('js/script.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/emoji-picker-element@1.21.0/index.js" type="module"></script>
     <script src="https://js.pusher.com/8.2/pusher.min.js"></script>
-    @vite('resources/js/app.js') 
+    @vite('resources/js/app.js')
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="{{ mix('js/app.js') }}"></script>
 <script>
-    const pseudo = "User" + Math.floor(Math.random() * 1000);
+    let pseudo = "User" + Math.floor(Math.random() * 1000);
     const messageInput = document.getElementById('messageInput');
     const chatMessages = document.getElementById('chatMessages');
     const sendSound = document.getElementById('sendSound');

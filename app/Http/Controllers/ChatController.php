@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Message;
 use App\Events\MessageSent;
+use App\Helpers\PseudoHelper;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
@@ -16,12 +17,14 @@ class ChatController extends Controller
     public function send(Request $request)
     {
         $request->validate([
-            'pseudo' => 'required|string|max:50',
+            'pseudo' => 'nullable|string|max:50',
             'content' => 'required|string',
         ]);
 
+        $pseudo = $request->pseudo ?: PseudoHelper::generate();
+
         $message = Message::create([
-            'pseudo' => $request->pseudo,
+            'pseudo' => $pseudo,
             'content' => $request->content,
         ]);
 

@@ -13,8 +13,8 @@ class Delete01Messages extends Command
 
     public function handle()
     {
-        $count = 
-        Message::where ('created_at', '<', Carbon::now()->subDays(90))->delete();
+        $count =
+        Message::where ('created_at', '<', Carbon::now()->subDays(30))->delete();
         $this->info("$count messages supprimés.");
     }
 }
