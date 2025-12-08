@@ -75,12 +75,14 @@
             </div>
             <div class="bg-gray-800 p-4 sm:p-6">
                 <!-- Lecteur vidéo en direct -->
-                <video id="liveVideo" controls class="w-full h-48 sm:h-64 md:h-96 lg:h-[64vh] bg-black rounded-md">
-                    <source src="//https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-                </video>
-                <p class="text-white mt-2 text-sm sm:text-base">
-                    Festival WelovEya - Scène Principale
-                </p>
+                <div id="videoContainer">
+                    <video id="liveVideo" controls class="w-full h-48 sm:h-64 md:h-96 lg:h-[64vh] bg-black rounded-md">
+                        <source src="//https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    </video>
+                    <p class="text-white mt-2 text-sm sm:text-base">
+                        Festival WelovEya - Scène Principale
+                    </p>
+                </div>
                 <!-- Bouton suivre live -->
                 <button id="recordBtn" class="bg-red-500 text-white font-bold py-2 px-4 mt-4 rounded-lg hover:bg-red-600 transition w-full sm:w-auto text-sm sm:text-base">
                     Suivre en live
@@ -114,6 +116,19 @@
     <!-- Sons -->
     <audio id="sendSound" src="{{ asset('sounds/send.mp3') }}"></audio>
     <audio id="receiveSound" src="{{ asset('sounds/receive.mp3') }}"></audio>
+
+    <!-- Modal for Secret Code -->
+    <div id="codeModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+        <div class="bg-white p-6 rounded-lg shadow-lg max-w-md w-full mx-4">
+            <h2 class="text-xl font-bold mb-4">Entrez votre code secret</h2>
+            <input type="text" id="secretCode" placeholder="Code secret" class="w-full px-3 py-2 border border-gray-300 rounded-lg mb-4">
+            <div id="errorMessage" class="text-red-500 mb-4 hidden">Code incorrect. Veuillez réessayer.</div>
+            <div class="flex justify-end space-x-2">
+                <button id="cancelBtn" class="px-4 py-2 bg-gray-300 rounded-lg">Annuler</button>
+                <button id="submitCodeBtn" class="px-4 py-2 bg-orange-500 text-white rounded-lg">Valider</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-black py-12 px-6 border-t border-gray-800 mt-8">
@@ -164,5 +179,45 @@
         .here(users => onlineCount.textContent = users.length)
         .joining(() => onlineCount.textContent++)
         .leaving(() => onlineCount.textContent--);
+
+    // Secret Code Modal Functionality
+    const recordBtn = document.getElementById('recordBtn');
+    const codeModal = document.getElementById('codeModal');
+    const secretCodeInput = document.getElementById('secretCode');
+    const errorMessage = document.getElementById('errorMessage');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const submitCodeBtn = document.getElementById('submitCodeBtn');
+    const videoContainer = document.getElementById('videoContainer');
+    const accessLink = document.querySelector('a[href="#"]'); // Lien pour entrer le code secret
+
+    const correctCode = 'WELOVEYA2024'; // Placeholder secret code
+
+    recordBtn.addEventListener('click', () => {
+        codeModal.classList.remove('hidden');
+    });
+
+    accessLink.addEventListener('click', (e) => {
+        e.preventDefault();
+        codeModal.classList.remove('hidden');
+    });
+
+    cancelBtn.addEventListener('click', () => {
+        codeModal.classList.add('hidden');
+        errorMessage.classList.add('hidden');
+        secretCodeInput.value = '';
+    });
+
+    submitCodeBtn.addEventListener('click', () => {
+        const code = secretCodeInput.value.trim();
+        if (code === correctCode) {
+            // Replace video with YouTube iframe
+            videoContainer.innerHTML = '<iframe width="100%" height="100%" src="https://www.youtube.com/embed/YOUR_LIVE_VIDEO_ID?autoplay=1" frameborder="0" allowfullscreen></iframe>';
+            codeModal.classList.add('hidden');
+            secretCodeInput.value = '';
+            errorMessage.classList.add('hidden');
+        } else {
+            errorMessage.classList.remove('hidden');
+        }
+    });
 </script>
 @endpush
