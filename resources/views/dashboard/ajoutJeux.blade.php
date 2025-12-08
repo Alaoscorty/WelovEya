@@ -1,89 +1,210 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="addnewgame.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    
- <!-- Sidebar -->
-    <div class="sidebar">
-        <div class="logo">
-            <div class="logo-icon">
-                <i class="fas fa-globe"></i>
-            </div>
-            <span class="logo-text">WELOVEYA</span>
-        </div>
+@extends('layouts.application')
 
-        <div class="search-box">
-            <i class="fas fa-search"></i>
-            <input type="text" placeholder="Rechercher......">
-        </div>
+@section('title', 'Artistes')
+<style>
+        .main-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
 
-        <nav class="menu">
-            <a href="#" class="menu-item">
-                <i class="fas fa-chart-line"></i>
-                <span>Dashboard</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-ticket-alt"></i>
-                <span>Tickets</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-film"></i>
-                <span>Billets Streaming</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-users"></i>
-                <span>Revendeurs</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-newspaper"></i>
-                <span>Articles</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-shopping-cart"></i>
-                <span>Commandes</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-user-tie"></i>
-                <span>Intervenants</span>
-            </a>
-            <a href="#" class="menu-item active">
-                <i class="fas fa-trophy"></i>
-                <span>Jeux-concours</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-bolt"></i>
-                <span>Activités</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-exclamation-circle"></i>
-                <span>Plainte des clients</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-gift"></i>
-                <span>Benefices</span>
-            </a>
-            <a href="#" class="menu-item">
-                <i class="fas fa-cog"></i>
-                <span>Paramètres</span>
-            </a>
-        </nav>
+        @media (min-width: 768px) {
+            .main-content {
+                padding: 40px 60px;
+            }
+        }
 
-        <div class="user-profile">
-            <div class="user-avatar">JC</div>
-            <div class="user-info">
-                <h4>John Carter</h4>
-                <p>Admin</p>
-            </div>
-        </div>
-    </div>
+        .page-header {
+            margin-bottom: 10px;
+        }
 
-    <!-- Main Content -->
+        .page-header h1 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .page-header h1 {
+                font-size: 32px;
+            }
+        }
+
+        .page-header p {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .form-container {
+            max-width: 100%;
+            margin: 30px auto 0;
+        }
+
+        @media (min-width: 768px) {
+            .form-container {
+                max-width: 900px;
+            }
+        }
+
+        .form-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        @media (min-width: 768px) {
+            .form-section {
+                padding: 30px;
+            }
+        }
+
+        .form-section h2 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 12px 16px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #ff6b35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23fff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+        }
+
+        .form-group input[type="date"] {
+            position: relative;
+            cursor: pointer;
+        }
+
+        .form-group input[type="date"]::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .form-row-3 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .form-row-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .btn-submit {
+            background: linear-gradient(90deg, #ff6b35 0%, #ff8c5a 100%);
+            color: #fff;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+            float: none;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .btn-submit {
+                float: right;
+                width: auto;
+                padding: 14px 40px;
+            }
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .date-input-wrapper {
+            position: relative;
+        }
+
+        .date-input-wrapper i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.4);
+            pointer-events: none;
+        }
+
+        .date-input-wrapper input {
+            padding-left: 45px;
+        }
+
+</style>
+@section('content')
+
+    {{-- MAIN CONTENT --}}
     <div class="main-content">
         <div class="page-header">
             <h1>Ajouter un nouveau Jeu-Concours</h1>
@@ -204,7 +325,10 @@
         </form>
     </div>
 
-    <script>
+    
+@endsection
+    
+        <script>
         // Form submission
         document.getElementById('contestForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -241,6 +365,5 @@
         startDateInput.setAttribute('min', today);
         endDateInput.setAttribute('min', today);
     </script>
-
-</body>
-</html>
+    @push('scripts')
+@endpush

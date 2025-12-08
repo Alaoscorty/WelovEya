@@ -6,11 +6,11 @@
     <div class="flex min-h-screen">
 
         <!-- Main Content -->
-        <main class="flex-1 p-10 overflow-y-auto bg-[#0a0d1f]">
+        <main class="flex-1 p-4 md:p-6 lg:p-10 overflow-y-auto bg-[#0a0d1f]">
             <!-- Header -->
             <header class="mb-7">
-                <h1 class="text-3xl font-bold mb-1.5 text-white">Tableau de bord</h1>
-                <p class="text-gray-400 text-xs">Vue d'ensemble de l'événement et de vos performance</p>
+                <h1 class="text-2xl md:text-3xl font-bold mb-1.5 text-white">Tableau de bord</h1>
+                <p class="text-gray-400 text-xs md:text-sm">Vue d'ensemble de l'événement et de vos performance</p>
             </header>
 
             <!-- Stats Grid -->

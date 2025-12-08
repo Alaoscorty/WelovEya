@@ -272,9 +272,30 @@
             background: rgba(255, 107, 53, 0.2);
             color: #ff6b35;
         }
-  .modal-content {
-            flex: 1;
-            margin: 30px;
+
+        /* Modal Styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            width: 90%;
+            max-width: 800px;
+            margin: 30px auto;
+            max-height: 80vh;
             overflow-y: auto;
             background: #0d1b2e;
             border-radius: 10px;
@@ -539,7 +560,7 @@
                         <input type="text" placeholder="Rechercher une commande ....">
                     </div>
                     <span class="pagination-info">1 - 10 sur</span>
-                    <button class="add-btn">
+                    <button class="add-btn" id="addOrderBtn">
                         <i class="fas fa-plus"></i>
                         Ajouter une commande
                     </button>
@@ -806,6 +827,7 @@
 </div>
   </div>
   <!-- Modal de gestion des commandes -->
+  <div class="modal" id="orderModal">
    <main class="modal-content">
             <div class="alert">
                 <i class="fas fa-exclamation-circle"></i>
@@ -957,7 +979,7 @@
             </div>
 
             <div class="button-group">
-                <button class="btn btn-secondary">Annuler</button>
+                <button class="btn btn-secondary" id="cancelBtn">Annuler</button>
                 <button class="btn btn-primary" onclick="createOrder()">Créer la commande</button>
             </div>
         </main>
@@ -1035,6 +1057,15 @@
                 checkbox.checked = this.checked;
             });
             calculateTotal();
+        });
+
+        // Modal functionality
+        document.getElementById('addOrderBtn').addEventListener('click', function() {
+            document.getElementById('orderModal').classList.add('show');
+        });
+
+        document.getElementById('cancelBtn').addEventListener('click', function() {
+            document.getElementById('orderModal').classList.remove('show');
         });
 
         function createOrder() {

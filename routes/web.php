@@ -80,6 +80,10 @@ Route::get('/jeux', function () {
     return view('dashboard.Jeux');
 })->name('Jeux_concours');
 
+Route::get('/ajoutjeux', function () {
+    return view('dashboard.ajoutJeux');
+})->name('ajout_jeux');
+
 Route::get('/activites', function () {
     return view('dashboard.activites');
 })->name('activités');

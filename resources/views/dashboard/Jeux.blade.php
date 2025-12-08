@@ -239,10 +239,10 @@
     <div class="main-content">
         <div class="header">
             <h1>Suivi des Jeux-Concours</h1>
-            <button class="btn-add">
+            <a href="{{ route('ajout_jeux') }}" class="btn-add">
                 <i class="fas fa-plus"></i>
                 Ajouter un Jeu
-            </button>
+            </a>
         </div>
 
         <div class="filters">

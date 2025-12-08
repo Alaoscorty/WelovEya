@@ -10,38 +10,70 @@
 
         .content-wrapper {
             background: linear-gradient(135deg, #12255a91 0%, #1e40af 100%);
-            padding: 30px 40px;
-            margin: 20px;
+            padding: 20px;
+            margin: 10px;
             padding-bottom: 40px;
             border-radius: 8px;
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
+        @media (min-width: 768px) {
+            .content-wrapper {
+                padding: 30px 40px;
+                margin: 20px;
+            }
+        }
+
         .header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 15px;
+            align-items: flex-start;
             margin-bottom: 25px;
         }
 
+        @media (min-width: 768px) {
+            .header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+
         .header h1 {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 600;
         }
 
+        @media (min-width: 768px) {
+            .header h1 {
+                font-size: 24px;
+            }
+        }
+
         .btn-create {
-            padding: 10px 20px;
+            padding: 10px 15px;
             background: #ff8c42;
             border: none;
             border-radius: 8px;
             color: #fff;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
             transition: all 0.3s;
+            width: 100%;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .btn-create {
+                width: auto;
+                padding: 10px 20px;
+                font-size: 13px;
+            }
         }
 
         .btn-create:hover {
@@ -52,8 +84,15 @@
 
         .filters {
             display: flex;
+            flex-direction: column;
             gap: 15px;
             margin-bottom: 25px;
+        }
+
+        @media (min-width: 768px) {
+            .filters {
+                flex-direction: row;
+            }
         }
 
         .search-filter {
@@ -96,6 +135,13 @@
             font-size: 13px;
             cursor: pointer;
             appearance: none;
+            width: 100%;
+        }
+
+        @media (min-width: 768px) {
+            .status-filter select {
+                width: auto;
+            }
         }
 
         .status-filter i {
@@ -108,18 +154,26 @@
         }
 
         .btn-export {
-            padding: 10px 20px;
+            padding: 10px 15px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 8px;
             color: #fff;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
             transition: all 0.3s;
+            justify-content: center;
+        }
+
+        @media (min-width: 768px) {
+            .btn-export {
+                font-size: 13px;
+                padding: 10px 20px;
+            }
         }
 
         .btn-export:hover {
@@ -130,13 +184,14 @@
         .table-container {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
-            overflow: hidden;
+            overflow-x: auto;
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
+            min-width: 600px;
         }
 
         thead {
@@ -144,19 +199,33 @@
         }
 
         th {
-            padding: 15px;
+            padding: 12px 8px;
             text-align: left;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: 600;
             color: rgba(255, 255, 255, 0.8);
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
+        @media (min-width: 768px) {
+            th {
+                padding: 15px;
+                font-size: 12px;
+            }
+        }
+
         td {
-            padding: 18px 15px;
+            padding: 12px 8px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 13px;
+            font-size: 12px;
+        }
+
+        @media (min-width: 768px) {
+            td {
+                padding: 18px 15px;
+                font-size: 13px;
+            }
         }
 
         tbody tr {
@@ -173,11 +242,18 @@
         }
 
         .status-badge {
-            padding: 5px 12px;
+            padding: 5px 8px;
             border-radius: 20px;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             display: inline-block;
+        }
+
+        @media (min-width: 768px) {
+            .status-badge {
+                padding: 5px 12px;
+                font-size: 11px;
+            }
         }
 
         .status-ouvert {
@@ -200,18 +276,33 @@
 
         .actions-buttons {
             display: flex;
-            gap: 8px;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        @media (min-width: 768px) {
+            .actions-buttons {
+                flex-direction: row;
+                gap: 8px;
+            }
         }
 
         .btn-action {
-            padding: 6px 14px;
+            padding: 6px 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 6px;
             background: rgba(255, 255, 255, 0.05);
             color: #fff;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
             transition: all 0.2s;
+        }
+
+        @media (min-width: 768px) {
+            .btn-action {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
         }
 
         .btn-action:hover {
