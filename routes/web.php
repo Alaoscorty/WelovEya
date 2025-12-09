@@ -64,6 +64,23 @@ Route::get('/articles', function () {
     return view('dashboard.articles');
 })->name('articles');
 
+Route::get('/gestion_variantes', function () {
+    return view('dashboard.gestionVariantes');
+})->name('gestion_variantes');
+
+Route::get('/gestionCasquette', function () {
+    return view('dashboard.gestionCasquette');
+})->name('gestionCasquette');
+
+Route::get('/gestionSac', function () {
+    return view('dashboard.gestionSac');
+})->name('gestionSac');
+
+
+Route::get('/ajout_variantes', function () {
+    return view('dashboard.ajoutVariantes');
+})->name('ajout_variantes');
+
 Route::get('/commandes', function () {
     return view('dashboard.commandes');
 })->name('commandes');
@@ -76,6 +93,10 @@ Route::get('/intervenants', function () {
     return view('dashboard.intervenants');
 })->name('intervenants');
 
+Route::get('/ajouter_intervenants', function () {
+    return view('dashboard.ajouterintervenants');
+})->name('ajouter_intervenants');
+
 Route::get('/jeux', function () {
     return view('dashboard.Jeux');
 })->name('Jeux_concours');
@@ -87,6 +108,10 @@ Route::get('/ajoutjeux', function () {
 Route::get('/activites', function () {
     return view('dashboard.activites');
 })->name('activités');
+
+Route::get('/newAction', function () {
+    return view('dashboard.newAction');
+})->name('newAction');
 
 Route::get('/plaintes', function () {
     return view('dashboard.plaintes');

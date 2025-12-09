@@ -1,20 +1,8 @@
-* {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+@extends('layouts.application')
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .modal {
+@section('title', 'Artistes')
+<style>
+    .modal {
             background: #0a1e3d;
             color: white;
             border-radius: 8px;
@@ -206,4 +194,105 @@
                 width: 100%;
             }
         }
-    </style>
+</style>
+@section('content')
+
+    {{-- MAIN CONTENT --}}
+    <div class="modal">
+        <div class="modal-header">
+            <h2>
+                <i class="fas fa-plus-circle"></i>
+                Ajouter une nouvelle variante
+            </h2>
+            <button class="close-btn" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="modal-description">
+            Définissez les options de votre produit pour générer les combinaisons uniques
+        </div>
+
+        <div class="modal-body">
+            <div class="section-title">I. Informations de base</div>
+            
+            <div class="form-group">
+                <label>Article concerné</label>
+                <input type="text" value="T-Shirt Logo Evènement" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Image de l'article</label>
+                <div class="file-upload">
+                    <label for="fileInput" class="file-upload-btn">
+                        <i class="fas fa-upload"></i> Choisir un fichier
+                    </label>
+                    <input type="file" id="fileInput" accept="image/*" onchange="updateFileName(this)">
+                    <span class="file-name" id="fileName">Aucun fichier choisi</span>
+                </div>
+            </div>
+
+            <div class="section-divider">
+                <div class="section-title">II. Options</div>
+            </div>
+
+            <div class="form-group">
+                <label>Taille</label>
+                <input type="text" placeholder="Ex: S, L, M, N, XL">
+            </div>
+
+            <div class="form-group">
+                <label>Couleur</label>
+                <input type="text" placeholder="Ex: Noir, Blanc">
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="btn btn-cancel" onclick="closeModal()">Annuler</button>
+            <button class="btn btn-submit" onclick="saveOptions()">
+                <i class="fas fa-save"></i> Enregistrez les options
+            </button>
+        </div>
+    </div>
+@endsection
+    
+<script>
+        function updateFileName(input) {
+            const fileName = document.getElementById('fileName');
+            if (input.files && input.files[0]) {
+                fileName.textContent = input.files[0].name;
+            } else {
+                fileName.textContent = 'Aucun fichier choisi';
+            }
+        }
+
+        function closeModal() {
+            if (confirm('Voulez-vous vraiment fermer sans enregistrer ?')) {
+                document.querySelector('.modal').style.animation = 'fadeOut 0.3s';
+                setTimeout(() => {
+                    alert('Modal fermé');
+                }, 300);
+            }
+        }
+
+        function saveOptions() {
+            const taille = document.querySelectorAll('input[type="text"]')[1].value;
+            const couleur = document.querySelectorAll('input[type="text"]')[2].value;
+            const file = document.getElementById('fileInput').files[0];
+
+            if (!taille || !couleur) {
+                alert('Veuillez remplir tous les champs obligatoires');
+                return;
+            }
+
+            alert(`Options enregistrées !\nTaille: ${taille}\nCouleur: ${couleur}\nImage: ${file ? file.name : 'Aucune'}`);
+        }
+
+        // Animation d'entrée
+        window.addEventListener('load', () => {
+            const modal = document.querySelector('.modal');
+            modal.style.animation = 'fadeIn 0.3s';
+        });
+    </script>
+    @push('scripts')
+@endpush

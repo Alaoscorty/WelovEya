@@ -1,90 +1,146 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-     <link rel="stylesheet" href="nouvelleaction.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    
-<div class="container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo">
-                <img src="logo.png" alt="WELDOVEYA Logo" width="35" height="35">
-                <span class="logo-text">WELDOVEYA</span>
-            </div>
+@extends('layouts.application')
 
-            <div class="search-box">
-                <input type="text" placeholder="Rechercher.....">
-            </div>
+@section('title', 'Artistes')
+<style>
+    .main-content {
+            flex: 1;
+            background: linear-gradient(180deg, #1a3a6b 0%, #0a0e27 100%);
+            padding: 50px;
+            overflow-y: auto;
+        }
 
-            <ul class="menu">
-                <li class="menu-item">
-                    <i class="fas fa-home"></i>
-                    <span>Dashboard</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-ticket-alt"></i>
-                    <span>Tickets</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-ticket"></i>
-                    <span>Billets Streaming</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-users"></i>
-                    <span>Revendeurs</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-newspaper"></i>
-                    <span>Articles</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span>Commandes</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-user-tie"></i>
-                    <span>Intervenants</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-trophy"></i>
-                    <span>Jeux-concours</span>
-                </li>
-                <li class="menu-item active">
-                    <i class="fas fa-bolt"></i>
-                    <span>Activités</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <span>Plainte des clients</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Benefices</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-cog"></i>
-                    <span>Paramètres</span>
-                </li>
-            </ul>
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 40px;
+            text-align: center;
+        }
 
-            <div class="user-info">
-                <div class="user-avatar">
-                    <img src="avatar.jpg" alt="John Carter" width="38" height="38">
-                </div>
-                <div class="user-details">
-                    <div class="user-name">John Carter</div>
-                    <div class="user-role">Admin</div>
-                </div>
-            </div>
-        </aside>
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
 
-        <!-- Main Content -->
-        <main class="main-content">
+        .form-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 25px;
+            color: #fff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 40px;
+            cursor: pointer;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, #ff7849 0%, #ff9966 100%);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 120, 73, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+</style>
+@section('content')
+
+    {{-- MAIN CONTENT --}}
+    <main class="main-content">
             <h1 class="page-title">Créer une nouvelle Action</h1>
 
             <form class="form-container" id="actionForm">
@@ -191,10 +247,10 @@
                 </div>
             </form>
         </main>
-    </div>
-
+@endsection
+    
     <script>
-        // Form submission
+      // Form submission
         document.getElementById('actionForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
@@ -247,8 +303,7 @@
                     this.style.borderColor = 'rgba(255, 255, 255, 0.15)';
                 }
             });
-        });
+        });  
     </script>
-
-</body>
-</html>
+    @push('scripts')
+@endpush

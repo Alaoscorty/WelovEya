@@ -412,10 +412,10 @@
                         <i class="fas fa-search search-icon"></i>
                         <input type="text" placeholder="Rechercher un revendeur..." style="padding-left: 40px; width: 350px; padding: 10px 15px 10px 40px; background: #0d1129; border: 1px solid #2a2f4a; border-radius: 8px; color: #fff;">
                     </div>
-                    <button class="add-btn">
+                    <a href="{{ route('ajouter_revendeur') }}" class="add-btn">
                         <i class="fas fa-plus"></i>
                         Ajouter un revendeur
-                    </button>
+      </a>
                 </div>
 
                 <div class="table-filters">

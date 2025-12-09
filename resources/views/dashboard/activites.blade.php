@@ -280,13 +280,6 @@
             gap: 4px;
         }
 
-        @media (min-width: 768px) {
-            .actions-buttons {
-                flex-direction: row;
-                gap: 8px;
-            }
-        }
-
         .btn-action {
             padding: 6px 10px;
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -318,10 +311,10 @@
             <div class="content-wrapper">
                 <div class="header">
                     <h1>Gestion des Actions Sociales & Récompenses (RSE)</h1>
-                    <button class="btn-create">
+                    <a href="{{route ('newAction')}}" class="btn-create">
                         <i class="fas fa-plus-circle"></i>
                         Créer une nouvelle Action
-                    </button>
+                    </a>
                 </div>
 
                 <div class="filters">

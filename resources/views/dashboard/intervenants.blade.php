@@ -1,4 +1,4 @@
-{{-- Sur cette page je dois gérer le css du paramètres --}}
+{{--  --}}
 @extends('layouts.application')
 
 @section('title', 'Artistes')
@@ -410,10 +410,10 @@
                         <option>DJ</option>
                     </select>
 
-                    <button class="add-btn">
+                    <a href="{{ route('ajouter_intervenants') }}"  class="add-btn">
                         <i class="fas fa-plus"></i>
                         Ajouter un intervenant
-                    </button>
+                    </a>
 
                     <span class="pagination-info"><span class="text-orange-600">1 - 10</span> sur 156</span>
                 </div>

@@ -1,51 +1,307 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-     <link rel="stylesheet" href="ajouternouvelintervenant.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    
-<div class="container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo">
-                <i class="fas fa-music"></i>
-                <span>WELLIVEYB</span>
-            </div>
+@extends('layouts.application')
 
-            <div class="search-box">
-                <input type="text" placeholder="Rechercher...">
-            </div>
+@section('title', 'Artistes')
+<style>
+    .main-content {
+            flex: 1;
+            padding: 0;
+            overflow-y: auto;
+        }
 
-            <ul class="menu">
-                <li><a href="#"><i class="fas fa-home"></i> Dashboard</a></li>
-                <li><a href="#"><i class="fas fa-ticket-alt"></i> Tickets</a></li>
-                <li><a href="#"><i class="fas fa-film"></i> Billet Streaming</a></li>
-                <li><a href="#"><i class="fas fa-coins"></i> Revendeurs</a></li>
-                <li><a href="#"><i class="fas fa-newspaper"></i> Articles</a></li>
-                <li><a href="#"><i class="fas fa-comments"></i> Communautés</a></li>
-                <li><a href="#" class="active"><i class="fas fa-user-friends"></i> Intervenants</a></li>
-                <li><a href="#"><i class="fas fa-star"></i> Activités</a></li>
-                <li><a href="#"><i class="fas fa-chart-line"></i> Profils des clients</a></li>
-                <li><a href="#"><i class="fas fa-user-shield"></i> Bénéficiare</a></li>
-                <li><a href="#"><i class="fas fa-wallet"></i> Portefeuilles</a></li>
-            </ul>
+        .header-banner {
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+            padding: 20px 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
 
-            <div class="user-profile">
-                <i class="fas fa-user-circle"></i>
-                <div class="user-info">
-                    <div class="name">Justin Conier</div>
-                    <div class="role">Admin</div>
-                </div>
-            </div>
-        </aside>
+        .header-banner i {
+            font-size: 24px;
+        }
 
-        <!-- Main Content -->
-        <main class="main-content">
+        .header-banner h1 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .header-banner p {
+            font-size: 13px;
+            opacity: 0.9;
+            margin-top: 3px;
+        }
+
+        .form-container {
+            padding: 30px;
+            max-width: 1000px;
+        }
+
+        /* Section Styles */
+        .form-section {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 3px;
+            height: 20px;
+            background: #ff6b35;
+            border-radius: 2px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #ff6b35;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Interactive Vote Section */
+        .vote-section {
+            background: rgba(70, 130, 180, 0.1);
+            border: 1px solid rgba(70, 130, 180, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+        }
+
+        .vote-description {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: #ff6b35;
+        }
+
+        .checkbox-group label {
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .date-limit-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 15px;
+            align-items: end;
+            margin-bottom: 20px;
+        }
+
+        .calendar-icon {
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .calendar-icon:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .calendar-icon i {
+            color: #4dabf7;
+        }
+
+        .vote-note {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .options-list {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .options-list ol {
+            margin-left: 20px;
+        }
+
+        .options-list li {
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        /* Paroles Section */
+        .paroles-section {
+            margin-top: 20px;
+        }
+
+        .paroles-header {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .paroles-options {
+            display: grid;
+            gap: 15px;
+        }
+
+        .parole-option {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 15px;
+        }
+
+        .parole-option-header {
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .parole-option-description {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 12px;
+        }
+
+        .parole-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-secondary {
+            padding: 8px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Action Buttons */
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn-cancel {
+            padding: 12px 30px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-cancel:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .btn-submit {
+            padding: 12px 40px;
+            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 53, 0.3);
+        }
+</style>
+@section('content')
+
+    {{-- MAIN CONTENT --}}
+    <main class="main-content">
             <div class="header-banner">
                 <i class="fas fa-edit"></i>
                 <div>
@@ -154,15 +410,10 @@
                         CRITIQUE : Une analyse claire sera envoyée après clôture (Date limite)
                     </div>
 
-                    <div class="form-group">
-                        <label>Signifiez une limite</label>
-                        <textarea rows="3" placeholder="Signifiez une limite">Une valeur Strictement plus loins pour ce faciliteur</textarea>
-                    </div>
-
                     <div class="options-list">
                         <ol>
-                            <li>Classiques et Ballades</li>
-                            <li>Hits Rythmés et Daniel</li>
+                            <li>  1.Classiques et Ballades</li>
+                            <li>  2.Hits Rythmés et Daniel</li>
                         </ol>
                     </div>
 
@@ -215,9 +466,9 @@
                 </div>
             </div>
         </main>
-    </div>
-
-    <script>
+@endsection
+    
+        <script>
         // File upload handling
         const fileButtons = document.querySelectorAll('.parole-buttons .btn-secondary');
         fileButtons.forEach((btn, index) => {
@@ -278,6 +529,5 @@
             });
         });
     </script>
-
-</body>
-</html>
+    @push('scripts')
+@endpush

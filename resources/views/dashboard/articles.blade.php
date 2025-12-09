@@ -318,6 +318,14 @@
             width: 100%;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             overflow: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            display: none;
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
         }
 
         .modal-header {
@@ -537,10 +545,11 @@
                         </div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn btn-add">
+                        <a href="{{ route ('ajout_variantes')}}"  class="btn btn-add " id="addArticleBtn">
                             <i class="fas fa-plus"></i>
                             Ajouter un nouvel article
-                        </button>
+                        </a>
+                        
                         <button class="btn btn-export">
                             <i class="fas fa-download"></i>
                             Exporter
@@ -581,9 +590,10 @@
                                 <td>Vêtement</td>
                                 <td>Call center customized standard collection</td>
                                 <td class="action-cell">
-                                    <button class="btn-action">
+                                    <a href="{{ route ('gestion_variantes') }}"
+                                    class="btn-action">
                                         <i class="fas fa-eye"></i> Gérer les variantes
-                                    </button>
+    </a>
                                     <button class="icon-button">
                                         <i class="fas fa-edit"></i>
                                     </button>
@@ -606,9 +616,9 @@
                                 <td>Accessoire</td>
                                 <td>Mlm casquette ajustable en coton avec 5 lettres</td>
                                 <td class="action-cell">
-                                    <button class="btn-action">
+                                    <a href="{{ route ('gestionCasquette')}}" class="btn-action">
                                         <i class="fas fa-eye"></i> Gérer les variantes
-                                    </button>
+    </a>
                                     <button class="icon-button">
                                         <i class="fas fa-edit"></i>
                                     </button>
@@ -631,9 +641,9 @@
                                 <td>Accessoire</td>
                                 <td>Sac bandoulière d'affaires street wear en cuir simple</td>
                                 <td class="action-cell">
-                                    <button class="btn-action">
+                                    <a href="{{route('gestionSac')}}" class="btn-action">
                                         <i class="fas fa-eye"></i> Gérer les variantes
-                                    </button>
+                                    </a>
                                     <button class="icon-button">
                                         <i class="fas fa-edit"></i>
                                     </button>
@@ -672,7 +682,7 @@
                 </div>
             </div>
         </main>
-        <div class="modal-container">
+        <div class="modal-container" id="orderModal">
         <div class="modal-header">
             <h2>
                 <i class="fas fa-plus-circle"></i>
@@ -721,7 +731,7 @@
                 </div>
 
                 <div class="button-group">
-                    <button type="button" class="btn btn-cancel" onclick="cancelForm()">
+                    <button type="button" class="btn btn-cancel" id="cancelBtn" onclick="cancelForm()">
                         <i class="fas fa-times-circle"></i>
                         Annuler
                     </button>
@@ -733,6 +743,77 @@
             </form>
         </div>
     </div>
+</div>
+
+<div class="modal-overlay">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fas fa-plus-circle"></i>
+                    Ajouter un stock
+                </div>
+                <button class="close-btn" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Stock ajouté avec succès !</span>
+                </div>
+
+                <div class="section-title">Informations de base</div>
+
+                <div class="form-group">
+                    <label class="form-label">Article concerné</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-tag input-icon"></i>
+                        <input type="text" class="form-input" id="article" value="T-Shirt Logo Événement" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Stock actuel</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-box input-icon"></i>
+                        <input type="number" class="form-input calculated-field" id="currentStock" value="20" readonly>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Quantité à ajouter</label>
+                    <div class="quantity-controls">
+                        <button class="quantity-btn" onclick="decreaseQuantity()">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                        <input type="number" class="quantity-input" id="quantity" value="20" min="0" oninput="calculateTotal()">
+                        <button class="quantity-btn" onclick="increaseQuantity()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Nouveau Stock Total</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-calculator input-icon"></i>
+                        <input type="number" class="form-input calculated-field" id="newStock" value="40" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn btn-cancel" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                    Annuler
+                </button>
+                <button class="btn btn-confirm" onclick="confirmStock()">
+                    <i class="fas fa-check"></i>
+                    Confirmer l'ajout de Stock
+                </button>
+            </div>
+        </div>
 </div>
 @endsection
 <script>
@@ -853,6 +934,68 @@
                 form.reset();
             }
         }
+        // Modal functionality
+        document.getElementById('addArticleBtn').addEventListener('click', function() {
+            document.getElementById('orderModal').classList.add('show');
+        });
+
+        document.getElementById('cancelBtn').addEventListener('click', function() {
+            document.getElementById('orderModal').classList.remove('show');
+        });
+        function calculateTotal() {
+            const currentStock = parseInt(document.getElementById('currentStock').value) || 0;
+            const quantity = parseInt(document.getElementById('quantity').value) || 0;
+            const newStock = currentStock + quantity;
+            document.getElementById('newStock').value = newStock;
+        }
+
+        function increaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+            calculateTotal();
+        }
+
+        function decreaseQuantity() {
+            const quantityInput = document.getElementById('quantity');
+            const currentValue = parseInt(quantityInput.value);
+            if (currentValue > 0) {
+                quantityInput.value = currentValue - 1;
+                calculateTotal();
+            }
+        }
+
+        function confirmStock() {
+            const successMessage = document.getElementById('successMessage');
+            successMessage.classList.add('show');
+            
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 3000);
+        }
+
+        function closeModal() {
+            const modal = document.querySelector('.modal');
+            modal.style.animation = 'slideOut 0.3s ease-out';
+            
+            setTimeout(() => {
+                alert('Modal fermée');
+            }, 300);
+        }
+
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideOut {
+                from {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateY(-50px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
     @push('scripts')
 @endpush

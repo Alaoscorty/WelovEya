@@ -1,69 +1,157 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="sactotebag.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-    
- <div class="container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="logo">
-                <div class="logo-icon">
-                    <i class="fas fa-cube"></i>
-                </div>
-                <span class="logo-text">WELOVEYA</span>
-            </div>
+@extends('layouts.application')
 
-            <div class="search-box" style="position: relative;">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Rechercher...">
-            </div>
+@section('title', 'Artistes')
+<style>
+    .main-content {
+            flex: 1;
+            padding: 30px 40px;
+        }
 
-            <ul class="menu">
-                <li class="menu-item">
-                    <i class="fas fa-home"></i>
-                    <span>Dashboard</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-ticket-alt"></i>
-                    <span>Tickets</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-users"></i>
-                    <span>Revendeurs</span>
-                </li>
-                <li class="menu-item active">
-                    <i class="fas fa-box"></i>
-                    <span>Articles</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-gift"></i>
-                    <span>Bénéfices</span>
-                </li>
-                <li class="menu-item">
-                    <i class="fas fa-cog"></i>
-                    <span>Paramètres</span>
-                </li>
-            </ul>
+        .header {
+            margin-bottom: 30px;
+        }
 
-            <div class="user-profile">
-                <div class="user-avatar">
-                    <i class="fas fa-user"></i>
-                </div>
-                <div class="user-info">
-                    <div class="user-name">John Carter</div>
-                    <div class="user-role">Admin</div>
-                </div>
-            </div>
-        </aside>
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
 
-        <!-- Main Content -->
-        <main class="main-content">
+        .breadcrumb {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .content-box {
+            background: #0a1629;
+            border-radius: 8px;
+            padding: 25px;
+            border: 1px solid #1a2f4d;
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .add-variant-btn {
+            background: linear-gradient(135deg, #d97339, #c85a28);
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s;
+        }
+
+        .add-variant-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #0f1e33;
+        }
+
+        th {
+            padding: 15px;
+            text-align: left;
+            font-size: 13px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid #1a2f4d;
+        }
+
+        th i {
+            margin-left: 5px;
+            font-size: 10px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        tbody tr {
+            border-bottom: 1px solid #1a2f4d;
+            transition: background 0.3s;
+        }
+
+        tbody tr:hover {
+            background: #0f1e33;
+        }
+
+        td {
+            padding: 15px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .checkbox {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .product-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 6px;
+            object-fit: cover;
+        }
+
+        .stock-btn {
+            background: transparent;
+            border: 1px solid #3b82f6;
+            color: #3b82f6;
+            padding: 6px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .stock-btn:hover {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-size: 16px;
+            padding: 5px;
+            transition: color 0.3s;
+        }
+
+        .action-btn:hover {
+            color: white;
+        }
+
+        .action-btn.delete:hover {
+            color: #ef4444;
+        }
+</style>
+@section('content')
+
+    {{-- MAIN CONTENT --}}
+    <main class="main-content">
             <div class="header">
                 <h1>Gestion des variantes - Sac Totebag</h1>
                 <div class="breadcrumb">
@@ -175,10 +263,10 @@
                 </table>
             </div>
         </main>
-    </div>
-
-     <script>
-        // Toggle sidebar on mobile
+@endsection
+    
+    <script>
+      // Toggle sidebar on mobile
         const menuToggle = document.createElement('button');
         menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
         menuToggle.style.cssText = 'position: fixed; top: 20px; left: 20px; background: #d97339; border: none; color: white; padding: 10px 15px; border-radius: 6px; cursor: pointer; z-index: 1001; display: none;';
@@ -234,8 +322,7 @@
             icon.parentElement.addEventListener('click', () => {
                 alert('Tri en cours...');
             });
-        });
+        });  
     </script>
-
-</body>
-</html>
+    @push('scripts')
+@endpush
