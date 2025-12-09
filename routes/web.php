@@ -97,6 +97,10 @@ Route::get('/ajouter_intervenants', function () {
     return view('dashboard.ajouterintervenants');
 })->name('ajouter_intervenants');
 
+Route::get('/detailIntervenant', function () {
+    return view('dashboard.detailIntervenant');
+})->name('detailIntervenant');
+
 Route::get('/jeux', function () {
     return view('dashboard.Jeux');
 })->name('Jeux_concours');

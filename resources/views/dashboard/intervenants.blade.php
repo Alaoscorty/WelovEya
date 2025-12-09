@@ -462,7 +462,7 @@
                             <td>27 Décembre 2025</td>
                             <td>
                                 <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                    <a href="{{route ('detailIntervenant')}}" class="action-btn"><i class="fas fa-eye"></i></a>
                                     <button class="action-btn"><i class="fas fa-edit"></i></button>
                                     <button class="action-btn"><i class="fas fa-trash"></i></button>
                                 </div>
