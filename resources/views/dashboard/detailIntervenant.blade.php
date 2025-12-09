@@ -250,7 +250,7 @@
 
         .playlist-card i {
             font-size: 24px;
-            color: #4dabf7;
+            color: #f0f2f3ff;
         }
 
         .playlist-info h4 {
@@ -455,7 +455,7 @@
                     <span class="time-limit-label">26 Décembre 2025</span>
                     <button class="extend-btn">
                         <i class="fas fa-calendar-plus"></i>
-                        Étendre la date
+                        Mettre à jour
                     </button>
                 </div>
             </div>
