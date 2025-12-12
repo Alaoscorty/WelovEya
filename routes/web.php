@@ -64,6 +64,10 @@ Route::get('/articles', function () {
     return view('dashboard.articles');
 })->name('articles');
 
+Route::get('/ajoutArticles', function () {
+    return view('dashboard.ajoutArticles');
+})->name('ajoutArticles');
+
 Route::get('/gestion_variantes', function () {
     return view('dashboard.gestionVariantes');
 })->name('gestion_variantes');
@@ -143,4 +147,7 @@ Route::get('/ajouter_tickets', function () {
     return view('dashboard.ajouterstockticket');
 })->name('ajouter_tickets');
 
-
+Route::get('/ajouterlien', function () {
+    
+}
+);

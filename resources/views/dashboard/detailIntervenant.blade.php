@@ -138,6 +138,7 @@
         }
 
         .total-votes {
+            
             text-align: center;
             margin-top: 15px;
             font-size: 13px;
@@ -145,7 +146,7 @@
         }
 
         .total-votes strong {
-            color: #4dabf7;
+            color: #f75e44ff;
             font-size: 20px;
             display: block;
             margin-top: 5px;
@@ -339,7 +340,7 @@
     {{-- MAIN CONTENT --}}
     <main class="main-content">
             <div class="header">
-                <a href="#" class="back-btn">
+                <a href="{{route ('intervenants')}}" class="back-btn">
                     <i class="fas fa-arrow-left"></i>
                     Votes pour : Nom_artiste
                 </a>
