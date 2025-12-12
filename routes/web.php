@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChatController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +30,6 @@ Route::get('/direct', [ChatController::class, 'index'])->name('chat.direct');
 Route::get('/messages', [ChatController::class, 'getMessages']);
 Route::post('/messages', [ChatController::class, 'sendMessage']);
 Route::get('/online-users', [ChatController::class, 'getOnlineCount']);
-
 
 Route::get('/boutique', function () {
     return view('boutique');
@@ -79,7 +78,6 @@ Route::get('/gestionCasquette', function () {
 Route::get('/gestionSac', function () {
     return view('dashboard.gestionSac');
 })->name('gestionSac');
-
 
 Route::get('/ajout_variantes', function () {
     return view('dashboard.ajoutVariantes');
@@ -133,11 +131,9 @@ Route::get('/ajouterrevendeur', function () {
     return view('dashboard.ajouterrevendeur');
 })->name('ajouter_revendeur');
 
-
 Route::get('/benefices', function () {
     return view('dashboard.benefices');
 })->name('benefices');
-
 
 Route::get('/parametres', function () {
     return view('dashboard.parametres');
@@ -148,6 +144,5 @@ Route::get('/ajouter_tickets', function () {
 })->name('ajouter_tickets');
 
 Route::get('/ajouterlien', function () {
-    
 }
 );

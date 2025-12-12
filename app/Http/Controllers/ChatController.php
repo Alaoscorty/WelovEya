@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Message;
 use App\Events\MessageSent;
 use App\Helpers\PseudoHelper;
+use App\Models\Message;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller

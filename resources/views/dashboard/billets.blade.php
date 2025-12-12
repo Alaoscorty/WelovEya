@@ -243,10 +243,6 @@
                     <i class="fas fa-arrow-left"></i>
                     <span>Retour à la Gestion des Billets Live Streaming</span>
                 </div>
-                <div style="position: relative;">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" class="search-bar" placeholder="Rechercher par Nom, Email, Code...">
-                </div>
             </div>
 
             <div class="table-container">
