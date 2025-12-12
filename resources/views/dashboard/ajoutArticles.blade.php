@@ -1,28 +1,14 @@
 @extends('layouts.application')
 
 @section('title', 'Artistes')
-
-@section('content')
 <style>
-    .modal-container {
+.modal-container {
             background: white;
             border-radius: 12px;
             max-width: 650px;
             width: 100%;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
             overflow: hidden;
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100%;
-            display: none;
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal-container.show {
-            display: flex;
         }
 
         .modal-header {
@@ -182,72 +168,73 @@
         }
 
 </style>
-{{-- Main Content --}}
-<div class="modal-container" id="orderModal">
+@section('content')
+
+    {{-- MAIN CONTENT --}}
+    <div class="modal-container" id="orderModal">
     <div class="modal-header">
-        <h2>
-            <i class="fas fa-plus-circle"></i>
-            Ajouter un nouvel article
-        </h2>
-        <button class="close-btn" onclick="closeModal()">
-            <i class="fas fa-times"></i>
-        </button>
-    </div>
+            <h2>
+                <i class="fas fa-plus-circle"></i>
+                Ajouter un nouvel article
+            </h2>
+            <button class="close-btn" onclick="closeModal()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
 
-    <div class="subtitle">
-        Remplissez les informations sur votre article
-    </div>
+        <div class="subtitle">
+            Remplissez les informations sur votre article
+        </div>
 
-    <div class="form-section">
-        <h3 class="section-title">Informations de base</h3>
+        <div class="form-section">
+            <h3 class="section-title">Informations de base</h3>
 
-        <form id="articleForm">
-            <div class="form-group">
-                <label for="articleName">Nom de l'article</label>
-                <input type="text" id="articleName" placeholder="Entrez le nom de l'article" required>
-            </div>
+            <form id="articleForm">
+                <div class="form-group">
+                    <label for="articleName">Nom de l'article</label>
+                    <input type="text" id="articleName" placeholder="Entrez le nom de l'article" required>
+                </div>
 
-            <div class="form-group">
-                <label for="price">Prix de Vente</label>
-                <input type="number" id="price" placeholder="0.00" step="0.01" min="0" required>
-            </div>
+                <div class="form-group">
+                    <label for="price">Prix de Vente</label>
+                    <input type="number" id="price" placeholder="0.00" step="0.01" min="0" required>
+                </div>
 
-            <div class="form-group">
-                <label for="category">Catégorie</label>
-                <select id="category" required>
-                    <option value="">Ex: Vêtement</option>
-                    <option value="vetement">Vêtement</option>
-                    <option value="electronique">Électronique</option>
-                    <option value="alimentaire">Alimentaire</option>
-                    <option value="maison">Maison & Jardin</option>
-                    <option value="sport">Sport</option>
-                    <option value="livres">Livres</option>
-                    <option value="autre">Autre</option>
-                </select>
-            </div>
+                <div class="form-group">
+                    <label for="category">Catégorie</label>
+                    <select id="category" required>
+                        <option value="">Ex: Vêtement</option>
+                        <option value="vetement">Vêtement</option>
+                        <option value="electronique">Électronique</option>
+                        <option value="alimentaire">Alimentaire</option>
+                        <option value="maison">Maison & Jardin</option>
+                        <option value="sport">Sport</option>
+                        <option value="livres">Livres</option>
+                        <option value="autre">Autre</option>
+                    </select>
+                </div>
 
-            <div class="form-group">
-                <label for="description">Description</label>
-                <textarea id="description" placeholder="Description détaillée de l'article" required></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" placeholder="Description détaillée de l'article" required></textarea>
+                </div>
 
-            <div class="button-group">
-                <button type="button" class="btn btn-cancel" id="cancelBtn" onclick="cancelForm()">
-                    <i class="fas fa-times-circle"></i>
-                    Annuler
-                </button>
-                <button type="submit" class="btn btn-submit">
-                    <i class="fas fa-check-circle"></i>
-                    Ajouter l'article
-                </button>
-            </div>
-        </form>
-    </div>
+                <div class="button-group">
+                    <button type="button" class="btn btn-cancel" onclick="cancelForm()">
+                        <i class="fas fa-times-circle"></i>
+                        Annuler
+                    </button>
+                    <button type="submit" class="btn btn-submit">
+                        <i class="fas fa-check-circle"></i>
+                        Ajouter l'article
+                    </button>
+                </div>
+            </form>
+        </div>
 </div>
-    @endsection
-    <script>
-        //gestionnaire du modal
-        const form = document.getElementById('articleForm');
+@endsection
+<script>
+    const form = document.getElementById('articleForm');
 
         form.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -281,122 +268,6 @@
                 form.reset();
             }
         }
-        // Modal functionality
-        document.getElementById('addArticleBtn').addEventListener('click', function() {
-            document.getElementById('orderModal').classList.add('show');
-        });
-
-        document.getElementById('cancelBtn').addEventListener('click', function() {
-            document.getElementById('orderModal').classList.remove('show');
-        });
-        function calculateTotal() {
-            const currentStock = parseInt(document.getElementById('currentStock').value) || 0;
-            const quantity = parseInt(document.getElementById('quantity').value) || 0;
-            const newStock = currentStock + quantity;
-            document.getElementById('newStock').value = newStock;
-        }
-
-        function increaseQuantity() {
-            const quantityInput = document.getElementById('quantity');
-            quantityInput.value = parseInt(quantityInput.value) + 1;
-            calculateTotal();
-        }
-
-        function decreaseQuantity() {
-            const quantityInput = document.getElementById('quantity');
-            const currentValue = parseInt(quantityInput.value);
-            if (currentValue > 0) {
-                quantityInput.value = currentValue - 1;
-                calculateTotal();
-            }
-        }
-
-        function confirmStock() {
-            const successMessage = document.getElementById('successMessage');
-            successMessage.classList.add('show');
-            
-            setTimeout(() => {
-                successMessage.classList.remove('show');
-            }, 3000);
-        }
-
-        function closeModal() {
-            const modal = document.querySelector('.modal');
-            modal.style.animation = 'slideOut 0.3s ease-out';
-            
-            setTimeout(() => {
-                alert('Modal fermée');
-            }, 300);
-        }
-
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideOut {
-                from {
-                    transform: translateY(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateY(-50px);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Edit button functionality
-        document.querySelectorAll('.icon-button .fa-edit').forEach(button => {
-            button.parentElement.addEventListener('click', function() {
-                const row = this.closest('tr');
-                const cells = row.querySelectorAll('td');
-
-                // Extract data from the row
-                const id = cells[1].textContent.trim();
-                const name = cells[2].textContent.trim();
-                const price = cells[3].textContent.trim();
-                const category = cells[7].textContent.trim();
-                const description = cells[8].textContent.trim();
-
-                // Populate the edit modal
-                document.getElementById('editArticleName').value = name;
-                document.getElementById('editPrice').value = price;
-                document.getElementById('editCategory').value = category.toLowerCase().replace(' ', '');
-                document.getElementById('editDescription').value = description;
-
-                // Update modal title with article ID
-                document.getElementById('editModalTitle').textContent = `Modifier l'article ${id}`;
-
-                // Show the edit modal
-                document.getElementById('editModal').classList.add('show');
-            });
-        });
-
-        // Close edit modal function
-        function closeEditModal() {
-            document.getElementById('editModal').classList.remove('show');
-        }
-
-        // Edit form submission
-        document.getElementById('editArticleForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            const updatedData = {
-                name: document.getElementById('editArticleName').value,
-                price: document.getElementById('editPrice').value,
-                category: document.getElementById('editCategory').value,
-                description: document.getElementById('editDescription').value
-            };
-
-            console.log('Article modifié:', updatedData);
-
-            alert('Article modifié avec succès!\n\n' +
-                  'Nom: ' + updatedData.name + '\n' +
-                  'Prix: ' + updatedData.price + '\n' +
-                  'Catégorie: ' + updatedData.category + '\n' +
-                  'Description: ' + updatedData.description);
-
-            closeEditModal();
-        });
     </script>
     @push('scripts')
 @endpush
