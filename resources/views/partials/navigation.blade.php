@@ -3,7 +3,9 @@
         <aside class="w-64 bg-[#0f1229] p-4 md:p-6 flex flex-col border-r border-white/5">
             <!-- Logo -->
             <div class="flex items-center gap-2.5 mb-6 text-base font-semibold text-[#ff8c42] px-2">
-                <i class="fas fa-globe text-2xl"></i>
+                <a href="{{ url('/') }}">
+                    <img src="{{ asset('images/Logo-WLE_Plan-de-travail-1.png') }}" alt="Logo" width="50">
+                </a>
                 <span>WELOVEYA</span>
             </div>
 
