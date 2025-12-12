@@ -1,7 +1,15 @@
 <?php
 
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommandeController;
+use App\Http\Controllers\JeuController;
+use App\Http\Controllers\PlainteController;
+use App\Http\Controllers\RevendeurController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ResellerController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -143,6 +151,5 @@ Route::get('/ajouter_tickets', function () {
     return view('dashboard.ajouterstockticket');
 })->name('ajouter_tickets');
 
-Route::get('/ajouterlien', function () {
-}
-);
+Route::post('/resellers', [ResellerController::class, 'store'])->name('resellers.store');
+Route::get('/resellers', [ResellerController::class, 'index'])->name('resellers.index'); // Pour redirection après création

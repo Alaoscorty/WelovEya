@@ -4,7 +4,7 @@
 
 @section('content')
         <!-- Main Content -->
-        <main class="ml-64 w-full p-8">
+        <main class="ml-2 w-full p-8">
             <!-- Header Alert -->
             <div class="bg-gradient-to-r from-orange-500 to-orange-600 rounded-xl p-6 mb-8 shadow-lg">
                 <div class="flex items-start gap-4">
