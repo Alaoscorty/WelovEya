@@ -236,7 +236,6 @@
     <!-- Main Content -->
         <main class="main-content">
             
-
             <div class="page-header">
                 <h1 class="page-title">Participants Live : [Nom du Billet] - Festival WeLovEya</h1>
                 <div class="breadcrumb">

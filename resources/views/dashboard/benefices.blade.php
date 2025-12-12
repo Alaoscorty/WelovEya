@@ -163,63 +163,7 @@
             border-color: #60a5fa;
         }
 
-        /* Bottom Actions */
-        .bottom-actions {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            gap: 15px;
-            background: #1e293b;
-            padding: 15px 20px;
-            border-radius: 50px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-        }
-
-        .action-btn {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-            transition: all 0.3s;
-        }
-
-        .action-btn.primary {
-            background: #6366f1;
-            color: #fff;
-        }
-
-        .action-btn.secondary {
-            background: transparent;
-            color: #cbd5e1;
-            border: 2px solid #334155;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn-edit {
-            background: #6366f1;
-            color: #fff;
-            padding: 12px 30px;
-            border-radius: 25px;
-            border: none;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-edit:hover {
-            background: #4f46e5;
-            transform: translateY(-2px);
-        }
+        
 </style>
 {{-- Main Content --}}
 <div class=" p-8">
@@ -330,19 +274,6 @@
                     </tbody>
                 </table>
             </div>
-        </div>
-
-        <div class="bottom-actions">
-            <button class="action-btn primary">
-                <i class="fas fa-play"></i>
-            </button>
-            <button class="action-btn secondary">
-                <i class="fas fa-hand-pointer"></i>
-            </button>
-            <button class="action-btn secondary">
-                <i class="far fa-comment"></i>
-            </button>
-            <button class="btn-edit">Ask to edit</button>
         </div>
     </div>
 </div>
