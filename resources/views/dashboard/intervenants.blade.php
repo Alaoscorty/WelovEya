@@ -74,12 +74,12 @@
             gap: 20px;
         }
 
-        .search-filter {
+        .search-icon {
             flex: 1;
             max-width: 400px;
         }
 
-        .search-filter input {
+        .search-icon input {
             width: 100%;
             padding: 10px 15px 10px 40px;
             background: rgba(255, 255, 255, 0.05);
@@ -91,6 +91,7 @@
 
         .search-icon {
             position: relative;
+            
         }
 
         .search-icon i {
@@ -105,6 +106,10 @@
             display: flex;
             gap: 15px;
             align-items: center;
+            padding:5px;
+        }
+        .filters option{
+            color:black;
         }
 
         select {
