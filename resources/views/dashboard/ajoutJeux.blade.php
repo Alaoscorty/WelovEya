@@ -32,7 +32,7 @@
 
         .page-header p {
             font-size: 14px;
-            color: rgba(255, 255, 255, 0.6);
+            color: rgba(224, 224, 224, 0.6);
         }
 
         .form-container {
@@ -87,7 +87,7 @@
             border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 10px;
             padding: 12px 16px;
-            color: #fff;
+            color: #1b1b1bff;
             font-size: 14px;
             outline: none;
             transition: all 0.3s;
