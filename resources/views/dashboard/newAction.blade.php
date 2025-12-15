@@ -143,13 +143,26 @@
     <main class="main-content">
             <h1 class="page-title">Créer une nouvelle Action</h1>
 
-            <form class="form-container" id="actionForm">
+            <form 
+    class="form-container" 
+    id="actionForm"
+    method="POST"
+    action="{{ route('actions.store') }}"
+>
+    @csrf
+
                 <!-- Identification Section -->
                 <div class="form-section">
                     <h2 class="section-title">Identification</h2>
                     
                     <div class="form-group">
-                        <label class="form-label">Nom de l'Action</label>
+                        <input 
+    type="text" 
+    name="title"
+    class="form-input" 
+    required
+>
+Nom de l'Action</label>
                         <input 
                             type="text" 
                             class="form-input" 
@@ -161,6 +174,7 @@
                     <div class="form-group">
                         <label class="form-label">Description</label>
                         <textarea 
+                            name="description"
                             class="form-textarea" 
                             placeholder="Décrivez la mission pour le public..."
                             required
@@ -171,6 +185,7 @@
                         <label class="form-label">Lieu Exact</label>
                         <input 
                             type="text" 
+                            name="location"
                             class="form-input" 
                             placeholder="Ex: 123 Rue du Port, 17000 La Rochelle"
                             required
@@ -187,6 +202,7 @@
                             <label class="form-label">Date & Heure</label>
                             <input 
                                 type="datetime-local" 
+                                name="date_time"
                                 class="form-input"
                                 required
                             >
@@ -194,7 +210,7 @@
 
                         <div class="form-group">
                             <label class="form-label">Durée estimée</label>
-                            <select class="form-select" required>
+                            <select class="form-select" name="duration" required>
                                 <option value="">Sélectionner</option>
                                 <option value="1h">1h</option>
                                 <option value="2h">2h</option>
@@ -209,6 +225,7 @@
                             <label class="form-label">Nombre de Places</label>
                             <input 
                                 type="number" 
+                                name="slots"
                                 class="form-input" 
                                 placeholder="Ex: 20"
                                 min="1"
@@ -219,12 +236,12 @@
                 </div>
 
                 <!-- Récompenses & Visibilité Section -->
-                <div class="form-section">
+                <div class="form-section" >
                     <h2 class="section-title">Récompenses & Visibilité</h2>
                     
                     <div class="form-group">
                         <label class="form-label">Type de Récompense</label>
-                        <select class="form-select" required>
+                        <select class="form-select" name="reward" required>
                             <option value="">Sélectionner une récompense</option>
                             <option value="billet-jour-1">Billet Jour 1</option>
                             <option value="billet-jour-2">Billet Jour 2</option>
@@ -250,19 +267,6 @@
 @endsection
     
     <script>
-      // Form submission
-        document.getElementById('actionForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Collect form data
-            const formData = new FormData(this);
-            
-            // Show success message
-            alert('Action créée avec succès!');
-            
-            // Reset form
-            this.reset();
-        });
 
         // Cancel form
         function cancelForm() {

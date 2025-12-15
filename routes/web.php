@@ -9,6 +9,10 @@ use App\Http\Controllers\PlainteController;
 use App\Http\Controllers\RevendeurController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResellerController;
+use App\Http\Controllers\ActionController;
+use App\Http\Controllers\JeuxController;
+
+
 
 
 /*
@@ -115,9 +119,8 @@ Route::get('/jeux', function () {
     return view('dashboard.Jeux');
 })->name('Jeux_concours');
 
-Route::get('/ajoutjeux', function () {
-    return view('dashboard.ajoutJeux');
-})->name('ajout_jeux');
+Route::get('/jeux', [JeuxController::class, 'index'])->name('Jeux_concours');
+
 
 Route::get('/activites', function () {
     return view('dashboard.activites');
@@ -153,3 +156,38 @@ Route::get('/ajouter_tickets', function () {
 
 Route::post('/resellers', [ResellerController::class, 'store'])->name('resellers.store');
 Route::get('/resellers', [ResellerController::class, 'index'])->name('resellers.index'); // Pour redirection après création
+Route::post('/actions', [ActionController::class, 'store'])
+    ->name('actions.store');
+Route::get('/activites', [ActionController::class, 'index'])
+    ->name('dashboard.activites');
+
+
+Route::get('/dashboard/actions/{action}/edit', [ActionController::class, 'edit'])
+    ->name('actions.edit');
+
+Route::get('/dashboard/actions/{action}', [ActionController::class, 'show'])
+    ->name('actions.show');
+
+Route::put('/dashboard/actions/{action}', [ActionController::class, 'update'])
+    ->name('actions.update');
+
+
+Route::get('/ajout-jeux', [JeuxController::class, 'create'])->name('ajout_jeux'); // Formulaire
+Route::post('/ajout-jeux', [JeuxController::class, 'store'])->name('ajout_jeux.store'); // Soumission
+Route::get('/suivi-jeux', [JeuxController::class, 'index'])->name('suivi_jeux'); // Liste des jeux
+
+// Routes pour la gestion des jeux
+// Liste des jeux
+Route::get('/suivi-jeux', [JeuxController::class, 'index'])->name('suivi_jeux');
+
+// Création d'un jeu
+Route::get('/ajout-jeux', [JeuxController::class, 'create'])->name('ajout_jeux');
+Route::post('/ajout-jeux', [JeuxController::class, 'store'])->name('ajout_jeux.store');
+
+// Edition d'un jeu
+Route::get('/ajout-jeux/{jeu}/edit', [JeuxController::class, 'edit'])->name('ajout_jeux.edit');
+Route::put('/ajout-jeux/{jeu}', [JeuxController::class, 'update'])->name('ajout_jeux.update');
+
+// Suppression d'un jeu
+Route::delete('/ajout-jeux/{jeu}', [JeuxController::class, 'destroy'])->name('ajout_jeux.destroy');
+

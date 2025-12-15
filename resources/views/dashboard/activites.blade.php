@@ -320,17 +320,19 @@
                 <div class="filters">
                     <div class="search-filter">
                         <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Rechercher par nom...">
+                        <input type="text" id="searchInput" placeholder="Rechercher par nom...">
                     </div>
+
                     <div class="status-filter">
-                        <select>
-                            <option>Statut: Ouvert</option>
-                            <option>Statut: Complet</option>
-                            <option>Statut: Terminé</option>
-                            <option>Tous les statuts</option>
+                        <select id="statusFilter">
+                            <option value="all">Tous les statuts</option>
+                            <option value="ouvert">Ouvert</option>
+                            <option value="complet">Complet</option>
+                            <option value="termine">Terminé</option>
                         </select>
                         <i class="fas fa-chevron-down"></i>
                     </div>
+
                     <button class="btn-export">
                         <i class="fas fa-file-export"></i>
                         Exporter vers Sheets
@@ -341,6 +343,8 @@
                     <table>
                         <thead>
                             <tr>
+                                
+                                <th>ID</th>
                                 <th>NOM DE L'ACTION</th>
                                 <th>DATE & HEURE</th>
                                 <th>LIEU</th>
@@ -350,50 +354,27 @@
                                 <th>ACTIONS</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="actionsTable">
+                            
+                            @foreach($actions as $action)
                             <tr>
-                                <td class="action-name">Nettoyage de l'École A</td>
-                                <td>18/12/2025 à<br>14:00</td>
-                                <td>Parc de la Villette,<br>Paris</td>
-                                <td>15 / 20 places</td>
-                                <td><span class="status-badge status-ouvert">Ouvert</span></td>
-                                <td>2 Billets Jour 1</td>
+                                <td>{{ $action->id }}</td>
+                                <td class="action-name">{{ $action->title }}</td>
+                                <td>{{ $action->date_time->format('d/m/Y') }} à<br>{{ $action->date_time->format('H:i') }}</td>
+                                <td>{{ $action->location }}</td>
+                                <td>{{ $action->registered }} / {{ $action->slots }} places</td>
+                                <td><span class="status-badge {{ $action->status_class }}">{{ ucfirst($action->status) }}</span></td>
+                                <td>{{ $action->reward }}</td>
                                 <td>
                                     <div class="actions-buttons">
-                                        <button class="btn-action">Gérer</button>
-                                        <button class="btn-action">Modifier</button>
+                                        <a href="{{ route('actions.show', $action->id) }}" class="btn-action">Gérer</a>
+                                        <a href="{{ route('actions.edit', $action->id) }}" class="btn-action">Modifier</a>
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="action-name">Collecte de fonds pour le refuge</td>
-                                <td>22/01/2026 à<br>09:00</td>
-                                <td>Siège social, Lyon</td>
-                                <td>30 / 30<br>places</td>
-                                <td><span class="status-badge status-complet">Complet</span></td>
-                                <td>1 Bon d'achat de<br>20€</td>
-                                <td>
-                                    <div class="actions-buttons">
-                                        <button class="btn-action">Gérer</button>
-                                        <button class="btn-action">Modifier</button>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="action-name">Atelier de sensibilisation</td>
-                                <td>05/11/2025 à<br>18:00</td>
-                                <td>En ligne (Zoom)</td>
-                                <td>48 / 50<br>places</td>
-                                <td><span class="status-badge status-termine">Terminé</span></td>
-                                <td>Points de<br>bénévolat</td>
-                                <td>
-                                    <div class="actions-buttons">
-                                        <button class="btn-action">Gérer</button>
-                                        <button class="btn-action">Modifier</button>
-                                    </div>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
+
                     </table>
                 </div>
             </div>
@@ -463,6 +444,39 @@
                 alert(`${action}: ${actionName}`);
             });
         });
+        const searchInput = document.getElementById('searchInput');
+        const statusFilter = document.getElementById('statusFilter');
+        const actionsTable = document.getElementById('actionsTable');
+
+        function filterActions() {
+            const term = searchInput.value.toLowerCase();
+            const status = statusFilter.value;
+
+            Array.from(actionsTable.getElementsByTagName('tr')).forEach(row => {
+                const title = row.querySelector('.action-name').textContent.toLowerCase();
+                const statusBadge = row.querySelector('.status-badge');
+                let rowStatus = '';
+
+                if (statusBadge.classList.contains('status-ouvert')) rowStatus = 'ouvert';
+                if (statusBadge.classList.contains('status-complet')) rowStatus = 'complet';
+                if (statusBadge.classList.contains('status-termine')) rowStatus = 'termine';
+
+                // Vérifie si la ligne correspond au terme ET au statut
+                const matchesTerm = title.includes(term);
+                const matchesStatus = (status === 'all') || (rowStatus === status);
+
+                if (matchesTerm && matchesStatus) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        // Événements
+        searchInput.addEventListener('input', filterActions);
+        statusFilter.addEventListener('change', filterActions);
+
     </script>
     @push('scripts')
 @endpush

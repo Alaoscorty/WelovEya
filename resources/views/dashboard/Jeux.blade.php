@@ -236,132 +236,92 @@
 @section('content')
 
     {{-- MAIN CONTENT --}}
-    <div class="main-content">
-        <div class="header">
-            <h1>Suivi des Jeux-Concours</h1>
-            <a href="{{ route('ajout_jeux') }}" class="btn-add">
-                <i class="fas fa-plus"></i>
-                Ajouter un Jeu
-            </a>
-        </div>
+<div class="main-content">
+    <div class="header">
+        <h1>Suivi des Jeux-Concours</h1>
+        <a href="{{ route('ajout_jeux') }}" class="btn-add">
+            <i class="fas fa-plus"></i>
+            Ajouter un Jeu
+        </a>
+    </div>
 
-        <div class="filters">
-            <div class="search-filter">
-                <i class="fas fa-search"></i>
-                <input type="text" placeholder="Rechercher par nom, partenaire...">
-            </div>
-            <div class="filter-group">
-                <button class="filter-btn active">Tous les statuts</button>
-                <button class="filter-btn">En cours</button>
-                <button class="filter-btn">Terminé</button>
-            </div>
-        </div>
+    @if (session('success'))
+        <div style="color:green; margin-bottom:20px;">{{ session('success') }}</div>
+    @endif
 
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>NOM DU JEU</th>
-                        <th>PARTENAIRE</th>
-                        <th>RÉSEAU SOCIAL</th>
-                        <th>STATUT</th>
-                        <th>PÉRIODE</th>
-                        <th>LIEN</th>
-                        <th>ACTIONS</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><strong>Concours d'été</strong></td>
-                        <td>Marque A</td>
-                        <td>
-                            <span class="social-badge facebook">
-                                <i class="fab fa-facebook-f"></i>
-                                Facebook
-                            </span>
-                        </td>
-                        <td>
-                            <span class="status-badge en-cours">En cours</span>
-                        </td>
-                        <td>Se termine le 31/08/2024</td>
-                        <td>
-                            <a href="#" class="link-btn">
-                                Visiter <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <div class="actions">
-                                <button class="action-btn edit" title="Modifier">
-                                    <i class="fas fa-pen"></i>
-                                </button>
-                                <button class="action-btn delete" title="Supprimer">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Jeu de la rentrée</strong></td>
-                        <td>Marque B</td>
-                        <td>
-                            <span class="social-badge instagram">
-                                <i class="fab fa-instagram"></i>
-                                Instagram
-                            </span>
-                        </td>
-                        <td>
-                            <span class="status-badge en-cours">En cours</span>
-                        </td>
-                        <td>Se termine le 15/09/2024</td>
-                        <td>
-                            <a href="#" class="link-btn">
-                                Visiter <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <div class="actions">
-                                <button class="action-btn edit" title="Modifier">
-                                    <i class="fas fa-pen"></i>
-                                </button>
-                                <button class="action-btn delete" title="Supprimer">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><strong>Concours de Noël</strong></td>
-                        <td>Marque C</td>
-                        <td>
-                            <span class="social-badge tiktok">
-                                <i class="fab fa-tiktok"></i>
-                                TikTok
-                            </span>
-                        </td>
-                        <td>
-                            <span class="status-badge termine">Terminé</span>
-                        </td>
-                        <td>Terminé le 25/12/2023</td>
-                        <td>
-                            <a href="#" class="link-btn">
-                                Visiter <i class="fas fa-external-link-alt"></i>
-                            </a>
-                        </td>
-                        <td>
-                            <div class="actions">
-                                <button class="action-btn edit" title="Modifier">
-                                    <i class="fas fa-pen"></i>
-                                </button>
-                                <button class="action-btn delete" title="Supprimer">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="filters">
+        <div class="search-filter">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Rechercher par nom, partenaire...">
+        </div>
+        <div class="filter-group">
+            <button class="filter-btn active">Tous les statuts</button>
+            <button class="filter-btn">En cours</button>
+            <button class="filter-btn">Terminé</button>
         </div>
     </div>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>NOM DU JEU</th>
+                    <th>PARTENAIRE</th>
+                    <th>RÉSEAU SOCIAL</th>
+                    <th>STATUT</th>
+                    <th>PÉRIODE</th>
+                    <th>LIEN</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach($jeux as $jeu)
+                @php
+                    $status = (now()->between($jeu->date_debut, $jeu->date_fin)) ? 'en-cours' : 'termine';
+                @endphp
+                <tr>
+                    <td><strong>{{ $jeu->nom_du_jeu }}</strong></td>
+                    <td>{{ $jeu->partenaire }}</td>
+                    <td>
+                        <span class="social-badge {{ $jeu->reseau_social }}">
+                            @if($jeu->reseau_social=='facebook')<i class="fab fa-facebook-f"></i> Facebook
+                            @elseif($jeu->reseau_social=='instagram')<i class="fab fa-instagram"></i> Instagram
+                            @elseif($jeu->reseau_social=='tiktok')<i class="fab fa-tiktok"></i> TikTok
+                            @elseif($jeu->reseau_social=='twitter')<i class="fab fa-twitter"></i> Twitter
+                            @elseif($jeu->reseau_social=='youtube')<i class="fab fa-youtube"></i> YouTube
+                            @elseif($jeu->reseau_social=='linkedin')<i class="fab fa-linkedin"></i> LinkedIn
+                            @endif
+                        </span>
+                    </td>
+                    <td><span class="status-badge {{ $status }}">{{ $status=='en-cours'?'En cours':'Terminé' }}</span></td>
+                    <td>{{ \Carbon\Carbon::parse($jeu->date_debut)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($jeu->date_fin)->format('d/m/Y') }}</td>
+                    <td><a href="{{ $jeu->lien_du_jeu }}" class="link-btn" target="_blank">Visiter <i class="fas fa-external-link-alt"></i></a></td>
+                    <td>
+                        <div class="actions">
+                            <!-- Bouton Modifier -->
+                            <a href="{{ route('ajout_jeux.edit', $jeu->id) }}" class="action-btn edit" title="Modifier">
+                                <i class="fas fa-pen"></i>
+                            </a>
+
+                            <!-- Bouton Supprimer -->
+                            <form action="{{ route('ajout_jeux.destroy', $jeu->id) }}" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="action-btn delete" title="Supprimer"
+                                    onclick="return confirm('Êtes-vous sûr de vouloir supprimer {{ $jeu->nom_du_jeu }} ?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
 @endsection
     
     <script>

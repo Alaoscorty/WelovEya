@@ -1,6 +1,6 @@
 @extends('layouts.application')
 
-@section('title', 'Artistes')
+@section('title', 'créer un jeux')
 <style>
         .main-content {
             flex: 1;
@@ -205,146 +205,123 @@
 @section('content')
 
     {{-- MAIN CONTENT --}}
-    <div class="main-content">
-        <div class="page-header">
-            <h1>Ajouter un nouveau Jeu-Concours</h1>
-            <p>Remplissez les champs ci-dessous pour lancer votre concours</p>
-        </div>
-
-        <form class="form-container" id="contestForm">
-            <!-- Identification Section -->
-            <div class="form-section">
-                <h2>Identification</h2>
-                <div class="form-group">
-                    <label>Nom du Jeu</label>
-                    <input type="text" placeholder="Ex: Grand Concours de l'Été" required>
-                </div>
-                <div class="form-group">
-                    <label>Description du Jeu</label>
-                    <textarea placeholder="Décrivez brièvement le jeu, ses règles et son objectif." required></textarea>
-                </div>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Partenaire Associé</label>
-                        <select required>
-                            <option value="">Rechercher ou sélectionner</option>
-                            <option value="marque-a">Marque A</option>
-                            <option value="marque-b">Marque B</option>
-                            <option value="marque-c">Marque C</option>
-                            <option value="sponsor-x">Sponsor X</option>
-                            <option value="partenaire-y">Partenaire Y</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Type de Jeu</label>
-                        <select required>
-                            <option value="">Sélectionner un type</option>
-                            <option value="tirage">Tirage au sort</option>
-                            <option value="quiz">Quiz</option>
-                            <option value="photo">Concours photo</option>
-                            <option value="video">Concours vidéo</option>
-                            <option value="creative">Challenge créatif</option>
-                            <option value="instant">Jeu instantané</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Liens et Réseaux Section -->
-            <div class="form-section">
-                <h2>Liens et Réseaux</h2>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Réseau Social Principal</label>
-                        <select required>
-                            <option value="">Sélectionner un réseau</option>
-                            <option value="facebook">
-                                <i class="fab fa-facebook"></i> Facebook
-                            </option>
-                            <option value="instagram">
-                                <i class="fab fa-instagram"></i> Instagram
-                            </option>
-                            <option value="tiktok">
-                                <i class="fab fa-tiktok"></i> TikTok
-                            </option>
-                            <option value="twitter">
-                                <i class="fab fa-twitter"></i> Twitter / X
-                            </option>
-                            <option value="youtube">
-                                <i class="fab fa-youtube"></i> YouTube
-                            </option>
-                            <option value="linkedin">
-                                <i class="fab fa-linkedin"></i> LinkedIn
-                            </option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Lien du Jeu (URL)</label>
-                        <input type="url" placeholder="https://example.com/concours" required>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Date de Début / Fin Section -->
-            <div class="form-section">
-                <h2>Date de Début / Fin</h2>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Date de début</label>
-                        <div class="date-input-wrapper">
-                            <i class="far fa-calendar"></i>
-                            <input type="date" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Date de fin</label>
-                        <div class="date-input-wrapper">
-                            <i class="far fa-calendar"></i>
-                            <input type="date" required>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Récompense Section -->
-            <div class="form-section">
-                <h2>Récompense</h2>
-                <div class="form-row-3">
-                    <div class="form-group">
-                        <label>Récompense / Lot</label>
-                        <input type="text" placeholder="Ex: 2 Billets VIP" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Nombre de Gagnants</label>
-                        <input type="number" min="1" value="1" required>
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit" class="btn-submit">Créer le Jeu</button>
-        </form>
+<div class="main-content">
+    <div class="page-header">
+        <h1>Ajouter un nouveau Jeu-Concours</h1>
+        <p>Remplissez les champs ci-dessous pour lancer votre concours</p>
     </div>
 
-    
+    @if ($errors->any())
+        <div style="color:red; margin-bottom: 20px;">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form class="form-container" id="contestForm" action="{{ route('ajout_jeux.store') }}" method="POST">
+        @csrf
+
+        <!-- Identification Section -->
+        <div class="form-section">
+            <h2>Identification</h2>
+            <div class="form-group">
+                <label>Nom du Jeu</label>
+                <input type="text" name="nom_du_jeu" value="{{ old('nom_du_jeu') }}" placeholder="Ex: Grand Concours de l'Été" required>
+            </div>
+            <div class="form-group">
+                <label>Description du Jeu</label>
+                <textarea name="description" placeholder="Décrivez brièvement le jeu, ses règles et son objectif." required>{{ old('description') }}</textarea>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Partenaire Associé</label>
+                    <select name="partenaire" required>
+                        <option value="">Rechercher ou sélectionner</option>
+                        <option value="marque-a" {{ old('partenaire')=='marque-a'?'selected':'' }}>Marque A</option>
+                        <option value="marque-b" {{ old('partenaire')=='marque-b'?'selected':'' }}>Marque B</option>
+                        <option value="marque-c" {{ old('partenaire')=='marque-c'?'selected':'' }}>Marque C</option>
+                        <option value="sponsor-x" {{ old('partenaire')=='sponsor-x'?'selected':'' }}>Sponsor X</option>
+                        <option value="partenaire-y" {{ old('partenaire')=='partenaire-y'?'selected':'' }}>Partenaire Y</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Type de Jeu</label>
+                    <select name="type_de_jeu" required>
+                        <option value="">Sélectionner un type</option>
+                        <option value="tirage" {{ old('type_du_jeu')=='tirage'?'selected':'' }}>Tirage au sort</option>
+                        <option value="quiz" {{ old('type_du_jeu')=='quiz'?'selected':'' }}>Quiz</option>
+                        <option value="photo" {{ old('type_du_jeu')=='photo'?'selected':'' }}>Concours photo</option>
+                        <option value="video" {{ old('type_du_jeu')=='video'?'selected':'' }}>Concours vidéo</option>
+                        <option value="creative" {{ old('type_du_jeu')=='creative'?'selected':'' }}>Challenge créatif</option>
+                        <option value="instant" {{ old('type_du_jeu')=='instant'?'selected':'' }}>Jeu instantané</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Liens et Réseaux Section -->
+        <div class="form-section">
+            <h2>Liens et Réseaux</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Réseau Social Principal</label>
+                    <select name="reseau_social" required>
+                        <option value="">Sélectionner un réseau</option>
+                        <option value="facebook" {{ old('reseau_social')=='facebook'?'selected':'' }}>Facebook</option>
+                        <option value="instagram" {{ old('reseau_social')=='instagram'?'selected':'' }}>Instagram</option>
+                        <option value="tiktok" {{ old('reseau_social')=='tiktok'?'selected':'' }}>TikTok</option>
+                        <option value="twitter" {{ old('reseau_social')=='twitter'?'selected':'' }}>Twitter / X</option>
+                        <option value="youtube" {{ old('reseau_social')=='youtube'?'selected':'' }}>YouTube</option>
+                        <option value="linkedin" {{ old('reseau_social')=='linkedin'?'selected':'' }}>LinkedIn</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Lien du Jeu (URL)</label>
+                    <input type="url" name="lien" value="{{ old('lien_du_jeu') }}" placeholder="https://example.com/concours" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- Date Section -->
+        <div class="form-section">
+            <h2>Date de Début / Fin</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Date de début</label>
+                    <input type="date" name="date_debut" value="{{ old('date_debut') }}" required>
+                </div>
+                <div class="form-group">
+                    <label>Date de fin</label>
+                    <input type="date" name="date_fin" value="{{ old('date_fin') }}" required>
+                </div>
+            </div>
+        </div>
+
+        <!-- Récompense Section -->
+        <div class="form-section">
+            <h2>Récompense</h2>
+            <div class="form-row-3">
+                <div class="form-group">
+                    <label>Récompense / Lot</label>
+                    <input type="text" name="recompense" value="{{ old('recompense') }}" placeholder="Ex: 2 Billets VIP" required>
+                </div>
+                <div class="form-group">
+                    <label>Nombre de Gagnants</label>
+                    <input type="number" name="nombre_gagnants" min="1" value="{{ old('nombre_gagnants',1) }}" required>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Créer le Jeu</button>
+    </form>
+</div>
 @endsection
     
+    
         <script>
-        // Form submission
-        document.getElementById('contestForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Get form values
-            const formData = new FormData(this);
-            
-            // Show success message
-            alert('Jeu-Concours créé avec succès ! 🎉');
-            
-            // Optional: Reset form
-            // this.reset();
-            
-            // Optional: Redirect to list page
-            // window.location.href = '/jeux-concours';
-        });
 
         // Date validation (end date must be after start date)
         const startDateInput = document.querySelector('input[type="date"]:first-of-type');
