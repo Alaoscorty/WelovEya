@@ -1,6 +1,6 @@
 @extends('layouts.application')
 
-@section('title', 'Artistes')
+@section('title', 'billets')
 
 @section('content')
 <style>
@@ -238,10 +238,10 @@
             
             <div class="page-header">
                 <h1 class="page-title">Participants Live : [Nom du Billet] - Festival WeLovEya</h1>
-                <div class="breadcrumb">
+                <a href="{{ route ('billets_streaming')}}"  class="breadcrumb">
                     <i class="fas fa-arrow-left"></i>
                     <span>Retour à la Gestion des Billets Live Streaming</span>
-                </div>
+                </a>
             </div>
 
             <div class="table-container">

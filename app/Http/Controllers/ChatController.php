@@ -33,3 +33,4 @@ class ChatController extends Controller
         return ['status' => 'Message envoyé !'];
     }
 }
+

@@ -1,11 +1,10 @@
 @extends('layouts.application')
 
-@section('title', 'Artistes')
+@section('title', 'detail intervevants')
 <style>
     .main-content {
             flex: 1;
-            padding: 30px;
-            overflow-y: auto;
+            padding: 30px 40px;
         }
 
         .header {
@@ -15,324 +14,218 @@
             margin-bottom: 30px;
         }
 
-        .back-btn {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: #fff;
+        .back-link {
+            color: #4a90e2;
             text-decoration: none;
-            font-size: 14px;
-        }
-
-        .close-vote-btn {
-            background: #dc3545;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 25px;
-            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
             font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        .close-vote-btn:hover {
-            background: #c82333;
-            transform: translateY(-2px);
-        }
-
-        /* Status Card */
-        .status-card {
-            background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .status-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .vote-actif {
-            background: #ff6b35;
-            color: #fff;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-        }
-
-        .date-limite {
-            font-size: 13px;
-            opacity: 0.9;
-        }
-
-        /* Charts Section */
-        .charts-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 25px;
-            margin-bottom: 30px;
-        }
-
-        .chart-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 25px;
-        }
-
-        .chart-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .chart-header i {
-            color: #4dabf7;
-        }
-
-        .chart-header h3 {
-            font-size: 16px;
-            font-weight: 600;
-        }
-
-        /* Pie Chart */
-        .pie-chart {
-            position: relative;
-            width: 200px;
-            height: 200px;
-            margin: 30px auto;
-        }
-
-        .legend {
-            margin-top: 20px;
-        }
-
-        .legend-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-            font-size: 14px;
-        }
-
-        .legend-label {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .legend-color {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-        }
-
-        .total-votes {
-            
-            text-align: center;
-            margin-top: 15px;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.6);
-        }
-
-        .total-votes strong {
-            color: #f75e44ff;
-            font-size: 20px;
-            display: block;
-            margin-top: 5px;
-        }
-
-        /* Bar Chart */
-        .bar-chart {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-around;
-            height: 250px;
-            margin-top: 30px;
-            position: relative;
-        }
-
-        .bar-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .bars {
-            display: flex;
-            gap: 5px;
-            align-items: flex-end;
-            height: 200px;
-        }
-
-        .bar {
-            width: 20px;
-            border-radius: 4px 4px 0 0;
-            transition: all 0.3s;
-        }
-
-        .bar.classique {
-            background: #4dabf7;
-        }
-
-        .bar.hits {
-            background: #ff6b35;
-        }
-
-        .bar-label {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.6);
-            transform: rotate(-45deg);
-            white-space: nowrap;
-        }
-
-        .chart-legend {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-            font-size: 13px;
-        }
-
-        .chart-legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        /* Control Section */
-        .control-section {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-        }
-
-        .control-section h3 {
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-
-        .playlists {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .playlist-card {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .playlist-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            transform: translateY(-2px);
-        }
-
-        .playlist-card i {
-            font-size: 24px;
-            color: #f0f2f3ff;
-        }
-
-        .playlist-info h4 {
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 3px;
-        }
-
-        .playlist-info p {
-            font-size: 12px;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .time-limit {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-        }
-
-        .time-limit-label {
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .extend-btn {
-            background: #ff6b35;
-            color: #fff;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        .extend-btn:hover {
-            background: #e55a2b;
-            transform: translateY(-2px);
-        }
-
-        /* Publication Section */
-        .publication-section {
-            background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
-            border-radius: 15px;
-            padding: 25px;
-        }
-
-        .publication-section h3 {
-            font-size: 16px;
             margin-bottom: 15px;
         }
 
-        .publication-section p {
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 20px;
-            opacity: 0.9;
+        .header-title h1 {
+            font-size: 32px;
+            margin-bottom: 5px;
         }
 
-        .publish-btn {
-            background: #ff6b35;
-            color: #fff;
+        .header-subtitle {
+            color: #6b7785;
+            font-size: 14px;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 24px;
             border: none;
-            padding: 12px 30px;
             border-radius: 8px;
             cursor: pointer;
             font-size: 14px;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             transition: all 0.3s;
-            display: inline-block;
         }
 
-        .publish-btn:hover {
-            background: #e55a2b;
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-primary {
+            background: #ff8c42;
+            color: #fff;
+        }
+
+        .btn:hover {
             transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 140, 66, 0.3);
+        }
+
+        /* Cards */
+        .cards-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 25px;
+        }
+
+        /* Profile Card */
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid rgba(255, 140, 66, 0.3);
+        }
+
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-info h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #ff8c42;
+            color: #fff;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: #8b9aab;
+            font-size: 14px;
+        }
+
+        .contact-item i {
+            color: #4a90e2;
+            width: 20px;
+        }
+
+        .bio-section {
+            margin-top: 30px;
+        }
+
+        .bio-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .bio-text {
+            color: #8b9aab;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        .social-links {
+            margin-top: 30px;
+        }
+
+        .social-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .social-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-btn {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            color: #fff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .social-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        /* Logistics Card */
+        .logistics-grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .logistics-item {
+            display: flex;
+            justify-content: space-between;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logistics-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .logistics-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #8b9aab;
+            font-size: 14px;
+        }
+
+        .logistics-label i {
+            color: #c94727ff;
+        }
+
+        .logistics-value {
+            font-weight: 600;
+            font-size: 15px;
         }
 </style>
 @section('content')
@@ -340,224 +233,139 @@
     {{-- MAIN CONTENT --}}
     <main class="main-content">
             <div class="header">
-                <a href="{{route ('intervenants')}}" class="back-btn">
-                    <i class="fas fa-arrow-left"></i>
-                    Votes pour : Nom_artiste
-                </a>
-                <button class="close-vote-btn">
-                    <i class="fas fa-times-circle"></i>
-                    Clôturer le Vote
-                </button>
-            </div>
-
-            <!-- Status Card -->
-            <div class="status-card">
-                <div class="status-info">
-                    <i class="fas fa-poll" style="font-size: 24px;"></i>
-                    <div>
-                        <div style="font-weight: bold; margin-bottom: 5px;">Statut</div>
-                        <span class="vote-actif">Vote actif</span>
-                    </div>
+                <div class="header-title">
+                    <a href="#" class="back-link">
+                        <i class="fas fa-arrow-left"></i>
+                        Retour à la liste
+                    </a>
+                    <h1>Détails de l'Intervenant :  {{ $intervenant->nom }}</h1>
+                    <p class="header-subtitle">Informations complètes et logistique</p>
                 </div>
-                <div class="date-limite">
-                    Date limite<br>
-                    <strong>26 Décembre 2025 à 23:59</strong>
-                </div>
-            </div>
-
-            <!-- Charts Row -->
-            <div class="charts-row">
-                <!-- Pie Chart -->
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <i class="fas fa-chart-pie"></i>
-                        <h3>Répartition des votes</h3>
-                    </div>
-                    
-                    <div class="pie-chart">
-                        <canvas id="pieChart"></canvas>
-                    </div>
-
-                    <div class="legend">
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <span class="legend-color" style="background: #ff6b35;"></span>
-                                <span>Classiques</span>
-                            </div>
-                            <span>95 Votes</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-label">
-                                <span class="legend-color" style="background: #4dabf7;"></span>
-                                <span>Hits</span>
-                            </div>
-                            <span>105 Votes</span>
-                        </div>
-                    </div>
-
-                    <div class="total-votes">
-                        Total des votes
-                        <strong>200</strong>
-                    </div>
-                </div>
-
-                <!-- Bar Chart -->
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <i class="fas fa-chart-bar"></i>
-                        <h3>Évolution des votes</h3>
-                    </div>
-
-                    <div class="bar-chart" id="barChart"></div>
-
-                    <div class="chart-legend">
-                        <div class="chart-legend-item">
-                            <span class="legend-color" style="background: #4dabf7;"></span>
-                            <span>Classique</span>
-                        </div>
-                        <div class="chart-legend-item">
-                            <span class="legend-color" style="background: #ff6b35;"></span>
-                            <span>Hits</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Control Section -->
-            <div class="control-section">
-                <h3>Gestion et Contrôle</h3>
-                
-                <div style="font-size: 14px; margin-bottom: 15px; color: rgba(255, 255, 255, 0.7);">
-                    Fiches de Paroles
-                </div>
-
-                <div class="playlists">
-                    <div class="playlist-card">
+                <div class="header-actions">
+                    @foreach($intervenants as $intervenant)
+                    <button class="btn btn-secondary">
                         <i class="fas fa-download"></i>
-                        <div class="playlist-info">
-                            <h4>Classique</h4>
-                            <p>PDF de paroles</p>
-                        </div>
-                    </div>
-                    <div class="playlist-card">
-                        <i class="fas fa-music"></i>
-                        <div class="playlist-info">
-                            <h4>Hits</h4>
-                            <p>PDF de paroles</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="font-size: 14px; margin-bottom: 15px; color: rgba(255, 255, 255, 0.7);">
-                    Date/Heure limite du Vote
-                </div>
-
-                <div class="time-limit">
-                    <span class="time-limit-label">26 Décembre 2025</span>
-                    <button class="extend-btn">
-                        <i class="fas fa-calendar-plus"></i>
-                        Mettre à jour
+                        Télécharger la Fiche
                     </button>
+                    <a href="{{ route('intervenants.edit', $intervenant) }}"  class="btn btn-primary">
+                        <i class="fas fa-edit"></i>
+                        Modifier
+                    </a>
                 </div>
+                @endforeach
             </div>
 
-            <!-- Publication Section -->
-            <div class="publication-section">
-                <h3>Publication des Paroles</h3>
-                <p>
-                    En publiant, les paroles de l'option gagnante 'Hits Rythmés et Danse' seront automatiquement affichées sur la page publique de l'artiste.
-                </p>
-                <button class="publish-btn">
-                    <i class="fas fa-upload"></i>
-                    Publier les paroles de "Hits"
-                </button>
+            <div class="cards-container">
+                <!-- Identification Card -->
+                <div class="card">
+                    <h2 class="card-title">Identification</h2>
+                    
+                    <div class="profile-header">
+                        <div class="profile-avatar">
+                            <img width="120" src="{{ asset('storage/'.$intervenant->photo) }}">
+                        </div>
+                        <div class="profile-info">
+                            <h3>{{ $intervenant->nom }}</h3>
+                            <span class="status-badge">{{ $intervenant->status }}</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <span> {{ $intervenant->email }} </span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <span>{{ $intervenant->contact }}</span>
+                        </div>
+                    </div>
+
+                    <div class="bio-section">
+                        <h4 class="bio-title">Biographie</h4>
+                        <p class="bio-text">
+                            {{ $intervenant->description }}
+                        </p>
+                    </div>
+
+                    <div class="social-links">
+                        <h4 class="social-title">Liens Sociaux</h4>
+                        <div class="social-buttons">
+                            <a href="#" class="social-btn">
+                                <i class="fab fa-spotify"></i>
+                                Spotify
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                            <a href="#" class="social-btn">
+                                <i class="fab fa-instagram"></i>
+                                Instagram
+                                <i class="fas fa-external-link-alt"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logistics Card -->
+                <div class="card">
+                    <h2 class="card-title">Logistique et Planning</h2>
+                    
+                    <div class="logistics-grid">
+                        <div class="logistics-item">
+                            <div class="logistics-label">
+                                <i class="fas fa-calendar-alt"></i>
+                                Jour
+                            </div>
+                            <div class="logistics-value">{{ $intervenant->date }} </div>
+                        </div>
+
+                        <div class="logistics-item">
+                            <div class="logistics-label">
+                                <i class="fas fa-map-marker-alt"></i>
+                                Scène
+                            </div>
+                            <div class="logistics-value">{{ $intervenant->lieu }}</div>
+                        </div>
+
+                        <div class="logistics-item">
+                            <div class="logistics-label">
+                                <i class="fas fa-clock"></i>
+                                Créneau
+                            </div>
+                            <div class="logistics-value">{{ $intervenant->heure }}</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </main>
 @endsection
     
 <script>
-         // Pie Chart
-        const pieCanvas = document.getElementById('pieChart');
-        const pieCtx = pieCanvas.getContext('2d');
-        pieCanvas.width = 200;
-        pieCanvas.height = 200;
-
-        const classiquesVotes = 95;
-        const hitsVotes = 105;
-        const total = classiquesVotes + hitsVotes;
-
-        const classiquesAngle = (classiquesVotes / total) * 2 * Math.PI;
-        const hitsAngle = (hitsVotes / total) * 2 * Math.PI;
-
-        const centerX = 100;
-        const centerY = 100;
-        const radius = 80;
-
-        // Draw Classiques (orange)
-        pieCtx.beginPath();
-        pieCtx.arc(centerX, centerY, radius, 0, classiquesAngle);
-        pieCtx.lineTo(centerX, centerY);
-        pieCtx.fillStyle = '#ff6b35';
-        pieCtx.fill();
-
-        // Draw Hits (blue)
-        pieCtx.beginPath();
-        pieCtx.arc(centerX, centerY, radius, classiquesAngle, classiquesAngle + hitsAngle);
-        pieCtx.lineTo(centerX, centerY);
-        pieCtx.fillStyle = '#4dabf7';
-        pieCtx.fill();
-
-        // Bar Chart
-        const barChartData = [
-            { label: '2024', classique: 60, hits: 40 },
-            { label: '2025', classique: 80, hits: 70 },
-            { label: 'Q1', classique: 50, hits: 90 },
-            { label: 'Q2', classique: 70, hits: 60 },
-            { label: 'Q3', classique: 90, hits: 100 }
-        ];
-
-        const barChart = document.getElementById('barChart');
-        const maxValue = 100;
-
-        barChartData.forEach(data => {
-            const barGroup = document.createElement('div');
-            barGroup.className = 'bar-group';
-
-            const bars = document.createElement('div');
-            bars.className = 'bars';
-
-            const classiqueBar = document.createElement('div');
-            classiqueBar.className = 'bar classique';
-            classiqueBar.style.height = `${(data.classique / maxValue) * 200}px`;
-
-            const hitsBar = document.createElement('div');
-            hitsBar.className = 'bar hits';
-            hitsBar.style.height = `${(data.hits / maxValue) * 200}px`;
-
-            bars.appendChild(classiqueBar);
-            bars.appendChild(hitsBar);
-
-            const label = document.createElement('div');
-            label.className = 'bar-label';
-            label.textContent = data.label;
-
-            barGroup.appendChild(bars);
-            barGroup.appendChild(label);
-            barChart.appendChild(barGroup);
+        // Animation au survol des boutons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
         });
 
-        // Button interactions
-        document.querySelector('.close-vote-btn').addEventListener('click', function() {
-            alert('Vote clôturé !');
+        // Menu items interactifs
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+                this.classList.add('active');
+            });
         });
 
-        document.querySelector('.extend-btn').addEventListener('click', function() {
-            alert('Extension de date demandée');
+        // Animation de la barre de recherche
+        const searchInput = document.querySelector('.search-box input');
+        searchInput.addEventListener('focus', function() {
+            this.parentElement.style.borderColor = 'rgba(74, 144, 226, 0.5)';
         });
-
-        document.querySelector('.publish-btn').addEventListener('click', function() {
-            alert('Paroles publiées avec succès !');
+        searchInput.addEventListener('blur', function() {
+            this.parentElement.style.borderColor = 'transparent';
         });
-    </script>
+    </script>  
     @push('scripts')
 @endpush

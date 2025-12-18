@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\JeuxController;
-
+use App\Http\Controllers\IntervenantController;
 
 
 
@@ -67,6 +67,10 @@ Route::get('/tickets', function () {
     return view('dashboard.gestiondestickets');
 })->name('tickets');
 
+Route::get('/billets_streaming', function () {
+    return view('dashboard.billets_streaming');
+})->name('billets_streaming');
+
 Route::get('/billets', function () {
     return view('dashboard.billets');
 })->name('billets streaming');
@@ -103,24 +107,15 @@ Route::get('/detailcommande', function () {
     return view('dashboard.detailcommande');
 })->name('commandes_detail');
 
-Route::get('/intervenants', function () {
-    return view('dashboard.intervenants');
-})->name('intervenants');
-
-Route::get('/ajouter_intervenants', function () {
-    return view('dashboard.ajouterintervenants');
-})->name('ajouter_intervenants');
-
-Route::get('/detailIntervenant', function () {
-    return view('dashboard.detailIntervenant');
-})->name('detailIntervenant');
-
 Route::get('/jeux', function () {
     return view('dashboard.Jeux');
 })->name('Jeux_concours');
 
 Route::get('/jeux', [JeuxController::class, 'index'])->name('Jeux_concours');
 
+Route::get('/detailIntervenants', function () {
+    return view('dashboard.detailIntervenants');
+})->name('detailIntervenants');
 
 Route::get('/activites', function () {
     return view('dashboard.activites');
@@ -190,4 +185,32 @@ Route::put('/ajout-jeux/{jeu}', [JeuxController::class, 'update'])->name('ajout_
 
 // Suppression d'un jeu
 Route::delete('/ajout-jeux/{jeu}', [JeuxController::class, 'destroy'])->name('ajout_jeux.destroy');
+
+// route de gestion de la création des intervenants
+
+
+Route::prefix('dashboard')->group(function () {
+
+    Route::get('/intervenants', [IntervenantController::class, 'index'])->name('dashboard.intervenants');
+    Route::get('/intervenants/{id}', [IntervenantController::class, 'show'])->name('intervenants.show');
+
+    Route::get('/intervenants/ajouter', [IntervenantController::class, 'create'])
+        ->name('ajouter_intervenants');
+
+    Route::post('/intervenants', [IntervenantController::class, 'store'])
+        ->name('intervenants.store');
+
+    Route::get('/intervenants/{intervenant}/edit', [IntervenantController::class, 'edit'])
+        ->name('intervenants.edit');
+
+    Route::put('/intervenants/{intervenant}', [IntervenantController::class, 'update'])
+        ->name('intervenants.update');
+
+    Route::delete('/intervenants/{intervenant}', [IntervenantController::class, 'destroy'])
+        ->name('intervenants.destroy');
+
+    Route::get('/intervenants-search', [IntervenantController::class, 'search'])
+        ->name('intervenants.search');
+});
+
 

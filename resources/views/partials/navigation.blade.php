@@ -26,7 +26,7 @@
         <span>Tickets</span>
     </a>
 
-    <a href="{{ url('/billets') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm transition-all @if(request()->is('billets')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">
+    <a href="{{ url('/billets_streaming') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm transition-all @if(request()->is('billets')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">
         <i class="fas fa-users w-4.5"></i>
         <span>Billets streaming</span>
     </a>
@@ -46,7 +46,7 @@
         <span>Commandes</span>
     </a>
 
-    <a href="{{ url('/intervenants') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm transition-all @if(request()->is('intervenants')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">
+    <a href="{{ url('dashboard/intervenants') }}" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm transition-all @if(request()->is('intervenants')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">
         <i class="fas fa-users w-4.5"></i>
         <span>Intervenants</span>
     </a>

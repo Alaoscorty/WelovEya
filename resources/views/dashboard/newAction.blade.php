@@ -157,12 +157,12 @@
                     
                     <div class="form-group">
                         <input 
-    type="text" 
-    name="title"
-    class="form-input" 
-    required
->
-Nom de l'Action</label>
+                            type="text" 
+                            name="title"
+                            class="form-input" 
+                            required
+                        >
+                        Nom de l'Action</label>
                         <input 
                             type="text" 
                             class="form-input" 
