@@ -8,8 +8,8 @@ return new class extends Migration
 {
     public function up(): void
     {
-        if (!Schema::hasTable('articles_commandes')) {
-            Schema::create('articles_commandes', function (Blueprint $table) {
+        if (!Schema::hasTable('articles')) {
+            Schema::create('articles', function (Blueprint $table) {
                 $table->id();
                 $table->foreignId('commande_id')->constrained('commandes')->onDelete('cascade');
                 $table->string('nom_article');

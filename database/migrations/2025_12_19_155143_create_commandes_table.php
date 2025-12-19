@@ -11,7 +11,7 @@ return new class extends Migration
         if (!Schema::hasTable('commandes')) {
             Schema::create('commandes', function (Blueprint $table) {
                 $table->id();
-                $table->string('code_commande')->unique();
+                $table->string('code_commande')->default(DB::raw('(UUID())'));
                 $table->string('nom_acheteur');
                 $table->string('email')->nullable();
                 $table->string('telephone')->nullable();

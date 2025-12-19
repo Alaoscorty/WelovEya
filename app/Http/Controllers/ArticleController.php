@@ -72,6 +72,7 @@ class ArticleController extends Controller
 
         // Création de l'article
         Article::create($validated);
+        
 
         // Redirection avec message de succès
         return redirect()->route('articles.index')->with('success', 'Article créé avec succès.');
