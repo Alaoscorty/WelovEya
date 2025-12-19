@@ -3,34 +3,21 @@
 @section('title', 'Ajouter un intervenant')
 
 <style>
-    .main-content {
-            flex: 1;
-            padding: 0;
-            overflow-y: auto;
-        }
-
-        .header-banner {
-            background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
-            padding: 20px 30px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .header-banner i {
-            font-size: 24px;
-        }
-
-        .header-banner h1 {
-            font-size: 20px;
-            font-weight: 600;
-        }
-
-        .header-banner p {
-            font-size: 13px;
-            opacity: 0.9;
-            margin-top: 3px;
-        }
+/* Garde tout ton style existant */
+.main-content {
+    flex: 1;
+    padding: 0;
+    overflow-y: auto;
+}
+.header-banner {
+    background: linear-gradient(135deg, #ff6b35 0%, #ff8c5a 100%);
+    padding: 20px 30px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.header-banner h1 { font-size: 20px; font-weight: 600; }
+.header-banner p { font-size: 14px; opacity: 0.9; margin-top: 8px; }
 
         .form-container {
             padding: 30px;
@@ -300,245 +287,157 @@
         }
 </style>
 
+
 @section('content')
 <div class="flex container">
     <main class="main-content">
 
-        <!-- Header -->
-        <div class="header">
+        <div class="header-banner">
             <h1>Ajouter un intervenant</h1>
             <p>Artiste, Animateur ou DJ</p>
         </div>
 
-        <!-- Form -->
         <div class="form-container">
+
+            @if(session('success'))
+                <div style="color:lightgreen">{{ session('success') }}</div>
+            @endif
+
             <form action="{{ route('intervenants.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
-                <div class="form-container">
-                <!-- Information de base -->
+                <!-- I. INFOS DE BASE -->
                 <div class="form-section">
                     <h2 class="section-title">I. Informations de base</h2>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Nom de l'intervenant*</label>
-                            <input type="text" value="INFANDE" placeholder="Nom de l'intervenant">
+                            <label>Nom *</label>
+                            <input type="text" name="nom" value="{{ old('nom') }}" required>
                         </div>
+
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="email" value="Infan@gmail.com" placeholder="Email">
+                            <input type="email" name="email" value="{{ old('email') }}">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label>Téléphone</label>
-                            <input type="tel" placeholder="Téléphone">
+                            <input type="tel" name="telephone">
                         </div>
+
                         <div class="form-group">
-                            <label>Région/ville (optionnel)</label>
-                            <input type="text" placeholder="Région/ville">
+                            <label>Région / Ville</label>
+                            <input type="text" name="region">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label>Pays</label>
-                            <select>
-                                <option>Côte</option>
-                                <option>Bénin</option>
-                                <option>Togo</option>
-                                <option>France</option>
+                            <select name="pays">
+                                <option value="">-- Choisir --</option>
+                                <option value="Côte d'Ivoire">Côte d'Ivoire</option>
+                                <option value="Bénin">Bénin</option>
+                                <option value="Togo">Togo</option>
+                                <option value="France">France</option>
                             </select>
                         </div>
+
                         <div class="form-group">
-                            <label>Date de Début</label>
-                            <input type="text" value="Jeudi 10/04/2025" placeholder="Date">
+                            <label>Date de début</label>
+                            <input type="date" name="date_debut">
+                        </div>
+                    </div>
+
+                    <!-- NOUVEAU CHAMP PHOTO -->
+                    <div class="form-row">
+                        <div class="form-group full-width">
+                            <label>Photo de l'intervenant</label>
+                            <input type="file" name="photo" accept="image/*">
                         </div>
                     </div>
                 </div>
 
-                <!-- Logistique et Programmation -->
+                <!-- II. PROGRAMMATION -->
                 <div class="form-section">
-                    <h2 class="section-title">II. Logistique et Programmation</h2>
-                    
+                    <h2 class="section-title">II. Logistique & Programmation</h2>
+
                     <div class="form-row">
                         <div class="form-group">
                             <label>Jour de l'événement</label>
-                            <select>
-                                <option>Jour 2</option>
-                                <option>Jour 1</option>
-                                <option>Jour 3</option>
+                            <select name="jour_evenement">
+                                <option value="Jour 1">Jour 1</option>
+                                <option value="Jour 2">Jour 2</option>
+                                <option value="Jour 3">Jour 3</option>
                             </select>
-                        </div>
-                        <div class="form-group">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label>Heure de début</label>
-                            <input type="time" value="19:30">
+                            <input type="time" name="heure_debut">
                         </div>
+
                         <div class="form-group">
                             <label>Heure de fin</label>
-                            <input type="time" value="20:45">
+                            <input type="time" name="heure_fin">
                         </div>
                     </div>
                 </div>
 
-                <!-- Gestion du vote interactif -->
+                <!-- III. VOTE -->
                 <div class="form-section vote-section">
-                    <h2 class="section-title">III. Gestion du vote interactif</h2>
-                    
-                    <div class="vote-description">
-                        Cette section permet d'activer un vote public pour que votre audience choisisse l'option de répertoire de la performance.
+                    <h2 class="section-title">III. Vote interactif</h2>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="voteToggle" name="vote_actif">
+                            Activer le vote public
+                        </label>
                     </div>
 
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="activerVote" checked>
-                        <label for="activerVote">Activer le vote public</label>
+                    <div class="form-group">
+                        <label>Date limite du vote</label>
+                        <input type="date" name="date_limite_vote" id="dateVote" disabled>
                     </div>
 
-                    <div class="date-limit-row">
+                    <h4>Fichiers Paroles</h4>
+
+                    <div class="form-row">
                         <div class="form-group">
-                            <label>Date Limite du Vote</label>
-                            <input type="text" placeholder="Sélectionnez une date">
+                            <label>Classiques</label>
+                            <input type="file" name="paroles_classiques" accept=".pdf,.doc,.docx">
                         </div>
-                        <div class="calendar-icon">
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                    </div>
 
-                    <div class="vote-note">
-                        CRITIQUE : Une analyse claire sera envoyée après clôture (Date limite)
-                    </div>
-
-                    <div class="options-list">
-                        <ol>
-                            <li>  1.Classiques et Ballades</li>
-                            <li>  2.Hits Rythmés et Daniel</li>
-                        </ol>
-                    </div>
-
-                    <!-- Paroles Section -->
-                    <div class="paroles-section">
-                        <div class="paroles-header">Télécharger/gérer les fiches de Paroles</div>
-                        
-                        <div class="paroles-options">
-                            <div class="parole-option">
-                                <div class="parole-option-header">HIP #01 - Classiques</div>
-                                <div class="parole-option-description">
-                                    Fichier non présent dans l'option "Classiques"
-                                </div>
-                                <div class="parole-buttons">
-                                    <button class="btn-secondary">
-                                        <i class="fas fa-upload"></i>
-                                        Choisir un fichier
-                                    </button>
-                                    <button class="btn-secondary">
-                                        <i class="fas fa-trash"></i>
-                                        Aucun fichier choisi
-                                    </button>
-                                </div>
-                            </div>
-
-                            <div class="parole-option">
-                                <div class="parole-option-header">HIP #02 - Hits</div>
-                                <div class="parole-option-description">
-                                    Fichier non représenté dans l'option "Hits/PCD"
-                                </div>
-                                <div class="parole-buttons">
-                                    <button class="btn-secondary">
-                                        <i class="fas fa-upload"></i>
-                                        Choisir un fichier
-                                    </button>
-                                    <button class="btn-secondary">
-                                        <i class="fas fa-trash"></i>
-                                        Aucun fichier choisi
-                                    </button>
-                                </div>
-                            </div>
+                        <div class="form-group">
+                            <label>Hits</label>
+                            <input type="file" name="paroles_hits" accept=".pdf,.doc,.docx">
                         </div>
                     </div>
                 </div>
 
-                <!-- Actions -->
-                <div class="form-actions">
-                    <a href="{{ url()->previous() }}" class="btn btn-secondary">
-                        <i class="fas fa-arrow-left"></i> Annuler
-                    </a>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fas fa-save"></i> Enregistrer
-                    </button>
+                <!-- ACTIONS -->
+                <div class="action-buttons">
+                    <a href="{{ url()->previous() }}" class="btn-cancel">Annuler</a>
+                    <button type="submit" class="btn-submit">Enregistrer</button>
                 </div>
+
             </form>
         </div>
-
     </main>
 </div>
+
 @endsection
+
 <script>
-        // File upload handling
-        const fileButtons = document.querySelectorAll('.parole-buttons .btn-secondary');
-        fileButtons.forEach((btn, index) => {
-            if (btn.textContent.includes('Choisir')) {
-                btn.addEventListener('click', function() {
-                    const input = document.createElement('input');
-                    input.type = 'file';
-                    input.accept = '.pdf,.doc,.docx';
-                    input.onchange = function(e) {
-                        const file = e.target.files[0];
-                        if (file) {
-                            alert(`Fichier sélectionné: ${file.name}`);
-                        }
-                    };
-                    input.click();
-                });
-            }
-        });
+document.getElementById('voteToggle').addEventListener('change', function () {
+    document.getElementById('dateVote').disabled = !this.checked;
+});
+</script>
 
-        // Calendar icon click
-        document.querySelector('.calendar-icon').addEventListener('click', function() {
-            const dateInput = this.previousElementSibling.querySelector('input');
-            dateInput.type = 'date';
-            dateInput.focus();
-        });
-
-        // Checkbox toggle
-        document.getElementById('activerVote').addEventListener('change', function() {
-            const voteSection = this.closest('.vote-section');
-            if (!this.checked) {
-                voteSection.style.opacity = '0.5';
-            } else {
-                voteSection.style.opacity = '1';
-            }
-        });
-
-        // Cancel button
-        document.querySelector('.btn-cancel').addEventListener('click', function() {
-            if (confirm('Voulez-vous vraiment annuler les modifications?')) {
-                window.history.back();
-            }
-        });
-
-        // Submit button
-        document.querySelector('.btn-submit').addEventListener('click', function() {
-            alert('Modifications sauvegardées avec succès!');
-        });
-
-        // Form validation
-        const requiredInputs = document.querySelectorAll('input[type="text"], input[type="email"]');
-        requiredInputs.forEach(input => {
-            input.addEventListener('blur', function() {
-                if (this.value.trim() === '' && this.previousElementSibling.textContent.includes('*')) {
-                    this.style.borderColor = '#dc3545';
-                } else {
-                    this.style.borderColor = 'rgba(255, 255, 255, 0.1)';
-                }
-            });
-        });
-    </script>
-    @push('scripts')
+@push('scripts')
 @endpush

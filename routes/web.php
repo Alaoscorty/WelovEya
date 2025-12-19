@@ -111,6 +111,7 @@ Route::get('/jeux', function () {
     return view('dashboard.Jeux');
 })->name('Jeux_concours');
 
+
 Route::get('/jeux', [JeuxController::class, 'index'])->name('Jeux_concours');
 
 Route::get('/detailIntervenants', function () {
@@ -187,15 +188,14 @@ Route::put('/ajout-jeux/{jeu}', [JeuxController::class, 'update'])->name('ajout_
 Route::delete('/ajout-jeux/{jeu}', [JeuxController::class, 'destroy'])->name('ajout_jeux.destroy');
 
 // route de gestion de la création des intervenants
-
+Route::get('/intervenants/ajouter', function () {
+    return view('dashboard.intervenants.create');
+})->name('intervenants.create');
 
 Route::prefix('dashboard')->group(function () {
 
     Route::get('/intervenants', [IntervenantController::class, 'index'])->name('dashboard.intervenants');
     Route::get('/intervenants/{id}', [IntervenantController::class, 'show'])->name('intervenants.show');
-
-    Route::get('/intervenants/ajouter', [IntervenantController::class, 'create'])
-        ->name('ajouter_intervenants');
 
     Route::post('/intervenants', [IntervenantController::class, 'store'])
         ->name('intervenants.store');
@@ -214,3 +214,5 @@ Route::prefix('dashboard')->group(function () {
 });
 
 
+Route::get('/commandes', [CommandeController::class, 'index'])->name('commandes.index');
+Route::post('/commandes', [CommandeController::class, 'store'])->name('commandes.store');

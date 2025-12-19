@@ -6,23 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-   public function up()
-{
-    Schema::table('votes', function (Blueprint $table) {
-        $table->string('type')->after('intervenant_id'); // type de vote, par ex. 'classique' ou 'hits'
-    });
-}
+    public function up(): void
+    {
+        Schema::table('votes', function (Blueprint $table) {
+            $table->string('type')->after('intervenant_id')->default('standard');
+        });
+    }
 
-public function down()
-{
-    Schema::table('votes', function (Blueprint $table) {
-        $table->dropColumn('type');
-    });
-}
-
+    public function down(): void
+    {
+        Schema::table('votes', function (Blueprint $table) {
+            $table->dropColumn('type');
+        });
+    }
 };

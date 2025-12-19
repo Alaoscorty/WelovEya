@@ -9,12 +9,12 @@
     </button>
 
     <div id="menu" class="hidden md:flex items-center space-x-6">
-      <a href="{{ url('/artistes') }}" class="text-white hover:text-orange-500">Artistes</a>
-      <a href="{{ url('/billeterie') }}" class="text-white hover:text-orange-500">Billeterie & Location</a>
-      <a href="{{ url('/direct') }}" class="text-white hover:text-orange-500">Direct <i class="fas fa-video" style="color: red;"></i></a>
-      <a href="{{ url('/boutique') }}" class="text-white hover:text-orange-500">Boutique</a>
-      <a href="{{ url('/propos') }}"class="text-white hover:text-orange-500">A propos</a>
-      <a href="{{ url('/jeux') }}" class="text-white hover:text-orange-500">Jeux</a>
+      <a href="{{ url('/artistes') }}" class="text-white hover:text-orange-500 transition-all @if(request()->is('artistes')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">Artistes</a>
+      <a href="{{ url('/billeterie') }}" class="text-white hover:text-orange-500 transition-all @if(request()->is('billeterie')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">Billeterie & Location</a>
+      <a href="{{ url('/direct') }}" class="text-white hover:text-orange-500 transition-all @if(request()->is('direct')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">Direct <i class="fas fa-video" style="color: red;"></i></a>
+      <a href="{{ url('/boutique') }}" class="text-white hover:text-orange-500 transition-all @if(request()->is('boutique')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">Boutique</a>
+      <a href="{{ url('/propos') }}"class="text-white hover:text-orange-500 transition-all @if(request()->is('propos')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">A propos</a>
+      <a href="{{ url('/jeux') }}" class="text-white hover:text-orange-500 transition-all @if(request()->is('jeux')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">Jeux</a>
       <a href="{{ url('/dashboard') }}" class="text-white hover:text-white bg-orange-800 rounded-lg p-2">Connexion</a>
     </div>
 

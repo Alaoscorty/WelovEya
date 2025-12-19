@@ -5,19 +5,44 @@ namespace App\Http\Controllers;
 use App\Models\Intervenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\IntervenantRequest;
+use Illuminate\Support\Str;
 
 class IntervenantController extends Controller
 {
     /**
-     * LISTE DES INTERVENANTS (Dashboard)
+     * LISTE DES INTERVENANTS
      */
-   public function index()
-{
-    // Récupérer les intervenants avec le nombre de votes
-    $intervenants = Intervenant::withCount('votes')->get(); // votes = relation vers table votes
+    public function index(Request $request)
+    {
+        $query = Intervenant::query();
 
-    return view('dashboard.intervenants', compact('intervenants'));
-}
+        // Recherche par texte
+        if ($request->filled('q')) {
+            $q = $request->q;
+            $query->where(function($subQuery) use ($q) {
+                $subQuery->where('nom', 'like', "%{$q}%")
+                         ->orWhere('email', 'like', "%{$q}%")
+                         ->orWhere('code', 'like', "%{$q}%");
+            });
+        }
+
+        // Filtre par rôle
+        if ($request->filled('role')) {
+            $query->where('role', $request->role);
+        }
+
+        $intervenants = $query->latest()->paginate(10);
+
+        // Statistiques pour les cartes
+        $stats = [
+            'artistes'   => Intervenant::where('role', 'artiste')->count(),
+            'animateurs' => Intervenant::where('role', 'animateur')->count(),
+            'djs'        => Intervenant::where('role', 'dj')->count(),
+        ];
+
+        return view('dashboard.intervenants', compact('intervenants', 'stats'));
+    }
 
     /**
      * FORMULAIRE AJOUT
@@ -30,44 +55,73 @@ class IntervenantController extends Controller
     /**
      * ENREGISTREMENT
      */
-    public function store(Request $request)
+    public function store(IntervenantRequest $request)
     {
-        $request->validate([
-            'nom' => 'required|string|max:255',
-            'email' => 'required|email|unique:intervenants,email',
-            'role' => 'required|string',
-            'photo' => 'nullable|image|max:2048',
-        ]);
+        $data = $request->validated();
 
-        $intervenant = new Intervenant();
-        $intervenant->nom = $request->nom;
-        $intervenant->email = $request->email;
-        $intervenant->role = $request->role;
+        $data['code'] = 'INT-' . strtoupper(Str::random(6));
+        $data['statut'] = 'en-attente';
+        $data['vote_actif'] = $request->has('vote_actif');
 
+        // Upload photo
         if ($request->hasFile('photo')) {
-            $intervenant->photo = $request->file('photo')->store('intervenants', 'public');
+            $data['photo'] = $request->file('photo')->store('intervenants', 'public');
         }
 
-        $intervenant->statut = 'en_attente';
-        $intervenant->save();
+        Intervenant::create($data);
 
-        return redirect()->route('dashboard.intervenants')->with('success', 'Intervenant ajouté avec succès !');
+        return redirect()->route('dashboard.intervenants')->with('success', 'Intervenant enregistré avec succès');
     }
+
     /**
-     * DÉTAIL
+     * DÉTAIL D'UN INTERVENANT
      */
     public function show(Intervenant $intervenant)
 {
-    // Calcul des stats pour les charts
-    $votes_classiques = $intervenant->votes()->where('type', 'classique')->count();
-    $votes_hits = $intervenant->votes()->where('type', 'hits')->count();
+    // Récupérer tous les votes de l'intervenant
+    $votes = $intervenant->votes()->get();
 
-    $stats = [
-        'votes_classiques' => $votes_classiques,
-        'votes_hits' => $votes_hits,
+    // Comptage des votes par type
+    $votesByOption = $votes->groupBy('type')->map(function($group) {
+        return $group->count();
+    })->toArray();
+
+    // Si aucune catégorie, initialiser à 0
+    $votesByOption = array_merge([
+        'Classique' => 0,
+        'Hits' => 0
+    ], $votesByOption);
+
+    // Couleurs pour graphiques
+    $colors = [
+        'Classique' => '#ff6b35',
+        'Hits' => '#4dabf7',
     ];
 
-    return view('dashboard.detailIntervenant', compact('intervenant', 'stats'));
+    // Options pour les fiches de paroles
+    $options = [
+        [
+            'name' => 'Classique',
+            'file' => 'PDF de paroles',
+            'icon' => 'fas fa-download'
+        ],
+        [
+            'name' => 'Hits',
+            'file' => 'PDF de paroles',
+            'icon' => 'fas fa-music'
+        ]
+    ];
+
+    // Déterminer l'option gagnante
+    $winningOption = collect($votesByOption)->sortDesc()->keys()->first() ?? 'Classique';
+
+    return view('dashboard.intervenants.show', compact(
+        'intervenant',
+        'votesByOption',
+        'colors',
+        'options',
+        'winningOption'
+    ));
 }
 
     /**
@@ -87,29 +141,25 @@ class IntervenantController extends Controller
             'nom'    => 'required|string|max:255',
             'email'  => 'required|email|unique:intervenants,email,' . $intervenant->id,
             'role'   => 'required|in:artiste,animateur,dj',
-            'statut' => 'required|in:en_attente,confirme',
-            'heure'  => 'required',
-            'date'   => 'required|date',
+            'statut' => 'required|in:en-attente,confirme',
             'photo'  => 'nullable|image|max:2048',
+            'date_debut' => 'nullable|date',
+            'heure_debut' => 'nullable',
+
         ]);
 
         // Nouvelle photo ?
         if ($request->hasFile('photo')) {
-
-            // Supprimer l’ancienne
             if ($intervenant->photo && Storage::disk('public')->exists($intervenant->photo)) {
                 Storage::disk('public')->delete($intervenant->photo);
             }
 
-            $data['photo'] = $request->file('photo')
-                ->store('intervenants', 'public');
+            $data['photo'] = $request->file('photo')->store('intervenants', 'public');
         }
 
         $intervenant->update($data);
 
-        return redirect()
-            ->route('dashboard.intervenants')
-            ->with('success', 'Intervenant modifié avec succès');
+        return redirect()->route('dashboard.intervenants')->with('success', 'Intervenant modifié avec succès');
     }
 
     /**
@@ -123,7 +173,7 @@ class IntervenantController extends Controller
 
         $intervenant->delete();
 
-        return back()->with('success', 'Intervenant supprimé');
+        return back()->with('success', 'Intervenant supprimé avec succès');
     }
 
     /**
@@ -131,12 +181,19 @@ class IntervenantController extends Controller
      */
     public function search(Request $request)
     {
-        $query = $request->get('q');
+        $query = Intervenant::query();
 
-        return Intervenant::where('nom', 'like', "%{$query}%")
-            ->orWhere('email', 'like', "%{$query}%")
-            ->orWhere('code', 'like', "%{$query}%")
-            ->limit(10)
-            ->get();
+        if ($request->filled('q')) {
+            $q = $request->q;
+            $query->where('nom', 'like', "%{$q}%")
+                  ->orWhere('email', 'like', "%{$q}%")
+                  ->orWhere('code', 'like', "%{$q}%");
+        }
+
+        if ($request->filled('role')) {
+            $query->where('role', $request->role);
+        }
+
+        return response()->json($query->limit(10)->get());
     }
 }

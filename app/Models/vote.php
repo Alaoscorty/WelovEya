@@ -9,8 +9,13 @@ class Vote extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['intervenant_id', 'type'];
+    protected $fillable = [
+        'intervenant_id',
+        'type',
+        'user_name'
+    ];
 
+    // Relation inverse vers Intervenant
     public function intervenant()
     {
         return $this->belongsTo(Intervenant::class);

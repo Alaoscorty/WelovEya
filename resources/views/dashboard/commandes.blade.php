@@ -501,370 +501,146 @@
             filter: invert(1);
         }
 </style>
-  <!-- Main -->
-  <div class="ml-5 p-8">
-        <main class="main-content">
-            <div class="header">
-                <h1>Gestion des commandes</h1>
-                <p>Visualisez et gérez toutes les commandes</p>
-            </div>
 
-            <!-- Stats Grid -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon orange">
-                        <i class="fas fa-box"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Total Articles Vendus</h3>
-                        <p>2847</p>
-                    </div>
+<div class="ml-5 p-8">
+    <main class="main-content">
+        <div class="header">
+            <h1>Gestion des commandes</h1>
+            <p>Visualisez et gérez toutes les commandes</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon orange">
+                    <i class="fas fa-box"></i>
                 </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon green">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Total Commandes</h3>
-                        <p>2456</p>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon yellow">
-                        <i class="fas fa-clock"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Commandes en attente</h3>
-                        <p>391</p>
-                    </div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-icon red">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Revenus Générés</h3>
-                        <p>450000 F</p>
-                    </div>
+                <div class="stat-info">
+                    <h3>Total Articles Vendus</h3>
+                    <p>{{ $commandes->sum(fn($c)=>$c->articles->sum('quantite')) }}</p>
                 </div>
             </div>
-
-            <!-- Table Section -->
-            <div class="table-section">
-                <div class="table-header">
-                    <div class="table-search">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Rechercher une commande ....">
-                    </div>
-                    <span class="pagination-info">1 - 10 sur</span>
-                    <button class="add-btn" id="addOrderBtn">
-                        <i class="fas fa-plus"></i>
-                        Ajouter une commande
-                    </button>
+            <div class="stat-card">
+                <div class="stat-icon green">
+                    <i class="fas fa-check-circle"></i>
                 </div>
-
-                <table class="orders-table">
-                    <thead>
-                        <tr>
-                            <th><input type="checkbox" class="checkbox"></th>
-                            <th>ID Commande <i class="fas fa-sort"></i></th>
-                            <th>Acheteur <i class="fas fa-sort"></i></th>
-                            <th>Articles achetés <i class="fas fa-sort"></i></th>
-                            <th>Statut <i class="fas fa-sort"></i></th>
-                            <th>Revenus générés <i class="fas fa-sort"></i></th>
-                            <th>Date <i class="fas fa-sort"></i></th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="checkbox" class="checkbox"></td>
-                            <td class="order-id">CDE-001</td>
-                            <td>
-                                <div class="customer-info">
-                                    <div class="customer-avatar">JD</div>
-                                    <div class="customer-details">
-                                        <h4>Jean Dupont</h4>
-                                        <p>jeandupont@gmail.com</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>3</td>
-                            <td><span class="badge validee"><i class="fas fa-check-circle"></i> Validée</span></td>
-                            <td>13700 F</td>
-                            <td>15 Novembre 2024</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" class="checkbox"></td>
-                            <td class="order-id">CDE-002</td>
-                            <td>
-                                <div class="customer-info">
-                                    <div class="customer-avatar">MM</div>
-                                    <div class="customer-details">
-                                        <h4>Marie Martin</h4>
-                                        <p>mariemartin@gmail.com</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>1</td>
-                            <td><span class="badge attente"><i class="fas fa-clock"></i> En attente</span></td>
-                            <td>15000 F</td>
-                            <td>15 Novembre 2023</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" class="checkbox"></td>
-                            <td class="order-id">CDE-003</td>
-                            <td>
-                                <div class="customer-info">
-                                    <div class="customer-avatar">SD</div>
-                                    <div class="customer-details">
-                                        <h4>Sophie Dubois</h4>
-                                        <p>sophiedubois@gmail.com</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>2</td>
-                            <td><span class="badge attente"><i class="fas fa-clock"></i> En attente</span></td>
-                            <td>5675 F</td>
-                            <td>10 Décembre 2023</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" class="checkbox"></td>
-                            <td class="order-id">CDE-004</td>
-                            <td>
-                                <div class="customer-info">
-                                    <div class="customer-avatar">EB</div>
-                                    <div class="customer-details">
-                                        <h4>Emma Bernard</h4>
-                                        <p>emmab@gmail.com</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>5</td>
-                            <td><span class="badge validee"><i class="fas fa-check-circle"></i> Validée</span></td>
-                            <td>3375 F</td>
-                            <td>29 Novembre 2024</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" class="checkbox"></td>
-                            <td class="order-id">CDE-005</td>
-                            <td>
-                                <div class="customer-info">
-                                    <div class="customer-avatar">JD</div>
-                                    <div class="customer-details">
-                                        <h4>Jean Dupont</h4>
-                                        <p>jeandupont@gmail.com</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>4</td>
-                            <td><span class="badge attente"><i class="fas fa-clock"></i> En attente</span></td>
-                            <td>13293 F</td>
-                            <td>17 Décembre 2024</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" class="checkbox"></td>
-                            <td class="order-id">CDE-006</td>
-                            <td>
-                                <div class="customer-info">
-                                    <div class="customer-avatar">JD</div>
-                                    <div class="customer-details">
-                                        <h4>Jean Dupont</h4>
-                                        <p>jeandupont@gmail.com</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>2</td>
-                            <td><span class="badge validee"><i class="fas fa-check-circle"></i> Validée</span></td>
-                            <td>10000 F</td>
-                            <td>07 Novembre 2024</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" class="checkbox"></td>
-                            <td class="order-id">CDE-007</td>
-                            <td>
-                                <div class="customer-info">
-                                    <div class="customer-avatar">JD</div>
-                                    <div class="customer-details">
-                                        <h4>Jean Dupont</h4>
-                                        <p>jeandupont@gmail.com</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>1</td>
-                            <td><span class="badge attente"><i class="fas fa-clock"></i> En attente</span></td>
-                            <td>8100 F</td>
-                            <td>04 Novembre 2023</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" class="checkbox"></td>
-                            <td class="order-id">CDE-008</td>
-                            <td>
-                                <div class="customer-info">
-                                    <div class="customer-avatar">JD</div>
-                                    <div class="customer-details">
-                                        <h4>Jean Dupont</h4>
-                                        <p>jeandupont@gmail.com</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>1</td>
-                            <td><span class="badge validee"><i class="fas fa-check-circle"></i> Validée</span></td>
-                            <td>11700 F</td>
-                            <td>06 Décembre 2023</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" class="checkbox"></td>
-                            <td class="order-id">CDE-009</td>
-                            <td>
-                                <div class="customer-info">
-                                    <div class="customer-avatar">JD</div>
-                                    <div class="customer-details">
-                                        <h4>Jean Dupont</h4>
-                                        <p>jeandupont@gmail.com</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>2</td>
-                            <td><span class="badge attente"><i class="fas fa-clock"></i> En attente</span></td>
-                            <td>19200 F</td>
-                            <td>08 Novembre 2024</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" class="checkbox"></td>
-                            <td class="order-id">CDE-010</td>
-                            <td>
-                                <div class="customer-info">
-                                    <div class="customer-avatar">JD</div>
-                                    <div class="customer-details">
-                                        <h4>Jean Dupont</h4>
-                                        <p>jeandupont@gmail.com</p>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>5</td>
-                            <td><span class="badge attente"><i class="fas fa-clock"></i> En attente</span></td>
-                            <td>15000 F</td>
-                            <td>10 Décembre 2024</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div class="stat-info">
+                    <h3>Total Commandes</h3>
+                    <p>{{ $commandes->count() }}</p>
+                </div>
             </div>
-        </main>
+            <div class="stat-card">
+                <div class="stat-icon yellow">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Commandes en attente</h3>
+                    <p>{{ $commandes->where('statut','En attente')->count() }}</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon red">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Revenus Générés</h3>
+                    <p>{{ $commandes->sum('total') }} F</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table Section -->
+        <div class="table-section">
+            <div class="table-header">
+                <div class="table-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Rechercher une commande ...." id="searchInput">
+                </div>
+                <span class="pagination-info">1 - 10 sur {{ $commandes->count() }}</span>
+                <button class="add-btn" id="addOrderBtn">
+                    <i class="fas fa-plus"></i> Ajouter une commande
+                </button>
+            </div>
+
+            <table class="orders-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" class="checkbox"></th>
+                        <th>ID Commande <i class="fas fa-sort"></i></th>
+                        <th>Acheteur <i class="fas fa-sort"></i></th>
+                        <th>Articles achetés <i class="fas fa-sort"></i></th>
+                        <th>Statut <i class="fas fa-sort"></i></th>
+                        <th>Revenus générés <i class="fas fa-sort"></i></th>
+                        <th>Date <i class="fas fa-sort"></i></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="ordersBody">
+                    @foreach($commandes as $cmd)
+                    <tr>
+                        <td><input type="checkbox" class="checkbox"></td>
+                        <td class="order-id">CDE-{{ $cmd->id }}</td>
+                        <td>
+                            <div class="customer-info">
+                                <div class="customer-avatar">{{ substr($cmd->nom_acheteur,0,2) }}</div>
+                                <div class="customer-details">
+                                    <h4>{{ $cmd->nom_acheteur }}</h4>
+                                    <p>{{ $cmd->email }}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>{{ $cmd->articles->sum('quantite') }}</td>
+                        <td><span class="badge {{ $cmd->statut=='Payé' ? 'validee':'attente' }}">{{ $cmd->statut }}</span></td>
+                        <td>{{ $cmd->total }} F</td>
+                        <td>{{ $cmd->date_commande }}</td>
+                        <td>
+                            <div class="actions">
+                                <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn"><i class="fas fa-trash"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </main>
 </div>
-  </div>
-  <!-- Modal de gestion des commandes -->
-  <div class="modal" id="orderModal">
-   <main class="modal-content">
-            <div class="alert">
-                <i class="fas fa-exclamation-circle"></i>
-                <div class="alert-content">
-                    <h4>Nouvelle Commande</h4>
-                    <p>Remplissez les informations pour créer une nouvelle commande</p>
-                </div>
-            </div>
 
-            <!-- Section 1: Informations de base -->
+<!-- Modal de création -->
+<div class="modal" id="orderModal">
+    <main class="modal-content">
+        <form id="orderForm" method="POST" action="{{ route('commandes.store') }}">
+            @csrf
+            <!-- Section informations de base -->
             <div class="form-section">
-                <h3 class="section-title">I. Informations de base</h3>
+                <h3>I. Informations de base</h3>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Nom de l'acheteur</label>
-                        <input type="text" placeholder="Nom complet">
+                        <input type="text" name="nom_acheteur" placeholder="Nom complet" required>
                     </div>
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" placeholder="example@email.com">
+                        <input type="email" name="email" placeholder="example@email.com" required>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>Téléphone</label>
-                        <input type="tel" placeholder="+225 XX XX XX XX">
+                        <input type="tel" name="telephone" placeholder="+225 XX XX XX XX" required>
                     </div>
                     <div class="form-group">
                         <label>Date de la commande</label>
-                        <input type="date" value="2025-01-07">
+                        <input type="date" name="date_commande" value="{{ date('Y-m-d') }}" required>
                     </div>
                 </div>
             </div>
 
-            <!-- Section 2: Articles à commander -->
+            <!-- Section Articles -->
             <div class="form-section">
-                <h3 class="section-title">II. Articles à commander</h3>
+                <h3>II. Articles à commander</h3>
                 <div class="table-container">
                     <table>
                         <thead>
@@ -882,48 +658,16 @@
                                 <td><input type="checkbox" class="checkbox"></td>
                                 <td>Biscuit</td>
                                 <td>Biscuit</td>
-                                <td>0.040 F</td>
-                                <td>8</td>
+                                <td>0.040</td>
+                                <td contenteditable="true">1</td>
                                 <td>-</td>
                             </tr>
                             <tr>
                                 <td><input type="checkbox" class="checkbox"></td>
                                 <td>Crapolet</td>
                                 <td>Ville cloisette_test</td>
-                                <td>5.305 F</td>
-                                <td>6</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="checkbox"></td>
-                                <td>T-shirt</td>
-                                <td>Textile de test</td>
-                                <td>0.020 F</td>
-                                <td>0</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="checkbox"></td>
-                                <td>T-shirt</td>
-                                <td>Textile de test</td>
-                                <td>0.450 F</td>
-                                <td>0</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="checkbox"></td>
-                                <td>Bananes</td>
-                                <td>Bananes</td>
-                                <td>25.000 F</td>
-                                <td>0</td>
-                                <td>-</td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="checkbox"></td>
-                                <td>Chemise</td>
-                                <td>Textile de test</td>
-                                <td>0.000 F</td>
-                                <td>8</td>
+                                <td>5.305</td>
+                                <td contenteditable="true">1</td>
                                 <td>-</td>
                             </tr>
                         </tbody>
@@ -931,151 +675,96 @@
                 </div>
             </div>
 
-            <!-- Section 3: Récapitulatif et paiement -->
+            <!-- Section paiement -->
             <div class="form-section">
-                <h3 class="section-title">III. Récapitulatif et paiement</h3>
+                <h3>III. Récapitulatif et paiement</h3>
                 <div class="payment-row">
                     <div>
                         <h4>TOTAL À PAYER</h4>
                         <div class="total-display">0</div>
                     </div>
                     <div>
-                        <div style="margin-bottom: 25px;">
-                            <h4>Méthode de paiement</h4>
-                            <div class="radio-group">
-                                <div class="radio-option">
-                                    <input type="radio" name="payment" id="espece" checked>
-                                    <label for="espece">Espèce</label>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" name="payment" id="carte">
-                                    <label for="carte">Carte</label>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" name="payment" id="cheque">
-                                    <label for="cheque">Chèque</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <h4>Statut du paiement</h4>
-                            <div class="radio-group">
-                                <div class="radio-option">
-                                    <input type="radio" name="status" id="paye" checked>
-                                    <label for="paye">Payé</label>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" name="status" id="enattente">
-                                    <label for="enattente">En attente</label>
-                                </div>
-                                <div class="radio-option">
-                                    <input type="radio" name="status" id="annule">
-                                    <label for="annule">Annulé</label>
-                                </div>
-                            </div>
-                        </div>
+                        <h4>Méthode de paiement</h4>
+                        <select name="methode_paiement">
+                            <option value="Espèce">Espèce</option>
+                            <option value="Carte">Carte</option>
+                            <option value="Chèque">Chèque</option>
+                        </select>
+                        <h4>Statut du paiement</h4>
+                        <select name="statut">
+                            <option value="Payé">Payé</option>
+                            <option value="En attente">En attente</option>
+                            <option value="Annulé">Annulé</option>
+                        </select>
                     </div>
                 </div>
             </div>
 
+            <input type="hidden" name="articles_data" id="articles_data">
+
             <div class="button-group">
-                <button class="btn btn-secondary" id="cancelBtn">Annuler</button>
-                <button class="btn btn-primary" onclick="createOrder()">Créer la commande</button>
+                <button type="button" class="btn btn-secondary" id="cancelBtn">Annuler</button>
+                <button type="submit" class="btn btn-primary">Créer la commande</button>
             </div>
-        </main>
-<script>
-// Checkbox functionality
-        document.querySelectorAll('.checkbox').forEach(checkbox => {
-            checkbox.addEventListener('click', function() {
-                if (this.style.background) {
-                    this.style.background = '';
-                } else {
-                    this.style.background = '#ff6b35';
-                }
-            });
-        });
+        </form>
+    </main>
+</div>
 
-        // Menu navigation
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // Sort functionality
-        document.querySelectorAll('.orders-table thead th i').forEach(icon => {
-            icon.addEventListener('click', function(e) {
-                e.stopPropagation();
-                document.querySelectorAll('.orders-table thead th i').forEach(i => {
-                    i.classList.remove('fa-sort-up', 'fa-sort-down');
-                    i.classList.add('fa-sort');
-                });
-                
-                this.classList.remove('fa-sort');
-                this.classList.add('fa-sort-up');
-            });
-        });
-
-        // Search functionality
-        const searchInputs = document.querySelectorAll('input[type="text"]');
-        searchInputs.forEach(input => {
-            input.addEventListener('input', function() {
-                console.log('Searching for:', this.value);
-            });
-        });
-// Calculate total when quantities change
-        function calculateTotal() {
-            const rows = document.querySelectorAll('#tableBody tr');
-            let total = 0;
-
-            rows.forEach(row => {
-                const checkbox = row.querySelector('input[type="checkbox"]');
-                if (checkbox.checked) {
-                    const priceText = row.cells[3].textContent.replace(' F', '').replace('.', '');
-                    const quantity = parseInt(row.cells[4].textContent);
-                    const price = parseFloat(priceText);
-                    const itemTotal = price * quantity;
-                    total += itemTotal;
-                    row.cells[5].textContent = itemTotal.toFixed(3) + ' F';
-                } else {
-                    row.cells[5].textContent = '-';
-                }
-            });
-
-            document.querySelector('.total-display').textContent = total.toFixed(3) + ' F';
-        }
-
-        // Add event listeners to checkboxes
-        document.querySelectorAll('#tableBody input[type="checkbox"]').forEach(checkbox => {
-            checkbox.addEventListener('change', calculateTotal);
-        });
-
-        // Select all checkbox functionality
-        document.querySelector('thead input[type="checkbox"]').addEventListener('change', function() {
-            document.querySelectorAll('#tableBody input[type="checkbox"]').forEach(checkbox => {
-                checkbox.checked = this.checked;
-            });
-            calculateTotal();
-        });
-
-        // Modal functionality
-        document.getElementById('addOrderBtn').addEventListener('click', function() {
-            document.getElementById('orderModal').classList.add('show');
-        });
-
-        document.getElementById('cancelBtn').addEventListener('click', function() {
-            document.getElementById('orderModal').classList.remove('show');
-        });
-
-        function createOrder() {
-            alert('Commande créée avec succès!');
-        }
-
-        // Initial calculation
-        calculateTotal();
-</script>
 @endsection
 
-    @push('scripts')
+@push('scripts')
+<script>
+
+    // Calcul total
+    function calculateTotal(){
+        const rows = document.querySelectorAll('#tableBody tr');
+        let total = 0;
+        rows.forEach(row => {
+            const checkbox = row.querySelector('input[type="checkbox"]');
+            if(checkbox.checked){
+                const price = parseFloat(row.cells[3].textContent);
+                const qty = parseInt(row.cells[4].textContent);
+                const itemTotal = price*qty;
+                total += itemTotal;
+                row.cells[5].textContent = itemTotal.toFixed(3);
+            } else {
+                row.cells[5].textContent = '-';
+            }
+        });
+        document.querySelector('.total-display').textContent = total.toFixed(3);
+    }
+
+    // Event listener
+    document.querySelectorAll('#tableBody input[type="checkbox"], #tableBody td[contenteditable="true"]').forEach(el=>{
+        el.addEventListener('input', calculateTotal);
+        el.addEventListener('change', calculateTotal);
+    });
+
+    // Form submission
+    document.getElementById('orderForm').addEventListener('submit', function(){
+        const rows = document.querySelectorAll('#tableBody tr');
+        let articles = [];
+        rows.forEach(row => {
+            const checkbox = row.querySelector('input[type="checkbox"]');
+            if(checkbox.checked){
+                articles.push({
+                    nom_article: row.cells[1].textContent,
+                    type_article: row.cells[2].textContent,
+                    prix: parseFloat(row.cells[3].textContent),
+                    quantite: parseInt(row.cells[4].textContent)
+                });
+            }
+        });
+        document.getElementById('articles_data').value = JSON.stringify(articles);
+    });
+    // Modal functionality
+            document.getElementById('addOrderBtn').addEventListener('click', function() {
+                document.getElementById('orderModal').classList.add('show');
+            });
+
+            document.getElementById('cancelBtn').addEventListener('click', function() {
+                document.getElementById('orderModal').classList.remove('show');
+            });
+
+</script>
 @endpush

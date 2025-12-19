@@ -151,119 +151,119 @@
 >
     @csrf
 
-                <!-- Identification Section -->
-                <div class="form-section">
-                    <h2 class="section-title">Identification</h2>
-                    
-                    <div class="form-group">
-                        <input 
-                            type="text" 
-                            name="title"
-                            class="form-input" 
-                            required
-                        >
-                        Nom de l'Action</label>
-                        <input 
-                            type="text" 
-                            class="form-input" 
-                            placeholder="Ex: Nettoyage de la plage de la Concurrence"
-                            required
-                        >
-                    </div>
+        <!-- Identification Section -->
+        <div class="form-section">
+            <h2 class="section-title">Identification</h2>
+            
+            <div class="form-group">
+                <input 
+                    type="text" 
+                    name="title"
+                    class="form-input" 
+                    required
+                >
+                Nom de l'Action</label>
+                <input 
+                    type="text" 
+                    class="form-input" 
+                    placeholder="Ex: Nettoyage de la plage de la Concurrence"
+                    required
+                >
+            </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Description</label>
-                        <textarea 
-                            name="description"
-                            class="form-textarea" 
-                            placeholder="Décrivez la mission pour le public..."
-                            required
-                        ></textarea>
-                    </div>
+            <div class="form-group">
+                <label class="form-label">Description</label>
+                <textarea 
+                    name="description"
+                    class="form-textarea" 
+                    placeholder="Décrivez la mission pour le public..."
+                    required
+                ></textarea>
+            </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Lieu Exact</label>
-                        <input 
-                            type="text" 
-                            name="location"
-                            class="form-input" 
-                            placeholder="Ex: 123 Rue du Port, 17000 La Rochelle"
-                            required
-                        >
-                    </div>
+            <div class="form-group">
+                <label class="form-label">Lieu Exact</label>
+                <input 
+                    type="text" 
+                    name="location"
+                    class="form-input" 
+                    placeholder="Ex: 123 Rue du Port, 17000 La Rochelle"
+                    required
+                >
+            </div>
+        </div>
+
+        <!-- Planning & Quota Section -->
+        <div class="form-section">
+            <h2 class="section-title">Planning & Quota</h2>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="form-label">Date & Heure</label>
+                    <input 
+                        type="datetime-local" 
+                        name="date_time"
+                        class="form-input"
+                        required
+                    >
                 </div>
 
-                <!-- Planning & Quota Section -->
-                <div class="form-section">
-                    <h2 class="section-title">Planning & Quota</h2>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label">Date & Heure</label>
-                            <input 
-                                type="datetime-local" 
-                                name="date_time"
-                                class="form-input"
-                                required
-                            >
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Durée estimée</label>
-                            <select class="form-select" name="duration" required>
-                                <option value="">Sélectionner</option>
-                                <option value="1h">1h</option>
-                                <option value="2h">2h</option>
-                                <option value="3h">3h</option>
-                                <option value="4h">4h</option>
-                                <option value="5h">5h</option>
-                                <option value="6h+">6h+</option>
-                            </select>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="form-label">Nombre de Places</label>
-                            <input 
-                                type="number" 
-                                name="slots"
-                                class="form-input" 
-                                placeholder="Ex: 20"
-                                min="1"
-                                required
-                            >
-                        </div>
-                    </div>
+                <div class="form-group">
+                    <label class="form-label">Durée estimée</label>
+                    <select class="form-select" name="duration" required>
+                        <option value="">Sélectionner</option>
+                        <option value="1h">1h</option>
+                        <option value="2h">2h</option>
+                        <option value="3h">3h</option>
+                        <option value="4h">4h</option>
+                        <option value="5h">5h</option>
+                        <option value="6h+">6h+</option>
+                    </select>
                 </div>
 
-                <!-- Récompenses & Visibilité Section -->
-                <div class="form-section" >
-                    <h2 class="section-title">Récompenses & Visibilité</h2>
-                    
-                    <div class="form-group">
-                        <label class="form-label">Type de Récompense</label>
-                        <select class="form-select" name="reward" required>
-                            <option value="">Sélectionner une récompense</option>
-                            <option value="billet-jour-1">Billet Jour 1</option>
-                            <option value="billet-jour-2">Billet Jour 2</option>
-                            <option value="billet-jour-3">Billet Jour 3</option>
-                            <option value="pass-3-jours">Pass 3 Jours</option>
-                            <option value="pass-vip">Pass VIP</option>
-                            <option value="merchandise">Merchandise</option>
-                        </select>
-                    </div>
+                <div class="form-group">
+                    <label class="form-label">Nombre de Places</label>
+                    <input 
+                        type="number" 
+                        name="slots"
+                        class="form-input" 
+                        placeholder="Ex: 20"
+                        min="1"
+                        required
+                    >
                 </div>
+            </div>
+        </div>
 
-                <!-- Form Actions -->
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" onclick="cancelForm()">
-                        Annuler
-                    </button>
-                    <button type="submit" class="btn btn-primary">
-                        Créer l'Action
-                    </button>
-                </div>
-            </form>
-        </main>
+        <!-- Récompenses & Visibilité Section -->
+        <div class="form-section" >
+            <h2 class="section-title">Récompenses & Visibilité</h2>
+            
+            <div class="form-group">
+                <label class="form-label">Type de Récompense</label>
+                <select class="form-select" name="reward" required>
+                    <option value="">Sélectionner une récompense</option>
+                    <option value="billet-jour-1">Billet Jour 1</option>
+                    <option value="billet-jour-2">Billet Jour 2</option>
+                    <option value="billet-jour-3">Billet Jour 3</option>
+                    <option value="pass-3-jours">Pass 3 Jours</option>
+                    <option value="pass-vip">Pass VIP</option>
+                    <option value="merchandise">Merchandise</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+            <button type="button" class="btn btn-secondary" onclick="cancelForm()">
+                Annuler
+            </button>
+            <button type="submit" class="btn btn-primary">
+                Créer l'Action
+            </button>
+        </div>
+    </form>
+</main>
 @endsection
     
     <script>

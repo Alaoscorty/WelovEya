@@ -1,5 +1,4 @@
 @extends('layouts.application')
-
 @section('title', 'Détails Intervenant')
 
 <style>
@@ -115,10 +114,9 @@
 .extend-btn { background: #ff6b35; color: #fff; border: none; padding: 10px 25px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 14px; transition: all 0.3s; }
 .extend-btn:hover { background: #e55a2b; transform: translateY(-2px); }
 </style>
-
 @section('content')
-
 <main class="main-content">
+    <!-- HEADER -->
     <div class="header">
         <a href="{{ route('dashboard.intervenants') }}" class="back-btn">
             <i class="fas fa-arrow-left"></i>
@@ -135,7 +133,7 @@
         @endif
     </div>
 
-    <!-- Status Card -->
+    <!-- STATUS CARD -->
     <div class="status-card">
         <div class="status-info">
             <i class="fas fa-poll" style="font-size: 24px;"></i>
@@ -146,13 +144,13 @@
         </div>
         <div class="date-limite">
             Date limite<br>
-            <strong>{{ $intervenant->date_limite ? $intervenant->date_limite->format('d F Y à H:i') : 'Non définie' }}</strong>
+            <strong>{{ $intervenant->date_limite?->format('d F Y à H:i') ?? 'Non définie' }}</strong>
         </div>
     </div>
 
-    <!-- Charts Row -->
+    <!-- CHARTS ROW -->
     <div class="charts-row">
-        <!-- Pie Chart -->
+        <!-- PIE CHART -->
         <div class="chart-card">
             <div class="chart-header">
                 <i class="fas fa-chart-pie"></i>
@@ -167,7 +165,7 @@
                 @foreach($votesByOption as $option => $count)
                 <div class="legend-item">
                     <div class="legend-label">
-                        <span class="legend-color" style="background: {{ $colors[$option] ?? '#000' }};"></span>
+                        <span class="legend-color" style="background: {{ $colors[$option] ?? '#000' }}"></span>
                         <span>{{ $option }}</span>
                     </div>
                     <span>{{ $count }} Votes</span>
@@ -181,7 +179,7 @@
             </div>
         </div>
 
-        <!-- Bar Chart -->
+        <!-- BAR CHART -->
         <div class="chart-card">
             <div class="chart-header">
                 <i class="fas fa-chart-bar"></i>
@@ -193,7 +191,7 @@
             <div class="chart-legend">
                 @foreach($votesByOption as $option => $count)
                 <div class="chart-legend-item">
-                    <span class="legend-color" style="background: {{ $colors[$option] ?? '#000' }};"></span>
+                    <span class="legend-color" style="background: {{ $colors[$option] ?? '#000' }}"></span>
                     <span>{{ $option }}</span>
                 </div>
                 @endforeach
@@ -201,7 +199,7 @@
         </div>
     </div>
 
-    <!-- Control Section -->
+    <!-- CONTROL SECTION -->
     <div class="control-section">
         <h3>Gestion et Contrôle</h3>
         
@@ -226,7 +224,7 @@
         </div>
 
         <div class="time-limit">
-            <span class="time-limit-label">{{ $intervenant->date_limite?->format('d F Y') }}</span>
+            <span class="time-limit-label">{{ $intervenant->date_limite?->format('d F Y') ?? 'Non définie' }}</span>
             <button class="extend-btn">
                 <i class="fas fa-calendar-plus"></i>
                 Étendre la date
@@ -234,7 +232,7 @@
         </div>
     </div>
 
-    <!-- Publication Section -->
+    <!-- PUBLICATION SECTION -->
     <div class="publication-section">
         <h3>Publication des Paroles</h3>
         <p>
@@ -247,37 +245,64 @@
     </div>
 </main>
 
-
 @endsection
 
-@push('scripts')
+@section('scripts')
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // Pie Chart
-    const pieCanvas = document.getElementById('pieChart');
-    const pieCtx = pieCanvas.getContext('2d');
-    pieCanvas.width = 200; pieCanvas.height = 200;
+    // Données pour Pie Chart
+    const pieData = {
+        labels: {!! json_encode(array_keys($votesByOption)) !!},
+        datasets: [{
+            data: {!! json_encode(array_values($votesByOption)) !!},
+            backgroundColor: {!! json_encode(array_values($colors)) !!}
+        }]
+    };
 
-    const classiquesVotes = {{ $stats['votes_classiques'] }};
-    const hitsVotes = {{ $stats['votes_hits'] }};
-    const total = classiquesVotes + hitsVotes;
+    const pieConfig = {
+        type: 'pie',
+        data: pieData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        },
+    };
 
-    const classiquesAngle = (classiquesVotes / total) * 2 * Math.PI;
-    const hitsAngle = (hitsVotes / total) * 2 * Math.PI;
+    new Chart(
+        document.getElementById('pieChart'),
+        pieConfig
+    );
 
-    const centerX = 100, centerY = 100, radius = 80;
+    // Données pour Bar Chart (simple exemple)
+    const barData = {
+        labels: {!! json_encode(array_keys($votesByOption)) !!},
+        datasets: [{
+            label: 'Votes',
+            data: {!! json_encode(array_values($votesByOption)) !!},
+            backgroundColor: {!! json_encode(array_values($colors)) !!}
+        }]
+    };
 
-    // Draw Classiques
-    pieCtx.beginPath();
-    pieCtx.arc(centerX, centerY, radius, 0, classiquesAngle);
-    pieCtx.lineTo(centerX, centerY);
-    pieCtx.fillStyle = '#ff6b35';
-    pieCtx.fill();
+    const barConfig = {
+        type: 'bar',
+        data: barData,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        },
+    };
 
-    // Draw Hits
-    pieCtx.beginPath();
-    pieCtx.arc(centerX, centerY, radius, classiquesAngle, classiquesAngle + hitsAngle);
-    pieCtx.lineTo(centerX, centerY);
-    pieCtx.fillStyle = '#4dabf7';
-    pieCtx.fill();
+    new Chart(
+        document.getElementById('barChart'),
+        barConfig
+    );
 </script>
-@endpush
+@endsection

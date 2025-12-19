@@ -386,7 +386,7 @@
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon blue">
+                    <div class="stat-icon orange">
                         <i class="fas fa-user-check"></i>
                     </div>
                     <div class="stat-info">
@@ -395,7 +395,7 @@
                     </div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon purple">
+                    <div class="stat-icon orange">
                         <i class="fas fa-chart-line"></i>
                     </div>
                     <div class="stat-info">
@@ -418,31 +418,19 @@
       </a>
                 </div>
 
-                <div class="table-filters">
-                    <span style="color: #fff; font-weight: 500;"><i class="fas fa-filter"></i> 5 filtres</span>
-                    <span class="filter-item"><i class="fas fa-phone"></i> Téléphone <i class="fas fa-chevron-down"></i></span>
-                    <span class="filter-item"><i class="fas fa-toggle-on"></i> Statuts vendus <i class="fas fa-chevron-down"></i></span>
-                    <span class="filter-item"><i class="fas fa-ban"></i> Commission <i class="fas fa-chevron-down"></i></span>
-                    <span class="filter-item"><i class="fas fa-calendar"></i> Statut <i class="fas fa-chevron-down"></i></span>
-                    <span class="filter-item"><i class="fas fa-award"></i> Paiement général <i class="fas fa-chevron-down"></i></span>
-                    <span class="filter-item"><i class="fas fa-ban"></i> Membre depuis <i class="fas fa-chevron-down"></i></span>
-                    <span class="filter-item"><i class="fas fa-ellipsis-h"></i> Date d'inscription <i class="fas fa-chevron-down"></i></span>
-                    <span style="color: #ff6b35; margin-left: 10px; cursor: pointer;">Réinitialiser <i class="fas fa-redo"></i></span>
-                </div>
-
                 <table class="data-table">
                     <thead>
                         <tr>
                             <th><input type="checkbox"></th>
                             <th>Nom</th>
                             <th><i class="fas fa-phone"></i> Téléphone</th>
-                            <th><i class="fas fa-toggle-on"></i> Statuts vendus</th>
-                            <th><i class="fas fa-ban"></i> Commission</th>
+                            <th><i class="fas fa-ticket"></i> Tickets vendus</th>
+                            <th><i class="fas fa-ban"></i> Commissions</th>
                             <th><i class="fas fa-calendar"></i> Statut</th>
-                            <th><i class="fas fa-id-card"></i> Paiement général</th>
+                            <th><i class="fas fa-id-card"></i> Revenus généré</th>
                             <th><i class="fas fa-award"></i> Membre depuis</th>
                             <th><i class="fas fa-chart-bar"></i> Stock attribué</th>
-                            <th><i class="fas fa-percentage"></i> Taux d'abonnement</th>
+                            <th><i class="fas fa-percentage"></i> Taux d'écoulement</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -744,13 +732,5 @@
         });
     });
 
-    // =======================
-    //  AJOUTER UN REVENDEUR (DEMO)
-    // =======================
-    const addBtn = document.querySelector('.add-btn');
-
-    addBtn.addEventListener('click', function () {
-        alert("Formulaire d'ajout à ouvrir ici ");
-    });
 </script>
 @endpush
