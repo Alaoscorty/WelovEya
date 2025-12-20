@@ -8,7 +8,7 @@
             flex: 1;
             padding: 40px;
             overflow-y: auto;
-            background: linear-gradient(135deg, #1e3b8a81 0%, #1e40af6e 100%);
+            background: linear-gradient(135deg, #1e3b8a81 0%, #1a1f3a; 100%);
         }
 
         .header {
@@ -34,7 +34,7 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+            background: linear-gradient(135deg, #1a1f3a; 0%, #1e40af 100%);
             padding: 25px;
             border-radius: 12px;
             position: relative;

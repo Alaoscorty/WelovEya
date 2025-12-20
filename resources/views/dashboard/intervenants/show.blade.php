@@ -113,6 +113,42 @@
 .time-limit-label { font-size: 14px; color: rgba(255,255,255,0.7); }
 .extend-btn { background: #ff6b35; color: #fff; border: none; padding: 10px 25px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 14px; transition: all 0.3s; }
 .extend-btn:hover { background: #e55a2b; transform: translateY(-2px); }
+/* Publication Section */
+        .publication-section {
+            background: linear-gradient(135deg, #8b4513 0%, #654321 100%);
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .publication-section h3 {
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+
+        .publication-section p {
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+
+        .publish-btn {
+            background: #ff6b35;
+            color: #fff;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+        }
+
+        .publish-btn:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
 </style>
 @section('content')
 <main class="main-content">

@@ -257,6 +257,53 @@
             
             form.reset();
         });
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const articleData = {
+                name: document.getElementById('articleName').value,
+                price: document.getElementById('price').value,
+                category: document.getElementById('category').value,
+                description: document.getElementById('description').value
+            };
+
+            fetch("{{ route('produits.store') }}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify(articleData)
+            })
+            .then(response => response.json())
+            .then(data => {
+            if(data.success) {
+                // Ajouter la nouvelle ligne dans le tableau
+                const tableBody = document.getElementById('tableBody');
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td class="checkbox-cell"><input type="checkbox"></td>
+                    <td>${data.produit.id}</td>
+                    <td>${data.produit.nom}</td>
+                    <td>${parseFloat(data.produit.prix).toLocaleString('fr-FR')} F</td>
+                    <td><span class="badge disponible">Disponible</span></td>
+                    <td>${data.produit.stock}</td>
+                    <td>0</td>
+                    <td>${data.produit.categorie}</td>
+                    <td>${data.produit.description}</td>
+                    <td class="action-cell">
+                        <button class="icon-button"><i class="fas fa-edit"></i></button>
+                        <button class="icon-button" onclick="this.closest('tr').remove();"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                tableBody.prepend(newRow); // ajoute en haut
+                form.reset();
+                alert(data.message);
+            } else {
+                alert('Erreur: ' + data.message);
+            }
+        });
+        
 
         function closeModal() {
             if (confirm('Voulez-vous vraiment fermer? Les modifications non enregistrées seront perdues.')) {
@@ -269,6 +316,7 @@
                 form.reset();
             }
         }
-    </script>
+    });    
+</script>
     @push('scripts')
 @endpush

@@ -26,7 +26,7 @@
         }
 
         .stat-card {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2a4a6f 100%);
+            background: linear-gradient(135deg, #1a1f3a; 0%, #2a4a6f 100%);
             border-radius: 15px;
             padding: 25px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -56,7 +56,7 @@
 
         /* Table */
         .table-container {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2a4a6f 100%);
+            background: linear-gradient(135deg, #1a1f3a; 0%, #2a4a6f 100%);
             border-radius: 15px;
             padding: 30px;
             border: 1px solid rgba(255, 255, 255, 0.1);

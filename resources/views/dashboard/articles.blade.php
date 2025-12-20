@@ -329,7 +329,7 @@
                     </div>
                     <div class="stat-details">
                         <h3>Total Articles suivi</h3>
-                        <p>26</p>
+                        <p>{{ $totalArticles }}</p>
                     </div>
                 </div>
 
@@ -339,7 +339,7 @@
                     </div>
                     <div class="stat-details">
                         <h3>Stock Total actuel</h3>
-                        <p>1857</p>
+                        <p>{{ $stockTotal }}</p>
                     </div>
                 </div>
 
@@ -349,10 +349,11 @@
                     </div>
                     <div class="stat-details">
                         <h3>Revenus générés</h3>
-                        <p>45000 F</p>
+                        <p>{{ number_format($revenusGeneres, 0, ',', ' ') }} F</p>
                     </div>
                 </div>
             </div>
+
 
             <!-- Table Section -->
             <div class="table-section">
@@ -404,199 +405,134 @@
                             </tr>
                         </thead>
                         <tbody id="tableBody">
-                            <tr>
-                                <td class="checkbox-cell"><input type="checkbox"></td>
-                                <td>ARCL-001</td>
-                                <td>T-shirt Logo/Maillard</td>
-                                <td>10 000 F</td>
-                                <td><span class="badge disponible">Disponible</span></td>
-                                <td>333</td>
-                                <td>
-                                    3 (S bleu)<br>
-                                    <span class="variant-info">(S) bleu; M blanc</span>
-                                </td>
-                                <td>Vêtement</td>
-                                <td>Call center customized standard collection</td>
-                                <td class="action-cell">
-                                    <a href="{{ route ('gestion_variantes') }}"
-                                    class="btn-action">
-                                        <i class="fas fa-eye"></i> Gérer les variantes
-    </a>
-                                    <button class="icon-button">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="icon-button">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox-cell"><input type="checkbox"></td>
-                                <td>PROD-002</td>
-                                <td>Casquette</td>
-                                <td>8 000 F</td>
-                                <td><span class="badge epuise">Épuisé</span></td>
-                                <td>70</td>
-                                <td>
-                                    2 (S<br>
-                                    <span class="variant-info">Noir/Marron)</span>
-                                </td>
-                                <td>Accessoire</td>
-                                <td>Mlm casquette ajustable en coton avec 5 lettres</td>
-                                <td class="action-cell">
-                                    <a href="{{ route ('gestionCasquette')}}" class="btn-action">
-                                        <i class="fas fa-eye"></i> Gérer les variantes
-    </a>
-                                    <button class="icon-button">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="icon-button">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox-cell"><input type="checkbox"></td>
-                                <td>PROD-003</td>
-                                <td>Sac, Side-bag</td>
-                                <td>13 000 F</td>
-                                <td><span class="badge stock-bas">Stock bas</span></td>
-                                <td>25</td>
-                                <td>
-                                    2 (S<br>
-                                    <span class="variant-info">noir/marron)</span>
-                                </td>
-                                <td>Accessoire</td>
-                                <td>Sac bandoulière d'affaires street wear en cuir simple</td>
-                                <td class="action-cell">
-                                    <a href="{{route('gestionSac')}}" class="btn-action">
-                                        <i class="fas fa-eye"></i> Gérer les variantes
-                                    </a>
-                                    <button class="icon-button">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="icon-button">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="checkbox-cell"><input type="checkbox"></td>
-                                <td>PROD-004</td>
-                                <td>Monture</td>
-                                <td>10 000 F</td>
-                                <td><span class="badge disponible">Disponible</span></td>
-                                <td>18</td>
-                                <td>
-                                    2 (S<br>
-                                    <span class="variant-info">bleu/marron)</span>
-                                </td>
-                                <td>Accessoire</td>
-                                <td>10 articles d'informations sans pour sans reflets dispo</td>
-                                <td class="action-cell">
-                                    <button class="btn-action">
-                                        <i class="fas fa-eye"></i> Gérer les variantes
-                                    </button>
-                                    <button class="icon-button">
-                                        <i class="fas fa-edit"></i>
-                                    </button>
-                                    <button class="icon-button">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                            @foreach($produits as $produit)
+                                <tr>
+                                    <td class="checkbox-cell"><input type="checkbox"></td>
+                                    <td>{{ $produit->id }}</td>
+                                    <td>{{ $produit->nom }}</td>
+                                    <td>{{ number_format($produit->prix, 0, ',', ' ') }} F</td>
+                                    <td>
+                                        @if($produit->stock == 0)
+                                            <span class="badge epuise">Épuisé</span>
+                                        @elseif($produit->stock < 20)
+                                            <span class="badge stock-bas">Stock bas</span>
+                                        @else
+                                            <span class="badge disponible">Disponible</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ $produit->stock }}</td>
+                                    <td>
+                                        {{-- Exemple : variantes (tu peux adapter selon ta table variantes) --}}
+                                        0
+                                    </td>
+                                    <td>{{ $produit->categorie }}</td>
+                                    <td>{{ $produit->description }}</td>
+                                    <td class="action-cell">
+                                        <button class="icon-button">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <form method="POST" action="{{ route('produits.destroy', $produit->id) }}" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="icon-button" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
+
                     </table>
                 </div>
             </div>
         </main>
 </div>
 
-
 @endsection
 <script>
-        // Select All Checkbox
-        document.getElementById('selectAll').addEventListener('change', function() {
-            const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
-            checkboxes.forEach(checkbox => {
-                checkbox.checked = this.checked;
-            });
+    // Select All Checkbox
+    document.getElementById('selectAll').addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
         });
+    });
 
-        // Search functionality
-        const searchInput = document.querySelector('.search-input input');
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase();
-            const rows = document.querySelectorAll('tbody tr');
-            
-            rows.forEach(row => {
-                const text = row.textContent.toLowerCase();
-                row.style.display = text.includes(searchTerm) ? '' : 'none';
-            });
+    // Search functionality
+    const searchInput = document.querySelector('.search-input input');
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase();
+        const rows = document.querySelectorAll('tbody tr');
+        
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(searchTerm) ? '' : 'none';
         });
+    });
 
-        // Category filter
-        document.getElementById('categoryFilter').addEventListener('change', function() {
-            const category = this.value.toLowerCase();
-            const rows = document.querySelectorAll('tbody tr');
-            
-            if (category === 'catégorie') {
-                rows.forEach(row => row.style.display = '');
-                return;
-            }
-            
-            rows.forEach(row => {
-                const rowCategory = row.cells[7].textContent.toLowerCase();
-                row.style.display = rowCategory.includes(category) ? '' : 'none';
-            });
+    // Category filter
+    document.getElementById('categoryFilter').addEventListener('change', function() {
+        const category = this.value.toLowerCase();
+        const rows = document.querySelectorAll('tbody tr');
+        
+        if (category === 'catégorie') {
+            rows.forEach(row => row.style.display = '');
+            return;
+        }
+        
+        rows.forEach(row => {
+            const rowCategory = row.cells[7].textContent.toLowerCase();
+            row.style.display = rowCategory.includes(category) ? '' : 'none';
         });
+    });
 
-        // Sort functionality
-        document.querySelectorAll('th i.fa-sort').forEach(icon => {
-            icon.addEventListener('click', function() {
-                const th = this.parentElement;
-                const table = th.closest('table');
-                const tbody = table.querySelector('tbody');
-                const rows = Array.from(tbody.querySelectorAll('tr'));
-                const columnIndex = Array.from(th.parentElement.children).indexOf(th);
-                
-                const isAscending = this.classList.contains('sorted-asc');
-                
-                rows.sort((a, b) => {
-                    const aValue = a.cells[columnIndex].textContent.trim();
-                    const bValue = b.cells[columnIndex].textContent.trim();
-                    
-                    if (isAscending) {
-                        return bValue.localeCompare(aValue, 'fr', { numeric: true });
-                    } else {
-                        return aValue.localeCompare(bValue, 'fr', { numeric: true });
-                    }
-                });
-                
-                rows.forEach(row => tbody.appendChild(row));
-                
-                document.querySelectorAll('th i.fa-sort').forEach(i => {
-                    i.classList.remove('sorted-asc', 'sorted-desc');
-                });
+    // Sort functionality
+    document.querySelectorAll('th i.fa-sort').forEach(icon => {
+        icon.addEventListener('click', function() {
+            const th = this.parentElement;
+            const table = th.closest('table');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const columnIndex = Array.from(th.parentElement.children).indexOf(th);
+            
+            const isAscending = this.classList.contains('sorted-asc');
+            
+            rows.sort((a, b) => {
+                const aValue = a.cells[columnIndex].textContent.trim();
+                const bValue = b.cells[columnIndex].textContent.trim();
                 
                 if (isAscending) {
-                    this.classList.remove('sorted-asc');
-                    this.classList.add('sorted-desc');
+                    return bValue.localeCompare(aValue, 'fr', { numeric: true });
                 } else {
-                    this.classList.remove('sorted-desc');
-                    this.classList.add('sorted-asc');
+                    return aValue.localeCompare(bValue, 'fr', { numeric: true });
                 }
             });
+            
+            rows.forEach(row => tbody.appendChild(row));
+            
+            document.querySelectorAll('th i.fa-sort').forEach(i => {
+                i.classList.remove('sorted-asc', 'sorted-desc');
+            });
+            
+            if (isAscending) {
+                this.classList.remove('sorted-asc');
+                this.classList.add('sorted-desc');
+            } else {
+                this.classList.remove('sorted-desc');
+                this.classList.add('sorted-asc');
+            }
         });
+    });
 
-        // Delete button functionality
-        document.querySelectorAll('.icon-button .fa-trash').forEach(button => {
-            button.parentElement.addEventListener('click', function() {
-                if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
-                    this.closest('tr').remove();
-                }
-            });
+    // Delete button functionality
+    document.querySelectorAll('.icon-button .fa-trash').forEach(button => {
+        button.parentElement.addEventListener('click', function() {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cet article ?')) {
+                this.closest('tr').remove();
+            }
         });
+    });
         
 </script>
     @push('scripts')

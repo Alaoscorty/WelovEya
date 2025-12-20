@@ -272,114 +272,98 @@
     </style>
 @section('content')
 <div class="flex container">
-        <div class="main-content">
-            <div class="settings-header">
-                <h1>Paramètres du Festival & du Compte</h1>
-                <p>Gérez les informations de votre compte et les paramètres du site web.</p>
+    <div class="main-content">
+        <div class="settings-header">
+            <h1>Paramètres du Festival & du Compte</h1>
+            <p>Gérez les informations de votre compte et les paramètres du site web.</p>
+        </div>
+
+        <!-- Profile Section -->
+        <div class="settings-card">
+            <h2 class="section-title">
+                <i class="fas fa-user-circle"></i>
+                Profil du Compte
+            </h2>
+
+            <div class="form-group">
+                <label>Photo de Profil</label>
+                <div class="photo-upload">
+                    <div class="photo-preview" id="photoPreview" onclick="document.getElementById('photoInput').click()">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <div class="photo-info">
+                        <p>Glissez-déposez une image ou cliquez pour télécharger. PNG, JPG jusqu'à 5MB.</p>
+                        <button class="upload-btn" onclick="document.getElementById('photoInput').click()">
+                            <i class="fas fa-upload"></i>
+                            Télécharger l'image
+                        </button>
+                        <input type="file" id="photoInput" accept="image/png, image/jpeg, image/jpg" onchange="handleImageUpload(event)">
+                    </div>
+                </div>
             </div>
 
-            <!-- Profile Section -->
-            <div class="settings-card">
-                <h2 class="section-title">
-                    <i class="fas fa-user-circle"></i>
-                    Profil du Compte
-                </h2>
-
+            <div class="form-row">
                 <div class="form-group">
-                    <label>Photo de Profil</label>
-                    <div class="photo-upload">
-                        <div class="photo-preview" id="photoPreview" onclick="document.getElementById('photoInput').click()">
-                            <i class="fas fa-image"></i>
-                        </div>
-                        <div class="photo-info">
-                            <p>Glissez-déposez une image ou cliquez pour télécharger. PNG, JPG jusqu'à 5MB.</p>
-                            <button class="upload-btn" onclick="document.getElementById('photoInput').click()">
-                                <i class="fas fa-upload"></i>
-                                Télécharger l'image
-                            </button>
-                            <input type="file" id="photoInput" accept="image/png, image/jpeg, image/jpg" onchange="handleImageUpload(event)">
-                        </div>
-                    </div>
+                    <label>Nom d'Utilisateur</label>
+                    <input type="text" value="admin.festival" id="username">
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>Nom d'Utilisateur</label>
-                        <input type="text" value="admin.festival" id="username">
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" value="contact@festival.com" id="email">
-                    </div>
-                </div>
-
                 <div class="form-group">
-                    <label>Téléphone</label>
-                    <input type="tel" placeholder="Ex: +33 6 12 34 56 78" id="phone">
+                    <label>Email</label>
+                    <input type="email" value="contact@festival.com" id="email">
                 </div>
-
-                <button class="save-btn" onclick="saveProfile()">
-                    <i class="fas fa-save"></i>
-                    Sauvegarder les Modifications
-                </button>
-                <div style="clear: both;"></div>
             </div>
 
-            <!-- Security Section -->
-            <div class="settings-card">
-                <h2 class="section-title">
-                    <i class="fas fa-shield-alt"></i>
-                    Sécurité & Accès
-                </h2>
-
-                <div class="form-group">
-                    <label>Mot de Passe Actuel</label>
-                    <input type="password" placeholder="••••••••••" id="currentPassword">
-                </div>
-
-                <div class="form-group">
-                    <label>Nouveau Mot de Passe</label>
-                    <input type="password" placeholder="••••••••••" id="newPassword">
-                </div>
-
-                <div class="toggle-container">
-                    <div class="toggle-info">
-                        <h4>Double Authentification (2FA)</h4>
-                        <p>Ajoutez une couche de sécurité supplémentaire à votre compte.</p>
-                    </div>
-                    <div class="toggle-switch active" id="toggle2FA" onclick="toggle2FA()"></div>
-                </div>
-
-                <button class="security-btn" onclick="updateSecurity()">
-                    <i class="fas fa-lock"></i>
-                    Mettre à Jour la Sécurité
-                </button>
-                <div style="clear: both;"></div>
+            <div class="form-group">
+                <label>Téléphone</label>
+                <input type="tel" placeholder="Ex: +33 6 12 34 56 78" id="phone">
             </div>
 
-            <div class="notification" id="notification">
-        <i class="fas fa-check-circle"></i>
-        <span id="notificationText">Modifications sauvegardées avec succès!</span>
-    </div>
+            <button class="save-btn" onclick="saveProfile()">
+                <i class="fas fa-save"></i>
+                Sauvegarder les Modifications
+            </button>
+            <div style="clear: both;"></div>
+        </div>
+
+        <!-- Security Section -->
+        <div class="settings-card">
+            <h2 class="section-title">
+                <i class="fas fa-shield-alt"></i>
+                Sécurité & Accès
+            </h2>
+
+            <div class="form-group">
+                <label>Mot de Passe Actuel</label>
+                <input type="password" placeholder="••••••••••" id="currentPassword">
+            </div>
+
+            <div class="form-group">
+                <label>Nouveau Mot de Passe</label>
+                <input type="password" placeholder="••••••••••" id="newPassword">
+            </div>
+
+            <div class="toggle-container">
+                <div class="toggle-info">
+                    <h4>Double Authentification (2FA)</h4>
+                    <p>Ajoutez une couche de sécurité supplémentaire à votre compte.</p>
+                </div>
+                <div class="toggle-switch active" id="toggle2FA" onclick="toggle2FA()"></div>
+            </div>
+
+            <button class="security-btn" onclick="updateSecurity()">
+                <i class="fas fa-lock"></i>
+                Mettre à Jour la Sécurité
+            </button>
+            <div style="clear: both;"></div>
+        </div>
+
+        <div class="notification" id="notification">
+            <i class="fas fa-check-circle"></i>
+            <span id="notificationText">Modifications sauvegardées avec succès!</span>
         </div>
     </div>
+</div>
 
-    <!-- Bottom Bar -->
-    <div class="bottom-bar">
-        <button class="bottom-btn">
-            <i class="fas fa-play"></i>
-        </button>
-        <button class="bottom-btn">
-            <i class="far fa-hand-paper"></i>
-        </button>
-        <button class="bottom-btn">
-            <i class="far fa-comment"></i>
-        </button>
-        <button class="bottom-btn primary">
-            <span>Ask to edit</span>
-        </button>
-        <span class="version">v.1135</span>
-    </div>
 
     @endsection
     <script>

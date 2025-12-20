@@ -35,7 +35,7 @@ class Intervenant extends Model
     // ✅ Relation avec les votes
     public function votes()
     {
-        return $this->hasMany(Vote::class); // Assure-toi que Vote::class existe
+        return $this->hasMany(Vote::class); 
     }
     
 }

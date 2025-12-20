@@ -402,7 +402,7 @@
 
                     <div class="form-group">
                         <label>Date limite du vote</label>
-                        <input type="date" name="date_limite_vote" id="dateVote" disabled>
+                        <input type="date" name="date_limite_vote" id="dateVote" >
                     </div>
 
                     <h4>Fichiers Paroles</h4>

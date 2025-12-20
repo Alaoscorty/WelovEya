@@ -4,7 +4,6 @@
 <style>
     .main-content {
             flex: 1;
-            background: linear-gradient(180deg, #0f1c3f 0%, #0a0e1a 100%);
             padding: 0;
         }
 
@@ -12,9 +11,9 @@
             background: linear-gradient(135deg, #12255a91 0%, #1e40af 100%);
             padding: 20px;
             margin: 10px;
+            margin:top 20px;
             padding-bottom: 40px;
             border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         @media (min-width: 768px) {
@@ -308,77 +307,77 @@
 
     {{-- MAIN CONTENT --}}
     <main class="main-content">
-            <div class="content-wrapper">
-                <div class="header">
-                    <h1>Gestion des Actions Sociales & Récompenses (RSE)</h1>
-                    <a href="{{route ('newAction')}}" class="btn-create">
-                        <i class="fas fa-plus-circle"></i>
-                        Créer une nouvelle Action
-                    </a>
-                </div>
-
-                <div class="filters">
-                    <div class="search-filter">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Rechercher par nom...">
-                    </div>
-
-                    <div class="status-filter">
-                        <select id="statusFilter">
-                            <option value="all">Tous les statuts</option>
-                            <option value="ouvert">Ouvert</option>
-                            <option value="complet">Complet</option>
-                            <option value="termine">Terminé</option>
-                        </select>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-
-                    <button class="btn-export">
-                        <i class="fas fa-file-export"></i>
-                        Exporter vers Sheets
-                    </button>
-                </div>
-
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                
-                                <th>ID</th>
-                                <th>NOM DE L'ACTION</th>
-                                <th>DATE & HEURE</th>
-                                <th>LIEU</th>
-                                <th>INSCRIPTIONS</th>
-                                <th>STATUT</th>
-                                <th>RÉCOMPENSE</th>
-                                <th>ACTIONS</th>
-                            </tr>
-                        </thead>
-                        <tbody id="actionsTable">
-                            
-                            @foreach($actions as $action)
-                            <tr>
-                                <td>{{ $action->id }}</td>
-                                <td class="action-name">{{ $action->title }}</td>
-                                <td>{{ $action->date_time->format('d/m/Y') }} à<br>{{ $action->date_time->format('H:i') }}</td>
-                                <td>{{ $action->location }}</td>
-                                <td>{{ $action->registered }} / {{ $action->slots }} places</td>
-                                <td><span class="status-badge {{ $action->status_class }}">{{ ucfirst($action->status) }}</span></td>
-                                <td>{{ $action->reward }}</td>
-                                <td>
-                                    <div class="actions-buttons">
-                                        <a href="{{ route('actions.show', $action->id) }}" class="btn-action">Gérer</a>
-                                        <a href="{{ route('actions.edit', $action->id) }}" class="btn-action">Modifier</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-
-                    </table>
-                </div>
+        <div class="content-wrapper">
+            <div class="header">
+                <h1>Gestion des Actions Sociales & Récompenses (RSE)</h1>
+                <a href="{{route ('newAction')}}" class="btn-create">
+                    <i class="fas fa-plus-circle"></i>
+                    Créer une nouvelle Action
+                </a>
             </div>
-        </main>
+
+            <div class="filters">
+                <div class="search-filter">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Rechercher par nom...">
+                </div>
+
+                <div class="status-filter">
+                    <select id="statusFilter">
+                        <option value="all">Tous les statuts</option>
+                        <option value="ouvert">Ouvert</option>
+                        <option value="complet">Complet</option>
+                        <option value="termine">Terminé</option>
+                    </select>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+
+                <button class="btn-export">
+                    <i class="fas fa-file-export"></i>
+                    Exporter vers Sheets
+                </button>
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            
+                            <th>ID</th>
+                            <th>NOM DE L'ACTION</th>
+                            <th>DATE & HEURE</th>
+                            <th>LIEU</th>
+                            <th>INSCRIPTIONS</th>
+                            <th>STATUT</th>
+                            <th>RÉCOMPENSE</th>
+                            <th>ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody id="actionsTable">
+                        
+                        @foreach($actions as $action)
+                        <tr>
+                            <td>{{ $action->id }}</td>
+                            <td class="action-name">{{ $action->title }}</td>
+                            <td>{{ $action->date_time->format('d/m/Y') }} à<br>{{ $action->date_time->format('H:i') }}</td>
+                            <td>{{ $action->location }}</td>
+                            <td>{{ $action->registered }} / {{ $action->slots }} places</td>
+                            <td><span class="status-badge {{ $action->status_class }}">{{ ucfirst($action->status) }}</span></td>
+                            <td>{{ $action->reward }}</td>
+                            <td>
+                                <div class="actions-buttons">
+                                    <a href="{{ route('actions.show', $action->id) }}" class="btn-action">Gérer</a>
+                                    <a href="{{ route('actions.edit', $action->id) }}" class="btn-action">Modifier</a>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+    </main>
 @endsection
     
 <script>

@@ -12,6 +12,7 @@ use App\Http\Controllers\ResellerController;
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\JeuxController;
 use App\Http\Controllers\IntervenantController;
+use App\Http\Controllers\ProduitController;
 
 
 
@@ -216,3 +217,12 @@ Route::prefix('dashboard')->group(function () {
 
 Route::get('/commandes', [CommandeController::class, 'index'])->name('commandes.index');
 Route::post('/commandes', [CommandeController::class, 'store'])->name('commandes.store');
+
+
+
+Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
+
+
+Route::post('/produits', [ProduitController::class, 'store'])->name('produits.store');
+Route::get('/gestion-articles', [ProduitController::class, 'index'])->name('gestion.articles');
+Route::delete('/produits/{produit}', [ProduitController::class, 'destroy'])->name('produits.destroy');
