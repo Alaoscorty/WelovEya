@@ -43,8 +43,8 @@ class IntervenantController extends Controller
      */
     public function store(IntervenantRequest $request)
     {
+        dd($request->all());
         $data = $request->validated();
-        $data['code'] = 'INT-' . strtoupper(Str::random(6));
         $data['statut'] = 'en-attente';
         $data['vote_actif'] = $request->has('vote_actif');
 

@@ -327,7 +327,7 @@
                             <input type="email" name="email" value="{{ old('email') }}">
                         </div>
                     </div>
-
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label>Téléphone</label>
@@ -345,10 +345,9 @@
                             <label>Pays</label>
                             <select name="pays">
                                 <option value="">-- Choisir --</option>
-                                <option value="Côte d'Ivoire">Côte d'Ivoire</option>
-                                <option value="Bénin">Bénin</option>
-                                <option value="Togo">Togo</option>
-                                <option value="France">France</option>
+                                <option value="artiste" {{ old('role')=='artiste'?'selected':'' }}>Artiste</option>
+                                <option value="animateur" {{ old('role')=='animateur'?'selected':'' }}>Animateur</option>
+                                <option value="dj" {{ old('role')=='dj'?'selected':'' }}>DJ</option>
                             </select>
                         </div>
 
@@ -356,6 +355,15 @@
                             <label>Date de début</label>
                             <input type="date" name="date_debut">
                         </div>
+                        <div class="form-group">
+                            <label>Rôle *</label>
+                            <select name="role" required>
+                                <option value="Jour 1" {{ old('jour_evenement')=='Jour 1'?'selected':'' }}>Jour 1</option>
+                                <option value="Jour 2" {{ old('jour_evenement')=='Jour 2'?'selected':'' }}>Jour 2</option>
+                                <option value="Jour 3" {{ old('jour_evenement')=='Jour 3'?'selected':'' }}>Jour 3</option>
+                            </select>
+                        </div>
+
                     </div>
 
                     <!-- NOUVEAU CHAMP PHOTO -->
@@ -400,14 +408,14 @@
 
                     <div class="form-group">
                         <label>
-                            <input type="checkbox" id="voteToggle" name="vote_actif">
+                            <input type="checkbox" id="voteToggle" name="vote_actif" {{ old('vote_actif') ? 'checked' : '' }}>
                             Activer le vote public
                         </label>
                     </div>
 
-                    <div class="form-group" id="voteDateWrapper" style="display:none;">
+                    <div class="form-group" id="voteDateWrapper" style="display:{{ old('vote_actif') ? 'block' : 'none' }};">
                         <label>Date limite du vote</label>
-                        <input type="date" name="date_limite_vote" id="dateVote">
+                        <input type="date" name="date_limite_vote" id="dateVote" value="{{ old('date_limite_vote') }}">
                     </div>
 
                     <h4>Fichiers Paroles</h4>
@@ -441,12 +449,11 @@
 <script>
 const voteToggle = document.getElementById('voteToggle');
 const dateVote = document.getElementById('dateVote');
-
-// Initialiser l'état au chargement
 dateVote.disabled = !voteToggle.checked;
 
 voteToggle.addEventListener('change', function () {
     dateVote.disabled = !this.checked;
+    document.getElementById('voteDateWrapper').style.display = this.checked ? 'block' : 'none';
 });
 
 function previewImage(event) {
@@ -458,10 +465,6 @@ function previewImage(event) {
     };
     reader.readAsDataURL(event.target.files[0]);
 }
-
-voteToggle.addEventListener('change', function () {
-    document.getElementById('voteDateWrapper').style.display = this.checked ? 'block' : 'none';
-});
 </script>
 
 @push('scripts')

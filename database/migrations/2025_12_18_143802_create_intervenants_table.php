@@ -8,7 +8,7 @@ return new class extends Migration {
     {
         Schema::create('intervenants', function (Blueprint $table) {
             $table->id();
-            $table->string('code')->unique();
+            $table->string('code')->unique()->nullable();
             $table->string('role')->default('artiste'); // artiste | animateur | dj
             $table->string('statut')->default('en-attente'); // confirme | en-attente
             $table->string('photo')->nullable();
