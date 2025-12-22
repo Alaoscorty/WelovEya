@@ -133,7 +133,7 @@ td { padding: 15px; font-size: 14px; }
             <table id="intervenants-table">
                 <thead>
                     <tr>
-                        <th><input type="checkbox" class="checkbox"></th>
+                        <th><input type="checkbox" id="selectAll" class="checkbox"></th>
                         <th>Code</th>
                         <th>Nom</th>
                         <th>Rôle</th>
@@ -214,6 +214,12 @@ td { padding: 15px; font-size: 14px; }
 
 @push('scripts')
 <script>
+    document.getElementById('selectAll').addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+    });
 document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('search');
     const tableBody = document.getElementById('intervenants-body');

@@ -294,7 +294,7 @@
                             @endif
                         </span>
                     </td>
-                    <td><span class="status-badge {{ $status }}">{{ $status=='en-cours'?'En cours':'Terminé' }}</span></td>
+                    <td><span class="status-badge {{ $status }}">{{ $status=='Terminé'?'En cours':'En-cours' }}</span></td>
                     <td>{{ \Carbon\Carbon::parse($jeu->date_debut)->format('d/m/Y') }} - {{ \Carbon\Carbon::parse($jeu->date_fin)->format('d/m/Y') }}</td>
                     <td><a href="{{ $jeu->lien_du_jeu }}" class="link-btn" target="_blank">Visiter <i class="fas fa-external-link-alt"></i></a></td>
                     <td>

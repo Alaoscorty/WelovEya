@@ -565,7 +565,7 @@
             <table class="orders-table">
                 <thead>
                     <tr>
-                        <th><input type="checkbox" class="checkbox"></th>
+                        <th><input id="selectAll" type="checkbox" class="checkbox"></th>
                         <th>ID Commande <i class="fas fa-sort"></i></th>
                         <th>Acheteur <i class="fas fa-sort"></i></th>
                         <th>Articles achetés <i class="fas fa-sort"></i></th>
@@ -714,7 +714,12 @@
 
 @push('scripts')
 <script>
-
+    document.getElementById('selectAll').addEventListener('change', function() {
+        const checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = this.checked;
+        });
+    });
     // Calcul total
     function calculateTotal(){
         const rows = document.querySelectorAll('#tableBody tr');

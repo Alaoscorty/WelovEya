@@ -479,6 +479,8 @@
             </table>
         </div>
     </main>
+</div>
+
 @endsection
 
     @push('scripts')
