@@ -325,14 +325,10 @@
 
         .pagination {
             display: flex;
-            gap: 6px;
+            
         }
 
-        @media (min-width: 768px) {
-            .pagination {
-                gap: 8px;
-            }
-        }
+
 
         .page-btn {
             width: 32px;
@@ -341,8 +337,6 @@
             align-items: center;
             justify-content: center;
             background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 6px;
             color: #fff;
             cursor: pointer;
             font-size: 12px;
@@ -471,7 +465,7 @@
 
             <div class="pagination-wrapper">
                 <div class="pagination-info">
-                    Affichage de 1 à 4 sur 25 résultats
+                    Affichage de .. à .. sur .. résultats
                 </div>
                 <div class="pagination">
                     <button class="page-btn" id="prevBtn" disabled>
