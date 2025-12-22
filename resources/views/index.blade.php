@@ -4,69 +4,35 @@
 
 @section('content')
     <!-- section carousel responsive -->
-        <div class="relative h-screen w-full overflow-hidden">
+    <div class="relative h-screen w-full overflow-hidden">
         <!-- Slides -->
-        <div class="relative h-full w-full">
-            <!-- Slide 1 -->
-            <div class="slide absolute inset-0 w-full h-full active-slide">
-                <div class="absolute inset-0 overlay"></div>
-                <img src="{{ asset('images/WLE-24_SITE-WEB_SAVE-THE-DATE-1') }}" alt="Personne en costume futuriste" class="w-full h-full object-cover">
-                <div class="absolute inset-0 flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32">
-                    <div class="max-w-2xl">
-                        <h2 class="text-yellow-400 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 animate-fadeIn">WeLovEya ne sera pas comme...</h2>
-                        <p class="text-white text-lg sm:text-xl md:text-2xl mb-8">Découvrez l'avenir de la festivité</p>
-                        <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 md:space-x-20">
-                            <button class="bg-red-900 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition text-sm sm:text-base">
-                                    Acheter votre ticket
-                            </button>
-                            <button class="bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition text-sm sm:text-base">
-                                <i class="fas fa-play"></i> Voir la bande d'annonce
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="slide absolute inset-0 w-full h-full active-slide">
+            <div class="absolute inset-0 overlay"></div>
+            
+            <!-- Vidéo en arrière-plan -->
+            <video autoplay muted loop class="w-full h-full object-cover">
+                <source src="{{ asset('images/VID-20251017-WA0155(1).mp4') }}" type="video/mp4">
+            </video>
 
-            <!-- Slide 2 -->
-            <div class="slide absolute inset-0 w-full h-full inactive-slide">
-                <div class="absolute inset-0 overlay"></div>
-                <img src="{{ asset('images/WLE_REV-Nikanor.png') }}" alt="Artistes" class="w-full h-full object-cover">
-                <div class="absolute inset-0 flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32">
-                    <div class="max-w-2xl">
-                        <h2 class="text-yellow-400 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Spéciale ? Mieux, vous êtes unique.</h2>
-                        <p class="text-white text-lg sm:text-xl md:text-2xl mb-8">Personnalisez votre expérience en festivité</p>
-                        <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 md:space-x-20">
-                            <button class="bg-red-900 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition text-sm sm:text-base">
-                                    Acheter votre ticket
-                            </button>
-                            <button class="bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition text-sm sm:text-base">
-                                <i class="fas fa-play"></i> Voir la bande d'annonce
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="slide absolute inset-0 w-full h-full inactive-slide">
-                <div class="absolute inset-0 overlay"></div>
-                <img src="{{ asset('images/Black-women.jpeg') }}" alt="Réseau" class="w-full h-full object-cover">
-                <div class="absolute inset-0 flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32">
-                    <div class="max-w-2xl">
-                        <h2 class="text-yellow-400 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4">Connectivité nouvelle génération</h2>
-                        <p class="text-white text-lg sm:text-xl md:text-2xl mb-8">Latence ultra-faible, vitesse révolutionnaire avec l'intégration de notre chat en ligne , vibrons ensemble</p>
-                        <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 md:space-x-20">
-                            <button class="bg-red-900 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition text-sm sm:text-base">
-                                    Acheter votre ticket
-                            </button>
-                            <button class="bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition text-sm sm:text-base">
-                                <i class="fas fa-play"></i> Voir la bande d'annonce
-                            </button>
-                        </div>
+            <!-- Texte par-dessus la vidéo -->
+            <div class="absolute inset-0 flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24 xl:px-32">
+                <div class="max-w-2xl">
+                    <h2 class="text-yellow-400 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-4 animate-fadeIn">
+                        WeLovEya ne sera pas comme...
+                    </h2>
+                    <p class="text-white text-lg sm:text-xl md:text-2xl mb-8">Découvrez l'avenir de la festivité</p>
+                    <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4 md:space-x-20">
+                        <button class="bg-red-900 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition text-sm sm:text-base">
+                                Acheter votre ticket
+                        </button>
+                        <button class="bg-yellow-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition text-sm sm:text-base">
+                            <i class="fas fa-play"></i> Voir la bande d'annonce
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <!-- Navigation dots -->
         <div class="absolute bottom-4 sm:bottom-8 left-1/2 transform -translate-x-1/2 flex gap-3 z-20">
@@ -75,22 +41,7 @@
             <button class="dot w-3 h-3 rounded-full bg-gray-600" data-slide="2"></button>
         </div>
 
-        <!-- Chat button -->
-        <button class="absolute bottom-4 sm:bottom-8 right-4 sm:right-8 bg-blue-600 text-white p-3 sm:p-4 rounded-full shadow-lg chat-bubble z-20">
-            <i data-feather="message-circle"></i>
-        </button>
-        <!-- Navigation arrows -->
-        <button class="absolute left-2 sm:left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 sm:p-3 rounded-full z-20 hover:bg-opacity-70 transition" id="prev-slide">
-            <i data-feather="chevron-left"></i>
-        </button>
-        <button class="absolute right-2 sm:right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 sm:p-3 rounded-full z-20 hover:bg-opacity-70 transition" id="next-slide">
-            <i data-feather="chevron-right"></i>
-        </button>
-    </div>
-    <div class="relative h-screen w-full overflow-hidden">
-        <video id="Video" autoplay class="w-full h-64 sm:h-96 md:h-[64vh] bg-black rounded-md">
-            <source src="{{ asset('images/VID-20251017-WA0155(1).mp4') }}" type="video/mp4">
-        </video>
+        
     </div>
     <!-- Fin de la section carousel  -->
 
