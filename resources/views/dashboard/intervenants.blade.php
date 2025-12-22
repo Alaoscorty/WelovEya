@@ -134,7 +134,7 @@ td { padding: 15px; font-size: 14px; }
                 <thead>
                     <tr>
                         <th><input type="checkbox" class="checkbox"></th>
-                        <th># Code</th>
+                        <th>Code</th>
                         <th>Nom</th>
                         <th>Rôle</th>
                         <th>Statut</th>

@@ -368,318 +368,117 @@
 
 <div className="ml-56 p-8">
     <!-- Main Content -->
-        <main class="main-content">
-            <div class="header">
-                <h1>Gestion des revendeurs</h1>
-                <p>Gérez vos partenaires et leurs performances</p>
-            </div>
+    <main class="main-content">
+        <div class="header">
+            <h1>Gestion des revendeurs</h1>
+            <p>Gérez vos partenaires et leurs performances</p>
+        </div>
 
-            <!-- Stats Cards -->
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-icon orange">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Total revendeurs</h3>
-                        <p>156</p>
-                    </div>
+        <!-- Stats Cards -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-icon orange">
+                    <i class="fas fa-users"></i>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-icon orange">
-                        <i class="fas fa-user-check"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Actifs ce mois</h3>
-                        <p>134</p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon orange">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-                    <div class="stat-info">
-                        <h3>Commission Moyenne</h3>
-                        <p>14.3 %</p>
-                    </div>
+                <div class="stat-info">
+                    <h3>Total revendeurs</h3>
+                    <p>{{ $totalRevendeurs }}</p>
                 </div>
             </div>
 
-            <!-- Table Section -->
-            <div class="table-section">
-                <div class="table-header">
-                    <div style="position: relative;">
-                        <i class="fas fa-search search-icon"></i>
-                        <input type="text" placeholder="Rechercher un revendeur..." style="padding-left: 40px; width: 350px; padding: 10px 15px 10px 40px; background: #0d1129; border: 1px solid #2a2f4a; border-radius: 8px; color: #fff;">
-                    </div>
-                    <a href="{{ route('ajouter_revendeur') }}" class="add-btn">
-                        <i class="fas fa-plus"></i>
-                        Ajouter un revendeur
-      </a>
+            <div class="stat-card">
+                <div class="stat-icon orange">
+                    <i class="fas fa-user-check"></i>
                 </div>
+                <div class="stat-info">
+                    <h3>Actifs ce mois</h3>
+                    <p>{{ $actifsCeMois }}</p>
+                </div>
+            </div>
 
-                <table class="data-table">
-                    <thead>
-                        <tr>
-                            <th><input type="checkbox"></th>
-                            <th>Nom</th>
-                            <th><i class="fas fa-phone"></i> Téléphone</th>
-                            <th><i class="fas fa-ticket"></i> Tickets vendus</th>
-                            <th><i class="fas fa-ban"></i> Commissions</th>
-                            <th><i class="fas fa-calendar"></i> Statut</th>
-                            <th><i class="fas fa-id-card"></i> Revenus généré</th>
-                            <th><i class="fas fa-award"></i> Membre depuis</th>
-                            <th><i class="fas fa-chart-bar"></i> Stock attribué</th>
-                            <th><i class="fas fa-percentage"></i> Taux d'écoulement</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="user-avatar">LR</div>
-                                    <div class="user-info">
-                                        <span class="user-name">LE ROI AZEEZ</span>
-                                        <span class="user-email">leroidesabonne@gmail.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>+22963456870</td>
-                            <td>183</td>
-                            <td><span class="badge restreint">RESTREINT</span></td>
-                            <td><span class="status-badge actif">ACTIF</span></td>
-                            <td>ID667</td>
-                            <td>Novembre 2024</td>
-                            <td>200</td>
-                            <td>99%</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="user-avatar simple">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div class="user-info">
-                                        <span class="user-name">ICI C'EST POPADOM</span>
-                                        <span class="user-email">icicpopadom@gmail.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>[404] 404 - 4477</td>
-                            <td>303</td>
-                            <td><span class="badge actif">ACTIF</span></td>
-                            <td><span class="status-badge inactif">INACTIF</span></td>
-                            <td>ID2067</td>
-                            <td>Novembre 2023</td>
-                            <td>100</td>
-                            <td>100%</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="user-avatar">LR</div>
-                                    <div class="user-info">
-                                        <span class="user-name">LE ROI AZEEZ7</span>
-                                        <span class="user-email">azeez7@gmail.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>[299] 415 - 5100</td>
-                            <td>89</td>
-                            <td><span class="badge restreint">RESTREINT</span></td>
-                            <td><span class="status-badge inactif">INACTIF</span></td>
-                            <td>ID187</td>
-                            <td>Décembre 2020</td>
-                            <td>50</td>
-                            <td>92%</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="user-avatar simple">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div class="user-info">
-                                        <span class="user-name">ICI C'EST OFFICIEL</span>
-                                        <span class="user-email">icicest@gmail.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>[356] 647 - 4009</td>
-                            <td>48</td>
-                            <td><span class="badge suspendu">SUSPENDU</span></td>
-                            <td><span class="status-badge actif">ACTIF</span></td>
-                            <td>IT107</td>
-                            <td>Novembre 2024</td>
-                            <td>250</td>
-                            <td>77%</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="user-avatar simple">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div class="user-info">
-                                        <span class="user-name">ICI C'EST OFFICIEL</span>
-                                        <span class="user-email">theuniverse2@gmail.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>[284] 443 - 2876</td>
-                            <td>116</td>
-                            <td><span class="badge restreint">RESTREINT</span></td>
-                            <td><span class="status-badge inactif">INACTIF</span></td>
-                            <td>ID187</td>
-                            <td>Décembre 2024</td>
-                            <td>0</td>
-                            <td>0%</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="user-avatar">LR</div>
-                                    <div class="user-info">
-                                        <span class="user-name">LE ROI AZEEZ</span>
-                                        <span class="user-email">leroideesabon@gmail.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>[504] 415 - 4600</td>
-                            <td>104</td>
-                            <td><span class="badge restreint">RESTREINT</span></td>
-                            <td><span class="status-badge actif">ACTIF</span></td>
-                            <td>ID2067</td>
-                            <td>Novembre 2024</td>
-                            <td>020</td>
-                            <td>98%</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="user-avatar simple">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div class="user-info">
-                                        <span class="user-name">LE BOSS DOKIT</span>
-                                        <span class="user-email">dankidneed.it@gmail.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>[407] 915 - 7770</td>
-                            <td>93</td>
-                            <td><span class="badge actif">ACTIF</span></td>
-                            <td><span class="status-badge inactif">INACTIF</span></td>
-                            <td>IT607</td>
-                            <td>Novembre 2025</td>
-                            <td>100</td>
-                            <td>100%</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="user-avatar">LR</div>
-                                    <div class="user-info">
-                                        <span class="user-name">LE ROI AZEEZ</span>
-                                        <span class="user-email">larocakev@gmail.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>[7262] 853 - 6792</td>
-                            <td>105</td>
-                            <td><span class="badge restreint">RESTREINT</span></td>
-                            <td><span class="status-badge actif">ACTIF</span></td>
-                            <td>IT3357</td>
-                            <td>Décembre 2023</td>
-                            <td>450</td>
-                            <td>70%</td>
-                            <td>
-                                <div class="actions">
-                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
-                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox"></td>
-                            <td>
-                                <div class="user-cell">
-                                    <div class="user-avatar simple">
-                                        <i class="fas fa-user"></i>
-                                    </div>
-                                    <div class="user-info">
-                                        <span class="user-name">LE BOSS DOKIT</span>
-                                        <span class="user-email">doonkeet31@gmail.com</span>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>[911] 347 - 8472</td>
-                            <td>223</td>
-                            <td><span class="badge restreint">RESTREINT</span></td>
-                            <td><span class="status-badge inactif">INACTIF</span></td>
-                            <td>IT207F</td>
+            <div class="stat-card">
+                <div class="stat-icon orange">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-info">
+                    <h3>Commission Moyenne</h3>
+                    <p>{{ number_format($commissionMoyenne, 2) }} %</p>
+                </div>
+            </div>
+        </div>
 
+        @if(session('success'))
+            <div class="bg-green-600 text-white p-4 rounded mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
 
-</div>
+        <!-- Table Section -->
+        <div class="table-section">
+            <div class="table-header">
+                <div style="position: relative;">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" placeholder="Rechercher un revendeur..." style="padding-left: 40px; width: 350px; padding: 10px 15px 10px 40px; background: #0d1129; border: 1px solid #2a2f4a; border-radius: 8px; color: #fff;">
+                </div>
+                <a href="{{ route('ajouter_revendeur') }}" class="add-btn">
+                    <i class="fas fa-plus"></i>
+                    Ajouter un revendeur
+                </a>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox"></th>
+                        <th>Nom</th>
+                        <th><i class="fas fa-phone"></i> Téléphone</th>
+                        <th><i class="fas fa-ticket"></i> Tickets vendus</th>
+                        <th><i class="fas fa-ban"></i> Commissions</th>
+                        <th><i class="fas fa-calendar"></i> Statut</th>
+                        <th><i class="fas fa-id-card"></i> Revenus généré</th>
+                        <th><i class="fas fa-award"></i> Membre depuis</th>
+                        <th><i class="fas fa-chart-bar"></i> Stock attribué</th>
+                        <th><i class="fas fa-percentage"></i> Taux d'écoulement</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($revendeurs as $revendeur)
+                        <tr>
+                            <td><input type="checkbox"></td>
+                            <td>
+                                <div class="user-cell">
+                                    <div class="user-avatar">
+                                        {{ strtoupper(substr($revendeur->name, 0, 2)) }}
+                                    </div>
+                                    <div class="user-info">
+                                        <span class="user-name">{{ $revendeur->name }}</span>
+                                        <span class="user-email">{{ $revendeur->email }}</span>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>{{ $revendeur->telephone }}</td>
+                            <td>0</td> <!-- Tickets vendus à calculer -->
+                            <td>{{ $revendeur->commission_standard + $revendeur->commission_premium + $revendeur->commission_vip + $revendeur->commission_elite }}</td>
+                            <td><span class="badge">{{ $revendeur->statut }}</span></td>
+                            <td><span class="status-badge {{ strtolower($revendeur->status) }}">{{ $revendeur->statut }}</span></td>
+                            <td>ID{{ $revendeur->id }}</td>
+                            <td>{{ $revendeur->member_since }}</td>
+                            <td>{{ $revendeur->stock_standard + $revendeur->stock_premium + $revendeur->stock_vip + $revendeur->stock_elite }}</td>
+                            <td>0%</td> <!-- Taux d'écoulement à calculer-->
+                            <td>
+                                <div class="actions">
+                                    <button class="action-btn"><i class="fas fa-eye"></i></button>
+                                    <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                    <button class="action-btn"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </main>
 @endsection
 
     @push('scripts')

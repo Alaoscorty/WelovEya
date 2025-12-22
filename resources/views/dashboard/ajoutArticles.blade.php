@@ -4,9 +4,7 @@
 <style>
 .modal-container {
     background: white;
-    border-radius: 12px;
     width: 100%;
-    max-width: 650px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
@@ -173,150 +171,144 @@
     {{-- MAIN CONTENT --}}
 <div class="modal-container" id="orderModal">
     <div class="modal-header">
-            <h2>
-                <i class="fas fa-plus-circle"></i>
-                Ajouter un nouvel article
-            </h2>
-            <button class="close-btn" onclick="closeModal()">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-
-        <div class="subtitle">
-            Remplissez les informations sur votre article
-        </div>
-
-        <div class="form-section">
-            <h3 class="section-title">Informations de base</h3>
-
-            <form id="articleForm">
-                <div class="form-group">
-                    <label for="articleName">Nom de l'article</label>
-                    <input type="text" id="articleName" placeholder="Entrez le nom de l'article" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="price">Prix de Vente</label>
-                    <input type="number" id="price" placeholder="0.00" step="0.01" min="0" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="category">Catégorie</label>
-                    <select id="category" required>
-                        <option value="">Ex: Vêtement</option>
-                        <option value="vetement">Vêtement</option>
-                        <option value="electronique">Électronique</option>
-                        <option value="alimentaire">Alimentaire</option>
-                        <option value="maison">Maison & Jardin</option>
-                        <option value="sport">Sport</option>
-                        <option value="livres">Livres</option>
-                        <option value="autre">Autre</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea id="description" placeholder="Description détaillée de l'article" required></textarea>
-                </div>
-
-                <div class="button-group">
-                    <button type="button" class="btn btn-cancel" onclick="cancelForm()">
-                        <i class="fas fa-times-circle"></i>
-                        Annuler
-                    </button>
-                    <button type="submit" class="btn btn-submit">
-                        <i class="fas fa-check-circle"></i>
-                        Ajouter l'article
-                    </button>
-                </div>
-            </form>
-        </div>
+        <h2>
+            <i class="fas fa-plus-circle"></i>
+            Ajouter un nouvel article
+        </h2>
+        <button class="close-btn" onclick="closeModal()">
+            <i class="fas fa-times"></i>
+        </button>
     </div>
+
+    <div class="subtitle">
+        Remplissez les informations sur votre article
+    </div>
+
+    <div class="form-section">
+        <h3 class="section-title">Informations de base</h3>
+
+        <form id="articleForm" method="POST">
+            <div class="form-group">
+                <label for="articleName">Nom de l'article</label>
+                <input type="text" id="articleName" name="nom"placeholder="Entrez le nom de l'article" required>
+            </div>
+
+            <div class="form-group">
+                <label for="price">Prix de Vente</label>
+                <input type="number" id="price" name="prix" placeholder="0.00" step="0.01" min="0" required>
+            </div>
+
+            <div class="form-group">
+                <label for="category">Catégorie</label>
+                <select select id="category" name="categorie" required>
+                    <option value="vetement">Vêtement</option>
+                    <option value="electronique">Électronique</option>
+                    <option value="alimentaire">Alimentaire</option>
+                    <option value="maison">Maison & Jardin</option>
+                    <option value="sport">Sport</option>
+                    <option value="livres">Livres</option>
+                    <option value="autre">Autre</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" placeholder="Description détaillée de l'article" required></textarea>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn btn-cancel" onclick="cancelForm()">
+                    <i class="fas fa-times-circle"></i>
+                    Annuler
+                </button>
+                <button type="submit" class="btn btn-submit">
+                    <i class="fas fa-check-circle"></i>
+                    Ajouter l'article
+                </button>
+            </div>
+        </form>
+    </div>
+
 </div>
 @endsection
+@push('scripts')
 <script>
+document.addEventListener('DOMContentLoaded', function () {
+
     const form = document.getElementById('articleForm');
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const articleData = {
-                name: document.getElementById('articleName').value,
-                price: document.getElementById('price').value,
-                category: document.getElementById('category').value,
-                description: document.getElementById('description').value
-            };
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-            console.log('Article ajouté:', articleData);
-            
-            alert('Article ajouté avec succès!\n\n' + 
-                  'Nom: ' + articleData.name + '\n' +
-                  'Prix: ' + articleData.price + ' €\n' +
-                  'Catégorie: ' + articleData.category + '\n' +
-                  'Description: ' + articleData.description);
-            
-            form.reset();
-        });
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+        const articleData = {
+            nom: document.getElementById('articleName').value,
+            prix: document.getElementById('price').value,
+            categorie: document.getElementById('category').value,
+            description: document.getElementById('description').value
+        };
 
-            const articleData = {
-                name: document.getElementById('articleName').value,
-                price: document.getElementById('price').value,
-                category: document.getElementById('category').value,
-                description: document.getElementById('description').value
-            };
-
-            fetch("{{ route('produits.store') }}", {
+        fetch("{{ route('produits.store') }}", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Accept': 'application/json'
             },
             body: JSON.stringify(articleData)
-            })
-            .then(response => response.json())
-            .then(data => {
-            if(data.success) {
-                // Ajouter la nouvelle ligne dans le tableau
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
                 const tableBody = document.getElementById('tableBody');
-                const newRow = document.createElement('tr');
-                newRow.innerHTML = `
-                    <td class="checkbox-cell"><input type="checkbox"></td>
-                    <td>${data.produit.id}</td>
-                    <td>${data.produit.nom}</td>
-                    <td>${parseFloat(data.produit.prix).toLocaleString('fr-FR')} F</td>
-                    <td><span class="badge disponible">Disponible</span></td>
-                    <td>${data.produit.stock}</td>
-                    <td>0</td>
-                    <td>${data.produit.categorie}</td>
-                    <td>${data.produit.description}</td>
-                    <td class="action-cell">
-                        <button class="icon-button"><i class="fas fa-edit"></i></button>
-                        <button class="icon-button" onclick="this.closest('tr').remove();"><i class="fas fa-trash"></i></button>
-                    </td>
-                `;
-                tableBody.prepend(newRow); // ajoute en haut
+                if (tableBody) {
+                    const newRow = document.createElement('tr');
+                    newRow.innerHTML = `
+                        <td><input type="checkbox"></td>
+                        <td>${data.produit.id}</td>
+                        <td>${data.produit.nom}</td>
+                        <td>${parseFloat(data.produit.prix).toLocaleString('fr-FR')} F</td>
+                        <td><span class="badge disponible">Disponible</span></td>
+                        <td>${data.produit.stock ?? 0}</td>
+                        <td>0</td>
+                        <td>${data.produit.categorie}</td>
+                        <td>${data.produit.description}</td>
+                        <td>
+                            <button><i class="fas fa-edit"></i></button>
+                            <button onclick="this.closest('tr').remove()">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </td>
+                    `;
+                    tableBody.prepend(newRow);
+                }
+
                 form.reset();
                 alert(data.message);
             } else {
-                alert('Erreur: ' + data.message);
+                alert('Erreur : ' + data.message);
             }
+        })
+        .catch(err => {
+            console.error(err);
+            alert('Erreur serveur');
         });
-        
+    });
 
-        function closeModal() {
-            if (confirm('Voulez-vous vraiment fermer? Les modifications non enregistrées seront perdues.')) {
-                window.close();
-            }
+    window.closeModal = function () {
+        if (confirm('Voulez-vous vraiment fermer ?')) {
+            form.reset();
+            document.getElementById('orderModal').style.display = 'none';
         }
+    };
 
-        function cancelForm() {
-            if (confirm('Voulez-vous annuler? Toutes les données saisies seront perdues.')) {
-                form.reset();
-            }
+    window.cancelForm = function () {
+        if (confirm('Voulez-vous annuler ?')) {
+            form.reset();
         }
-    });    
+    };
+
+});
 </script>
-    @push('scripts')
+
+    
 @endpush

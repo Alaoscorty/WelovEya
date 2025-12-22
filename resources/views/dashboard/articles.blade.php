@@ -1,4 +1,3 @@
-{{-- Sur cette page je dois gérer l'apparition du modal lorsqu'on clique sur le bouton ajouter une nouvelle article --}}
 @extends('layouts.application')
 
 @section('title', 'Artistes')
@@ -450,6 +449,7 @@
 </div>
 
 @endsection
+@push('scripts')
 <script>
     // Select All Checkbox
     document.getElementById('selectAll').addEventListener('change', function() {
@@ -535,5 +535,5 @@
     });
         
 </script>
-    @push('scripts')
+    
 @endpush

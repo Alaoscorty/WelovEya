@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Produit;
+use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class ProduitController extends Controller
 {
@@ -11,38 +12,34 @@ class ProduitController extends Controller
     {
         $produits = Produit::all();
 
-        $totalArticles = $produits->count();
-        $stockTotal = $produits->sum('stock');
-        $revenusGeneres = $produits->sum(function($produit){
-            return $produit->prix * $produit->stock;
-        });
-
-        return view('dashboard.articles', compact('produits', 'totalArticles', 'stockTotal', 'revenusGeneres'));
+        return view('dashboard.articles', [
+            'produits' => $produits,
+            'totalArticles' => $produits->count(),
+            'stockTotal' => $produits->sum('stock'),
+            'revenusGeneres' => $produits->sum(fn($p) => $p->prix * $p->stock),
+        ]);
     }
 
     public function store(Request $request)
     {
-        // Validation des données
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'price' => 'required|numeric|min:0',
-            'category' => 'required|string|max:100',
-            'description' => 'required|string',
-        ]);
+        try {
+            $data = $request->validate([
+                'nom' => 'required|string',
+                'prix' => 'required|numeric',
+                'categorie' => 'required|string',
+                'description' => 'required|string',
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'success' => false,
+                'errors' => $e->errors()
+            ], 422);
+        }
 
-        // Création du produit et assignation à une variable
-        $produit = Produit::create([
-            'nom' => $request->name,
-            'prix' => $request->price,
-            'categorie' => $request->category,
-            'description' => $request->description,
-            'stock' => $request->stock ?? 0, // valeur par défaut si stock non fourni
-        ]);
+        $produit = Produit::create($data + ['stock' => 0]);
 
-        // Retourne le produit créé pour AJAX
         return response()->json([
             'success' => true,
-            'message' => 'Produit ajouté avec succès !',
             'produit' => $produit
         ]);
     }
@@ -50,7 +47,6 @@ class ProduitController extends Controller
     public function destroy(Produit $produit)
     {
         $produit->delete();
-
-        return redirect()->route('dashboard.articles')->with('success', 'Produit supprimé avec succès');
+        return back();
     }
 }

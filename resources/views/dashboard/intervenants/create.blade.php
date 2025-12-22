@@ -50,6 +50,12 @@
             border-radius: 2px;
         }
 
+        input:disabled {
+            background: rgba(255,255,255,0.02);
+            color: rgba(255,255,255,0.5);
+            cursor: not-allowed;
+        }
+
         .form-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -353,11 +359,10 @@
                     </div>
 
                     <!-- NOUVEAU CHAMP PHOTO -->
-                    <div class="form-row">
-                        <div class="form-group full-width">
-                            <label>Photo de l'intervenant</label>
-                            <input type="file" name="photo" accept="image/*">
-                        </div>
+                    <div class="form-group full-width">
+                        <label>Photo de l'intervenant</label>
+                        <input type="file" name="photo" accept="image/*" onchange="previewImage(event)">
+                        <img id="photoPreview" src="#" alt="Aperçu" style="display:none; max-width:150px; margin-top:10px;">
                     </div>
                 </div>
 
@@ -400,9 +405,9 @@
                         </label>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group" id="voteDateWrapper" style="display:none;">
                         <label>Date limite du vote</label>
-                        <input type="date" name="date_limite_vote" id="dateVote" >
+                        <input type="date" name="date_limite_vote" id="dateVote">
                     </div>
 
                     <h4>Fichiers Paroles</h4>
@@ -434,8 +439,28 @@
 @endsection
 
 <script>
-document.getElementById('voteToggle').addEventListener('change', function () {
-    document.getElementById('dateVote').disabled = !this.checked;
+const voteToggle = document.getElementById('voteToggle');
+const dateVote = document.getElementById('dateVote');
+
+// Initialiser l'état au chargement
+dateVote.disabled = !voteToggle.checked;
+
+voteToggle.addEventListener('change', function () {
+    dateVote.disabled = !this.checked;
+});
+
+function previewImage(event) {
+    const reader = new FileReader();
+    reader.onload = function(){
+        const output = document.getElementById('photoPreview');
+        output.src = reader.result;
+        output.style.display = 'block';
+    };
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+voteToggle.addEventListener('change', function () {
+    document.getElementById('voteDateWrapper').style.display = this.checked ? 'block' : 'none';
 });
 </script>
 

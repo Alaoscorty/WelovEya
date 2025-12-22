@@ -196,7 +196,10 @@ Route::get('/intervenants/ajouter', function () {
 Route::prefix('dashboard')->group(function () {
 
     Route::get('/intervenants', [IntervenantController::class, 'index'])->name('dashboard.intervenants');
+
     Route::get('/intervenants/{id}', [IntervenantController::class, 'show'])->name('intervenants.show');
+
+        Route::get('/intervenants/create', [IntervenantController::class, 'create'])->name('intervenants.create');
 
     Route::post('/intervenants', [IntervenantController::class, 'store'])
         ->name('intervenants.store');
@@ -222,7 +225,16 @@ Route::post('/commandes', [CommandeController::class, 'store'])->name('commandes
 
 Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
 
+Route::get('/articles', [ProduitController::class, 'index'])
+    ->name('dashboard.articles');
 
-Route::post('/produits', [ProduitController::class, 'store'])->name('produits.store');
-Route::get('/gestion-articles', [ProduitController::class, 'index'])->name('gestion.articles');
-Route::delete('/produits/{produit}', [ProduitController::class, 'destroy'])->name('produits.destroy');
+Route::post('/produits', [ProduitController::class, 'store'])
+    ->name('produits.store');
+
+Route::delete('/produits/{produit}', [ProduitController::class, 'destroy'])
+    ->name('produits.destroy');
+
+
+
+Route::get('/revendeurs', [ResellerController::class, 'index'])->name('resellers.index');
+Route::post('/revendeurs', [ResellerController::class, 'store'])->name('resellers.store');

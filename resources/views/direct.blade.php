@@ -99,7 +99,7 @@
                     <div class="text-sm text-gray-400"><span id="onlineCount">0</span> en ligne</div>
                 </div>
 
-                <div class="flex-1 overflow-y-auto p-4 space-y-4" id="chatMessages" style="max-height: 60vh;">
+                <div class="flex-1 overflow-y-auto p-4 space-y-4" id="chatMessages" style="max-height: 80vh;">
                     @foreach($messages as $message)
                         <div><span class="text-blue-400 font-semibold">{{ $message->pseudo }}</span> : {{ $message->content }}</div>
                     @endforeach
@@ -113,6 +113,7 @@
                 </div>
             </div>
         </div>
+    </div>
     <!-- Sons -->
     <audio id="sendSound" src="{{ asset('sounds/send.mp3') }}"></audio>
     <audio id="receiveSound" src="{{ asset('sounds/receive.mp3') }}"></audio>
@@ -168,7 +169,7 @@
     Echo.channel('chat')
         .listen('MessageSent', (e) => {
             const msg = document.createElement('div');
-            msg.innerHTML = `<span class="text-blue-400 font-semibold">${e.message.pseudo}</span> : ${e.message.content}`;
+            msg.innerHTML = `<span class="text-blue-400 font-semibold border-white ">${e.message.pseudo}</span> : ${e.message.content}`;
             chatMessages.appendChild(msg);
             receiveSound.play();
         });
@@ -187,7 +188,7 @@
     const cancelBtn = document.getElementById('cancelBtn');
     const submitCodeBtn = document.getElementById('submitCodeBtn');
     const videoContainer = document.getElementById('videoContainer');
-    const accessLink = document.querySelector('a[href="#"]'); // Lien pour entrer le code secret
+    const accessLink = document.querySelector('a[href=""]'); // Lien pour entrer le code secret
 
     const correctCode = 'WELOVEYA2024'; // Placeholder secret code
 
