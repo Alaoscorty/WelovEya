@@ -9,14 +9,72 @@
     </button>
 
     <div id="menu" class="hidden md:flex items-center space-x-6">
-      <a href="{{ url('/artistes') }}" class="text-white hover:text-orange-500 transition-all @if(request()->is('artistes')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">Artistes</a>
-      <a href="{{ url('/billeterie') }}" class="text-white hover:text-orange-500 transition-all @if(request()->is('billeterie')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">Billeterie & Location</a>
-      <a href="{{ url('/direct') }}" class="text-white hover:text-orange-500 transition-all @if(request()->is('direct')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">Direct <i class="fas fa-video" style="color: red;"></i></a>
-      <a href="{{ url('/boutique') }}" class="text-white hover:text-orange-500 transition-all @if(request()->is('boutique')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">Boutique</a>
-      <a href="{{ url('/propos') }}"class="text-white hover:text-orange-500 transition-all @if(request()->is('propos')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">A propos</a>
-      <a href="{{ url('/jeux') }}" class="text-white hover:text-orange-500 transition-all @if(request()->is('jeux')) bg-gradient-to-r from-[#ff6b35] to-[#ff8c42] text-white shadow-lg shadow-[#ff6c35]/30 @else text-gray-400 hover:bg-[#1a1f3a] hover:text-white @endif">Jeux</a>
-      <a href="{{ url('/dashboard') }}" class="text-white hover:text-white bg-orange-800 rounded-lg p-2">Connexion</a>
+      <a href="{{ url('/artistes') }}" 
+        class="relative text-white transition-all 
+                @if(request()->is('artistes')) 
+                  text-white after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-orange-500 after:w-full after:transition-all 
+                @else 
+                  text-gray-400 hover:text-white hover:bg-[#1a1f3a] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-orange-500 after:w-0 after:transition-all hover:after:w-full 
+                @endif">
+        Artistes
+      </a>
+
+      <a href="{{ url('/billeterie') }}" 
+        class="relative text-white transition-all 
+                @if(request()->is('billeterie')) 
+                  text-white after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-orange-500 after:w-full after:transition-all 
+                @else 
+                  text-gray-400 hover:text-white hover:bg-[#1a1f3a] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-orange-500 after:w-0 after:transition-all hover:after:w-full 
+                @endif">
+        Billeterie & Location
+      </a>
+
+      <a href="{{ url('/direct') }}" 
+        class="relative text-white transition-all 
+                @if(request()->is('direct')) 
+                  text-white after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-orange-500 after:w-full after:transition-all 
+                @else 
+                  text-gray-400 hover:text-white hover:bg-[#1a1f3a] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-orange-500 after:w-0 after:transition-all hover:after:w-full 
+                @endif">
+        Direct <i class="fas fa-video" style="color: red;"></i>
+      </a>
+
+      <a href="{{ url('/boutique') }}" 
+        class="relative text-white transition-all 
+                @if(request()->is('boutique')) 
+                  text-white after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-orange-500 after:w-full after:transition-all 
+                @else 
+                  text-gray-400 hover:text-white hover:bg-[#1a1f3a] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-orange-500 after:w-0 after:transition-all hover:after:w-full 
+                @endif">
+        Boutique
+      </a>
+
+      <a href="{{ url('/propos') }}" 
+        class="relative text-white transition-all 
+                @if(request()->is('propos')) 
+                  text-white after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-orange-500 after:w-full after:transition-all 
+                @else 
+                  text-gray-400 hover:text-white hover:bg-[#1a1f3a] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-orange-500 after:w-0 after:transition-all hover:after:w-full 
+                @endif">
+        A propos
+      </a>
+
+      <a href="{{ url('/jeux') }}" 
+        class="relative text-white transition-all 
+                @if(request()->is('jeux')) 
+                  text-white after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-orange-500 after:w-full after:transition-all 
+                @else 
+                  text-gray-400 hover:text-white hover:bg-[#1a1f3a] after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:bg-orange-500 after:w-0 after:transition-all hover:after:w-full 
+                @endif">
+        Jeux
+      </a>
+
+      <a href="{{ url('/dashboard') }}" 
+        class="text-white hover:text-white bg-orange-800 rounded-lg p-2 transition-all">
+        Connexion
+      </a>
     </div>
+
 
     <div class="flex items-center justify-end space-x-4">
       <!-- Menu button (burger or close) -->
