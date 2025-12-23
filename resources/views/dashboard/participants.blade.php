@@ -232,125 +232,80 @@
         }
 </style>
         {{-- Main Content --}}
-<div class=" p-8">
     <!-- Main Content -->
-        <main class="main-content">
-            
-            <div class="page-header">
-                <h1 class="page-title">Participants Live : [Nom du Billet] - Festival WeLovEya</h1>
-                <a href="{{ route ('billets_streaming')}}"  class="breadcrumb">
-                    <i class="fas fa-arrow-left"></i>
-                    <span>Retour à la Gestion des Billets Live Streaming</span>
-                </a>
-            </div>
+       <div class="p-8">
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">Participants Live : {{ $billet->nom }} - Festival WeLovEya</h1>
+            <a href="{{ route('billets.index') }}" class="breadcrumb">
+                <i class="fas fa-arrow-left"></i>
+                <span>Retour à la Gestion des Billets Live Streaming</span>
+            </a>
+        </div>
 
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>NOM/EMAIL DU CLIENT</th>
-                            <th>BILLET ACHETÉ</th>
-                            <th>CONFIRMATION DE PAIEMENT</th>
-                            <th>CODE D'ACCÈS</th>
-                            <th>STATUT D'UTILISATION</th>
-                            <th>DATE DE PREMIÈRE CONNEXION</th>
-                            <th>ACTIONS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>
-                                <div class="participant-info">
-                                    <h4>Jean Dupont</h4>
-                                    <p>jean.dupont@email.com</p>
-                                </div>
-                            </td>
-                            <td>Jour 1</td>
-                            <td><span class="badge badge-success">Payé: TXS2356789</span></td>
-                            <td>A8B3-F5R2-C0L1</td>
-                            <td><span class="status-badge status-utilisé">Utilisé</span></td>
-                            <td>2023-10-28 09:05:12</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#" class="action-link">Renouveler le Code</a>
-                                    <span class="divider">|</span>
-                                    <a href="#" class="action-link">Bloquer l'Accès</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="participant-info">
-                                    <h4>Marie Curie</h4>
-                                    <p>marie.curie@email.com</p>
-                                </div>
-                            </td>
-                            <td>Jour 2</td>
-                            <td><span class="badge badge-success">Payé: TXB8765433</span></td>
-                            <td>G4H7-J3K6-P7R9</td>
-                            <td><span class="status-badge status-non-utilisé">Non utilisé</span></td>
-                            <td>-</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#" class="action-link">Renouveler le Code</a>
-                                    <span class="divider">|</span>
-                                    <a href="#" class="action-link">Bloquer l'Accès</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="participant-info">
-                                    <h4>Louis Pasteur</h4>
-                                    <p>louis.pasteur@email.com</p>
-                                </div>
-                            </td>
-                            <td>Jour 1</td>
-                            <td><span class="badge badge-success">Payé: YX99644433</span></td>
-                            <td>Z6X4-Y7N6-Q9H1</td>
-                            <td><span class="status-badge status-bloqué">Bloqué</span></td>
-                            <td>2023-10-28 08:30:00</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#" class="action-link">Renouveler le Code</a>
-                                    <span class="divider">|</span>
-                                    <a href="#" class="action-link">Bloquer l'Accès</a>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="participant-info">
-                                    <h4>Ada Lovelace</h4>
-                                    <p>ada.lovelace@email.com</p>
-                                </div>
-                            </td>
-                            <td>Pass VIP</td>
-                            <td><span class="badge badge-success">Payé: TK90000001</span></td>
-                            <td>L9V4-C3B7-A2H1</td>
-                            <td><span class="status-badge status-non-utilisé">Non utilisé</span></td>
-                            <td>-</td>
-                            <td>
-                                <div class="actions">
-                                    <a href="#" class="action-link">Renouveler le Code</a>
-                                    <span class="divider">|</span>
-                                    <a href="#" class="action-link">Bloquer l'Accès</a>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>NOM/EMAIL DU CLIENT</th>
+                        <th>BILLET ACHETÉ</th>
+                        <th>CONFIRMATION DE PAIEMENT</th>
+                        <th>CODE D'ACCÈS</th>
+                        <th>STATUT D'UTILISATION</th>
+                        <th>DATE DE PREMIÈRE CONNEXION</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse($participants as $participant)
+                    <tr>
+                        <td>
+                            <div class="participant-info">
+                                <h4>{{ $participant->nom }}</h4>
+                                <p>{{ $participant->email }}</p>
+                            </div>
+                        </td>
+                        <td>{{ $participant->billet->nom ?? '-' }}</td>
+                        <td>
+                            @if($participant->paiement_confirme)
+                                <span class="badge badge-success">Payé: {{ $participant->transaction_id }}</span>
+                            @else
+                                <span class="badge badge-warning">En attente</span>
+                            @endif
+                        </td>
+                        <td>{{ $participant->code_acces }}</td>
+                        <td>
+                            @if($participant->statut == 'utilisé')
+                                <span class="status-badge status-utilisé">Utilisé</span>
+                            @elseif($participant->statut == 'non-utilisé')
+                                <span class="status-badge status-non-utilisé">Non utilisé</span>
+                            @else
+                                <span class="status-badge status-bloqué">Bloqué</span>
+                            @endif
+                        </td>
+                        <td>{{ $participant->premiere_connexion ? $participant->premiere_connexion->format('Y-m-d H:i:s') : '-' }}</td>
+                        <td>
+                            <div class="actions">
+                                <a href="{{ route('participant.renouveler', $participant) }}" class="action-link">Renouveler le Code</a>
+                                <span class="divider">|</span>
+                                <a href="{{ route('participant.bloquer', $participant) }}" class="action-link">Bloquer l'Accès</a>
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="7" class="text-center">Aucun participant pour ce billet.</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
 
-            <div class="pagination">
-                <button class="btn">Précédent</button>
-                <button class="btn btn-primary">Suivant</button>
-            </div>
-        </main>
-    </div>
-
-    
-
+        <div class="pagination">
+            {{ $participants->links() }}
+        </div>
+    </main>
+</div>
 
 @endsection
     <script>

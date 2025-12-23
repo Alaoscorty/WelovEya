@@ -6,7 +6,7 @@
 <style>
   .main-content {
             flex: 1;
-            padding: 30px;
+            padding: 20px;
         }
 
         .header {
@@ -181,7 +181,7 @@
         .user-cell {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 7px;
         }
 
         .user-avatar {
@@ -264,7 +264,7 @@
 
         .actions {
             display: flex;
-            gap: 10px;
+            gap: 8px;
         }
 
         .action-btn {
@@ -366,7 +366,6 @@
         }
 </style>
 
-<div className="ml-56 p-8">
     <!-- Main Content -->
     <main class="main-content">
         <div class="header">
@@ -430,7 +429,11 @@
                 <thead>
                     <tr>
                         <th><input type="checkbox"></th>
-                        <th>Nom</th>
+                        <th>
+                            Nom
+
+                        </th>
+
                         <th><i class="fas fa-phone"></i> Téléphone</th>
                         <th><i class="fas fa-ticket"></i> Tickets vendus</th>
                         <th><i class="fas fa-ban"></i> Commissions</th>
@@ -439,7 +442,7 @@
                         <th><i class="fas fa-award"></i> Membre depuis</th>
                         <th><i class="fas fa-chart-bar"></i> Stock attribué</th>
                         <th><i class="fas fa-percentage"></i> Taux d'écoulement</th>
-                        <th></th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -449,7 +452,7 @@
                             <td>
                                 <div class="user-cell">
                                     <div class="user-avatar">
-                                        {{ strtoupper(substr($revendeur->name, 0, 2)) }}
+                                        ID{{ $revendeur->id }}
                                     </div>
                                     <div class="user-info">
                                         <span class="user-name">{{ $revendeur->name }}</span>
@@ -457,13 +460,24 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>{{ $revendeur->telephone }}</td>
-                            <td>0</td> <!-- Tickets vendus à calculer -->
-                            <td>{{ $revendeur->commission_standard + $revendeur->commission_premium + $revendeur->commission_vip + $revendeur->commission_elite }}</td>
-                            <td><span class="badge">{{ $revendeur->statut }}</span></td>
-                            <td><span class="status-badge {{ strtolower($revendeur->status) }}">{{ $revendeur->statut }}</span></td>
-                            <td>ID{{ $revendeur->id }}</td>
-                            <td>{{ $revendeur->member_since }}</td>
+                            <td>
+                                {{ $revendeur->telephone }}
+                            </td>
+                            <td>
+                                0
+                            </td> <!-- Tickets vendus à calculer -->
+                            <td>
+                                {{ $revendeur->commission_standard + $revendeur->commission_premium + $revendeur->commission_vip + $revendeur->commission_elite }}
+                            </td>
+                            <td>
+                                <span class="status-badge">{{ $revendeur->statut }}</span>
+                            </td>
+                            <td>
+                                <span class="status-badge ">{{ $revendeur->statut }}</span>
+                            </td>
+                            <td>
+                                {{ $revendeur->date_adhesion }}
+                            </td>
                             <td>{{ $revendeur->stock_standard + $revendeur->stock_premium + $revendeur->stock_vip + $revendeur->stock_elite }}</td>
                             <td>0%</td> <!-- Taux d'écoulement à calculer-->
                             <td>

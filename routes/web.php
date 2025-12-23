@@ -13,7 +13,7 @@ use App\Http\Controllers\ActionController;
 use App\Http\Controllers\JeuxController;
 use App\Http\Controllers\IntervenantController;
 use App\Http\Controllers\ProduitController;
-
+use App\Http\Controllers\BilletController;
 
 
 /*
@@ -68,11 +68,8 @@ Route::get('/tickets', function () {
     return view('dashboard.gestiondestickets');
 })->name('tickets');
 
-Route::get('/billets_streaming', function () {
-    return view('dashboard.billets_streaming');
-})->name('billets_streaming');
 
-Route::get('/billets', function () {
+Route::get('/billet/modification', function () {
     return view('dashboard.billets');
 })->name('billets streaming');
 
@@ -238,3 +235,17 @@ Route::delete('/produits/{produit}', [ProduitController::class, 'destroy'])
 
 Route::get('/revendeurs', [ResellerController::class, 'index'])->name('resellers.index');
 Route::post('/revendeurs', [ResellerController::class, 'store'])->name('resellers.store');
+
+
+
+Route::prefix('dashboard')->group(function () {
+    Route::get('/billets-streaming', [BilletController::class, 'index'])->name('billets.index');
+    Route::post('/billets-streaming/{billet}/update-max', [BilletController::class, 'updateMaxVentes'])->name('billets.updateMax');
+    Route::get('/billets-streaming/{billet}/participants', [BilletController::class, 'participants'])->name('billets.participants');
+    Route::get('/billets-streaming/{billet}/edit', [BilletController::class, 'edit'])->name('billets.edit');
+    Route::get('/dashboard/billets/create', [BilletController::class, 'create'])->name('billets.create');
+    Route::post('/dashboard/billets', [BilletController::class, 'store'])->name('billets.store');
+    Route::get('/billets/{billet}/pdf', [BilletController::class, 'exportPDF'])->name('billets.pdf');
+    Route::put('/billets-streaming/{billet}', [BilletController::class, 'update'])->name('billets.update');
+
+});
